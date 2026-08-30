@@ -1,0 +1,142 @@
+{
+  "home": {
+    "heroEyebrow": "Film Production · Seoul",
+    "heroTitle": "GOLDSTREAM",
+    "heroTagline": "이야기를 현실로 만듭니다.",
+    "heroTaglineEn": "Creating stories into reality",
+    "featuredCount": 3
+  },
+  "works": [
+    {
+      "id": "w1",
+      "title": "검은 해변",
+      "titleEn": "The Black Shore",
+      "status": "released",
+      "dateLabel": "Released, July 2024",
+      "format": "장편영화",
+      "image": "assets/img/w1.svg",
+      "video": "",
+      "synopsis": "한 어촌 마을에 돌아온 남자가 20년 전 사라진 동생의 흔적을 좇는다. 바다와 기억, 그리고 침묵에 관한 이야기.",
+      "credits": {
+        "감독": "홍민재",
+        "각본": "홍민재",
+        "출연": "정우성, 한예리",
+        "플랫폼": "극장 개봉"
+      }
+    },
+    {
+      "id": "w2",
+      "title": "스트림",
+      "titleEn": "Stream",
+      "status": "released",
+      "dateLabel": "Released, 2023",
+      "format": "리미티드 시리즈",
+      "image": "assets/img/w2.svg",
+      "video": "",
+      "synopsis": "라이브 스트리밍으로 유명해진 소년과 그를 둘러싼 어른들. 전 6부작 리미티드 시리즈.",
+      "credits": {
+        "감독": "김도영",
+        "각본": "이수경",
+        "출연": "박정민, 김새벽",
+        "플랫폼": "OTT 오리지널"
+      }
+    },
+    {
+      "id": "w3",
+      "title": "도시의 밤은 길다",
+      "titleEn": "The City's Night Is Long",
+      "status": "released",
+      "dateLabel": "Released, 2022",
+      "format": "장편영화",
+      "image": "assets/img/w3.svg",
+      "video": "",
+      "synopsis": "야간 버스 운전기사와 마지막 승객이 함께 보내는 하룻밤. 도시의 소음 속에서 나누는 대화.",
+      "credits": {
+        "감독": "장한새",
+        "각본": "장한새",
+        "출연": "김윤석, 전종서",
+        "플랫폼": "극장 개봉"
+      }
+    },
+    {
+      "id": "w4",
+      "title": "형산강",
+      "titleEn": "Hyeongsan River",
+      "status": "released",
+      "dateLabel": "Released, 2021",
+      "format": "다큐멘터리",
+      "image": "assets/img/w4.svg",
+      "video": "",
+      "synopsis": "포항을 가로지르는 형산강을 따라 세 세대의 삶을 기록한 다큐멘터리.",
+      "credits": {
+        "감독": "오세라",
+        "각본": "오세라",
+        "출연": "-",
+        "플랫폼": "방송 · 영화제"
+      }
+    },
+    {
+      "id": "w5",
+      "title": "금맥",
+      "titleEn": "Gold Vein",
+      "status": "upcoming",
+      "dateLabel": "Upcoming, 2025",
+      "format": "장편영화",
+      "image": "assets/img/w5.svg",
+      "video": "",
+      "synopsis": "폐광촌에 금이 다시 발견됐다는 소문. 마을 사람들의 욕망이 얽히는 스릴러.",
+      "credits": {
+        "감독": "미정",
+        "각본": "김정환, 서지우",
+        "출연": "미정",
+        "플랫폼": "극장 개봉 예정"
+      }
+    },
+    {
+      "id": "w6",
+      "title": "소금 정원",
+      "titleEn": "Salt Garden",
+      "status": "upcoming",
+      "dateLabel": "In development, 2026",
+      "format": "리미티드 시리즈",
+      "image": "assets/img/w6.svg",
+      "video": "",
+      "synopsis": "염전 마을을 배경으로 한 가족 미스터리 시리즈. 현재 개발 단계.",
+      "credits": {
+        "감독": "미정",
+        "각본": "이수경",
+        "출연": "미정",
+        "플랫폼": "OTT"
+      }
+    }
+  ],
+  "about": {
+    "name": "김정환",
+    "role": "영화 제작자 · Producer",
+    "portrait": "assets/img/portrait.svg",
+    "bio": [
+      "김정환은 현장 연출부에서 출발해 20여 년간 장편영화·다큐멘터리·시리즈를 제작해 온 영화 제작자입니다.",
+      "2014년 첫 장편을 프로듀싱한 뒤 2016년 GOLDSTREAM을 설립했습니다. 작가의 목소리를 지키면서도 관객과 만나는 지점을 찾는 것을 제작의 기준으로 삼고, 기획 개발부터 투자 유치, 촬영, 후반작업, 배급 협의까지 프로젝트의 전 과정을 책임집니다.",
+      "장르에 얽매이지 않되 오래 곱씹게 되는 이야기에 관심이 많으며, 신인 감독의 데뷔작과 중견 감독의 도전작을 균형 있게 이어가고 있습니다."
+    ],
+    "bioEn": "Kim Jung-hwan is a Seoul-based film producer. He founded GOLDSTREAM in 2016 to develop and produce feature films and series that keep a director's voice intact while finding their audience.",
+    "facts": [
+      { "k": "Base", "v": "서울 · Seoul, KR" },
+      { "k": "Founded", "v": "GOLDSTREAM, 2016" },
+      { "k": "Focus", "v": "장편영화 · 리미티드 시리즈 · 다큐멘터리" },
+      { "k": "Role", "v": "기획개발 · 제작 · 투자·배급 총괄" }
+    ],
+    "recognition": [
+      { "year": "2024", "text": "「검은 해변」 부산국제영화제 초청" },
+      { "year": "2023", "text": "「스트림」 백상예술대상 작품상 후보" },
+      { "year": "2021", "text": "「형산강」 서울독립영화제 대상" },
+      { "year": "2019", "text": "한국영화프로듀서조합 올해의 제작자" }
+    ]
+  },
+  "contact": {
+    "email": "hello@goldstream.co.kr",
+    "address": "서울특별시 마포구",
+    "hours": "Mon–Fri 10:00–19:00",
+    "inquiries": ["제작 제안 · 시나리오", "투자 · 배급 문의", "채용 · 인턴십"]
+  }
+}

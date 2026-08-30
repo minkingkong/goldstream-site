@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Works — GOLDSTREAM</title>
+  <meta name="description" content="GOLDSTREAM이 제작한 영화·시리즈·다큐멘터리 작품." />
+  <link rel="preload" as="font" type="font/woff2" href="assets/fonts/PretendardVariable.woff2" crossorigin />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="hd">
+    <div class="wrap hd__in">
+      <a class="hd__logo" href="index.html">GOLDSTREAM</a>
+      <nav class="hd__nav">
+        <a href="works.html" aria-current="page">works</a>
+        <a href="about.html">about</a>
+        <a href="contact.html">contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page wrap">
+    <h1 class="page__title">Works</h1>
+    <p class="page__lead">GOLDSTREAM이 기획·제작한 장편영화, 리미티드 시리즈, 다큐멘터리입니다.</p>
+
+    <div class="works-controls">
+      <div class="filters" data-filters>
+        <button data-filter="all" aria-pressed="true">All</button>
+        <button data-filter="upcoming" aria-pressed="false">Upcoming</button>
+        <button data-filter="released" aria-pressed="false">Released</button>
+      </div>
+      <div class="viewtoggle" data-view>
+        <button data-viewmode="gallery" aria-pressed="true"><span class="dot"></span> Gallery</button>
+        <button data-viewmode="list" aria-pressed="false">List</button>
+      </div>
+    </div>
+
+    <div class="works-grid" id="works-grid"></div>
+    <p class="works-empty" id="works-empty" hidden>해당하는 작품이 없습니다.</p>
+  </main>
+
+  <footer class="ft">
+    <div class="wrap ft__in">
+      <span>© 2026 GOLDSTREAM</span>
+      <a href="mailto:hello@goldstream.co.kr" data-field="contact.email" data-mailto>hello@goldstream.co.kr</a>
+      <span data-field="contact.address">서울특별시 마포구</span>
+    </div>
+  </footer>
+
+  <script src="js/site.js"></script>
+</body>
+</html>

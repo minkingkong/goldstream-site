@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex" />
+  <title>편집기 — GOLDSTREAM</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="hd">
+    <div class="wrap hd__in">
+      <a class="hd__logo" href="index.html">GOLDSTREAM</a>
+      <nav class="hd__nav">
+        <a href="index.html">사이트 보기</a>
+        <a id="repo-link" href="https://github.com/minkingkong/goldstream-site" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="admin-main">
+    <h1 style="font-size:26px;font-weight:800;letter-spacing:-0.02em;margin-bottom:6px">콘텐츠 편집기</h1>
+    <p style="color:var(--ink-muted);font-size:14px;margin-bottom:20px">
+      이 페이지에서 수정하면 GitHub에 바로 저장되고, 약 1분 뒤 사이트에 반영됩니다.
+    </p>
+
+    <div class="admin-note">
+      <p><b>처음 한 번만 — GitHub 토큰 등록</b></p>
+      <p style="margin-top:6px">
+        1. <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">Fine-grained 토큰 생성 페이지</a> 열기 &nbsp;·&nbsp;
+        2. <b>Repository access</b> → <i>Only select repositories</i> → <code>goldstream-site</code> 선택 &nbsp;·&nbsp;
+        3. <b>Permissions</b> → <i>Contents</i> → <b>Read and write</b> &nbsp;·&nbsp;
+        4. 생성된 토큰(<code>github_pat_...</code>)을 아래에 붙여넣고 <b>저장</b>
+      </p>
+      <p style="margin-top:6px;color:var(--ink-faint)">
+        토큰은 이 브라우저에만 저장됩니다(localStorage). 다른 사람이 쓰는 PC에서는 등록하지 마세요.
+      </p>
+    </div>
+
+    <div class="tokenbar">
+      <input type="password" id="token" placeholder="github_pat_..." style="flex:1;min-width:220px;font-family:inherit;font-size:13px;padding:10px 12px;border:1px solid var(--line-strong);border-radius:4px" />
+      <button class="btn btn--sm" id="save-token">토큰 저장</button>
+      <button class="btn btn--ghost btn--sm" id="check">연결 확인</button>
+      <button class="btn btn--ghost btn--sm" id="clear-token">삭제</button>
+      <button class="btn btn--ghost btn--sm" id="reload">불러오기</button>
+    </div>
+    <p id="conn" style="font-size:13px;color:var(--ink-faint);margin-bottom:10px"></p>
+
+    <form id="editor" hidden>
+      <!-- HOME -->
+      <section class="admin-section">
+        <h2>홈 (Home)</h2>
+        <div class="grid-2">
+          <div class="field"><label>상단 라벨</label><input type="text" id="f-heroEyebrow" /></div>
+          <div class="field"><label>큰 제목</label><input type="text" id="f-heroTitle" /></div>
+        </div>
+        <div class="grid-2">
+          <div class="field"><label>태그라인 (한글)</label><input type="text" id="f-heroTagline" /></div>
+          <div class="field"><label>태그라인 (영문)</label><input type="text" id="f-heroTaglineEn" /></div>
+        </div>
+      </section>
+
+      <!-- WORKS -->
+      <section class="admin-section">
+        <h2>작품 (Works)</h2>
+        <div id="works-list"></div>
+        <button type="button" class="btn btn--ghost" id="add-work">+ 작품 추가</button>
+      </section>
+
+      <!-- ABOUT -->
+      <section class="admin-section">
+        <h2>소개 (About)</h2>
+        <div class="grid-2">
+          <div class="field"><label>이름</label><input type="text" id="f-name" /></div>
+          <div class="field"><label>직함</label><input type="text" id="f-role" /></div>
+        </div>
+        <div class="field">
+          <label>프로필 사진</label>
+          <img class="thumb-preview" data-preview="f-portrait" alt="" style="aspect-ratio:4/5;max-width:220px" />
+          <input type="hidden" id="f-portrait" />
+          <input type="file" accept="image/*" data-target="f-portrait" />
+        </div>
+        <div class="field"><label>소개 글 (한 줄 = 한 문단)</label><textarea id="f-bio" style="min-height:140px"></textarea></div>
+        <div class="field"><label>소개 글 (영문)</label><textarea id="f-bioEn"></textarea></div>
+        <div class="field"><label>정보 (형식: 라벨 | 내용, 한 줄에 하나)</label><textarea id="f-facts" style="min-height:110px"></textarea></div>
+        <div class="field"><label>수상·초청 (형식: 연도 | 내용, 한 줄에 하나)</label><textarea id="f-recognition" style="min-height:110px"></textarea></div>
+      </section>
+
+      <!-- CONTACT -->
+      <section class="admin-section">
+        <h2>연락처 (Contact)</h2>
+        <div class="grid-2">
+          <div class="field"><label>이메일</label><input type="text" id="f-email" /></div>
+          <div class="field"><label>운영 시간</label><input type="text" id="f-hours" /></div>
+        </div>
+        <div class="field"><label>주소 / 스튜디오</label><input type="text" id="f-address" /></div>
+        <div class="field"><label>문의 항목 (한 줄에 하나)</label><textarea id="f-inquiries"></textarea></div>
+      </section>
+
+      <div class="statusline" id="status">불러오는 중…</div>
+      <div style="margin-top:16px;display:flex;gap:10px">
+        <button type="button" class="btn" id="save-all">저장하기</button>
+        <a class="btn btn--ghost" href="index.html" target="_blank" rel="noopener">사이트 새 탭에서 보기</a>
+      </div>
+    </form>
+  </main>
+
+  <!-- template for one work editor -->
+  <template id="work-tpl">
+    <div class="work-editor">
+      <div class="work-editor__bar">
+        <strong class="we-name">작품</strong>
+        <div class="tools">
+          <button type="button" class="btn btn--ghost btn--sm we-up">↑</button>
+          <button type="button" class="btn btn--ghost btn--sm we-down">↓</button>
+          <button type="button" class="btn btn--ghost btn--sm we-del">삭제</button>
+        </div>
+      </div>
+      <img class="thumb-preview f-image-preview" alt="" />
+      <input type="hidden" class="f-image" />
+      <div class="field"><label>대표 이미지 (가로 3:2 권장)</label><input type="file" accept="image/*" class="f-image-file" /></div>
+      <div class="grid-2">
+        <div class="field"><label>제목 (한글)</label><input type="text" class="f-title" /></div>
+        <div class="field"><label>제목 (영문)</label><input type="text" class="f-titleEn" /></div>
+      </div>
+      <div class="grid-2">
+        <div class="field"><label>상태</label>
+          <select class="f-status">
+            <option value="released">released (공개완료)</option>
+            <option value="upcoming">upcoming (공개예정)</option>
+          </select>
+        </div>
+        <div class="field"><label>날짜 라벨</label><input type="text" class="f-dateLabel" placeholder="Released, July 2024" /></div>
+      </div>
+      <div class="grid-2">
+        <div class="field"><label>형식</label><input type="text" class="f-format" placeholder="장편영화 / 리미티드 시리즈 …" /></div>
+        <div class="field"><label>영상 URL (YouTube·Vimeo, 또는 mp4 링크 / 비워도 됨)</label><input type="text" class="f-video" /></div>
+      </div>
+      <div class="field"><label>시놉시스</label><textarea class="f-synopsis"></textarea></div>
+      <div class="grid-2">
+        <div class="field"><label>감독</label><input type="text" class="f-c-director" /></div>
+        <div class="field"><label>각본</label><input type="text" class="f-c-writer" /></div>
+      </div>
+      <div class="grid-2">
+        <div class="field"><label>출연</label><input type="text" class="f-c-cast" /></div>
+        <div class="field"><label>플랫폼</label><input type="text" class="f-c-platform" /></div>
+      </div>
+      <input type="hidden" class="f-id" />
+    </div>
+  </template>
+
+  <script src="js/admin.js"></script>
+</body>
+</html>

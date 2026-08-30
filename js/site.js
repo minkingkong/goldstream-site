@@ -1,0 +1,296 @@
+/* GOLDSTREAM — front-end renderer
+   Reads data/content.json and populates pages. No build step. */
+(function () {
+  "use strict";
+
+  var CONTENT_URL = "data/content.json?t=" + Date.now();
+
+  function get(obj, path) {
+    return path.split(".").reduce(function (o, k) {
+      return o == null ? undefined : o[k];
+    }, obj);
+  }
+
+  function esc(s) {
+    return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c];
+    });
+  }
+
+  /* ---------- text / image fields ---------- */
+  function applyFields(data) {
+    document.querySelectorAll("[data-field]").forEach(function (el) {
+      var v = get(data, el.getAttribute("data-field"));
+      if (v == null || typeof v === "object") return;
+      if (el.hasAttribute("data-mailto")) {
+        el.textContent = v;
+        el.setAttribute("href", "mailto:" + v);
+      } else if (el.tagName === "IMG") {
+        el.setAttribute("src", v);
+      } else {
+        el.textContent = v;
+      }
+    });
+  }
+
+  /* ---------- works ---------- */
+  function videoEmbed(url) {
+    if (!url) return null;
+    var yt = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([\w-]{6,})/);
+    if (yt) return { type: "iframe", src: "https://www.youtube.com/embed/" + yt[1] };
+    var vm = url.match(/vimeo\.com\/(?:video\/)?(\d+)/);
+    if (vm) return { type: "iframe", src: "https://player.vimeo.com/video/" + vm[1] };
+    if (/\.(mp4|webm|mov)(\?.*)?$/i.test(url)) return { type: "video", src: url };
+    return { type: "iframe", src: url };
+  }
+
+  function workCard(w) {
+    var a = document.createElement("a");
+    a.className = "work";
+    a.setAttribute("data-status", w.status || "released");
+    a.setAttribute("data-id", w.id);
+    a.setAttribute("role", "button");
+    a.setAttribute("tabindex", "0");
+    a.href = "#" + w.id;
+    a.innerHTML =
+      '<div class="work__thumb"><img loading="lazy" alt="' +
+      esc(w.title) +
+      '" src="' + esc(w.image || "") + '"></div>' +
+      '<div class="work__row"><h3>' + esc(w.title) + "</h3>" +
+      '<span class="work__arrow" aria-hidden="true">&rarr;</span></div>' +
+      '<p class="work__date">' + esc(w.dateLabel || "") + "</p>" +
+      (w.format ? '<span class="work__tag">' + esc(w.format) + "</span>" : "");
+    a.addEventListener("click", function (e) {
+      e.preventDefault();
+      openModal(w);
+    });
+    a.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        openModal(w);
+      }
+    });
+    return a;
+  }
+
+  function renderWorks(data) {
+    var grid = document.getElementById("works-grid");
+    if (!grid) return;
+    var works = data.works || [];
+    var featured = grid.hasAttribute("data-featured");
+    if (featured) {
+      var n = (data.home && data.home.featuredCount) || 3;
+      works = works.slice(0, n);
+    }
+    grid.innerHTML = "";
+    works.forEach(function (w) {
+      grid.appendChild(workCard(w));
+    });
+
+    // filters
+    var filterBar = document.querySelector("[data-filters]");
+    if (filterBar && !featured) {
+      filterBar.addEventListener("click", function (e) {
+        var btn = e.target.closest("button[data-filter]");
+        if (!btn) return;
+        filterBar.querySelectorAll("button").forEach(function (b) {
+          b.setAttribute("aria-pressed", b === btn ? "true" : "false");
+        });
+        var f = btn.getAttribute("data-filter");
+        var shown = 0;
+        grid.querySelectorAll(".work").forEach(function (card) {
+          var ok = f === "all" || card.getAttribute("data-status") === f;
+          card.classList.toggle("is-hidden", !ok);
+          if (ok) shown++;
+        });
+        var empty = document.getElementById("works-empty");
+        if (empty) empty.hidden = shown !== 0;
+      });
+    }
+
+    // view toggle (gallery / list)
+    var viewBar = document.querySelector("[data-view]");
+    if (viewBar) {
+      viewBar.addEventListener("click", function (e) {
+        var btn = e.target.closest("button[data-viewmode]");
+        if (!btn) return;
+        viewBar.querySelectorAll("button").forEach(function (b) {
+          b.setAttribute("aria-pressed", b === btn ? "true" : "false");
+        });
+        grid.classList.toggle(
+          "works-grid--list",
+          btn.getAttribute("data-viewmode") === "list"
+        );
+      });
+    }
+
+    // deep link (#w2)
+    if (location.hash.length > 1) {
+      var target = works.filter(function (w) {
+        return "#" + w.id === location.hash;
+      })[0] || (data.works || []).filter(function (w) {
+        return "#" + w.id === location.hash;
+      })[0];
+      if (target) openModal(target);
+    }
+  }
+
+  /* ---------- modal ---------- */
+  var modalEl;
+  function ensureModal() {
+    if (modalEl) return modalEl;
+    modalEl = document.createElement("div");
+    modalEl.className = "modal";
+    modalEl.innerHTML =
+      '<button class="modal__close" aria-label="닫기">&times;</button>' +
+      '<div class="modal__card">' +
+      '<div class="modal__media" id="modal-media"></div>' +
+      '<div class="modal__body">' +
+      '<p class="modal__eyebrow" id="modal-eyebrow"></p>' +
+      '<h2 class="modal__title" id="modal-title"></h2>' +
+      '<p class="modal__synopsis" id="modal-synopsis"></p>' +
+      '<dl class="modal__credits" id="modal-credits"></dl>' +
+      "</div></div>";
+    document.body.appendChild(modalEl);
+    function close() {
+      modalEl.classList.remove("is-open");
+      document.getElementById("modal-media").innerHTML = "";
+      document.body.style.overflow = "";
+      if (location.hash) history.replaceState(null, "", location.pathname);
+    }
+    modalEl.querySelector(".modal__close").addEventListener("click", close);
+    modalEl.addEventListener("click", function (e) {
+      if (e.target === modalEl) close();
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") close();
+    });
+    return modalEl;
+  }
+
+  function openModal(w) {
+    ensureModal();
+    var media = document.getElementById("modal-media");
+    var emb = videoEmbed(w.video);
+    if (emb && emb.type === "iframe") {
+      media.innerHTML =
+        '<iframe src="' + esc(emb.src) +
+        '" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>';
+    } else if (emb && emb.type === "video") {
+      media.innerHTML = '<video src="' + esc(emb.src) + '" controls playsinline></video>';
+    } else {
+      media.innerHTML = '<img alt="' + esc(w.title) + '" src="' + esc(w.image || "") + '">';
+    }
+    document.getElementById("modal-eyebrow").textContent =
+      (w.format ? w.format + " · " : "") + (w.dateLabel || "");
+    document.getElementById("modal-title").innerHTML =
+      esc(w.title) +
+      (w.titleEn ? '<span class="modal__title-en">' + esc(w.titleEn) + "</span>" : "");
+    document.getElementById("modal-synopsis").textContent = w.synopsis || "";
+    var dl = document.getElementById("modal-credits");
+    dl.innerHTML = "";
+    var cr = w.credits || {};
+    Object.keys(cr).forEach(function (k) {
+      if (!cr[k]) return;
+      var d = document.createElement("div");
+      d.innerHTML = "<dt>" + esc(k) + "</dt><dd>" + esc(cr[k]) + "</dd>";
+      dl.appendChild(d);
+    });
+    modalEl.classList.add("is-open");
+    document.body.style.overflow = "hidden";
+    history.replaceState(null, "", "#" + w.id);
+  }
+
+  /* ---------- about ---------- */
+  function renderAbout(data) {
+    var bioBox = document.getElementById("about-bio");
+    if (bioBox && data.about) {
+      bioBox.innerHTML = "";
+      (data.about.bio || []).forEach(function (p) {
+        var el = document.createElement("p");
+        el.textContent = p;
+        bioBox.appendChild(el);
+      });
+      if (data.about.bioEn) {
+        var en = document.createElement("p");
+        en.className = "en";
+        en.textContent = data.about.bioEn;
+        bioBox.appendChild(en);
+      }
+    }
+    var factsBox = document.getElementById("about-facts");
+    if (factsBox && data.about) {
+      factsBox.innerHTML = "";
+      (data.about.facts || []).forEach(function (f) {
+        var d = document.createElement("div");
+        d.innerHTML = "<dt>" + esc(f.k) + "</dt><dd>" + esc(f.v) + "</dd>";
+        factsBox.appendChild(d);
+      });
+    }
+    var recBox = document.getElementById("about-recognition");
+    if (recBox && data.about) {
+      recBox.innerHTML = "";
+      (data.about.recognition || []).forEach(function (r) {
+        var d = document.createElement("div");
+        d.innerHTML = "<dt>" + esc(r.year) + "</dt><dd>" + esc(r.text) + "</dd>";
+        recBox.appendChild(d);
+      });
+    }
+    var inq = document.getElementById("contact-inquiries");
+    if (inq && data.contact) {
+      inq.innerHTML = "";
+      (data.contact.inquiries || []).forEach(function (t) {
+        var li = document.createElement("p");
+        li.textContent = t;
+        inq.appendChild(li);
+      });
+    }
+  }
+
+  /* ---------- reveal ---------- */
+  function initReveal() {
+    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var items = document.querySelectorAll(".reveal");
+    if (reduce || !("IntersectionObserver" in window)) {
+      items.forEach(function (el) { el.classList.add("in"); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) {
+          en.target.classList.add("in");
+          io.unobserve(en.target);
+        }
+      });
+    }, { threshold: 0.14, rootMargin: "0px 0px -6% 0px" });
+    items.forEach(function (el) { io.observe(el); });
+    setTimeout(function () {
+      items.forEach(function (el) { el.classList.add("in"); });
+    }, 3000);
+  }
+
+  /* ---------- boot ---------- */
+  function boot() {
+    fetch(CONTENT_URL, { cache: "no-store" })
+      .then(function (r) {
+        if (!r.ok) throw new Error("content " + r.status);
+        return r.json();
+      })
+      .then(function (data) {
+        window.__content = data;
+        applyFields(data);
+        renderWorks(data);
+        renderAbout(data);
+      })
+      .catch(function (err) {
+        console.error("[GOLDSTREAM] content load failed:", err);
+      })
+      .finally(initReveal);
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", boot);
+  } else {
+    boot();
+  }
+})();

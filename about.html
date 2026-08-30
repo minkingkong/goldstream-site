@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About — GOLDSTREAM</title>
+  <meta name="description" content="영화 제작자 김정환과 GOLDSTREAM 소개." />
+  <link rel="preload" as="font" type="font/woff2" href="assets/fonts/PretendardVariable.woff2" crossorigin />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="hd">
+    <div class="wrap hd__in">
+      <a class="hd__logo" href="index.html">GOLDSTREAM</a>
+      <nav class="hd__nav">
+        <a href="works.html">works</a>
+        <a href="about.html" aria-current="page">about</a>
+        <a href="contact.html">contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page wrap">
+    <h1 class="page__title">About</h1>
+
+    <div class="about">
+      <div class="about__portrait reveal">
+        <img data-field="about.portrait" src="assets/img/portrait.svg" alt="김정환" />
+      </div>
+      <div class="about__body reveal">
+        <p class="about__name" data-field="about.name">김정환</p>
+        <p class="about__role" data-field="about.role">영화 제작자 · Producer</p>
+
+        <div class="about__bio" id="about-bio"></div>
+
+        <dl class="facts" id="about-facts"></dl>
+
+        <h2 class="eyebrow" style="margin-top:36px;display:block">Recognition</h2>
+        <dl class="facts" id="about-recognition"></dl>
+      </div>
+    </div>
+  </main>
+
+  <footer class="ft">
+    <div class="wrap ft__in">
+      <span>© 2026 GOLDSTREAM</span>
+      <a href="mailto:hello@goldstream.co.kr" data-field="contact.email" data-mailto>hello@goldstream.co.kr</a>
+      <span data-field="contact.address">서울특별시 마포구</span>
+    </div>
+  </footer>
+
+  <script src="js/site.js"></script>
+</body>
+</html>
