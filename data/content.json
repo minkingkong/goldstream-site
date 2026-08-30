@@ -121,22 +121,48 @@
     ],
     "bioEn": "Kim Jung-hwan is a Seoul-based film producer. He founded GOLDSTREAM in 2016 to develop and produce feature films and series that keep a director's voice intact while finding their audience.",
     "facts": [
-      { "k": "Base", "v": "서울 · Seoul, KR" },
-      { "k": "Founded", "v": "GOLDSTREAM, 2016" },
-      { "k": "Focus", "v": "장편영화 · 리미티드 시리즈 · 다큐멘터리" },
-      { "k": "Role", "v": "기획개발 · 제작 · 투자·배급 총괄" }
+      {
+        "k": "Base",
+        "v": "서울 · Seoul, KR"
+      },
+      {
+        "k": "Founded",
+        "v": "GOLDSTREAM, 2016"
+      },
+      {
+        "k": "Focus",
+        "v": "장편영화 · 리미티드 시리즈 · 다큐멘터리"
+      },
+      {
+        "k": "Role",
+        "v": "기획개발 · 제작 · 투자·배급 총괄"
+      }
     ],
     "recognition": [
-      { "year": "2024", "text": "「검은 해변」 부산국제영화제 초청" },
-      { "year": "2023", "text": "「스트림」 백상예술대상 작품상 후보" },
-      { "year": "2021", "text": "「형산강」 서울독립영화제 대상" },
-      { "year": "2019", "text": "한국영화프로듀서조합 올해의 제작자" }
+      {
+        "year": "2024",
+        "text": "「검은 해변」 부산국제영화제 초청"
+      },
+      {
+        "year": "2023",
+        "text": "「스트림」 백상예술대상 작품상 후보"
+      },
+      {
+        "year": "2021",
+        "text": "「형산강」 서울독립영화제 대상"
+      },
+      {
+        "year": "2019",
+        "text": "한국영화프로듀서조합 올해의 제작자"
+      }
     ]
   },
   "contact": {
-    "email": "hello@goldstream.co.kr",
-    "address": "서울특별시 마포구",
-    "hours": "Mon–Fri 10:00–19:00",
-    "inquiries": ["제작 제안 · 시나리오", "투자 · 배급 문의", "채용 · 인턴십"]
+    "email": "minsung3124@gmail.com",
+    "address": "서울특별시 마포구 성산1동",
+    "hours": "",
+    "inquiries": [
+      "AI VFX · Media Art · Commercial"
+    ]
   }
 }
