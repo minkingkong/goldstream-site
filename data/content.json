@@ -1,9 +1,9 @@
 {
   "site": {
-    "brand": "GOLDSTREAM"
+    "brand": "Minseong Kang"
   },
   "theme": {
-    "accent": "#7c4bff",
+    "accent": "#b4dafe",
     "ink": "#252525",
     "inkMuted": "#525252",
     "bg": "#ffffff",
@@ -20,7 +20,7 @@
     },
     "contact": {
       "title": "Contact",
-      "big": "함께 만들\n이야기가 있다면."
+      "big": "상상을 현실로 만들고 싶다면."
     }
   },
   "home": {
