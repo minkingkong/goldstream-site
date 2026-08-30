@@ -1,4 +1,28 @@
 {
+  "site": {
+    "brand": "GOLDSTREAM"
+  },
+  "theme": {
+    "accent": "#7c4bff",
+    "ink": "#252525",
+    "inkMuted": "#525252",
+    "bg": "#ffffff",
+    "heroFrom": "#8a6bf0",
+    "heroTo": "#6d4bd8"
+  },
+  "pages": {
+    "works": {
+      "title": "Works",
+      "lead": "GOLDSTREAM이 기획·제작한 장편영화, 리미티드 시리즈, 다큐멘터리입니다."
+    },
+    "about": {
+      "title": "About"
+    },
+    "contact": {
+      "title": "Contact",
+      "big": "함께 만들\n이야기가 있다면."
+    }
+  },
   "home": {
     "heroEyebrow": "Film Production · Seoul",
     "heroTitle": "HARU",

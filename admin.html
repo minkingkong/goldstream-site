@@ -47,6 +47,53 @@
     <p id="conn" style="font-size:13px;color:var(--ink-faint);margin-bottom:10px"></p>
 
     <form id="editor" hidden>
+      <!-- SITE -->
+      <section class="admin-section">
+        <h2>사이트 (공통)</h2>
+        <div class="field">
+          <label>로고 / 브랜드 이름 (좌상단 · 푸터)</label>
+          <input type="text" id="f-brand" />
+        </div>
+      </section>
+
+      <!-- THEME COLOURS -->
+      <section class="admin-section">
+        <h2>색상 (테마)</h2>
+        <p style="font-size:13px;color:var(--ink-muted);margin:-8px 0 14px">
+          저장 후 약 1분 뒤 전체 사이트에 반영됩니다. 기본값 — 포인트 #7c4bff · 글자 #252525 · 배경 #ffffff
+        </p>
+        <div class="grid-2">
+          <div class="field"><label>포인트 색 (보라)</label><input type="color" id="f-th-accent" /></div>
+          <div class="field"><label>기본 글자색</label><input type="color" id="f-th-ink" /></div>
+        </div>
+        <div class="grid-2">
+          <div class="field"><label>옅은 글자색 (설명·메타)</label><input type="color" id="f-th-inkMuted" /></div>
+          <div class="field"><label>배경색</label><input type="color" id="f-th-bg" /></div>
+        </div>
+        <div class="grid-2">
+          <div class="field"><label>홈 히어로 배경 — 시작</label><input type="color" id="f-th-heroFrom" /></div>
+          <div class="field"><label>홈 히어로 배경 — 끝</label><input type="color" id="f-th-heroTo" /></div>
+        </div>
+        <button type="button" class="btn btn--ghost btn--sm" id="reset-theme">기본 색상으로 되돌리기</button>
+      </section>
+
+      <!-- PAGE TITLES -->
+      <section class="admin-section">
+        <h2>페이지 제목 · 문구</h2>
+        <div class="grid-2">
+          <div class="field"><label>Works — 제목</label><input type="text" id="f-pg-works-title" /></div>
+          <div class="field"><label>About — 제목</label><input type="text" id="f-pg-about-title" /></div>
+        </div>
+        <div class="field"><label>Works — 설명 문구</label><textarea id="f-pg-works-lead"></textarea></div>
+        <div class="grid-2">
+          <div class="field"><label>Contact — 제목</label><input type="text" id="f-pg-contact-title" /></div>
+        </div>
+        <div class="field">
+          <label>Contact — 큰 문구 (줄바꿈 그대로 반영)</label>
+          <textarea id="f-pg-contact-big"></textarea>
+        </div>
+      </section>
+
       <!-- HOME -->
       <section class="admin-section">
         <h2>홈 (Home)</h2>

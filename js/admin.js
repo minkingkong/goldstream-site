@@ -10,6 +10,15 @@
   var API = "https://api.github.com";
   var TKEY = "gs_gh_token";
   var MAX_BYTES = 40 * 1024 * 1024; // 40 MB soft cap for uploads
+  var DEFAULT_THEME = {
+    accent: "#7c4bff",
+    ink: "#252525",
+    inkMuted: "#525252",
+    bg: "#ffffff",
+    heroFrom: "#8a6bf0",
+    heroTo: "#6d4bd8"
+  };
+  var THEME_KEYS = ["accent", "ink", "inkMuted", "bg", "heroFrom", "heroTo"];
 
   var state = { data: null, sha: null };
   var $ = function (id) { return document.getElementById(id); };
@@ -217,6 +226,22 @@
 
   function fillForm(data) {
     var h = data.home || {}, a = data.about || {}, c = data.contact || {};
+
+    setV("f-brand", (data.site || {}).brand || "");
+
+    var th = data.theme || {};
+    THEME_KEYS.forEach(function (k) {
+      var el = $("f-th-" + k);
+      if (el) el.value = th[k] || DEFAULT_THEME[k];
+    });
+
+    var pg = data.pages || {};
+    setV("f-pg-works-title", (pg.works || {}).title);
+    setV("f-pg-works-lead", (pg.works || {}).lead);
+    setV("f-pg-about-title", (pg.about || {}).title);
+    setV("f-pg-contact-title", (pg.contact || {}).title);
+    setV("f-pg-contact-big", (pg.contact || {}).big);
+
     setV("f-heroEyebrow", h.heroEyebrow);
     setV("f-heroTitle", h.heroTitle);
     setV("f-heroTagline", h.heroTagline);
@@ -244,6 +269,21 @@
 
   function collectForm() {
     var data = JSON.parse(JSON.stringify(state.data || {}));
+
+    data.site = data.site || {};
+    data.site.brand = v("f-brand");
+
+    data.theme = {};
+    THEME_KEYS.forEach(function (k) {
+      data.theme[k] = v("f-th-" + k) || DEFAULT_THEME[k];
+    });
+
+    data.pages = {
+      works: { title: v("f-pg-works-title"), lead: v("f-pg-works-lead") },
+      about: { title: v("f-pg-about-title") },
+      contact: { title: v("f-pg-contact-title"), big: $("f-pg-contact-big").value.replace(/\s+$/, "") }
+    };
+
     data.home = data.home || {};
     data.home.heroEyebrow = v("f-heroEyebrow");
     data.home.heroTitle = v("f-heroTitle");
@@ -346,6 +386,14 @@
     });
     $("check").addEventListener("click", checkConn);
     $("reload").addEventListener("click", load);
+    var rt = $("reset-theme");
+    if (rt) rt.addEventListener("click", function () {
+      THEME_KEYS.forEach(function (k) {
+        var el = $("f-th-" + k);
+        if (el) el.value = DEFAULT_THEME[k];
+      });
+      status("기본 색상으로 되돌렸습니다. [저장하기]를 눌러 적용하세요.");
+    });
     $("add-work").addEventListener("click", function () {
       var node = makeWorkEditor({ id: "w" + Date.now(), status: "upcoming" });
       $("works-list").appendChild(node);

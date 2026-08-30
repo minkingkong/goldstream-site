@@ -17,6 +17,49 @@
     });
   }
 
+  /* ---------- theme colours ---------- */
+  function normHex(hex) {
+    hex = String(hex || "").trim().replace("#", "");
+    if (hex.length === 3) hex = hex.split("").map(function (c) { return c + c; }).join("");
+    return /^[0-9a-fA-F]{6}$/.test(hex) ? hex : null;
+  }
+  function hexToRgba(hex, a) {
+    var h = normHex(hex);
+    if (!h) return null;
+    return "rgba(" + parseInt(h.substr(0, 2), 16) + "," +
+      parseInt(h.substr(2, 2), 16) + "," + parseInt(h.substr(4, 2), 16) + "," + a + ")";
+  }
+  function shade(hex, pct) {
+    var h = normHex(hex);
+    if (!h) return hex;
+    var out = [0, 2, 4].map(function (i) {
+      var v = parseInt(h.substr(i, 2), 16) + Math.round(255 * pct);
+      v = Math.max(0, Math.min(255, v));
+      return ("0" + v.toString(16)).slice(-2);
+    });
+    return "#" + out.join("");
+  }
+  function applyTheme(t) {
+    if (!t) return;
+    var s = document.documentElement.style;
+    var map = {
+      accent: "--violet",
+      ink: "--ink",
+      inkMuted: "--ink-muted",
+      bg: "--bg",
+      heroFrom: "--violet-hero-1",
+      heroTo: "--violet-hero-2"
+    };
+    Object.keys(map).forEach(function (k) {
+      if (t[k]) s.setProperty(map[k], t[k]);
+    });
+    if (t.accent) {
+      var soft = hexToRgba(t.accent, 0.1);
+      if (soft) s.setProperty("--violet-soft", soft);
+      s.setProperty("--violet-ink", shade(t.accent, -0.12));
+    }
+  }
+
   /* ---------- text / image fields ---------- */
   function applyFields(data) {
     document.querySelectorAll("[data-field]").forEach(function (el) {
@@ -27,6 +70,8 @@
         el.setAttribute("href", "mailto:" + v);
       } else if (el.tagName === "IMG") {
         el.setAttribute("src", v);
+      } else if (el.hasAttribute("data-multiline")) {
+        el.innerHTML = esc(v).replace(/\n/g, "<br>");
       } else {
         el.textContent = v;
       }
@@ -278,6 +323,7 @@
       })
       .then(function (data) {
         window.__content = data;
+        applyTheme(data.theme);
         applyFields(data);
         renderWorks(data);
         renderAbout(data);
