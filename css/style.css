@@ -628,6 +628,9 @@ ul {
   .about {
     grid-template-columns: 1fr;
   }
+  .about__portrait {
+    max-width: 300px;
+  }
 }
 .about__portrait {
   aspect-ratio: 4 / 5;
