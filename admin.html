@@ -122,15 +122,29 @@
           <div class="field"><label>직함</label><input type="text" id="f-role" /></div>
         </div>
         <div class="field">
-          <label>프로필 사진</label>
+          <label>프로필 사진 (세로 4:5 권장)</label>
           <img class="thumb-preview" data-preview="f-portrait" alt="" style="aspect-ratio:4/5;max-width:220px" />
           <input type="hidden" id="f-portrait" />
           <input type="file" accept="image/*" data-target="f-portrait" />
         </div>
-        <div class="field"><label>소개 글 (한 줄 = 한 문단)</label><textarea id="f-bio" style="min-height:140px"></textarea></div>
-        <div class="field"><label>소개 글 (영문)</label><textarea id="f-bioEn"></textarea></div>
-        <div class="field"><label>정보 (형식: 라벨 | 내용, 한 줄에 하나)</label><textarea id="f-facts" style="min-height:110px"></textarea></div>
-        <div class="field"><label>수상·초청 (형식: 연도 | 내용, 한 줄에 하나)</label><textarea id="f-recognition" style="min-height:110px"></textarea></div>
+
+        <div class="field"><label>인사말 — 소제목</label><input type="text" id="f-ab-greetingTitle" /></div>
+        <div class="field"><label>인사말 본문 (한 줄 = 한 문단)</label><textarea id="f-ab-greeting" style="min-height:180px"></textarea></div>
+        <div class="field"><label>인사말 서명</label><input type="text" id="f-ab-greetingSign" /></div>
+
+        <div class="field"><label>Profile — 소제목</label><input type="text" id="f-ab-profileTitle" /></div>
+        <div class="field"><label>Profile 본문 (한 줄 = 한 문단)</label><textarea id="f-ab-profile" style="min-height:140px"></textarea></div>
+
+        <div class="field"><label>Current Business — 소제목</label><input type="text" id="f-ab-cbTitle" /></div>
+        <div class="field"><label>Current Business 항목 (한 줄에 하나)</label><textarea id="f-ab-cb" style="min-height:140px"></textarea></div>
+
+        <div class="field"><label>Vision — 소제목</label><input type="text" id="f-ab-visionTitle" /></div>
+        <div class="field"><label>Vision — 큰 문구 (줄바꿈 그대로 반영)</label><textarea id="f-ab-visionQuote" style="min-height:90px"></textarea></div>
+        <div class="field"><label>Vision 본문 (한 줄 = 한 문단)</label><textarea id="f-ab-vision"></textarea></div>
+
+        <div class="field"><label>회사 정보 (형식: 라벨 | 내용, 한 줄에 하나)</label><textarea id="f-facts" style="min-height:110px"></textarea></div>
+        <div class="field"><label>주요 작품 (형식: 연도 | 내용, 한 줄에 하나)</label><textarea id="f-recognition" style="min-height:110px"></textarea></div>
+        <div class="field"><label>Press · 관련 보도 (형식: 제목 | URL, 한 줄에 하나)</label><textarea id="f-ab-press" style="min-height:90px"></textarea></div>
       </section>
 
       <!-- CONTACT -->

@@ -261,39 +261,63 @@
   }
 
   /* ---------- about ---------- */
+  function fillParas(id, arr) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    el.innerHTML = "";
+    (arr || []).forEach(function (p) {
+      var n = document.createElement("p");
+      n.textContent = p;
+      el.appendChild(n);
+    });
+  }
+  function fillItems(id, arr) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    el.innerHTML = "";
+    (arr || []).forEach(function (t) {
+      var li = document.createElement("li");
+      li.textContent = t;
+      el.appendChild(li);
+    });
+  }
+  function fillDefs(id, pairs) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    el.innerHTML = "";
+    (pairs || []).forEach(function (p) {
+      if (p[0] == null && p[1] == null) return;
+      var d = document.createElement("div");
+      d.innerHTML = "<dt>" + esc(p[0]) + "</dt><dd>" + esc(p[1]) + "</dd>";
+      el.appendChild(d);
+    });
+  }
+  function fillLinkList(id, arr) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    el.innerHTML = "";
+    (arr || []).forEach(function (ln) {
+      if (!ln || !ln.url) return;
+      var a = document.createElement("a");
+      a.href = ln.url;
+      a.target = "_blank";
+      a.rel = "noopener noreferrer";
+      a.className = "modal__link";
+      a.innerHTML = esc(ln.label || ln.url) + ' <span aria-hidden="true">&#8599;</span>';
+      el.appendChild(a);
+    });
+  }
+
   function renderAbout(data) {
-    var bioBox = document.getElementById("about-bio");
-    if (bioBox && data.about) {
-      bioBox.innerHTML = "";
-      (data.about.bio || []).forEach(function (p) {
-        var el = document.createElement("p");
-        el.textContent = p;
-        bioBox.appendChild(el);
-      });
-      if (data.about.bioEn) {
-        var en = document.createElement("p");
-        en.className = "en";
-        en.textContent = data.about.bioEn;
-        bioBox.appendChild(en);
-      }
-    }
-    var factsBox = document.getElementById("about-facts");
-    if (factsBox && data.about) {
-      factsBox.innerHTML = "";
-      (data.about.facts || []).forEach(function (f) {
-        var d = document.createElement("div");
-        d.innerHTML = "<dt>" + esc(f.k) + "</dt><dd>" + esc(f.v) + "</dd>";
-        factsBox.appendChild(d);
-      });
-    }
-    var recBox = document.getElementById("about-recognition");
-    if (recBox && data.about) {
-      recBox.innerHTML = "";
-      (data.about.recognition || []).forEach(function (r) {
-        var d = document.createElement("div");
-        d.innerHTML = "<dt>" + esc(r.year) + "</dt><dd>" + esc(r.text) + "</dd>";
-        recBox.appendChild(d);
-      });
+    var a = data.about;
+    if (a) {
+      fillParas("about-greeting", a.greeting);
+      fillParas("about-profile", a.profile);
+      fillParas("about-vision", a.vision);
+      fillItems("about-business", a.currentBusiness);
+      fillDefs("about-facts", (a.facts || []).map(function (f) { return [f.k, f.v]; }));
+      fillDefs("about-recognition", (a.recognition || []).map(function (r) { return [r.year, r.text]; }));
+      fillLinkList("about-press", a.press);
     }
     var inq = document.getElementById("contact-inquiries");
     if (inq && data.contact) {

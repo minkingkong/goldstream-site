@@ -269,10 +269,21 @@
     setV("f-portrait", a.portrait);
     var pv = document.querySelector('[data-preview="f-portrait"]');
     if (pv && a.portrait) pv.src = a.portrait;
-    setV("f-bio", (a.bio || []).join("\n"));
-    setV("f-bioEn", a.bioEn);
+
+    setV("f-ab-greetingTitle", a.greetingTitle);
+    setV("f-ab-greeting", (a.greeting || []).join("\n"));
+    setV("f-ab-greetingSign", a.greetingSign);
+    setV("f-ab-profileTitle", a.profileTitle);
+    setV("f-ab-profile", (a.profile || []).join("\n"));
+    setV("f-ab-cbTitle", a.currentBusinessTitle);
+    setV("f-ab-cb", (a.currentBusiness || []).join("\n"));
+    setV("f-ab-visionTitle", a.visionTitle);
+    setV("f-ab-visionQuote", a.visionQuote);
+    setV("f-ab-vision", (a.vision || []).join("\n"));
+
     setV("f-facts", (a.facts || []).map(function (f) { return f.k + " | " + f.v; }).join("\n"));
     setV("f-recognition", (a.recognition || []).map(function (r) { return r.year + " | " + r.text; }).join("\n"));
+    setV("f-ab-press", (a.press || []).map(function (p) { return (p.label || "") + " | " + (p.url || ""); }).join("\n"));
 
     setV("f-email", c.email);
     setV("f-hours", c.hours);
@@ -307,11 +318,21 @@
     data.works = collectWorks();
 
     data.about = data.about || {};
+    delete data.about.bio;
+    delete data.about.bioEn;
     data.about.name = v("f-name");
     data.about.role = v("f-role");
     data.about.portrait = v("f-portrait");
-    data.about.bio = lines("f-bio");
-    data.about.bioEn = v("f-bioEn");
+    data.about.greetingTitle = v("f-ab-greetingTitle");
+    data.about.greeting = lines("f-ab-greeting");
+    data.about.greetingSign = v("f-ab-greetingSign");
+    data.about.profileTitle = v("f-ab-profileTitle");
+    data.about.profile = lines("f-ab-profile");
+    data.about.currentBusinessTitle = v("f-ab-cbTitle");
+    data.about.currentBusiness = lines("f-ab-cb");
+    data.about.visionTitle = v("f-ab-visionTitle");
+    data.about.visionQuote = $("f-ab-visionQuote").value.replace(/\s+$/, "");
+    data.about.vision = lines("f-ab-vision");
     data.about.facts = lines("f-facts").map(function (l) {
       var p = l.split("|");
       return { k: (p[0] || "").trim(), v: (p.slice(1).join("|") || "").trim() };
@@ -319,6 +340,12 @@
     data.about.recognition = lines("f-recognition").map(function (l) {
       var p = l.split("|");
       return { year: (p[0] || "").trim(), text: (p.slice(1).join("|") || "").trim() };
+    });
+    data.about.press = lines("f-ab-press").map(function (l) {
+      var i = l.indexOf("|");
+      return i === -1
+        ? { label: l.trim(), url: l.trim() }
+        : { label: l.slice(0, i).trim(), url: l.slice(i + 1).trim() };
     });
 
     data.contact = data.contact || {};

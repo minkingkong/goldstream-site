@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>About — GOLDSTREAM</title>
-  <meta name="description" content="영화 제작자 김정환과 GOLDSTREAM 소개." />
+  <meta name="description" content="골드스트림 엔터테인먼트 대표이사 김정환 — 인사말과 프로필." />
   <link rel="preload" as="font" type="font/woff2" href="assets/fonts/PretendardVariable.woff2" crossorigin />
   <link rel="stylesheet" href="css/style.css" />
 </head>
@@ -25,20 +25,49 @@
 
     <div class="about">
       <div class="about__portrait reveal">
-        <img data-field="about.portrait" src="assets/img/portrait.svg" alt="김정환" />
+        <img data-field="about.portrait" src="assets/img/portrait.svg" alt="김정환 대표이사" />
       </div>
       <div class="about__body reveal">
         <p class="about__name" data-field="about.name">김정환</p>
-        <p class="about__role" data-field="about.role">영화 제작자 · Producer</p>
+        <p class="about__role" data-field="about.role">대표이사 · GOLDSTREAM ENTERTAINMENT</p>
 
-        <div class="about__bio" id="about-bio"></div>
-
-        <dl class="facts" id="about-facts"></dl>
-
-        <h2 class="eyebrow" style="margin-top:36px;display:block">Recognition</h2>
-        <dl class="facts" id="about-recognition"></dl>
+        <h2 class="about__block-title" data-field="about.greetingTitle">대표이사 인사말</h2>
+        <div class="about__prose" id="about-greeting"></div>
+        <p class="about__sign" data-field="about.greetingSign"></p>
       </div>
     </div>
+
+    <section class="about-section reveal">
+      <h2 class="about__block-title" data-field="about.profileTitle">Profile</h2>
+      <div class="about__prose about__prose--wide" id="about-profile"></div>
+    </section>
+
+    <section class="about-section reveal">
+      <h2 class="about__block-title" data-field="about.currentBusinessTitle">Current Business</h2>
+      <ul class="about-list" id="about-business"></ul>
+    </section>
+
+    <section class="about-section about-vision reveal">
+      <h2 class="about__block-title" data-field="about.visionTitle">Vision</h2>
+      <blockquote class="about-quote" data-field="about.visionQuote" data-multiline>좋은 이야기를 발견하고, 좋은 사람을 연결하고, 그것을 하나의 산업으로 만든다.</blockquote>
+      <div class="about__prose" id="about-vision"></div>
+    </section>
+
+    <div class="about-grid">
+      <section class="reveal">
+        <h2 class="eyebrow" style="display:block;margin-bottom:14px">Company</h2>
+        <dl class="facts" id="about-facts"></dl>
+      </section>
+      <section class="reveal">
+        <h2 class="eyebrow" style="display:block;margin-bottom:14px">Selected Filmography</h2>
+        <dl class="facts" id="about-recognition"></dl>
+      </section>
+    </div>
+
+    <section class="about-section reveal" id="about-press-wrap">
+      <h2 class="eyebrow" style="display:block;margin-bottom:8px">Press</h2>
+      <nav class="modal__links" id="about-press" aria-label="관련 보도"></nav>
+    </section>
   </main>
 
   <footer class="ft">

@@ -13,7 +13,7 @@
   "pages": {
     "works": {
       "title": "Works",
-      "lead": "GOLDSTREAM이 기획·제작한 장편영화, 리미티드 시리즈, 다큐멘터리입니다."
+      "lead": "GOLDSTREAM ENTERTAINMENT가 기획·제작에 참여한 영화와 드라마 시리즈입니다."
     },
     "about": {
       "title": "About"
@@ -36,7 +36,7 @@
       "title": "코드",
       "titleEn": "CODE",
       "status": "upcoming",
-      "dateLabel": "Upcoming, 2027",
+      "dateLabel": "Upcoming, 2027 · Disney+",
       "format": "드라마 시리즈",
       "image": "assets/img/code.svg",
       "video": "",
@@ -62,7 +62,7 @@
       "format": "장편영화",
       "image": "assets/img/steelrain.svg",
       "video": "https://www.youtube.com/watch?v=nCsO8lSZzZk",
-      "synopsis": "북한 내 쿠데타가 일어나고, 권력 1호가 치명상을 입은 채 남한으로 내려온다. 남북의 두 요원이 전쟁을 막기 위해 함께 움직이는 하루를 그린 첩보 액션. 양우석 감독의 웹툰 '스틸레인'이 원작.",
+      "synopsis": "북한 내 쿠데타가 일어나고, 권력 1호가 치명상을 입은 채 남한으로 내려온다. 남과 북의 두 요원이 전쟁을 막기 위해 함께 움직이는 하루를 그린 첩보 액션. 양우석 감독의 웹툰 '스틸레인'이 원작.",
       "credits": {
         "감독": "양우석",
         "각본": "양우석",
@@ -75,153 +75,119 @@
       ]
     },
     {
-      "id": "w1",
-      "title": "검은 해변",
-      "titleEn": "The Black Shore",
+      "id": "steelrain2",
+      "title": "강철비2: 정상회담",
+      "titleEn": "Steel Rain 2: Summit",
       "status": "released",
-      "dateLabel": "Released, July 2024",
+      "dateLabel": "Released, 2020",
       "format": "장편영화",
-      "image": "assets/img/w1.svg",
-      "video": "",
-      "synopsis": "한 어촌 마을에 돌아온 남자가 20년 전 사라진 동생의 흔적을 좇는다. 바다와 기억, 그리고 침묵에 관한 이야기.",
+      "image": "assets/img/steelrain2.svg",
+      "video": "https://www.youtube.com/watch?v=KKPUEANoHAo",
+      "synopsis": "남·북·미 정상이 북한 원산에서 정상회담을 갖던 중, 핵 포기에 반대하는 북한 호위총국의 쿠데타가 일어난다. 납치된 세 정상은 북한 핵잠수함에 갇히고, 좁은 함 안에서 한반도의 운명을 건 시간이 흐른다. '강철비' 세계관의 두 번째 이야기.",
       "credits": {
-        "감독": "홍민재",
-        "각본": "홍민재",
-        "출연": "정우성, 한예리",
+        "감독": "양우석",
+        "각본": "양우석",
+        "출연": "정우성, 유연석, 곽도원, 앵거스 맥페이든, 신정근",
         "플랫폼": "극장 개봉"
-      }
+      },
+      "links": [
+        { "label": "메인 예고편 (YouTube)", "url": "https://www.youtube.com/watch?v=KKPUEANoHAo" },
+        { "label": "강철비2: 정상회담 — 위키백과", "url": "https://ko.wikipedia.org/wiki/%EA%B0%95%EC%B2%A0%EB%B9%84_2:_%EC%A0%95%EC%83%81%ED%9A%8C%EB%8B%B4" }
+      ]
     },
     {
-      "id": "w2",
-      "title": "스트림",
-      "titleEn": "Stream",
+      "id": "pine",
+      "title": "파인: 촌뜨기들",
+      "titleEn": "Low Life",
       "status": "released",
-      "dateLabel": "Released, 2023",
-      "format": "리미티드 시리즈",
-      "image": "assets/img/w2.svg",
-      "video": "",
-      "synopsis": "라이브 스트리밍으로 유명해진 소년과 그를 둘러싼 어른들. 전 6부작 리미티드 시리즈.",
+      "dateLabel": "Released, 2025 · Disney+",
+      "format": "드라마 시리즈",
+      "image": "assets/img/pine.svg",
+      "video": "https://www.youtube.com/watch?v=rYAtNvK7b5U",
+      "synopsis": "1974년, 신안 앞바다에서 발견된 해저 유물을 둘러싸고 저마다의 욕심을 품은 자들이 모여든다. 유물을 차지하기 위해 물불 가리지 않는 거친 인간 군상의 이야기. 윤태호 작가의 웹툰 「파인」이 원작.",
       "credits": {
-        "감독": "김도영",
-        "각본": "이수경",
-        "출연": "박정민, 김새벽",
-        "플랫폼": "OTT 오리지널"
-      }
+        "감독": "강윤성",
+        "각본": "강윤성",
+        "출연": "류승룡, 양세종, 임수정, 김의성, 이동휘, 정윤호",
+        "플랫폼": "Disney+ 오리지널"
+      },
+      "links": [
+        { "label": "메인 예고편 (YouTube)", "url": "https://www.youtube.com/watch?v=rYAtNvK7b5U" },
+        { "label": "티저 예고편 (YouTube)", "url": "https://www.youtube.com/watch?v=gSi7GCDQIUw" },
+        { "label": "'Low Life' 소개 — Variety", "url": "https://variety.com/2025/tv/news/ryu-seungryong-disney-crime-drama-low-life-1236441409/" }
+      ]
     },
     {
-      "id": "w3",
-      "title": "도시의 밤은 길다",
-      "titleEn": "The City's Night Is Long",
+      "id": "mungmungi",
+      "title": "멍뭉이",
+      "titleEn": "My Heart Puppy",
       "status": "released",
-      "dateLabel": "Released, 2022",
+      "dateLabel": "Released, March 2023",
       "format": "장편영화",
-      "image": "assets/img/w3.svg",
-      "video": "",
-      "synopsis": "야간 버스 운전기사와 마지막 승객이 함께 보내는 하룻밤. 도시의 소음 속에서 나누는 대화.",
+      "image": "assets/img/mungmungi.svg",
+      "video": "https://www.youtube.com/watch?v=nP5ZLApjkdw",
+      "synopsis": "반려견 루니와 더는 함께 살 수 없게 된 민수가, 사촌 형 진국과 함께 루니의 완벽한 새 가족을 찾아 서울에서 제주까지 길을 나선다. 웃음 끝에 유기견의 현실을 마주하게 되는 로드무비.",
       "credits": {
-        "감독": "장한새",
-        "각본": "장한새",
-        "출연": "김윤석, 전종서",
+        "감독": "김주환",
+        "각본": "김주환",
+        "출연": "유연석, 차태현",
         "플랫폼": "극장 개봉"
-      }
-    },
-    {
-      "id": "w4",
-      "title": "형산강",
-      "titleEn": "Hyeongsan River",
-      "status": "released",
-      "dateLabel": "Released, 2021",
-      "format": "다큐멘터리",
-      "image": "assets/img/w4.svg",
-      "video": "",
-      "synopsis": "포항을 가로지르는 형산강을 따라 세 세대의 삶을 기록한 다큐멘터리.",
-      "credits": {
-        "감독": "오세라",
-        "각본": "오세라",
-        "출연": "-",
-        "플랫폼": "방송 · 영화제"
-      }
-    },
-    {
-      "id": "w5",
-      "title": "금맥",
-      "titleEn": "Gold Vein",
-      "status": "upcoming",
-      "dateLabel": "Upcoming, 2025",
-      "format": "장편영화",
-      "image": "assets/img/w5.svg",
-      "video": "",
-      "synopsis": "폐광촌에 금이 다시 발견됐다는 소문. 마을 사람들의 욕망이 얽히는 스릴러.",
-      "credits": {
-        "감독": "미정",
-        "각본": "김정환, 서지우",
-        "출연": "미정",
-        "플랫폼": "극장 개봉 예정"
-      }
-    },
-    {
-      "id": "w6",
-      "title": "소금 정원",
-      "titleEn": "Salt Garden",
-      "status": "upcoming",
-      "dateLabel": "In development, 2026",
-      "format": "리미티드 시리즈",
-      "image": "assets/img/w6.svg",
-      "video": "",
-      "synopsis": "염전 마을을 배경으로 한 가족 미스터리 시리즈. 현재 개발 단계.",
-      "credits": {
-        "감독": "미정",
-        "각본": "이수경",
-        "출연": "미정",
-        "플랫폼": "OTT"
-      }
+      },
+      "links": [
+        { "label": "1차 예고편 (YouTube)", "url": "https://www.youtube.com/watch?v=nP5ZLApjkdw" },
+        { "label": "멍뭉이 — 위키백과", "url": "https://ko.wikipedia.org/wiki/%EB%A9%8D%EB%AD%89%EC%9D%B4" }
+      ]
     }
   ],
   "about": {
     "name": "김정환",
-    "role": "영화 제작자 · Producer",
+    "role": "대표이사 · GOLDSTREAM ENTERTAINMENT",
     "portrait": "assets/img/portrait.svg",
-    "bio": [
-      "김정환은 현장 연출부에서 출발해 20여 년간 장편영화·다큐멘터리·시리즈를 제작해 온 영화 제작자입니다.",
-      "2014년 첫 장편을 프로듀싱한 뒤 2016년 GOLDSTREAM을 설립했습니다. 작가의 목소리를 지키면서도 관객과 만나는 지점을 찾는 것을 제작의 기준으로 삼고, 기획 개발부터 투자 유치, 촬영, 후반작업, 배급 협의까지 프로젝트의 전 과정을 책임집니다.",
-      "장르에 얽매이지 않되 오래 곱씹게 되는 이야기에 관심이 많으며, 신인 감독의 데뷔작과 중견 감독의 도전작을 균형 있게 이어가고 있습니다."
+    "greetingTitle": "대표이사 인사말",
+    "greeting": [
+      "콘텐츠의 시작은 결국 좋은 이야기와 사람이라고 생각합니다.",
+      "골드스트림엔터테인먼트는 좋은 이야기를 발굴하고, 재능 있는 창작자들과 함께 이를 경쟁력 있는 콘텐츠로 만들어가는 제작사입니다.",
+      "영화와 드라마를 중심으로 기획·개발부터 투자, 제작, 유통까지 이어지는 사업 역량을 구축하고 있으며, 새로운 제작기술과 다양한 IP를 적극적으로 활용해 기존의 제작방식에 머무르지 않는 콘텐츠를 만들어가고 있습니다.",
+      "우리는 단순히 많은 작품을 만드는 회사보다 오랫동안 기억되는 작품을 만드는 회사를 지향합니다. 작품의 완성도와 사업성을 함께 고민하고, 창작자와 투자자, 파트너 모두가 함께 성장할 수 있는 지속가능한 제작 생태계를 만들어가겠습니다.",
+      "좋은 이야기가 좋은 산업이 될 수 있도록, 골드스트림엔터테인먼트가 그 시작을 만들겠습니다."
     ],
-    "bioEn": "Kim Jung-hwan is a Seoul-based film producer. He founded GOLDSTREAM in 2016 to develop and produce feature films and series that keep a director's voice intact while finding their audience.",
+    "greetingSign": "골드스트림엔터테인먼트 대표이사 김정환",
+    "profileTitle": "Profile",
+    "profile": [
+      "영화·드라마를 중심으로 콘텐츠 기획개발, 투자, 제작 및 IP 비즈니스를 추진하는 콘텐츠 프로듀서.",
+      "상업영화 및 시리즈 프로젝트의 기획·개발과 제작 구조 설계, 투자 파트너십 구축을 중심으로 활동하고 있으며, 원천 IP 발굴부터 프로젝트 패키징, 투자·제작으로 이어지는 콘텐츠 사업화 전 과정을 총괄하고 있다.",
+      "최근에는 기존 영화·드라마 제작을 넘어 AI 기반 콘텐츠 제작, 지역 콘텐츠 산업 연계 및 글로벌 공동제작·투자 네트워크 구축으로 사업 영역을 확장하고 있다."
+    ],
+    "currentBusinessTitle": "Current Business",
+    "currentBusiness": [
+      "영화·드라마 기획개발 및 제작",
+      "상업 콘텐츠 투자유치 및 프로젝트 파이낸싱",
+      "웹툰·스토리 등 원천 IP 발굴 및 영상화",
+      "감독·작가·배우 중심의 프로젝트 패키징",
+      "국내외 공동제작 및 투자 파트너십 구축",
+      "AI 기반 영상콘텐츠 제작모델 개발"
+    ],
+    "visionTitle": "Vision",
+    "visionQuote": "좋은 이야기를 발견하고,\n좋은 사람을 연결하고,\n그것을 하나의 산업으로 만든다.",
+    "vision": [
+      "좋은 콘텐츠는 이야기만으로 완성되지 않습니다.",
+      "창작자, 자본, 제작 그리고 시장을 연결해 작품을 현실로 만드는 것. 그것이 제작자의 역할이라고 생각합니다."
+    ],
     "facts": [
-      {
-        "k": "Base",
-        "v": "서울 · Seoul, KR"
-      },
-      {
-        "k": "Founded",
-        "v": "GOLDSTREAM, 2016"
-      },
-      {
-        "k": "Focus",
-        "v": "장편영화 · 리미티드 시리즈 · 다큐멘터리"
-      },
-      {
-        "k": "Role",
-        "v": "기획개발 · 제작 · 투자·배급 총괄"
-      }
+      { "k": "Company", "v": "골드스트림 엔터테인먼트 · GOLDSTREAM ENTERTAINMENT" },
+      { "k": "대표이사", "v": "김정환" },
+      { "k": "Focus", "v": "영화·드라마 기획개발 · 투자 · 제작 · IP 비즈니스" },
+      { "k": "Base", "v": "서울 · Seoul, KR" }
     ],
     "recognition": [
-      {
-        "year": "2024",
-        "text": "「검은 해변」 부산국제영화제 초청"
-      },
-      {
-        "year": "2023",
-        "text": "「스트림」 백상예술대상 작품상 후보"
-      },
-      {
-        "year": "2021",
-        "text": "「형산강」 서울독립영화제 대상"
-      },
-      {
-        "year": "2019",
-        "text": "한국영화프로듀서조합 올해의 제작자"
-      }
+      { "year": "2027", "text": "코드 — Disney+ 시리즈" },
+      { "year": "2025", "text": "파인: 촌뜨기들 — Disney+ 시리즈" },
+      { "year": "2023", "text": "멍뭉이 — 영화" },
+      { "year": "2020", "text": "강철비2: 정상회담 — 영화" },
+      { "year": "2017", "text": "강철비 — 영화" }
+    ],
+    "press": [
+      { "label": "김정환 대표 \"한국 영화 투자, 미래 신화가 될 것 믿는다\" (SEN TV, 2025)", "url": "https://www.sentv.co.kr/article/view/sentv202510220042" }
     ]
   },
   "contact": {
