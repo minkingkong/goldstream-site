@@ -71,6 +71,7 @@
       },
       "links": [
         { "label": "메인 예고편 (YouTube)", "url": "https://www.youtube.com/watch?v=nCsO8lSZzZk" },
+        { "label": "'강철비' 5분 순삭 미리보기 (잇츠뉴 It's NEW 공식)", "url": "https://www.youtube.com/watch?v=6v3f9qUDE-w" },
         { "label": "강철비 — 위키백과", "url": "https://ko.wikipedia.org/wiki/%EA%B0%95%EC%B2%A0%EB%B9%84" }
       ]
     },
@@ -91,7 +92,8 @@
         "플랫폼": "극장 개봉"
       },
       "links": [
-        { "label": "메인 예고편 (YouTube)", "url": "https://www.youtube.com/watch?v=KKPUEANoHAo" },
+        { "label": "메인 예고편 (롯데엔터테인먼트 공식)", "url": "https://www.youtube.com/watch?v=KKPUEANoHAo" },
+        { "label": "티저 예고편 (롯데엔터테인먼트 공식)", "url": "https://www.youtube.com/watch?v=fkSyE0qidyI" },
         { "label": "강철비2: 정상회담 — 위키백과", "url": "https://ko.wikipedia.org/wiki/%EA%B0%95%EC%B2%A0%EB%B9%84_2:_%EC%A0%95%EC%83%81%ED%9A%8C%EB%8B%B4" }
       ]
     },
@@ -103,7 +105,7 @@
       "dateLabel": "Released, 2025 · Disney+",
       "format": "드라마 시리즈",
       "image": "assets/img/pine.svg",
-      "video": "https://www.youtube.com/watch?v=rYAtNvK7b5U",
+      "video": "https://www.youtube.com/watch?v=i7mT2uIkWLY",
       "synopsis": "1974년, 신안 앞바다에서 발견된 해저 유물을 둘러싸고 저마다의 욕심을 품은 자들이 모여든다. 유물을 차지하기 위해 물불 가리지 않는 거친 인간 군상의 이야기. 윤태호 작가의 웹툰 「파인」이 원작.",
       "credits": {
         "감독": "강윤성",
@@ -112,8 +114,8 @@
         "플랫폼": "Disney+ 오리지널"
       },
       "links": [
-        { "label": "메인 예고편 (YouTube)", "url": "https://www.youtube.com/watch?v=rYAtNvK7b5U" },
-        { "label": "티저 예고편 (YouTube)", "url": "https://www.youtube.com/watch?v=gSi7GCDQIUw" },
+        { "label": "메인 예고편 (디즈니+ 공식)", "url": "https://www.youtube.com/watch?v=i7mT2uIkWLY" },
+        { "label": "티저 예고편 (디즈니+ 공식)", "url": "https://www.youtube.com/watch?v=OpClXdDvyuw" },
         { "label": "'Low Life' 소개 — Variety", "url": "https://variety.com/2025/tv/news/ryu-seungryong-disney-crime-drama-low-life-1236441409/" }
       ]
     },
@@ -125,7 +127,7 @@
       "dateLabel": "Released, March 2023",
       "format": "장편영화",
       "image": "assets/img/mungmungi.svg",
-      "video": "https://www.youtube.com/watch?v=nP5ZLApjkdw",
+      "video": "https://www.youtube.com/watch?v=kHzgRPver_o",
       "synopsis": "반려견 루니와 더는 함께 살 수 없게 된 민수가, 사촌 형 진국과 함께 루니의 완벽한 새 가족을 찾아 서울에서 제주까지 길을 나선다. 웃음 끝에 유기견의 현실을 마주하게 되는 로드무비.",
       "credits": {
         "감독": "김주환",
@@ -134,7 +136,7 @@
         "플랫폼": "극장 개봉"
       },
       "links": [
-        { "label": "1차 예고편 (YouTube)", "url": "https://www.youtube.com/watch?v=nP5ZLApjkdw" },
+        { "label": "1차 예고편 (키다리스튜디오 공식)", "url": "https://www.youtube.com/watch?v=kHzgRPver_o" },
         { "label": "멍뭉이 — 위키백과", "url": "https://ko.wikipedia.org/wiki/%EB%A9%8D%EB%AD%89%EC%9D%B4" }
       ]
     }

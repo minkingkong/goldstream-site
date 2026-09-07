@@ -390,10 +390,23 @@ ul {
   border-radius: var(--radius);
   background: var(--violet-soft);
 }
+.work__thumb::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--thumb-img);
+  background-size: cover;
+  background-position: center;
+  filter: blur(28px) brightness(0.82) saturate(1.2);
+  transform: scale(1.2);
+  z-index: 0;
+}
 .work__thumb img {
+  position: relative;
+  z-index: 1;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   transition: transform 0.7s cubic-bezier(0.19, 1, 0.22, 1);
 }
 .work:hover .work__thumb img {
@@ -517,9 +530,15 @@ ul {
 .modal__media iframe {
   width: 100%;
   height: 100%;
-  object-fit: cover;
   border: 0;
   display: block;
+}
+.modal__media video,
+.modal__media iframe {
+  object-fit: cover;
+}
+.modal__media img {
+  object-fit: contain;
 }
 .modal__body {
   padding: clamp(22px, 4vw, 40px);

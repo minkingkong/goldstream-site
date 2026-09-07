@@ -105,6 +105,10 @@
       '<span class="work__arrow" aria-hidden="true">&rarr;</span></div>' +
       '<p class="work__date">' + esc(w.dateLabel || "") + "</p>" +
       (w.format ? '<span class="work__tag">' + esc(w.format) + "</span>" : "");
+    if (w.image) {
+      var thumb = a.querySelector(".work__thumb");
+      if (thumb) thumb.style.setProperty("--thumb-img", 'url("' + w.image + '")');
+    }
     a.addEventListener("click", function (e) {
       e.preventDefault();
       openModal(w);
