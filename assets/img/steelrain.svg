@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-label="강철비 (Steel Rain)">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#141b23"/>
+      <stop offset="0.55" stop-color="#2b3743"/>
+      <stop offset="1" stop-color="#3d4b58"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="28%" cy="80%" r="60%">
+      <stop offset="0" stop-color="#7fa6c9" stop-opacity="0.5"/>
+      <stop offset="1" stop-color="#7fa6c9" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="streak" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#e8eef4"/>
+      <stop offset="1" stop-color="#9fb2c2"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg)"/>
+  <rect width="1200" height="800" fill="url(#glow)"/>
+  <g stroke="url(#streak)" stroke-width="3" opacity="0.28">
+    <line x1="250" y1="-40" x2="120" y2="840"/>
+    <line x1="470" y1="-40" x2="340" y2="840"/>
+    <line x1="900" y1="-40" x2="770" y2="840"/>
+    <line x1="1120" y1="-40" x2="990" y2="840"/>
+  </g>
+  <text x="84" y="470" font-family="'Pretendard Variable', sans-serif" font-size="150" font-weight="800" fill="#f2f6fa">강철비</text>
+  <text x="90" y="536" font-family="'IBM Plex Mono', monospace" font-size="32" font-weight="500" letter-spacing="10" fill="#cdd9e4">STEEL RAIN</text>
+  <text x="90" y="720" font-family="'Pretendard Variable', sans-serif" font-size="26" font-weight="600" letter-spacing="1" fill="#f2f6fa" opacity="0.82">2017 · 극장 개봉 · 양우석 감독</text>
+  <text x="90" y="90" font-family="'Pretendard Variable', sans-serif" font-size="24" font-weight="700" letter-spacing="4" fill="#f2f6fa" opacity="0.5">GOLDSTREAM</text>
+</svg>

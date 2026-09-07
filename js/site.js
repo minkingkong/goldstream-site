@@ -195,6 +195,7 @@
       '<h2 class="modal__title" id="modal-title"></h2>' +
       '<p class="modal__synopsis" id="modal-synopsis"></p>' +
       '<dl class="modal__credits" id="modal-credits"></dl>' +
+      '<nav class="modal__links" id="modal-links" aria-label="관련 링크"></nav>' +
       "</div></div>";
     document.body.appendChild(modalEl);
     function close() {
@@ -240,6 +241,19 @@
       var d = document.createElement("div");
       d.innerHTML = "<dt>" + esc(k) + "</dt><dd>" + esc(cr[k]) + "</dd>";
       dl.appendChild(d);
+    });
+
+    var lw = document.getElementById("modal-links");
+    lw.innerHTML = "";
+    (w.links || []).forEach(function (ln) {
+      if (!ln || !ln.url) return;
+      var a = document.createElement("a");
+      a.href = ln.url;
+      a.target = "_blank";
+      a.rel = "noopener noreferrer";
+      a.className = "modal__link";
+      a.innerHTML = esc(ln.label || ln.url) + ' <span aria-hidden="true">&#8599;</span>';
+      lw.appendChild(a);
     });
     modalEl.classList.add("is-open");
     document.body.style.overflow = "hidden";

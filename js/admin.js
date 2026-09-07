@@ -151,6 +151,9 @@
     q(".f-c-writer").value = cr["각본"] || "";
     q(".f-c-cast").value = cr["출연"] || "";
     q(".f-c-platform").value = cr["플랫폼"] || "";
+    q(".f-links").value = (w.links || [])
+      .map(function (l) { return (l.label || "") + " | " + (l.url || ""); })
+      .join("\n");
 
     var prev = q(".f-image-preview");
     if (w.image) prev.src = w.image;
@@ -211,7 +214,17 @@
             "각본": g(".f-c-writer"),
             "출연": g(".f-c-cast"),
             "플랫폼": g(".f-c-platform")
-          }
+          },
+          links: g(".f-links")
+            .split("\n")
+            .map(function (s) { return s.trim(); })
+            .filter(Boolean)
+            .map(function (line) {
+              var i = line.indexOf("|");
+              return i === -1
+                ? { label: line, url: line }
+                : { label: line.slice(0, i).trim(), url: line.slice(i + 1).trim() };
+            })
         };
       }
     );

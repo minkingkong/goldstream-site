@@ -571,6 +571,36 @@ ul {
   font-size: 14px;
   color: var(--ink);
 }
+.modal__links {
+  margin-top: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.modal__link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 2px;
+  border-bottom: 1px solid var(--line);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+  transition: color 0.16s ease, padding-left 0.16s ease;
+}
+.modal__link:first-child {
+  border-top: 1px solid var(--line);
+}
+.modal__link:hover {
+  color: var(--violet);
+  padding-left: 6px;
+}
+.modal__link span {
+  color: var(--violet);
+  flex: none;
+}
+
 .modal__close {
   position: fixed;
   top: 18px;

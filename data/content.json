@@ -32,6 +32,49 @@
   },
   "works": [
     {
+      "id": "code",
+      "title": "코드",
+      "titleEn": "CODE",
+      "status": "upcoming",
+      "dateLabel": "Upcoming, 2027",
+      "format": "드라마 시리즈",
+      "image": "assets/img/code.svg",
+      "video": "",
+      "synopsis": "불법과 편법을 오가는 속물 변호사 윤태주가 소원을 이뤄준다는 정체불명의 앱 '코드'에 초대되면서 벌어지는 미스터리 범죄 스릴러. 검사 출신으로 대형 로펌 파트너 자리를 노리던 그는, 앱의 초대장을 받은 뒤 걷잡을 수 없는 욕망의 소용돌이에 빠져든다.",
+      "credits": {
+        "감독": "유수민",
+        "각본": "-",
+        "출연": "남주혁, 이이담, 김의성, 박훈",
+        "플랫폼": "Disney+ (2027 공개 예정)"
+      },
+      "links": [
+        { "label": "캐스팅 확정 · 2027년 디즈니+ 공개 (다음뉴스)", "url": "https://v.daum.net/v/20260723105052683" },
+        { "label": "'약한영웅' 유수민 감독 신작 (일간스포츠)", "url": "https://isplus.com/article/view/isp202607230067" },
+        { "label": "남주혁, 속물 변호사 役 출연 확정 (뉴시스)", "url": "https://nwww.newsis.com/view/NISX20260723_0003719823" }
+      ]
+    },
+    {
+      "id": "steelrain",
+      "title": "강철비",
+      "titleEn": "Steel Rain",
+      "status": "released",
+      "dateLabel": "Released, December 2017",
+      "format": "장편영화",
+      "image": "assets/img/steelrain.svg",
+      "video": "https://www.youtube.com/watch?v=nCsO8lSZzZk",
+      "synopsis": "북한 내 쿠데타가 일어나고, 권력 1호가 치명상을 입은 채 남한으로 내려온다. 남북의 두 요원이 전쟁을 막기 위해 함께 움직이는 하루를 그린 첩보 액션. 양우석 감독의 웹툰 '스틸레인'이 원작.",
+      "credits": {
+        "감독": "양우석",
+        "각본": "양우석",
+        "출연": "정우성, 곽도원, 김갑수, 김의성, 조우진",
+        "플랫폼": "극장 개봉"
+      },
+      "links": [
+        { "label": "메인 예고편 (YouTube)", "url": "https://www.youtube.com/watch?v=nCsO8lSZzZk" },
+        { "label": "강철비 — 위키백과", "url": "https://ko.wikipedia.org/wiki/%EA%B0%95%EC%B2%A0%EB%B9%84" }
+      ]
+    },
+    {
       "id": "w1",
       "title": "검은 해변",
       "titleEn": "The Black Shore",
