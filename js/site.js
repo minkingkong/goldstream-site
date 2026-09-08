@@ -105,14 +105,6 @@
       '<span class="work__arrow" aria-hidden="true">&rarr;</span></div>' +
       '<p class="work__date">' + esc(w.dateLabel || "") + "</p>" +
       (w.format ? '<span class="work__tag">' + esc(w.format) + "</span>" : "");
-    if (w.image) {
-      var thumb = a.querySelector(".work__thumb");
-      if (thumb) {
-        var abs = w.image;
-        try { abs = new URL(w.image, document.baseURI).href; } catch (e) {}
-        thumb.style.setProperty("--thumb-img", 'url("' + abs + '")');
-      }
-    }
     a.addEventListener("click", function (e) {
       e.preventDefault();
       openModal(w);
