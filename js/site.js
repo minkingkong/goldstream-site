@@ -107,7 +107,11 @@
       (w.format ? '<span class="work__tag">' + esc(w.format) + "</span>" : "");
     if (w.image) {
       var thumb = a.querySelector(".work__thumb");
-      if (thumb) thumb.style.setProperty("--thumb-img", 'url("' + w.image + '")');
+      if (thumb) {
+        var abs = w.image;
+        try { abs = new URL(w.image, document.baseURI).href; } catch (e) {}
+        thumb.style.setProperty("--thumb-img", 'url("' + abs + '")');
+      }
     }
     a.addEventListener("click", function (e) {
       e.preventDefault();
