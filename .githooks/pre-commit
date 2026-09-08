@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Stamp css/js asset URLs with a content hash before each commit.
+# Enable once per clone with:  git config core.hooksPath .githooks
+set -eu
+bash "$(git rev-parse --show-toplevel)/scripts/stamp-assets.sh"

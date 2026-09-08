@@ -49,3 +49,16 @@ assets/img/         작품 이미지 (편집기에서 업로드되는 위치)
 
 imaginus 와 동일하게 **Pretendard Variable** 사용. `assets/fonts/PretendardVariable.woff2`
 파일을 저장소에 포함해 자체 호스팅 (CDN 의존 없음).
+
+## 캐시 무효화 (자동)
+
+`css/style.css`, `js/site.js`, `js/admin.js` 는 HTML에서 `?v=<내용해시>` 형태로 참조됩니다.
+파일 내용이 바뀔 때만 해시가 바뀌므로, 방문자는 평소엔 캐시를 쓰다가 수정 직후엔 항상 새 파일을 받습니다.
+
+- `scripts/stamp-assets.sh` 가 커밋 직전 자동 실행돼 HTML의 `?v=` 값을 갱신합니다.
+- 저장소를 새로 clone 하면 한 번만: `git config core.hooksPath .githooks`
+- 수동 실행: `bash scripts/stamp-assets.sh`
+
+`data/content.json` 은 `?t=` 로 매번 새로 받으므로 편집기 수정은 즉시(빌드 후 ~1분) 반영됩니다.
+`assets/img/` 의 편집기 업로드 이미지는 새 파일명으로 올라가 캐시 문제가 없습니다.
+(코드에 포함된 플레이스홀더 SVG를 교체할 땐 새 파일명을 쓰세요.)
