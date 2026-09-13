@@ -1,9 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-label="파인: 촌뜨기들 (Low Life)">
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-label="파인: 촌뜨기들 (Low Life) 포스터">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#06181c"/>
       <stop offset="0.6" stop-color="#0c2f34"/>
       <stop offset="1" stop-color="#12433f"/>
+    </linearGradient>
+    <linearGradient id="poster" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3a2c14"/>
+      <stop offset="0.55" stop-color="#17140c"/>
+      <stop offset="1" stop-color="#060504"/>
     </linearGradient>
     <radialGradient id="glow" cx="30%" cy="24%" r="60%">
       <stop offset="0" stop-color="#e5b567" stop-opacity="0.45"/>
@@ -13,13 +18,34 @@
   <rect width="1200" height="800" fill="url(#bg)"/>
   <rect width="1200" height="800" fill="url(#glow)"/>
   <g stroke="#efe0c0" stroke-width="2" opacity="0.14" fill="none">
-    <path d="M-20 620 Q 300 560 600 620 T 1220 610"/>
-    <path d="M-20 680 Q 300 620 600 680 T 1220 670"/>
-    <path d="M-20 740 Q 300 680 600 740 T 1220 730"/>
+    <path d="M-20 620 Q 260 560 520 620 T 680 610"/>
+    <path d="M-20 680 Q 260 620 520 680 T 680 670"/>
+    <path d="M-20 740 Q 260 680 520 740 T 680 730"/>
   </g>
-  <text x="84" y="452" font-family="'Pretendard Variable', sans-serif" font-size="150" font-weight="800" fill="#f4ecda">파인</text>
-  <text x="90" y="512" font-family="'Pretendard Variable', sans-serif" font-size="40" font-weight="700" fill="#e5b567">촌뜨기들</text>
-  <text x="92" y="560" font-family="'IBM Plex Mono', monospace" font-size="26" font-weight="500" letter-spacing="9" fill="#cfe3df">LOW LIFE</text>
-  <text x="90" y="720" font-family="'Pretendard Variable', sans-serif" font-size="26" font-weight="600" letter-spacing="1" fill="#f4ecda" opacity="0.82">2025 · Disney+ · 강윤성 감독</text>
-  <text x="90" y="90" font-family="'Pretendard Variable', sans-serif" font-size="24" font-weight="700" letter-spacing="4" fill="#f4ecda" opacity="0.5">GOLDSTREAM</text>
+
+  <text x="70" y="452" font-family="'Pretendard Variable', sans-serif" font-size="140" font-weight="800" fill="#f4ecda">파인</text>
+  <text x="74" y="510" font-family="'Pretendard Variable', sans-serif" font-size="38" font-weight="700" fill="#e5b567">촌뜨기들</text>
+  <text x="76" y="556" font-family="'IBM Plex Mono', monospace" font-size="22" letter-spacing="8" fill="#cfe3df">LOW LIFE</text>
+  <text x="74" y="690" font-family="'Pretendard Variable', sans-serif" font-size="22" font-weight="600" fill="#f4ecda" opacity="0.8">2025 · Disney+ · 강윤성 감독</text>
+
+  <!-- poster one-sheet -->
+  <g transform="rotate(-3 940 400)">
+    <rect x="742" y="70" width="404" height="640" rx="8" fill="#000000" opacity="0.42"/>
+    <rect x="734" y="62" width="404" height="640" rx="8" fill="url(#poster)" stroke="#e5b567" stroke-opacity="0.5" stroke-width="1.5"/>
+    <!-- ship wheel motif -->
+    <circle cx="936" cy="220" r="70" fill="none" stroke="#e5b567" stroke-width="4" opacity="0.85"/>
+    <circle cx="936" cy="220" r="14" fill="none" stroke="#e5b567" stroke-width="4" opacity="0.85"/>
+    <g stroke="#e5b567" stroke-width="4" opacity="0.85">
+      <line x1="936" y1="150" x2="936" y2="290"/>
+      <line x1="866" y1="220" x2="1006" y2="220"/>
+      <line x1="886" y1="170" x2="986" y2="270"/>
+      <line x1="886" y1="270" x2="986" y2="170"/>
+    </g>
+    <text x="936" y="440" text-anchor="middle" font-family="'Pretendard Variable', sans-serif" font-size="96" font-weight="800" fill="#f4ecda">파인</text>
+    <text x="936" y="484" text-anchor="middle" font-family="'Pretendard Variable', sans-serif" font-size="28" font-weight="700" fill="#e5b567">촌뜨기들</text>
+    <text x="936" y="600" text-anchor="middle" font-family="'Pretendard Variable', sans-serif" font-size="24" font-weight="700" fill="#ffffff">류승룡 · 양세종 · 임수정</text>
+    <text x="936" y="642" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="17" letter-spacing="3" fill="#ffffff" opacity="0.62">2025 · DISNEY+</text>
+  </g>
+
+  <text x="70" y="92" font-family="'Pretendard Variable', sans-serif" font-size="23" font-weight="700" letter-spacing="4" fill="#f4ecda" opacity="0.5">GOLDSTREAM</text>
 </svg>

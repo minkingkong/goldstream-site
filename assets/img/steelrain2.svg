@@ -1,8 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-label="강철비2: 정상회담 (Steel Rain 2: Summit)">
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-label="강철비2: 정상회담 (Steel Rain 2: Summit) 포스터">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#0f1216"/>
       <stop offset="1" stop-color="#241a1c"/>
+    </linearGradient>
+    <linearGradient id="poster" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3a2426"/>
+      <stop offset="0.55" stop-color="#170f10"/>
+      <stop offset="1" stop-color="#050303"/>
     </linearGradient>
     <radialGradient id="glow" cx="70%" cy="72%" r="62%">
       <stop offset="0" stop-color="#c0392b" stop-opacity="0.5"/>
@@ -11,15 +16,31 @@
   </defs>
   <rect width="1200" height="800" fill="url(#bg)"/>
   <rect width="1200" height="800" fill="url(#glow)"/>
-  <g stroke="#9fb2c2" stroke-width="2" opacity="0.16" fill="none">
-    <circle cx="960" cy="250" r="120"/>
-    <circle cx="960" cy="250" r="76"/>
-    <line x1="960" y1="110" x2="960" y2="390"/>
-    <line x1="820" y1="250" x2="1100" y2="250"/>
+  <g stroke="#9fb2c2" stroke-width="2" opacity="0.14" fill="none">
+    <circle cx="300" cy="620" r="150"/>
+    <circle cx="300" cy="620" r="96"/>
+    <line x1="300" y1="470" x2="300" y2="770"/>
+    <line x1="150" y1="620" x2="450" y2="620"/>
   </g>
-  <text x="84" y="452" font-family="'Pretendard Variable', sans-serif" font-size="128" font-weight="800" fill="#eef2f6">강철비2</text>
-  <text x="88" y="548" font-family="'Pretendard Variable', sans-serif" font-size="52" font-weight="700" fill="#e7c1bb">정상회담</text>
-  <text x="90" y="600" font-family="'IBM Plex Mono', monospace" font-size="26" font-weight="500" letter-spacing="7" fill="#b9c6d2">STEEL RAIN 2 : SUMMIT</text>
-  <text x="90" y="720" font-family="'Pretendard Variable', sans-serif" font-size="26" font-weight="600" letter-spacing="1" fill="#eef2f6" opacity="0.82">2020 · 극장 개봉 · 양우석 감독</text>
-  <text x="90" y="90" font-family="'Pretendard Variable', sans-serif" font-size="24" font-weight="700" letter-spacing="4" fill="#eef2f6" opacity="0.5">GOLDSTREAM</text>
+
+  <text x="70" y="470" font-family="'Pretendard Variable', sans-serif" font-size="128" font-weight="800" fill="#eef2f6">강철비2</text>
+  <text x="74" y="524" font-family="'Pretendard Variable', sans-serif" font-size="52" font-weight="700" fill="#e7c1bb">정상회담</text>
+  <text x="74" y="576" font-family="'IBM Plex Mono', monospace" font-size="20" letter-spacing="7" fill="#b9c6d2">STEEL RAIN 2 : SUMMIT</text>
+  <text x="74" y="690" font-family="'Pretendard Variable', sans-serif" font-size="22" font-weight="600" fill="#eef2f6" opacity="0.8">2020 · 극장 개봉 · 양우석 감독</text>
+
+  <!-- poster one-sheet -->
+  <g transform="rotate(-3 940 400)">
+    <rect x="742" y="70" width="404" height="640" rx="8" fill="#000000" opacity="0.42"/>
+    <rect x="734" y="62" width="404" height="640" rx="8" fill="url(#poster)" stroke="#e0796b" stroke-opacity="0.5" stroke-width="1.5"/>
+    <circle cx="936" cy="230" r="72" fill="none" stroke="#e0796b" stroke-width="4" opacity="0.85"/>
+    <circle cx="936" cy="230" r="40" fill="none" stroke="#e0796b" stroke-width="3" opacity="0.6"/>
+    <line x1="936" y1="120" x2="936" y2="340" stroke="#e0796b" stroke-width="2" opacity="0.4"/>
+    <line x1="826" y1="230" x2="1046" y2="230" stroke="#e0796b" stroke-width="2" opacity="0.4"/>
+    <text x="936" y="470" text-anchor="middle" font-family="'Pretendard Variable', sans-serif" font-size="86" font-weight="800" fill="#f4e9e7">강철비2</text>
+    <text x="936" y="514" text-anchor="middle" font-family="'Pretendard Variable', sans-serif" font-size="34" font-weight="700" fill="#e7c1bb">정상회담</text>
+    <text x="936" y="600" text-anchor="middle" font-family="'Pretendard Variable', sans-serif" font-size="26" font-weight="700" fill="#ffffff">정우성 · 유연석 · 곽도원</text>
+    <text x="936" y="642" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="17" letter-spacing="3" fill="#ffffff" opacity="0.62">2020</text>
+  </g>
+
+  <text x="70" y="92" font-family="'Pretendard Variable', sans-serif" font-size="23" font-weight="700" letter-spacing="4" fill="#eef2f6" opacity="0.5">GOLDSTREAM</text>
 </svg>
