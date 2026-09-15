@@ -127,8 +127,21 @@
     var works = data.works || [];
     var featured = grid.hasAttribute("data-featured");
     if (featured) {
-      var n = (data.home && data.home.featuredCount) || 3;
-      works = works.slice(0, n);
+      var ids = (data.home && data.home.featuredIds) || [];
+      if (ids.length) {
+        works = ids
+          .map(function (id) {
+            return works.filter(function (w) { return w.id === id; })[0];
+          })
+          .filter(Boolean);
+      } else {
+        var n = (data.home && data.home.featuredCount) || 3;
+        works = works.slice(0, n);
+      }
+    } else {
+      works = works.slice().sort(function (a, b) {
+        return (b.year || 0) - (a.year || 0);
+      });
     }
     grid.innerHTML = "";
     works.forEach(function (w) {

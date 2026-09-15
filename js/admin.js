@@ -143,6 +143,7 @@
     q(".f-titleEn").value = w.titleEn || "";
     q(".f-status").value = w.status === "upcoming" ? "upcoming" : "released";
     q(".f-dateLabel").value = w.dateLabel || "";
+    q(".f-year").value = w.year || "";
     q(".f-format").value = w.format || "";
     q(".f-video").value = w.video || "";
     q(".f-synopsis").value = w.synopsis || "";
@@ -205,6 +206,7 @@
           titleEn: g(".f-titleEn"),
           status: g(".f-status"),
           dateLabel: g(".f-dateLabel"),
+          year: parseInt(g(".f-year"), 10) || 0,
           format: g(".f-format"),
           image: g(".f-image"),
           video: g(".f-video"),
@@ -259,6 +261,7 @@
     setV("f-heroTitle", h.heroTitle);
     setV("f-heroTagline", h.heroTagline);
     setV("f-heroTaglineEn", h.heroTaglineEn);
+    setV("f-home-featuredIds", (h.featuredIds || []).join(", "));
 
     var list = $("works-list");
     list.innerHTML = "";
@@ -315,6 +318,10 @@
     data.home.heroTitle = v("f-heroTitle");
     data.home.heroTagline = v("f-heroTagline");
     data.home.heroTaglineEn = v("f-heroTaglineEn");
+    data.home.featuredIds = v("f-home-featuredIds")
+      .split(",")
+      .map(function (s) { return s.trim(); })
+      .filter(Boolean);
     if (data.home.featuredCount == null) data.home.featuredCount = 3;
 
     data.works = collectWorks();
