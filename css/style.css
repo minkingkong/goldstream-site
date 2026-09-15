@@ -832,8 +832,28 @@ ul {
 
 /* ---------- Contact ---------- */
 
+.contact-hero-band {
+  background: var(--violet-soft);
+  padding-bottom: clamp(48px, 8vw, 80px);
+  margin-bottom: clamp(40px, 7vw, 68px);
+}
+.contact-intro {
+  display: grid;
+  grid-template-columns: 0.6fr 1.4fr;
+  gap: clamp(28px, 5vw, 56px);
+  align-items: center;
+  margin-top: clamp(28px, 5vw, 48px);
+}
+@media (max-width: 720px) {
+  .contact-intro {
+    grid-template-columns: 1fr;
+  }
+  .contact-intro .about__portrait {
+    max-width: 220px;
+  }
+}
 .contact-big {
-  margin-top: clamp(32px, 6vw, 56px);
+  margin-top: 0;
   font-size: clamp(28px, 6vw, 56px);
   font-weight: 800;
   letter-spacing: -0.03em;
@@ -841,10 +861,41 @@ ul {
   text-wrap: balance;
 }
 .contact-grid {
-  margin-top: clamp(40px, 7vw, 68px);
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 28px;
+}
+.office-route {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.office-route__label {
+  font-size: 12px;
+  color: var(--ink-faint);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+.office-route__line {
+  flex: 1;
+  height: 1px;
+  min-width: 24px;
+  background-image: linear-gradient(to right, var(--violet) 0 4px, transparent 4px 8px);
+  background-size: 8px 1px;
+  background-repeat: repeat-x;
+  background-position: center;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.office-route__dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--violet);
+  flex: none;
 }
 .contact-grid h4 {
   font-size: 11px;

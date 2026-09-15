@@ -6,7 +6,7 @@
   <title>Contact — GOLDSTREAM</title>
   <meta name="description" content="GOLDSTREAM 제작·투자·배급 문의." />
   <link rel="preload" as="font" type="font/woff2" href="assets/fonts/PretendardVariable.woff2" crossorigin />
-  <link rel="stylesheet" href="css/style.css?v=ec9170da10" />
+  <link rel="stylesheet" href="css/style.css?v=c9898a1741" />
 </head>
 <body>
   <header class="hd">
@@ -20,24 +20,40 @@
     </div>
   </header>
 
-  <main class="page wrap">
-    <h1 class="page__title" data-field="pages.contact.title">Contact</h1>
-    <p class="contact-big" data-field="pages.contact.big" data-multiline>함께 만들<br />이야기가 있다면.</p>
+  <main class="page">
+    <div class="contact-hero-band">
+      <div class="wrap">
+        <h1 class="page__title" data-field="pages.contact.title">Contact</h1>
+        <div class="contact-intro">
+          <div class="about__portrait reveal">
+            <img data-field="about.portrait" src="assets/img/portrait.svg" alt="김정환 대표이사" />
+          </div>
+          <p class="contact-big reveal" data-field="pages.contact.big" data-multiline>함께 만들<br />이야기가 있다면.</p>
+        </div>
+      </div>
+    </div>
 
-    <div class="contact-grid">
-      <div>
-        <h4>General</h4>
-        <p class="mail" data-field="contact.email">hello@goldstream.co.kr</p>
-        <p class="mail" style="margin-top:10px" data-field="contact.phone">010-0000-0000</p>
-      </div>
-      <div>
-        <h4>Inquiries</h4>
-        <p class="office-intro" data-field="contact.inquiriesIntro">이런 이야기라면, 저를 찾아오세요.</p>
-        <div id="contact-inquiries"></div>
-      </div>
-      <div>
-        <h4>Offices</h4>
-        <div id="contact-offices"></div>
+    <div class="wrap">
+      <div class="contact-grid">
+        <div>
+          <h4>General</h4>
+          <p class="mail" data-field="contact.email">hello@goldstream.co.kr</p>
+          <p class="mail" style="margin-top:10px" data-field="contact.phone">010-0000-0000</p>
+        </div>
+        <div>
+          <h4>Inquiries</h4>
+          <p class="office-intro" data-field="contact.inquiriesIntro">이런 이야기라면, 저를 찾아오세요.</p>
+          <div id="contact-inquiries"></div>
+        </div>
+        <div>
+          <h4>Offices</h4>
+          <div class="office-route" aria-hidden="true">
+            <span class="office-route__label">광주</span>
+            <span class="office-route__line"><span class="office-route__dot"></span><span class="office-route__dot"></span></span>
+            <span class="office-route__label">서울</span>
+          </div>
+          <div id="contact-offices"></div>
+        </div>
       </div>
     </div>
   </main>
