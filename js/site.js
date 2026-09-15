@@ -68,9 +68,6 @@
       if (el.hasAttribute("data-mailto")) {
         el.textContent = v;
         el.setAttribute("href", "mailto:" + v);
-      } else if (el.hasAttribute("data-tel")) {
-        el.textContent = v;
-        el.setAttribute("href", "tel:" + String(v).replace(/[^0-9+]/g, ""));
       } else if (el.tagName === "IMG") {
         el.setAttribute("src", v);
       } else if (el.hasAttribute("data-multiline")) {
@@ -321,9 +318,6 @@
       fillDefs("about-facts", (a.facts || []).map(function (f) { return [f.k, f.v]; }));
       fillDefs("about-recognition", (a.recognition || []).map(function (r) { return [r.year, r.text]; }));
       fillLinkList("about-press", a.press);
-    }
-    if (data.contact) {
-      fillDefs("contact-offices", (data.contact.offices || []).map(function (o) { return [o.label, o.address]; }));
     }
     var inq = document.getElementById("contact-inquiries");
     if (inq && data.contact) {
