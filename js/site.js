@@ -78,20 +78,20 @@
         el.setAttribute("href", "tel:" + String(v).replace(/[^0-9+]/g, ""));
       } else if (el.tagName === "IMG") {
         el.setAttribute("src", v);
-      } else if (el.hasAttribute("data-multiline")) {
-        el.innerHTML = esc(v).replace(/\n/g, "<br>");
-      } else if (el.hasAttribute("data-highlight")) {
-        var hi = el.getAttribute("data-highlight");
+      } else if (el.hasAttribute("data-multiline") || el.hasAttribute("data-highlight")) {
         var s = String(v);
-        var idx = hi ? s.toLowerCase().indexOf(hi.toLowerCase()) : -1;
-        if (idx === -1) {
-          el.textContent = s;
-        } else {
-          el.innerHTML =
-            esc(s.slice(0, idx)) +
-            '<span class="gold-accent">' + esc(s.slice(idx, idx + hi.length)) + "</span>" +
-            esc(s.slice(idx + hi.length));
+        var html = esc(s).replace(/\n/g, "<br>");
+        var hi = el.getAttribute("data-highlight");
+        if (hi) {
+          var idx = s.toLowerCase().indexOf(hi.toLowerCase());
+          if (idx !== -1) {
+            var before = esc(s.slice(0, idx)).replace(/\n/g, "<br>");
+            var match = esc(s.slice(idx, idx + hi.length));
+            var after = esc(s.slice(idx + hi.length)).replace(/\n/g, "<br>");
+            html = before + '<span class="gold-accent">' + match + "</span>" + after;
+          }
         }
+        el.innerHTML = html;
       } else {
         el.textContent = v;
       }

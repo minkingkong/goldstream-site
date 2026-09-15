@@ -3,12 +3,12 @@
     "brand": "GOLDSTREAM ENT"
   },
   "theme": {
-    "accent": "#a1791d",
+    "accent": "#b8860b",
     "ink": "#252525",
     "inkMuted": "#525252",
     "bg": "#ffffff",
-    "heroFrom": "#9c7a1a",
-    "heroTo": "#6b4f14"
+    "heroFrom": "#e3b23c",
+    "heroTo": "#8a5a0f"
   },
   "pages": {
     "works": {
@@ -20,7 +20,7 @@
     },
     "contact": {
       "title": "Contact",
-      "big": "상상을 현실로 만들고 싶다면."
+      "big": "함께 만들\n다음 이야기가 있다면."
     }
   },
   "home": {
@@ -198,8 +198,8 @@
     "address": "서울 강남구 삼성로 648, 4층",
     "officesIntro": "광주에서 시작해, 서울과 세계로 이야기를 잇습니다.",
     "offices": [
-      { "label": "본점", "address": "전남광주통합특별시 광산구 첨단중앙로152번길 5-8, 3층" },
-      { "label": "서울사무소", "address": "서울 강남구 삼성로 648, 4층" }
+      { "label": "광주", "address": "전남광주통합특별시 광산구 첨단중앙로152번길 5-8, 3층" },
+      { "label": "서울", "address": "서울 강남구 삼성로 648, 4층" }
     ],
     "inquiries": [
       "영화·드라마 기획개발 및 제작",

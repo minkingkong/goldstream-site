@@ -22,14 +22,14 @@
   --line-strong: #d8d8d8;
   /* single brand accent — gold. kept under the --violet-* names to avoid
      touching ~40 call sites; --gold-* mirrors it (see applyTheme in site.js) */
-  --violet: #a1791d;
-  --violet-ink: #7c5c13;
-  --violet-soft: rgba(161, 121, 29, 0.12);
-  --violet-hero-1: #9c7a1a;
-  --violet-hero-2: #6b4f14;
-  --gold: #a1791d;
-  --gold-ink: #7c5c13;
-  --gold-soft: rgba(161, 121, 29, 0.12);
+  --violet: #b8860b;
+  --violet-ink: #996700;
+  --violet-soft: rgba(184, 134, 11, 0.1);
+  --violet-hero-1: #e3b23c;
+  --violet-hero-2: #8a5a0f;
+  --gold: #b8860b;
+  --gold-ink: #996700;
+  --gold-soft: rgba(184, 134, 11, 0.1);
 
   --radius: 4px;
   --wrap: 1240px;
@@ -223,6 +223,7 @@ ul {
 .hero {
   background: linear-gradient(150deg, var(--violet-hero-1), var(--violet-hero-2));
   color: #fff;
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.22);
   min-height: min(76vh, 640px);
   display: flex;
   align-items: center;
