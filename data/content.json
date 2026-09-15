@@ -48,9 +48,18 @@
         "플랫폼": "Disney+ (2027 공개 예정)"
       },
       "links": [
-        { "label": "캐스팅 확정 · 2027년 디즈니+ 공개 (다음뉴스)", "url": "https://v.daum.net/v/20260723105052683" },
-        { "label": "'약한영웅' 유수민 감독 신작 (일간스포츠)", "url": "https://isplus.com/article/view/isp202607230067" },
-        { "label": "남주혁, 속물 변호사 役 출연 확정 (뉴시스)", "url": "https://nwww.newsis.com/view/NISX20260723_0003719823" }
+        {
+          "label": "캐스팅 확정 · 2027년 디즈니+ 공개 (다음뉴스)",
+          "url": "https://v.daum.net/v/20260723105052683"
+        },
+        {
+          "label": "'약한영웅' 유수민 감독 신작 (일간스포츠)",
+          "url": "https://isplus.com/article/view/isp202607230067"
+        },
+        {
+          "label": "남주혁, 속물 변호사 役 출연 확정 (뉴시스)",
+          "url": "https://nwww.newsis.com/view/NISX20260723_0003719823"
+        }
       ]
     },
     {
@@ -70,9 +79,18 @@
         "플랫폼": "극장 개봉"
       },
       "links": [
-        { "label": "메인 예고편 (YouTube)", "url": "https://www.youtube.com/watch?v=nCsO8lSZzZk" },
-        { "label": "'강철비' 5분 순삭 미리보기 (잇츠뉴 It's NEW 공식)", "url": "https://www.youtube.com/watch?v=6v3f9qUDE-w" },
-        { "label": "강철비 — 위키백과", "url": "https://ko.wikipedia.org/wiki/%EA%B0%95%EC%B2%A0%EB%B9%84" }
+        {
+          "label": "메인 예고편 (YouTube)",
+          "url": "https://www.youtube.com/watch?v=nCsO8lSZzZk"
+        },
+        {
+          "label": "'강철비' 5분 순삭 미리보기 (잇츠뉴 It's NEW 공식)",
+          "url": "https://www.youtube.com/watch?v=6v3f9qUDE-w"
+        },
+        {
+          "label": "강철비 — 위키백과",
+          "url": "https://ko.wikipedia.org/wiki/%EA%B0%95%EC%B2%A0%EB%B9%84"
+        }
       ]
     },
     {
@@ -92,9 +110,18 @@
         "플랫폼": "극장 개봉"
       },
       "links": [
-        { "label": "메인 예고편 (롯데엔터테인먼트 공식)", "url": "https://www.youtube.com/watch?v=KKPUEANoHAo" },
-        { "label": "티저 예고편 (롯데엔터테인먼트 공식)", "url": "https://www.youtube.com/watch?v=fkSyE0qidyI" },
-        { "label": "강철비2: 정상회담 — 위키백과", "url": "https://ko.wikipedia.org/wiki/%EA%B0%95%EC%B2%A0%EB%B9%84_2:_%EC%A0%95%EC%83%81%ED%9A%8C%EB%8B%B4" }
+        {
+          "label": "메인 예고편 (롯데엔터테인먼트 공식)",
+          "url": "https://www.youtube.com/watch?v=KKPUEANoHAo"
+        },
+        {
+          "label": "티저 예고편 (롯데엔터테인먼트 공식)",
+          "url": "https://www.youtube.com/watch?v=fkSyE0qidyI"
+        },
+        {
+          "label": "강철비2: 정상회담 — 위키백과",
+          "url": "https://ko.wikipedia.org/wiki/%EA%B0%95%EC%B2%A0%EB%B9%84_2:_%EC%A0%95%EC%83%81%ED%9A%8C%EB%8B%B4"
+        }
       ]
     },
     {
@@ -114,9 +141,18 @@
         "플랫폼": "Disney+ 오리지널"
       },
       "links": [
-        { "label": "메인 예고편 (디즈니+ 공식)", "url": "https://www.youtube.com/watch?v=i7mT2uIkWLY" },
-        { "label": "티저 예고편 (디즈니+ 공식)", "url": "https://www.youtube.com/watch?v=OpClXdDvyuw" },
-        { "label": "'Low Life' 소개 — Variety", "url": "https://variety.com/2025/tv/news/ryu-seungryong-disney-crime-drama-low-life-1236441409/" }
+        {
+          "label": "메인 예고편 (디즈니+ 공식)",
+          "url": "https://www.youtube.com/watch?v=i7mT2uIkWLY"
+        },
+        {
+          "label": "티저 예고편 (디즈니+ 공식)",
+          "url": "https://www.youtube.com/watch?v=OpClXdDvyuw"
+        },
+        {
+          "label": "'Low Life' 소개 — Variety",
+          "url": "https://variety.com/2025/tv/news/ryu-seungryong-disney-crime-drama-low-life-1236441409/"
+        }
       ]
     },
     {
@@ -136,15 +172,21 @@
         "플랫폼": "극장 개봉"
       },
       "links": [
-        { "label": "1차 예고편 (키다리스튜디오 공식)", "url": "https://www.youtube.com/watch?v=kHzgRPver_o" },
-        { "label": "멍뭉이 — 위키백과", "url": "https://ko.wikipedia.org/wiki/%EB%A9%8D%EB%AD%89%EC%9D%B4" }
+        {
+          "label": "1차 예고편 (키다리스튜디오 공식)",
+          "url": "https://www.youtube.com/watch?v=kHzgRPver_o"
+        },
+        {
+          "label": "멍뭉이 — 위키백과",
+          "url": "https://ko.wikipedia.org/wiki/%EB%A9%8D%EB%AD%89%EC%9D%B4"
+        }
       ]
     }
   ],
   "about": {
     "name": "김정환",
     "role": "대표이사 · GOLDSTREAM ENTERTAINMENT",
-    "portrait": "assets/img/portrait.svg",
+    "portrait": "assets/img/1789474204980-kakaotalk-20260907-144227368.png",
     "greetingTitle": "대표이사 인사말",
     "greeting": [
       "콘텐츠의 시작은 결국 좋은 이야기와 사람이라고 생각합니다.",
@@ -176,20 +218,50 @@
       "창작자, 자본, 제작 그리고 시장을 연결해 작품을 현실로 만드는 것. 그것이 제작자의 역할이라고 생각합니다."
     ],
     "facts": [
-      { "k": "Company", "v": "골드스트림 엔터테인먼트 · GOLDSTREAM ENTERTAINMENT" },
-      { "k": "대표이사", "v": "김정환" },
-      { "k": "Focus", "v": "영화·드라마 기획개발 · 투자 · 제작 · IP 비즈니스" },
-      { "k": "Base", "v": "광주 · 서울" }
+      {
+        "k": "Company",
+        "v": "골드스트림 엔터테인먼트 · GOLDSTREAM ENTERTAINMENT"
+      },
+      {
+        "k": "대표이사",
+        "v": "김정환"
+      },
+      {
+        "k": "Focus",
+        "v": "영화·드라마 기획개발 · 투자 · 제작 · IP 비즈니스"
+      },
+      {
+        "k": "Base",
+        "v": "광주 · 서울"
+      }
     ],
     "recognition": [
-      { "year": "2027", "text": "코드 — Disney+ 시리즈" },
-      { "year": "2025", "text": "파인: 촌뜨기들 — Disney+ 시리즈" },
-      { "year": "2023", "text": "멍뭉이 — 영화" },
-      { "year": "2020", "text": "강철비2: 정상회담 — 영화" },
-      { "year": "2017", "text": "강철비 — 영화" }
+      {
+        "year": "2027",
+        "text": "코드 — Disney+ 시리즈"
+      },
+      {
+        "year": "2025",
+        "text": "파인: 촌뜨기들 — Disney+ 시리즈"
+      },
+      {
+        "year": "2023",
+        "text": "멍뭉이 — 영화"
+      },
+      {
+        "year": "2020",
+        "text": "강철비2: 정상회담 — 영화"
+      },
+      {
+        "year": "2017",
+        "text": "강철비 — 영화"
+      }
     ],
     "press": [
-      { "label": "김정환 대표 \"한국 영화 투자, 미래 신화가 될 것 믿는다\" (SEN TV, 2025)", "url": "https://www.sentv.co.kr/article/view/sentv202510220042" }
+      {
+        "label": "김정환 대표 \"한국 영화 투자, 미래 신화가 될 것 믿는다\" (SEN TV, 2025)",
+        "url": "https://www.sentv.co.kr/article/view/sentv202510220042"
+      }
     ]
   },
   "contact": {
@@ -198,8 +270,14 @@
     "address": "광주 · 서울",
     "hours": "",
     "offices": [
-      { "label": "광주", "address": "전남광주통합특별시 광산구 첨단중앙로152번길 5-8, 3층" },
-      { "label": "서울", "address": "서울 강남구 삼성로 648, 4층" }
+      {
+        "label": "광주",
+        "address": "전남광주통합특별시 광산구 첨단중앙로152번길 5-8, 3층"
+      },
+      {
+        "label": "서울",
+        "address": "서울 강남구 삼성로 648, 4층"
+      }
     ],
     "inquiriesIntro": "이런 이야기라면, 저를 찾아오세요.",
     "inquiries": [
