@@ -48,21 +48,20 @@
       inkMuted: "--ink-muted",
       bg: "--bg",
       heroFrom: "--violet-hero-1",
-      heroTo: "--violet-hero-2",
-      gold: "--gold"
+      heroTo: "--violet-hero-2"
     };
     Object.keys(map).forEach(function (k) {
       if (t[k]) s.setProperty(map[k], t[k]);
     });
+    // gold is the single brand accent — --gold-* always mirrors --violet-*
+    // so anything still styled off --gold (Vision quote, logo highlight) stays in sync.
     if (t.accent) {
       var soft = hexToRgba(t.accent, 0.1);
-      if (soft) s.setProperty("--violet-soft", soft);
-      s.setProperty("--violet-ink", shade(t.accent, -0.12));
-    }
-    if (t.gold) {
-      var gsoft = hexToRgba(t.gold, 0.16);
-      if (gsoft) s.setProperty("--gold-soft", gsoft);
-      s.setProperty("--gold-ink", shade(t.gold, -0.18));
+      var ink = shade(t.accent, -0.12);
+      if (soft) { s.setProperty("--violet-soft", soft); s.setProperty("--gold-soft", soft); }
+      s.setProperty("--violet-ink", ink);
+      s.setProperty("--gold-ink", ink);
+      s.setProperty("--gold", t.accent);
     }
   }
 

@@ -3,13 +3,12 @@
     "brand": "GOLDSTREAM ENT"
   },
   "theme": {
-    "accent": "#7c4bff",
+    "accent": "#a1791d",
     "ink": "#252525",
     "inkMuted": "#525252",
     "bg": "#ffffff",
-    "heroFrom": "#8a6bf0",
-    "heroTo": "#6d4bd8",
-    "gold": "#c9a227"
+    "heroFrom": "#9c7a1a",
+    "heroTo": "#6b4f14"
   },
   "pages": {
     "works": {

@@ -11,15 +11,14 @@
   var TKEY = "gs_gh_token";
   var MAX_BYTES = 40 * 1024 * 1024; // 40 MB soft cap for uploads
   var DEFAULT_THEME = {
-    accent: "#7c4bff",
+    accent: "#a1791d",
     ink: "#252525",
     inkMuted: "#525252",
     bg: "#ffffff",
-    heroFrom: "#8a6bf0",
-    heroTo: "#6d4bd8",
-    gold: "#c9a227"
+    heroFrom: "#9c7a1a",
+    heroTo: "#6b4f14"
   };
-  var THEME_KEYS = ["accent", "ink", "inkMuted", "bg", "heroFrom", "heroTo", "gold"];
+  var THEME_KEYS = ["accent", "ink", "inkMuted", "bg", "heroFrom", "heroTo"];
 
   var state = { data: null, sha: null };
   var $ = function (id) { return document.getElementById(id); };
