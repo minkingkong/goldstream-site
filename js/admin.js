@@ -16,10 +16,9 @@
     inkMuted: "#525252",
     bg: "#ffffff",
     heroFrom: "#8a6bf0",
-    heroTo: "#6d4bd8",
-    gold: "#c9a227"
+    heroTo: "#6d4bd8"
   };
-  var THEME_KEYS = ["accent", "ink", "inkMuted", "bg", "heroFrom", "heroTo", "gold"];
+  var THEME_KEYS = ["accent", "ink", "inkMuted", "bg", "heroFrom", "heroTo"];
 
   var state = { data: null, sha: null };
   var $ = function (id) { return document.getElementById(id); };
@@ -288,8 +287,8 @@
 
     setV("f-email", c.email);
     setV("f-phone", c.phone);
+    setV("f-hours", c.hours);
     setV("f-address", c.address);
-    setV("f-officesIntro", c.officesIntro);
     setV("f-offices", (c.offices || []).map(function (o) { return o.label + " | " + o.address; }).join("\n"));
     setV("f-inquiries", (c.inquiries || []).join("\n"));
   }
@@ -352,11 +351,10 @@
     });
 
     data.contact = data.contact || {};
-    delete data.contact.hours;
     data.contact.email = v("f-email");
     data.contact.phone = v("f-phone");
+    data.contact.hours = v("f-hours");
     data.contact.address = v("f-address");
-    data.contact.officesIntro = v("f-officesIntro");
     data.contact.offices = lines("f-offices").map(function (l) {
       var i = l.indexOf("|");
       return i === -1
