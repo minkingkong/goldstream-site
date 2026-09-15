@@ -804,15 +804,18 @@ ul {
   color: var(--ink-muted);
   font-size: 15px;
 }
-.contact-grid a.mail {
+.contact-grid .mail {
+  display: inline-block;
   color: var(--ink);
   font-weight: 600;
   border-bottom: 1px solid var(--line-strong);
   padding-bottom: 2px;
+  cursor: default;
 }
-.contact-grid a.mail:hover {
-  color: var(--violet);
-  border-color: var(--violet);
+.office-intro {
+  color: var(--ink-muted);
+  font-size: 13.5px;
+  margin-bottom: 12px;
 }
 
 /* ---------- reveal ---------- */
