@@ -701,7 +701,7 @@ ul {
   margin-top: 6px;
   color: var(--violet);
   font-weight: 600;
-  font-size: 14px;
+  font-size: 17px;
   letter-spacing: 0.02em;
 }
 .about__bio {
@@ -743,10 +743,9 @@ ul {
 /* about — extended blocks */
 .about__block-title {
   margin: 28px 0 14px;
-  font-size: 13px;
+  font-size: 16px;
   font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  letter-spacing: 0.04em;
   color: var(--violet);
   display: flex;
   align-items: center;
