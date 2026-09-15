@@ -423,7 +423,7 @@ ul {
 }
 .work__thumb {
   position: relative;
-  aspect-ratio: 3 / 2;
+  aspect-ratio: 2 / 3;
   overflow: hidden;
   border-radius: var(--radius);
   background: #14121c;
