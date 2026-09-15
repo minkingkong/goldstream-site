@@ -68,6 +68,9 @@
       if (el.hasAttribute("data-mailto")) {
         el.textContent = v;
         el.setAttribute("href", "mailto:" + v);
+      } else if (el.hasAttribute("data-tel")) {
+        el.textContent = v;
+        el.setAttribute("href", "tel:" + String(v).replace(/[^0-9+]/g, ""));
       } else if (el.tagName === "IMG") {
         el.setAttribute("src", v);
       } else if (el.hasAttribute("data-multiline")) {
@@ -326,6 +329,16 @@
         var li = document.createElement("p");
         li.textContent = t;
         inq.appendChild(li);
+      });
+    }
+    var off = document.getElementById("contact-offices");
+    if (off && data.contact) {
+      off.innerHTML = "";
+      (data.contact.offices || []).forEach(function (o) {
+        if (!o || (!o.label && !o.address)) return;
+        var p = document.createElement("p");
+        p.innerHTML = "<b>" + esc(o.label) + "</b> — " + esc(o.address);
+        off.appendChild(p);
       });
     }
   }
