@@ -193,9 +193,14 @@
     ]
   },
   "contact": {
-    "email": "minsung3124@gmail.com",
-    "address": "서울특별시 마포구 성산1동",
+    "email": "kim@goldstream.kr",
+    "phone": "010-4612-1588",
+    "address": "서울 강남구 삼성로 648, 4층",
     "hours": "",
+    "offices": [
+      { "label": "본점", "address": "전남광주통합특별시 광산구 첨단중앙로152번길 5-8, 3층" },
+      { "label": "서울사무소", "address": "서울 강남구 삼성로 648, 4층" }
+    ],
     "inquiries": [
       "AI VFX · Media Art · Commercial"
     ]

@@ -286,8 +286,10 @@
     setV("f-ab-press", (a.press || []).map(function (p) { return (p.label || "") + " | " + (p.url || ""); }).join("\n"));
 
     setV("f-email", c.email);
+    setV("f-phone", c.phone);
     setV("f-hours", c.hours);
     setV("f-address", c.address);
+    setV("f-offices", (c.offices || []).map(function (o) { return o.label + " | " + o.address; }).join("\n"));
     setV("f-inquiries", (c.inquiries || []).join("\n"));
   }
 
@@ -350,8 +352,15 @@
 
     data.contact = data.contact || {};
     data.contact.email = v("f-email");
+    data.contact.phone = v("f-phone");
     data.contact.hours = v("f-hours");
     data.contact.address = v("f-address");
+    data.contact.offices = lines("f-offices").map(function (l) {
+      var i = l.indexOf("|");
+      return i === -1
+        ? { label: l.trim(), address: l.trim() }
+        : { label: l.slice(0, i).trim(), address: l.slice(i + 1).trim() };
+    });
     data.contact.inquiries = lines("f-inquiries");
     return data;
   }

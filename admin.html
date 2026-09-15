@@ -152,9 +152,13 @@
         <h2>연락처 (Contact)</h2>
         <div class="grid-2">
           <div class="field"><label>이메일</label><input type="text" id="f-email" /></div>
-          <div class="field"><label>운영 시간</label><input type="text" id="f-hours" /></div>
+          <div class="field"><label>전화번호</label><input type="text" id="f-phone" /></div>
         </div>
-        <div class="field"><label>주소 / 스튜디오</label><input type="text" id="f-address" /></div>
+        <div class="grid-2">
+          <div class="field"><label>운영 시간</label><input type="text" id="f-hours" /></div>
+          <div class="field"><label>푸터용 짧은 주소</label><input type="text" id="f-address" /></div>
+        </div>
+        <div class="field"><label>사무실 (형식: 이름 | 주소, 한 줄에 하나)</label><textarea id="f-offices" style="min-height:90px"></textarea></div>
         <div class="field"><label>문의 항목 (한 줄에 하나)</label><textarea id="f-inquiries"></textarea></div>
       </section>
 
@@ -214,6 +218,6 @@
     </div>
   </template>
 
-  <script src="js/admin.js?v=5c10329feb"></script>
+  <script src="js/admin.js?v=83d758492d"></script>
 </body>
 </html>
