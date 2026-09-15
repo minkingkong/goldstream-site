@@ -810,25 +810,7 @@ ul {
   color: var(--ink);
   text-wrap: balance;
 }
-.about-vision {
-  position: relative;
-}
-.about-vision::before {
-  content: "\201C";
-  position: absolute;
-  top: -0.5em;
-  left: -0.1em;
-  font-size: clamp(140px, 20vw, 260px);
-  font-weight: 800;
-  line-height: 1;
-  color: var(--violet-soft);
-  z-index: 0;
-  pointer-events: none;
-  user-select: none;
-}
 .about-vision .about-quote {
-  position: relative;
-  z-index: 1;
   border-left: 3px solid var(--violet);
   padding-left: clamp(16px, 3vw, 28px);
 }
@@ -876,11 +858,9 @@ ul {
   font-size: 15px;
 }
 .contact-grid .mail {
-  display: inline-block;
+  display: block;
   color: var(--ink);
   font-weight: 600;
-  border-bottom: 1px solid var(--line-strong);
-  padding-bottom: 2px;
   cursor: default;
 }
 .office-intro {
