@@ -62,6 +62,17 @@ body {
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
 }
+/* subtle film-grain texture over the whole site — cheap depth without imagery */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  pointer-events: none;
+  opacity: 0.035;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
 
 a {
   color: inherit;
@@ -262,6 +273,33 @@ ul {
   gap: 16px;
 }
 
+/* staggered entrance on load */
+@media (prefers-reduced-motion: no-preference) {
+  .hero .eyebrow,
+  .hero__title,
+  .hero__tagline,
+  .hero__tagline-en,
+  .hero__cta {
+    opacity: 0;
+    animation: hero-rise 0.8s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+  }
+  .hero .eyebrow { animation-delay: 0.05s; }
+  .hero__title { animation-delay: 0.14s; }
+  .hero__tagline { animation-delay: 0.28s; }
+  .hero__tagline-en { animation-delay: 0.36s; }
+  .hero__cta { animation-delay: 0.46s; }
+}
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* ---------- Section header ---------- */
 
 .section {
@@ -389,6 +427,11 @@ ul {
   overflow: hidden;
   border-radius: var(--radius);
   background: #14121c;
+  transition: box-shadow 0.35s ease, transform 0.35s ease;
+}
+.work:hover .work__thumb {
+  box-shadow: 0 22px 40px -18px rgba(20, 18, 28, 0.45);
+  transform: translateY(-3px);
 }
 .work__thumb img {
   width: 100%;
@@ -705,6 +748,16 @@ ul {
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--violet);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.about__block-title::before {
+  content: "";
+  width: 20px;
+  height: 1px;
+  background: var(--violet);
+  flex: none;
 }
 .about__prose p {
   margin: 0 0 1.1em;
@@ -757,7 +810,25 @@ ul {
   color: var(--ink);
   text-wrap: balance;
 }
+.about-vision {
+  position: relative;
+}
+.about-vision::before {
+  content: "\201C";
+  position: absolute;
+  top: -0.5em;
+  left: -0.1em;
+  font-size: clamp(140px, 20vw, 260px);
+  font-weight: 800;
+  line-height: 1;
+  color: var(--violet-soft);
+  z-index: 0;
+  pointer-events: none;
+  user-select: none;
+}
 .about-vision .about-quote {
+  position: relative;
+  z-index: 1;
   border-left: 3px solid var(--violet);
   padding-left: clamp(16px, 3vw, 28px);
 }
