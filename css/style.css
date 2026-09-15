@@ -837,7 +837,7 @@ ul {
   font-size: clamp(28px, 6vw, 56px);
   font-weight: 800;
   letter-spacing: -0.03em;
-  line-height: 1.12;
+  line-height: 1.55;
   text-wrap: balance;
 }
 .contact-grid {
