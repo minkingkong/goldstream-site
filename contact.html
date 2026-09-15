@@ -6,12 +6,12 @@
   <title>Contact — GOLDSTREAM</title>
   <meta name="description" content="GOLDSTREAM 제작·투자·배급 문의." />
   <link rel="preload" as="font" type="font/woff2" href="assets/fonts/PretendardVariable.woff2" crossorigin />
-  <link rel="stylesheet" href="css/style.css?v=bf59dbf4da" />
+  <link rel="stylesheet" href="css/style.css?v=1f3bb2c589" />
 </head>
 <body>
   <header class="hd">
     <div class="wrap hd__in">
-      <a class="hd__logo" href="index.html" data-field="site.brand">GOLDSTREAM</a>
+      <a class="hd__logo" href="index.html" data-field="site.brand" data-highlight="GOLD">GOLDSTREAM</a>
       <nav class="hd__nav">
         <a href="works.html">works</a>
         <a href="about.html">about</a>
@@ -24,27 +24,20 @@
     <h1 class="page__title" data-field="pages.contact.title">Contact</h1>
     <p class="contact-big" data-field="pages.contact.big" data-multiline>함께 만들<br />이야기가 있다면.</p>
 
-    <div class="contact-grid">
-      <div>
-        <h4>General</h4>
-        <a class="mail" href="mailto:hello@goldstream.co.kr" data-field="contact.email" data-mailto>hello@goldstream.co.kr</a>
-        <p style="margin-top:10px">
-          <a href="tel:" data-field="contact.phone" data-tel>010-0000-0000</a>
-        </p>
-      </div>
-      <div>
-        <h4>Inquiries</h4>
-        <div id="contact-inquiries"></div>
-      </div>
-      <div>
-        <h4>Hours</h4>
-        <p data-field="contact.hours">Mon–Fri 10:00–19:00</p>
-      </div>
+    <div class="contact-direct reveal">
+      <a class="contact-direct__item" href="mailto:hello@goldstream.co.kr" data-field="contact.email" data-mailto>hello@goldstream.co.kr</a>
+      <a class="contact-direct__item" href="tel:" data-field="contact.phone" data-tel>010-0000-0000</a>
     </div>
 
     <section class="about-section reveal">
-      <h2 class="eyebrow" style="display:block;margin-bottom:14px">Offices</h2>
-      <dl class="facts" id="contact-offices"></dl>
+      <h2 class="eyebrow" style="display:block;margin-bottom:16px">Inquiries</h2>
+      <div class="tag-row" id="contact-inquiries"></div>
+    </section>
+
+    <section class="about-section reveal">
+      <h2 class="eyebrow" style="display:block;margin-bottom:8px">Offices</h2>
+      <p class="office-intro" data-field="contact.officesIntro">광주에서 시작해, 서울과 세계로 이야기를 잇습니다.</p>
+      <div class="office-grid" id="contact-offices"></div>
     </section>
   </main>
 
@@ -56,6 +49,6 @@
     </div>
   </footer>
 
-  <script src="js/site.js?v=d4293815f4"></script>
+  <script src="js/site.js?v=47118b6808"></script>
 </body>
 </html>

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="robots" content="noindex" />
   <title>편집기 — GOLDSTREAM</title>
-  <link rel="stylesheet" href="css/style.css?v=bf59dbf4da" />
+  <link rel="stylesheet" href="css/style.css?v=1f3bb2c589" />
 </head>
 <body>
   <header class="hd">
@@ -73,6 +73,9 @@
         <div class="grid-2">
           <div class="field"><label>홈 히어로 배경 — 시작</label><input type="color" id="f-th-heroFrom" /></div>
           <div class="field"><label>홈 히어로 배경 — 끝</label><input type="color" id="f-th-heroTo" /></div>
+        </div>
+        <div class="grid-2">
+          <div class="field"><label>포인트 색 (골드 — Upcoming 뱃지, Vision 강조 등)</label><input type="color" id="f-th-gold" /></div>
         </div>
         <button type="button" class="btn btn--ghost btn--sm" id="reset-theme">기본 색상으로 되돌리기</button>
       </section>
@@ -154,12 +157,10 @@
           <div class="field"><label>이메일</label><input type="text" id="f-email" /></div>
           <div class="field"><label>전화번호</label><input type="text" id="f-phone" /></div>
         </div>
-        <div class="grid-2">
-          <div class="field"><label>운영 시간</label><input type="text" id="f-hours" /></div>
-          <div class="field"><label>푸터용 짧은 주소</label><input type="text" id="f-address" /></div>
-        </div>
+        <div class="field"><label>푸터용 짧은 주소</label><input type="text" id="f-address" /></div>
+        <div class="field"><label>Offices 소개 문구</label><input type="text" id="f-officesIntro" /></div>
         <div class="field"><label>사무실 (형식: 이름 | 주소, 한 줄에 하나)</label><textarea id="f-offices" style="min-height:90px"></textarea></div>
-        <div class="field"><label>문의 항목 (한 줄에 하나)</label><textarea id="f-inquiries"></textarea></div>
+        <div class="field"><label>문의 항목 — Inquiries 태그 (한 줄에 하나)</label><textarea id="f-inquiries" style="min-height:120px"></textarea></div>
       </section>
 
       <div class="statusline" id="status">불러오는 중…</div>
@@ -218,6 +219,6 @@
     </div>
   </template>
 
-  <script src="js/admin.js?v=83d758492d"></script>
+  <script src="js/admin.js?v=9274caad91"></script>
 </body>
 </html>

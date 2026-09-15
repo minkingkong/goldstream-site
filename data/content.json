@@ -8,7 +8,8 @@
     "inkMuted": "#525252",
     "bg": "#ffffff",
     "heroFrom": "#8a6bf0",
-    "heroTo": "#6d4bd8"
+    "heroTo": "#6d4bd8",
+    "gold": "#c9a227"
   },
   "pages": {
     "works": {
@@ -196,13 +197,18 @@
     "email": "kim@goldstream.kr",
     "phone": "010-4612-1588",
     "address": "서울 강남구 삼성로 648, 4층",
-    "hours": "",
+    "officesIntro": "광주에서 시작해, 서울과 세계로 이야기를 잇습니다.",
     "offices": [
       { "label": "본점", "address": "전남광주통합특별시 광산구 첨단중앙로152번길 5-8, 3층" },
       { "label": "서울사무소", "address": "서울 강남구 삼성로 648, 4층" }
     ],
     "inquiries": [
-      "AI VFX · Media Art · Commercial"
+      "영화·드라마 기획개발 및 제작",
+      "상업 콘텐츠 투자유치 및 프로젝트 파이낸싱",
+      "웹툰·스토리 등 원천 IP 발굴 및 영상화",
+      "감독·작가·배우 중심의 프로젝트 패키징",
+      "국내외 공동제작 및 투자 파트너십 구축",
+      "AI 기반 영상콘텐츠 제작모델 개발"
     ]
   }
 }

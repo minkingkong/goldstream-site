@@ -25,6 +25,9 @@
   --violet-soft: rgba(124, 75, 255, 0.1);
   --violet-hero-1: #8a6bf0;
   --violet-hero-2: #6d4bd8;
+  --gold: #c9a227;
+  --gold-ink: #96751d;
+  --gold-soft: rgba(201, 162, 39, 0.16);
 
   --radius: 4px;
   --wrap: 1240px;
@@ -133,6 +136,9 @@ ul {
   font-size: 18px;
   letter-spacing: -0.02em;
   color: var(--violet);
+}
+.gold-accent {
+  color: var(--gold);
 }
 .hd__nav {
   display: flex;
@@ -377,11 +383,9 @@ ul {
 .work.is-hidden {
   display: none;
 }
-.work[data-status="upcoming"] {
-  opacity: 0.42;
-}
-.work[data-status="upcoming"]:hover {
-  opacity: 1;
+.work[data-status="upcoming"] .work__tag {
+  color: var(--gold-ink);
+  background: var(--gold-soft);
 }
 .work__thumb {
   position: relative;
@@ -758,7 +762,7 @@ ul {
   text-wrap: balance;
 }
 .about-vision .about-quote {
-  border-left: 3px solid var(--violet);
+  border-left: 3px solid var(--gold);
   padding-left: clamp(16px, 3vw, 28px);
 }
 .about-grid {
@@ -785,34 +789,79 @@ ul {
   line-height: 1.12;
   text-wrap: balance;
 }
-.contact-grid {
+/* ---------- contact: direct channels ---------- */
+.contact-direct {
   margin-top: clamp(40px, 7vw, 68px);
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 28px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 48px;
 }
-.contact-grid h4 {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--violet);
-  margin-bottom: 10px;
-}
-.contact-grid p,
-.contact-grid a {
-  color: var(--ink-muted);
-  font-size: 15px;
-}
-.contact-grid a.mail {
+.contact-direct__item {
+  font-size: clamp(22px, 3.4vw, 32px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
   color: var(--ink);
-  font-weight: 600;
-  border-bottom: 1px solid var(--line-strong);
-  padding-bottom: 2px;
+  border-bottom: 2px solid var(--line-strong);
+  padding-bottom: 5px;
+  transition: color 0.2s ease, border-color 0.2s ease;
 }
-.contact-grid a.mail:hover {
+.contact-direct__item:hover {
   color: var(--violet);
   border-color: var(--violet);
+}
+
+/* ---------- contact: inquiry tags ---------- */
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.tag-chip {
+  display: inline-flex;
+  align-items: center;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--violet-ink);
+  background: var(--violet-soft);
+  border-radius: 999px;
+  padding: 9px 16px;
+}
+
+/* ---------- contact: offices ---------- */
+.office-intro {
+  color: var(--ink-muted);
+  font-size: 14.5px;
+  max-width: 56ch;
+  margin-bottom: 22px;
+}
+.office-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 18px;
+}
+.office-card {
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 22px 22px 24px;
+}
+.office-dot {
+  display: block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--gold);
+  margin-bottom: 14px;
+}
+.office-card h5 {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+.office-card p {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--ink-muted);
 }
 
 /* ---------- reveal ---------- */
