@@ -416,12 +416,6 @@ ul {
 .work.is-hidden {
   display: none;
 }
-.work[data-status="upcoming"] {
-  opacity: 0.42;
-}
-.work[data-status="upcoming"]:hover {
-  opacity: 1;
-}
 .work__thumb {
   position: relative;
   aspect-ratio: 2 / 3;
