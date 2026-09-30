@@ -464,7 +464,7 @@ ul {
   display: block;
   cursor: pointer;
 }
-.work.is-hidden {
+.works-grid .work.is-hidden {
   display: none;
 }
 .work__thumb {
