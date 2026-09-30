@@ -56,7 +56,7 @@
     if (t.accent) {
       var soft = hexToRgba(t.accent, 0.1);
       if (soft) s.setProperty("--violet-soft", soft);
-      s.setProperty("--violet-ink", shade(t.accent, -0.12));
+      s.setProperty("--violet-ink", shade(t.accent, 0.08));
     }
   }
 
@@ -75,6 +75,10 @@
         el.setAttribute("src", v);
       } else if (el.hasAttribute("data-multiline")) {
         el.innerHTML = esc(v).replace(/\n/g, "<br>");
+      } else if (el.hasAttribute("data-split")) {
+        var s = String(v), i = s.indexOf(" ");
+        el.innerHTML = i < 0 ? esc(s)
+          : esc(s.slice(0, i)) + '<span class="hd__logo-rest">' + esc(s.slice(i)) + "</span>";
       } else {
         el.textContent = v;
       }

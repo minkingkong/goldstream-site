@@ -9,7 +9,7 @@
 ## 구조
 
 ```
-index.html      홈 (보라 히어로 + 대표 작품)
+index.html      홈 (블랙·골드 히어로 + 대표 작품)
 works.html      작품 목록 (필터 · Gallery/List · 상세 모달)
 about.html      김정환 소개
 contact.html    연락처

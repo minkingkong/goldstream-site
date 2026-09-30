@@ -11,12 +11,12 @@
   var TKEY = "gs_gh_token";
   var MAX_BYTES = 40 * 1024 * 1024; // 40 MB soft cap for uploads
   var DEFAULT_THEME = {
-    accent: "#7c4bff",
-    ink: "#252525",
-    inkMuted: "#525252",
-    bg: "#ffffff",
-    heroFrom: "#8a6bf0",
-    heroTo: "#6d4bd8"
+    accent: "#cdb27a",
+    ink: "#f4f1ea",
+    inkMuted: "#b3ada2",
+    bg: "#0f0e0c",
+    heroFrom: "#17150f",
+    heroTo: "#0c0b09"
   };
   var THEME_KEYS = ["accent", "ink", "inkMuted", "bg", "heroFrom", "heroTo"];
 
