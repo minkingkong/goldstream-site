@@ -144,7 +144,7 @@
       }
     } else {
       works = works.slice().sort(function (a, b) {
-        return (b.year || 0) - (a.year || 0);
+        return (!!a.sortLast - !!b.sortLast) || (b.year || 0) - (a.year || 0);
       });
     }
     grid.innerHTML = "";
@@ -328,6 +328,29 @@
     });
   }
 
+  function fillPartners(arr) {
+    var el = document.getElementById("about-partners");
+    if (!el) return;
+    var list = (arr || []).filter(function (p) { return p && p.name; });
+    var wrap = document.getElementById("about-partners-wrap");
+    if (wrap) wrap.hidden = list.length === 0;
+    el.innerHTML = "";
+    list.forEach(function (p) {
+      var li = document.createElement("li");
+      li.className = "partner";
+      if (p.logo) {
+        var img = document.createElement("img");
+        img.src = p.logo;
+        img.alt = p.name;
+        img.loading = "lazy";
+        li.appendChild(img);
+      } else {
+        li.textContent = p.name;
+      }
+      el.appendChild(li);
+    });
+  }
+
   function renderAbout(data) {
     var a = data.about;
     if (a) {
@@ -338,6 +361,7 @@
       fillDefs("about-facts", (a.facts || []).map(function (f) { return [f.k, f.v]; }));
       fillDefs("about-recognition", (a.recognition || []).map(function (r) { return [r.year, r.text]; }));
       fillLinkList("about-press", a.press);
+      fillPartners(a.partners);
     }
     var inq = document.getElementById("contact-inquiries");
     if (inq && data.contact) {

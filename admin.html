@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="robots" content="noindex" />
   <title>편집기 — GOLDSTREAM</title>
-  <link rel="stylesheet" href="css/style.css?v=bc2bcc68fd" />
+  <link rel="stylesheet" href="css/style.css?v=52b5fda959" />
 </head>
 <body class="admin">
   <header class="hd">
@@ -142,6 +142,17 @@
         <div class="field"><label>회사 정보 (형식: 라벨 | 내용, 한 줄에 하나)</label><textarea id="f-facts" style="min-height:110px"></textarea></div>
         <div class="field"><label>주요 작품 (형식: 연도 | 내용, 한 줄에 하나)</label><textarea id="f-recognition" style="min-height:110px"></textarea></div>
         <div class="field"><label>Press · 관련 보도 (형식: 제목 | URL, 한 줄에 하나)</label><textarea id="f-ab-press" style="min-height:90px"></textarea></div>
+
+        <div class="field"><label>협력사 — 소제목</label><input type="text" id="f-ab-partnersTitle" /></div>
+        <div class="field">
+          <label>협력사 (형식: 회사명 | 로고 경로, 한 줄에 하나 · 로고가 없으면 회사명만)</label>
+          <textarea id="f-ab-partners" style="min-height:90px" placeholder="얼반웍스 | assets/img/urbanworks-logo.png"></textarea>
+        </div>
+        <div class="field">
+          <label>협력사 로고 업로드 — 올린 뒤 아래 경로를 복사해서 위 목록의 "|" 뒤에 붙여넣으세요</label>
+          <input type="file" accept="image/*" data-target="f-partner-logo-path" />
+          <input type="text" id="f-partner-logo-path" readonly placeholder="업로드하면 여기에 경로가 나타납니다" style="margin-top:8px" />
+        </div>
       </section>
 
       <!-- CONTACT -->
@@ -200,6 +211,11 @@
         <div class="field"><label>날짜 라벨</label><input type="text" class="f-dateLabel" placeholder="Released, July 2024" /></div>
         <div class="field"><label>연도 (Works 목록 정렬용, 숫자만)</label><input type="text" class="f-year" placeholder="2024" /></div>
       </div>
+      <div class="field">
+        <label style="text-transform:none;letter-spacing:0;font-size:13px;color:var(--ink-muted)">
+          <input type="checkbox" class="f-sortLast" /> Works 목록 맨 뒤로 보내기 (연도와 상관없이 가장 마지막에 표시)
+        </label>
+      </div>
       <div class="grid-2">
         <div class="field"><label>형식</label><input type="text" class="f-format" placeholder="장편영화 / 리미티드 시리즈 …" /></div>
         <div class="field"><label>영상 URL (YouTube·Vimeo, 또는 mp4 링크 / 비워도 됨)</label><input type="text" class="f-video" /></div>
@@ -221,6 +237,6 @@
     </div>
   </template>
 
-  <script src="js/admin.js?v=b423f44ec4"></script>
+  <script src="js/admin.js?v=7eb255ba33"></script>
 </body>
 </html>

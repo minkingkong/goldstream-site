@@ -195,6 +195,68 @@
           "url": "http://www.cine21.com/news/view/?mag_id=102101"
         }
       ]
+    },
+    {
+      "id": "demonkiller",
+      "title": "미녀 데몬 킬러",
+      "titleEn": "Demon Dancer: Sua/Nara",
+      "status": "released",
+      "dateLabel": "Released, April 2026 · TVING · Wavve",
+      "year": 2026,
+      "format": "장편영화",
+      "image": "assets/img/demon-killer-poster.jpg",
+      "video": "https://www.youtube.com/watch?v=hdS-NaYmGZE",
+      "synopsis": "죽음의 문턱에 선 발레리나 수아. 거꾸로 펼쳐지는 기억 속에서 그녀는 악마 나라와 얽히고, 둘은 하나가 되어 악에 맞선다. 광주·곡성 등 국내 로케이션에서 촬영한 한미 합작 액션 판타지로, 실사 고위험 액션을 전면에 내세웠다.",
+      "credits": {
+        "감독": "아틸라 코로시 (Attila Korosi)",
+        "각본": "아틸라 코로시",
+        "출연": "한지연, 아니타 코로시, 조셉 김",
+        "플랫폼": "IPTV · TVING · Wavve"
+      },
+      "links": [
+        {
+          "label": "예고편 (Far East Films)",
+          "url": "https://www.youtube.com/watch?v=hdS-NaYmGZE"
+        },
+        {
+          "label": "한미 합작 액션, 실사 고위험 액션의 정수 (다음뉴스)",
+          "url": "https://v.daum.net/v/9sDYm6yOug?f=p"
+        },
+        {
+          "label": "1221필름즈 '미녀 데몬 킬러' IPTV·OTT 공개 (스포츠월드)",
+          "url": "https://www.sportsworldi.com/newsView/20260425503113"
+        }
+      ],
+      "sortLast": true
+    },
+    {
+      "id": "suanara",
+      "title": "수아나라",
+      "titleEn": "Sua/Nara",
+      "status": "released",
+      "dateLabel": "Released, 2025",
+      "year": 2025,
+      "format": "장편영화",
+      "image": "assets/img/suanara-poster.webp",
+      "video": "",
+      "synopsis": "낮에는 발레리나, 밤에는 데몬 헌터. 죽음 직전에 내몰린 발레리나 수아가 악마 나라와 하나가 되어 싸우는 액션 판타지. 광주·곡성·거제·파주에서 전편을 촬영했으며, 애니메이션 감성의 스타일리시한 액션과 실사 스턴트로 해외 매체의 주목을 받았다.",
+      "credits": {
+        "감독": "아틸라 코로시 (Attila Korosi)",
+        "각본": "아틸라 코로시",
+        "출연": "한지연, 아니타 코로시, 조셉 김",
+        "플랫폼": "-"
+      },
+      "links": [
+        {
+          "label": "Demon Dancer: Sua/Nara 리뷰 (Asian Movie Pulse)",
+          "url": "https://asianmoviepulse.com/2026/05/demon-dancer-sua-nara/"
+        },
+        {
+          "label": "Demon Dancer: Sua/Nara 리뷰 (Film Threat)",
+          "url": "https://filmthreat.com/reviews/demon-dancer-sua-nara/"
+        }
+      ],
+      "sortLast": true
     }
   ],
   "about": {
@@ -276,6 +338,12 @@
         "label": "김정환 대표 \"한국 영화 투자, 미래 신화가 될 것 믿는다\" (SEN TV, 2025)",
         "url": "https://www.sentv.co.kr/article/view/sentv202510220042"
       }
+    ],
+    "partnersTitle": "협력사",
+    "partners": [
+      { "name": "MDS스피어", "logo": "" },
+      { "name": "와이웍스엔터테인먼트", "logo": "" },
+      { "name": "얼반웍스", "logo": "" }
     ]
   },
   "contact": {

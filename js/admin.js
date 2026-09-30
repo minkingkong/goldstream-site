@@ -144,6 +144,7 @@
     q(".f-status").value = w.status === "upcoming" ? "upcoming" : "released";
     q(".f-dateLabel").value = w.dateLabel || "";
     q(".f-year").value = w.year || "";
+    q(".f-sortLast").checked = !!w.sortLast;
     q(".f-format").value = w.format || "";
     q(".f-video").value = w.video || "";
     q(".f-synopsis").value = w.synopsis || "";
@@ -200,7 +201,7 @@
           var n = el.querySelector(sel);
           return n ? n.value.trim() : "";
         };
-        return {
+        var work = {
           id: g(".f-id") || "w" + Date.now(),
           title: g(".f-title"),
           titleEn: g(".f-titleEn"),
@@ -228,6 +229,8 @@
                 : { label: line.slice(0, i).trim(), url: line.slice(i + 1).trim() };
             })
         };
+        if (el.querySelector(".f-sortLast").checked) work.sortLast = true;
+        return work;
       }
     );
   }
@@ -287,6 +290,10 @@
     setV("f-facts", (a.facts || []).map(function (f) { return f.k + " | " + f.v; }).join("\n"));
     setV("f-recognition", (a.recognition || []).map(function (r) { return r.year + " | " + r.text; }).join("\n"));
     setV("f-ab-press", (a.press || []).map(function (p) { return (p.label || "") + " | " + (p.url || ""); }).join("\n"));
+    setV("f-ab-partnersTitle", a.partnersTitle || "협력사");
+    setV("f-ab-partners", (a.partners || []).map(function (p) {
+      return p.logo ? p.name + " | " + p.logo : p.name;
+    }).join("\n"));
 
     setV("f-email", c.email);
     setV("f-phone", c.phone);
@@ -355,6 +362,13 @@
       return i === -1
         ? { label: l.trim(), url: l.trim() }
         : { label: l.slice(0, i).trim(), url: l.slice(i + 1).trim() };
+    });
+    data.about.partnersTitle = v("f-ab-partnersTitle");
+    data.about.partners = lines("f-ab-partners").map(function (l) {
+      var i = l.indexOf("|");
+      return i === -1
+        ? { name: l.trim(), logo: "" }
+        : { name: l.slice(0, i).trim(), logo: l.slice(i + 1).trim() };
     });
 
     data.contact = data.contact || {};
