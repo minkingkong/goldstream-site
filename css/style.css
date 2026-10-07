@@ -39,7 +39,6 @@
 
   --font: "Pretendard Variable", -apple-system, BlinkMacSystemFont, system-ui,
     "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif;
-  --serif: "Cormorant Garamond", "Cormorant", Georgia, "Times New Roman", serif;
 }
 @media (max-width: 1180px) {
   :root {
@@ -330,11 +329,11 @@ ul {
   letter-spacing: 0.01em;
 }
 .mnav a small {
-  font-family: var(--serif);
-  font-size: 16px;
-  font-weight: 500;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
   color: var(--gold);
-  font-variant-numeric: lining-nums;
+  font-variant-numeric: tabular-nums;
 }
 .mnav a[aria-current="page"] {
   color: var(--gold-bright);
@@ -461,13 +460,12 @@ ul {
   text-wrap: balance;
 }
 .hs__title-en {
-  margin-top: 10px;
-  font-family: var(--serif);
-  font-style: italic;
+  margin-top: 16px;
   font-weight: 500;
-  font-size: clamp(20px, 2.1vw, 32px);
-  letter-spacing: 0.01em;
-  color: rgba(244, 241, 234, 0.72);
+  font-size: clamp(13px, 1vw, 16px);
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: rgba(244, 241, 234, 0.62);
 }
 .hs__people {
   margin-top: 22px;
@@ -576,19 +574,19 @@ ul {
 }
 .hs__intro-tag small {
   display: block;
-  margin-top: 8px;
-  font-family: var(--serif);
-  font-style: italic;
-  font-size: 0.82em;
+  margin-top: 14px;
+  font-size: clamp(12px, 0.9vw, 14px);
   font-weight: 500;
-  letter-spacing: 0.02em;
-  color: var(--ink-muted);
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: rgba(244, 241, 234, 0.6);
 }
 
-/* pager (bottom-right): ⟵  01 ━━── 02 03 04 05 06  ⟶ */
+/* pager (bottom-centre): ⟵  01 ━━── 02 03 04 05 06  ⟶ */
 .hs__pager {
   position: absolute;
-  right: var(--pad);
+  left: 50%;
+  transform: translateX(-50%);
   bottom: clamp(34px, 6vh, 60px);
   z-index: 5;
   display: flex;
@@ -622,13 +620,13 @@ ul {
   gap: clamp(12px, 1.3vw, 20px);
 }
 .hs__num {
-  font-family: var(--serif);
-  font-variant-numeric: lining-nums tabular-nums;
-  font-size: 21px;
-  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
   line-height: 1;
   color: rgba(244, 241, 234, 0.42);
-  padding: 6px 2px;
+  padding: 8px 2px;
   transition: color 0.25s ease;
 }
 .hs__num:hover {
@@ -636,7 +634,7 @@ ul {
 }
 .hs__num.is-active {
   color: var(--gold-bright);
-  font-size: 26px;
+  font-weight: 700;
 }
 .hs__gauge {
   position: relative;
@@ -686,8 +684,7 @@ ul {
     opacity: 0.25;
   }
   .hs__pager {
-    left: var(--pad);
-    right: var(--pad);
+    width: calc(100% - 2 * var(--pad));
     bottom: 34px;
     justify-content: space-between;
     gap: 10px;
@@ -702,10 +699,7 @@ ul {
     gap: 10px;
   }
   .hs__num {
-    font-size: 17px;
-  }
-  .hs__num.is-active {
-    font-size: 20px;
+    font-size: 13px;
   }
   .hs__gauge {
     width: clamp(48px, 16vw, 90px);
@@ -836,10 +830,10 @@ ul {
   transform: scaleX(1);
 }
 .biz-card__num {
-  font-family: var(--serif);
-  font-variant-numeric: lining-nums;
-  font-size: 22px;
+  font-variant-numeric: tabular-nums;
+  font-size: 14px;
   font-weight: 600;
+  letter-spacing: 0.12em;
   color: var(--gold);
 }
 .biz-card__label {
@@ -1184,13 +1178,13 @@ ul {
   letter-spacing: -0.035em;
 }
 .modal__title-en {
-  font-family: var(--serif);
-  font-style: italic;
   color: var(--ink-muted);
   font-weight: 500;
-  font-size: 0.66em;
-  letter-spacing: 0;
-  margin-left: 12px;
+  font-size: 0.4em;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  margin-left: 14px;
+  vertical-align: middle;
 }
 .modal__synopsis {
   margin-top: 16px;
@@ -1323,11 +1317,9 @@ ul {
   color: var(--gold);
 }
 .bhero__crumb b {
-  font-family: var(--serif);
-  font-size: 20px;
-  font-weight: 600;
-  letter-spacing: 0;
-  font-variant-numeric: lining-nums;
+  font-size: 13px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
 }
 .bhero__title {
   margin-top: 18px;
