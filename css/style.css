@@ -591,19 +591,19 @@ ul {
   z-index: 5;
   display: flex;
   align-items: center;
-  gap: clamp(14px, 1.6vw, 24px);
+  gap: 14px;
 }
 .hs__arrow {
   display: grid;
   place-items: center;
-  width: 54px;
-  height: 40px;
+  width: 34px;
+  height: 32px;
   color: rgba(244, 241, 234, 0.8);
   transition: color 0.2s ease, transform 0.25s var(--ease);
 }
 .hs__arrow svg {
-  width: 40px;
-  height: 12px;
+  width: 24px;
+  height: 10px;
 }
 .hs__arrow:hover {
   color: var(--gold-bright);
@@ -617,11 +617,11 @@ ul {
 .hs__nums {
   display: flex;
   align-items: center;
-  gap: clamp(12px, 1.3vw, 20px);
+  gap: 14px;
 }
 .hs__num {
   font-variant-numeric: tabular-nums;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 500;
   letter-spacing: 0.08em;
   line-height: 1;
@@ -638,7 +638,7 @@ ul {
 }
 .hs__gauge {
   position: relative;
-  width: clamp(96px, 9vw, 168px);
+  width: clamp(80px, 7vw, 120px);
   height: 3px;
   background: rgba(244, 241, 234, 0.26);
   overflow: hidden;

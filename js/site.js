@@ -212,7 +212,6 @@
       '<h1 class="hs__intro-title">' + esc(home.heroTitle || "GOLDSTREAM ENTERTAINMENT").replace(" ", "<br>") + "</h1>" +
       '<p class="hs__intro-tag">' + esc(home.heroTagline || "") +
       (home.heroTaglineEn ? "<small>" + esc(home.heroTaglineEn) + "</small>" : "") + "</p>" +
-      '<a class="hs__more" href="about.html">회사 소개 ' + ARROW + "</a>" +
       "</div>";
     return el;
   }
@@ -499,8 +498,6 @@
       img.src = b.image;
       hero.insertBefore(img, hero.firstChild);
     }
-    var others = document.getElementById("biz-grid");
-    if (others) renderBusinessCards(data);
   }
 
   /* ---------- works ---------- */
