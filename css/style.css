@@ -13,23 +13,25 @@
 }
 
 /* One gold family for the whole site: --gold (base), --gold-bright (gauge, active, hover), --gold-soft (washes). */
+/* White + black, gold kept as a quiet accent. --gold-bright is the "active/hover" colour (black here). */
 :root {
-  --bg: #0b0a08;
-  --bg-soft: #14120f;
-  --bg-raise: #1b1813;
-  --ink: #f4f1ea;
-  --ink-muted: #b3ada2;
-  --ink-faint: #7d776d;
-  --line: #26231e;
-  --line-strong: #3a352d;
-  --on-accent: #14120e;
+  --bg: #ffffff;
+  --bg-soft: #f4f4f3;
+  --bg-raise: #ececea;
+  --ink: #111111;
+  --ink-muted: #555555;
+  --ink-faint: #8c8c8c;
+  --line: #e8e8e8;
+  --line-strong: #d2d2d2;
+  --on-accent: #ffffff;
+  --header-bg: rgba(255, 255, 255, 0.95);
 
-  --gold: #cdb27a;
-  --gold-bright: #e9d29c;
-  --gold-soft: rgba(205, 178, 122, 0.12);
-  --gold-line: rgba(205, 178, 122, 0.38);
-  --hero-1: #17150f;
-  --hero-2: #0c0b09;
+  --gold: #a8864a;
+  --gold-bright: #111111;
+  --gold-soft: rgba(0, 0, 0, 0.05);
+  --gold-line: rgba(0, 0, 0, 0.3);
+  --hero-1: #ffffff;
+  --hero-2: #f1f1f0;
 
   --radius: 2px;
   --wrap: 1760px;
@@ -1733,6 +1735,175 @@ ul {
     opacity: 1;
     transform: none;
   }
+}
+
+/* =========================================================
+   Light theme layer — the rules above were written for the
+   dark version; these re-colour the parts that hard-code it.
+   ========================================================= */
+body::after {
+  opacity: 0.03;
+}
+.hd,
+.home .hd:not(.is-scrolled):not(.is-open) {
+  background: var(--header-bg);
+  backdrop-filter: saturate(160%) blur(14px);
+  -webkit-backdrop-filter: saturate(160%) blur(14px);
+  border-bottom: 1px solid var(--line);
+}
+.hd__nav a {
+  color: var(--ink);
+}
+.hd__burger span {
+  background: var(--ink);
+}
+.hd__cta {
+  color: var(--ink);
+  border-color: var(--ink);
+}
+.hd__cta:hover,
+.hd__cta[aria-current="page"] {
+  background: var(--ink);
+  color: #fff;
+}
+
+/* hero slider */
+.hs {
+  background: var(--bg);
+}
+.hs__slide {
+  background: var(--bg);
+  color: var(--ink);
+}
+.hs__slide--intro {
+  background: radial-gradient(110% 90% at 80% 50%, var(--hero-1) 0%, var(--hero-2) 65%);
+}
+.hs__bg {
+  filter: blur(50px) brightness(1.35) saturate(0.6);
+  opacity: 0.32;
+}
+.hs__shade,
+.hs__slide--intro.has-video .hs__shade {
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.96) 0%, rgba(255, 255, 255, 0.8) 38%, rgba(255, 255, 255, 0) 64%),
+    linear-gradient(0deg, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0) 30%);
+}
+.hs__slide--intro .hs__shade {
+  background: none;
+}
+.hs__slide--intro .hs__mark {
+  opacity: 0.55;
+}
+.hs__poster {
+  box-shadow: 0 34px 60px -30px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(0, 0, 0, 0.06);
+}
+.hs__meta,
+.hs__title-en,
+.hs__people,
+.hs__intro-tag small {
+  color: var(--ink-muted);
+}
+.hs__coming {
+  color: var(--gold);
+}
+.hs__more {
+  color: var(--ink);
+}
+.hs__arrow {
+  color: var(--ink);
+}
+.hs__arrow:hover,
+.hs__num:hover {
+  color: var(--gold);
+}
+.hs__num {
+  color: rgba(0, 0, 0, 0.36);
+}
+.hs__num.is-active {
+  color: var(--ink);
+}
+.hs__gauge {
+  background: rgba(0, 0, 0, 0.12);
+}
+.hs__gauge i {
+  background: var(--gold);
+  box-shadow: none;
+}
+@media (max-width: 860px) {
+  .hs__bg {
+    filter: none;
+    opacity: 1;
+  }
+  .hs__shade {
+    background: linear-gradient(0deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.92) 40%, rgba(255, 255, 255, 0) 66%);
+  }
+  .hs__pager {
+    gap: 6px;
+  }
+  .hs__nums {
+    gap: 9px;
+  }
+  .hs__arrow {
+    width: 26px;
+  }
+  .hs__arrow svg {
+    width: 20px;
+  }
+  .hs__gauge {
+    width: 34px;
+  }
+}
+
+/* rest of the site */
+.work__thumb {
+  background: var(--bg-soft);
+}
+.work:hover .work__thumb {
+  box-shadow: 0 0 0 1px var(--gold-line), 0 26px 44px -24px rgba(0, 0, 0, 0.3);
+}
+.filters button[aria-pressed="true"]::after {
+  background: var(--ink);
+}
+.bhero {
+  background: radial-gradient(90% 120% at 85% 20%, rgba(168, 134, 74, 0.08) 0%, rgba(168, 134, 74, 0) 55%),
+    linear-gradient(160deg, var(--hero-1), var(--hero-2));
+}
+.bhero__word {
+  -webkit-text-stroke: 1px rgba(0, 0, 0, 0.14);
+}
+.bhero__shade {
+  background: linear-gradient(0deg, var(--bg) 0%, rgba(255, 255, 255, 0) 60%);
+}
+.notice {
+  border-color: var(--line-strong);
+  background: var(--bg-soft);
+}
+.notice__dot {
+  background: var(--gold);
+}
+.notice__dot::after {
+  border-color: var(--gold);
+}
+.btn-gold {
+  background: var(--ink);
+  color: #fff;
+}
+.btn-gold:hover {
+  background: var(--gold);
+  color: #fff;
+}
+.ft {
+  background: var(--bg-soft);
+}
+.modal {
+  background: rgba(0, 0, 0, 0.5);
+}
+.modal__card {
+  background: var(--bg);
+}
+::selection {
+  background: var(--ink);
+  color: #fff;
 }
 
 /* =========================================================

@@ -51,27 +51,6 @@
   }
 
   /* ---------- theme colours ---------- */
-  function normHex(hex) {
-    hex = String(hex || "").trim().replace("#", "");
-    if (hex.length === 3) hex = hex.split("").map(function (c) { return c + c; }).join("");
-    return /^[0-9a-fA-F]{6}$/.test(hex) ? hex : null;
-  }
-  function hexToRgba(hex, a) {
-    var h = normHex(hex);
-    if (!h) return null;
-    return "rgba(" + parseInt(h.substr(0, 2), 16) + "," +
-      parseInt(h.substr(2, 2), 16) + "," + parseInt(h.substr(4, 2), 16) + "," + a + ")";
-  }
-  function shade(hex, pct) {
-    var h = normHex(hex);
-    if (!h) return hex;
-    var out = [0, 2, 4].map(function (i) {
-      var v = parseInt(h.substr(i, 2), 16) + Math.round(255 * pct);
-      v = Math.max(0, Math.min(255, v));
-      return ("0" + v.toString(16)).slice(-2);
-    });
-    return "#" + out.join("");
-  }
   function applyTheme(t) {
     if (!t) return;
     var s = document.documentElement.style;
@@ -86,13 +65,7 @@
     Object.keys(map).forEach(function (k) {
       if (t[k]) s.setProperty(map[k], t[k]);
     });
-    if (t.accent) {
-      s.setProperty("--gold-bright", shade(t.accent, 0.11));
-      var soft = hexToRgba(t.accent, 0.12);
-      if (soft) s.setProperty("--gold-soft", soft);
-      var line = hexToRgba(t.accent, 0.38);
-      if (line) s.setProperty("--gold-line", line);
-    }
+    // --gold-bright / --gold-soft / --gold-line stay as defined in style.css (light theme uses ink for "active")
   }
 
   /* ---------- text / image fields ---------- */
