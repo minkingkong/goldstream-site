@@ -172,21 +172,83 @@
       (video
         ? '<video class="hs__video" src="' + esc(video) + '" muted playsinline preload="auto"' +
           (home.introPoster ? ' poster="' + esc(home.introPoster) + '"' : "") + "></video>"
-        : '<svg class="hs__mark" viewBox="0 0 84 100" aria-hidden="true" focusable="false">' +
-          '<defs><linearGradient id="gs-gold" x1="0" y1="0" x2="1" y2="1">' +
-          '<stop offset="0" stop-color="#ecd9ab"/><stop offset="0.55" stop-color="#cdb27a"/><stop offset="1" stop-color="#8f7442"/></linearGradient>' +
-          '<mask id="gs-inline" maskUnits="userSpaceOnUse" x="-10" y="-10" width="104" height="120">' +
-          '<rect x="-10" y="-10" width="104" height="120" fill="#fff"/>' +
-          '<text x="42" y="86" text-anchor="middle" font-size="100" fill="none" stroke="#000" stroke-width="0.7">G</text></mask></defs>' +
-          '<text x="42" y="86" text-anchor="middle" font-size="100" fill="none" stroke="url(#gs-gold)" stroke-width="1.3" mask="url(#gs-inline)">G</text></svg>') +
-      '<div class="hs__shade"></div>' +
-      '<div class="hs__credit">' +
-      '<p class="hs__meta"><span>' + esc(home.heroEyebrow || "Film & Drama Production") + "</span></p>" +
-      '<h1 class="hs__intro-title">' + esc(home.heroTitle || "GOLDSTREAM ENTERTAINMENT").replace(" ", "<br>") + "</h1>" +
-      '<p class="hs__intro-tag">' + esc(home.heroTagline || "") +
-      (home.heroTaglineEn ? "<small>" + esc(home.heroTaglineEn) + "</small>" : "") + "</p>" +
-      "</div>";
+        : '<canvas class="hs__ribbon" aria-hidden="true"></canvas>') +
+      '<h1 class="sr-only">' + esc(home.heroTitle || "GOLDSTREAM ENTERTAINMENT") + "</h1>";
+    if (!video) {
+      el.setAttribute("data-dur", String(RIBBON_MS));
+      ribbonIntro(el.querySelector("canvas"), el, home.heroTagline || "이야기를 현실로 만듭니다");
+    }
     return el;
+  }
+
+  /* Intro motion: a ribbon of fine lines twists through the frame like film turning in light,
+     then the logo and tagline settle in. One pass = RIBBON_MS; restarts whenever the slide is shown. */
+  var RIBBON_MS = 11000;
+  function ribbonIntro(canvas, slide, tag) {
+    var x = canvas.getContext("2d"), W = 0, H = 0, t0 = performance.now(), raf = 0;
+    var logo = new Image();
+    logo.src = "assets/img/logo-goldstream-dark.png";
+    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var clamp = function (v) { return v < 0 ? 0 : v > 1 ? 1 : v; };
+    var ease = function (v) { v = clamp(v); return v * v * (3 - 2 * v); };
+    function size() {
+      var d = Math.min(window.devicePixelRatio || 1, 2);
+      W = slide.clientWidth; H = slide.clientHeight;
+      canvas.width = W * d; canvas.height = H * d;
+      x.setTransform(d, 0, 0, d, 0, 0);
+    }
+    function draw(t) {
+      var hd = document.getElementById("hd"), top = hd ? hd.offsetHeight : 0;
+      var cy = top + (H - top) * .5;
+      var lw = Math.min(W * .62, 540), lh = lw * 170 / 774;
+      var reveal = reduce ? 1 : ease(t / 3), fade = reduce ? 1 : 1 - ease((t - 9.6) / 1.4);
+      var front = -60 + (W + 120) * reveal, A = Math.min(H, W) * .12, R = Math.min(H, W) * .2;
+      var band = cy + lh * .2, N = 70;
+      x.fillStyle = "#fafaf8"; x.fillRect(0, 0, W, H);
+      for (var i = 0; i < N; i++) {
+        var o = i / (N - 1) - .5;
+        x.beginPath();
+        for (var X = -60; X <= front; X += 5) {
+          var y = band + Math.sin(X * .0026 + t * .4) * A + o * R * Math.cos(X * .0019 - t * .55);
+          X === -60 ? x.moveTo(X, y) : x.lineTo(X, y);
+        }
+        var v = Math.round(25 + 145 * Math.abs(o) * 2);
+        x.strokeStyle = "rgba(" + v + "," + v + "," + (v + 6) + "," + (.5 - Math.abs(o) * .55) * fade + ")";
+        x.lineWidth = .8; x.stroke();
+      }
+      var la = reduce ? 1 : ease((t - 3.6) / 1.4) * fade;
+      if (la > 0) {
+        var g = x.createRadialGradient(W / 2, cy, 0, W / 2, cy, lw * .75);
+        g.addColorStop(0, "rgba(250,250,248," + .92 * la + ")"); g.addColorStop(1, "rgba(250,250,248,0)");
+        x.fillStyle = g; x.fillRect(0, 0, W, H);
+        if (logo.complete && logo.naturalWidth) {
+          x.globalAlpha = la;
+          x.drawImage(logo, W / 2 - lw / 2, cy - lh * .6 + (1 - la) * 14, lw, lh);
+          x.globalAlpha = 1;
+        }
+      }
+      var ta = reduce ? 1 : ease((t - 4.6) / 1.2) * fade;
+      if (ta > 0 && tag) {
+        var fs = Math.max(12, lw * .028);
+        x.globalAlpha = ta; x.fillStyle = "#555"; x.textAlign = "center";
+        x.font = "500 " + fs + "px 'Pretendard Variable', sans-serif";
+        if ("letterSpacing" in x) x.letterSpacing = ".38em";
+        x.fillText(tag, W / 2 + fs * .19, cy + lh * .85);
+        x.globalAlpha = 1;
+      }
+    }
+    function loop(n) {
+      draw((n - t0) / 1000);
+      raf = slide.classList.contains("is-active") ? requestAnimationFrame(loop) : 0;
+    }
+    function restart() {
+      size();
+      t0 = performance.now();
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(loop);
+    }
+    slide._onActive = restart;
+    window.addEventListener("resize", function () { if (raf) size(); });
   }
 
   function workSlide(w) {
@@ -314,8 +376,10 @@
           timer = setTimeout(next, d - video.currentTime * 1000 + 200);
         };
       } else {
-        startGauge(SLIDE_MS);
-        timer = setTimeout(next, SLIDE_MS);
+        var ms = +slide.getAttribute("data-dur") || SLIDE_MS;
+        if (slide._onActive) slide._onActive();
+        startGauge(ms);
+        timer = setTimeout(next, ms);
       }
     }
     function markActive() {

@@ -533,6 +533,13 @@ ul {
 .hs__slide--intro {
   background: radial-gradient(120% 90% at 78% 50%, #1d1a13 0%, var(--hero-2) 60%), var(--hero-2);
 }
+.hs__ribbon {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
 .hs__video {
   position: absolute;
   inset: 0;
