@@ -93,7 +93,7 @@
         <p class="admin-hint">01번은 회사 소개 화면(지금은 G 로고), 02번부터 아래 순서대로 작품이 나옵니다. 작품별 가로 이미지는 아래 [작품] 칸에서 올립니다.</p>
         <div class="field">
           <label>슬라이드 작품 순서 — 작품 ID, 쉼표로 구분 (작품 ID: code, steelrain, steelrain2, pine, mungmungi, demonkiller, suanara)</label>
-          <input type="text" id="f-home-slideIds" placeholder="pine, mungmungi, steelrain2, steelrain, code" />
+          <input type="text" id="f-home-slideIds" placeholder="code, pine, mungmungi, steelrain2, steelrain" />
         </div>
         <div class="field">
           <label>01번 모션그래픽 영상 (mp4 · 16:9 · 소리 없음 · 10MB 이하 권장) — 비워두면 G 로고 화면</label>
@@ -119,7 +119,7 @@
         <div class="field"><label>회사 한 줄 소개 — 설명</label><textarea id="f-statementBody"></textarea></div>
         <div class="field">
           <label>SELECTED WORK 포스터 — 작품 ID, 쉼표로 구분, 원하는 순서대로</label>
-          <input type="text" id="f-home-featuredIds" placeholder="pine, mungmungi, steelrain2, steelrain, code" />
+          <input type="text" id="f-home-featuredIds" placeholder="code, pine, mungmungi, steelrain2, steelrain" />
         </div>
       </section>
 
@@ -133,6 +133,7 @@
       <!-- WORKS -->
       <section class="admin-section">
         <h2>작품 (Works)</h2>
+        <p class="admin-hint">WORK 페이지에는 아래 순서 그대로 나옵니다. ↑ ↓ 버튼으로 순서를 바꾸세요.</p>
         <div id="works-list"></div>
         <button type="button" class="btn btn--ghost" id="add-work">+ 작품 추가</button>
       </section>
@@ -272,7 +273,7 @@
       </div>
       <div class="field">
         <label style="text-transform:none;letter-spacing:0;font-size:13px;color:var(--ink-muted)">
-          <input type="checkbox" class="f-sortLast" /> Works 목록 맨 뒤로 보내기 (연도와 상관없이 가장 마지막에 표시)
+          <input type="checkbox" class="f-sortLast" /> WORK 목록 맨 뒤로 보내기 (위 순서와 상관없이 가장 마지막에 표시)
         </label>
       </div>
       <div class="grid-2">

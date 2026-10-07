@@ -247,7 +247,7 @@
     var home = data.home || {};
     var ids = home.slideIds && home.slideIds.length
       ? home.slideIds
-      : ["pine", "mungmungi", "steelrain2", "steelrain", "code"];
+      : ["code", "pine", "mungmungi", "steelrain2", "steelrain", "suanara", "demonkiller"];
     var slides = [introSlide(home)];
     ids.forEach(function (id) {
       var w = byId(data.works, id);
@@ -556,9 +556,10 @@
         works = works.slice(0, (data.home && data.home.featuredCount) || 5);
       }
     } else {
-      works = works.slice().sort(function (a, b) {
-        return (!!a.sortLast - !!b.sortLast) || (b.year || 0) - (a.year || 0);
-      });
+      // order = the order in content.json (admin ↑↓ buttons); "sortLast" works still go to the end
+      works = works.map(function (w, i) { return { w: w, i: i }; })
+        .sort(function (a, b) { return (!!a.w.sortLast - !!b.w.sortLast) || a.i - b.i; })
+        .map(function (x) { return x.w; });
     }
     grid.innerHTML = "";
     works.forEach(function (w) {
