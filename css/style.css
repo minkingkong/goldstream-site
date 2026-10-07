@@ -1430,20 +1430,6 @@ ul {
   padding-top: clamp(80px, 12vw, 160px);
   padding-bottom: clamp(48px, 7vw, 96px);
 }
-.bhero__crumb {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  font-size: 13px;
-  font-weight: 650;
-  letter-spacing: 0.24em;
-  color: var(--gold);
-}
-.bhero__crumb b {
-  font-size: 13px;
-  font-weight: 700;
-  font-variant-numeric: tabular-nums;
-}
 .bhero__title {
   margin-top: 18px;
   font-size: clamp(54px, 9vw, 150px);

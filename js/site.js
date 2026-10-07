@@ -432,7 +432,7 @@
     var grid = document.getElementById("biz-grid");
     if (!grid) return;
     grid.innerHTML = businessList(data).map(function (b, i) {
-      return '<a class="biz-card" href="' + esc(b.id) + '.html">' +
+      return '<a class="biz-card" href="' + (b.id === "production" ? "works" : esc(b.id)) + '.html">' +
         '<span class="biz-card__num">' + pad2(i + 1) + "</span>" +
         '<span class="biz-card__label">' + esc(b.label) + "</span>" +
         '<h3 class="biz-card__title">' + esc(b.title) + "</h3>" +
@@ -453,8 +453,6 @@
       var el = document.querySelector(sel);
       if (el && val) el.textContent = val;
     };
-    set("[data-b='num']", pad2(idx + 1));
-    set("[data-b='label']", b.label);
     set("[data-b='title']", b.label);
     set("[data-b='ko']", b.title);
     set("[data-b='lead']", b.lead);
