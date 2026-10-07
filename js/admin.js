@@ -14,7 +14,7 @@
     accent: "#cdb27a",
     ink: "#f4f1ea",
     inkMuted: "#b3ada2",
-    bg: "#0f0e0c",
+    bg: "#0b0a08",
     heroFrom: "#17150f",
     heroTo: "#0c0b09"
   };
@@ -131,6 +131,59 @@
     return path;
   }
 
+  /* upload input -> hidden path field + preview (+ optional clear button) */
+  function bindUpload(fileInput, pathInput, preview, clearBtn, initial) {
+    if (initial) preview.src = initial;
+    else preview.removeAttribute("src");
+    fileInput.addEventListener("change", async function (e) {
+      var file = e.target.files[0];
+      if (!file) return;
+      status("이미지 업로드 중…");
+      try {
+        var path = await uploadAsset(file);
+        pathInput.value = path;
+        preview.src = path + "?t=" + Date.now();
+        status("이미지 업로드 완료: " + path, "ok");
+      } catch (err) {
+        status(err.message, "err");
+      }
+    });
+    if (clearBtn) clearBtn.addEventListener("click", function () {
+      pathInput.value = "";
+      preview.removeAttribute("src");
+      fileInput.value = "";
+    });
+  }
+
+  /* ---------- business editor ---------- */
+  var BIZ_IDS = ["production", "location", "campaign", "sponsorship"];
+  function makeBizEditor(b) {
+    var node = $("biz-tpl").content.firstElementChild.cloneNode(true);
+    var q = function (sel) { return node.querySelector(sel); };
+    q(".b-id").value = b.id;
+    q(".b-label").value = b.label || b.id.toUpperCase();
+    q(".b-title").value = b.title || "";
+    q(".b-lead").value = b.lead || "";
+    q(".b-keywords").value = (b.keywords || []).join(", ");
+    q(".b-image").value = b.image || "";
+    q(".be-name").textContent = (b.label || b.id.toUpperCase()) + " — " + b.id + ".html";
+    bindUpload(q(".b-image-file"), q(".b-image"), q(".b-image-preview"), q(".b-image-clear"), b.image);
+    return node;
+  }
+  function collectBiz() {
+    return Array.prototype.map.call(document.querySelectorAll("#biz-list .work-editor"), function (el) {
+      var g = function (sel) { return el.querySelector(sel).value.trim(); };
+      return {
+        id: g(".b-id"),
+        label: g(".b-label").toUpperCase(),
+        title: g(".b-title"),
+        lead: g(".b-lead"),
+        keywords: g(".b-keywords").split(",").map(function (s) { return s.trim(); }).filter(Boolean),
+        image: g(".b-image")
+      };
+    });
+  }
+
   /* ---------- work editor ---------- */
   function makeWorkEditor(w) {
     w = w || {};
@@ -149,6 +202,7 @@
     q(".f-video").value = w.video || "";
     q(".f-synopsis").value = w.synopsis || "";
     q(".f-image").value = w.image || "";
+    q(".f-heroImage").value = w.heroImage || "";
     q(".f-c-director").value = cr["감독"] || "";
     q(".f-c-writer").value = cr["각본"] || "";
     q(".f-c-cast").value = cr["출연"] || "";
@@ -178,6 +232,8 @@
         status(err.message, "err");
       }
     });
+
+    bindUpload(q(".f-heroImage-file"), q(".f-heroImage"), q(".f-heroImage-preview"), q(".f-heroImage-clear"), w.heroImage);
 
     q(".we-del").addEventListener("click", function () {
       if (confirm("이 작품을 삭제할까요?")) node.remove();
@@ -210,6 +266,7 @@
           year: parseInt(g(".f-year"), 10) || 0,
           format: g(".f-format"),
           image: g(".f-image"),
+          heroImage: g(".f-heroImage"),
           video: g(".f-video"),
           synopsis: g(".f-synopsis"),
           credits: {
@@ -265,6 +322,17 @@
     setV("f-heroTagline", h.heroTagline);
     setV("f-heroTaglineEn", h.heroTaglineEn);
     setV("f-home-featuredIds", (h.featuredIds || []).join(", "));
+    setV("f-home-slideIds", (h.slideIds || []).join(", "));
+    setV("f-introVideo", h.introVideo);
+    setV("f-statement", h.statement);
+    setV("f-statementBody", h.statementBody);
+
+    var bl = $("biz-list");
+    bl.innerHTML = "";
+    BIZ_IDS.forEach(function (id) {
+      var b = (data.business || []).filter(function (x) { return x.id === id; })[0] || { id: id };
+      bl.appendChild(makeBizEditor(b));
+    });
 
     var list = $("works-list");
     list.innerHTML = "";
@@ -329,8 +397,16 @@
       .split(",")
       .map(function (s) { return s.trim(); })
       .filter(Boolean);
-    if (data.home.featuredCount == null) data.home.featuredCount = 3;
+    if (data.home.featuredCount == null) data.home.featuredCount = 5;
+    data.home.slideIds = v("f-home-slideIds")
+      .split(",")
+      .map(function (s) { return s.trim(); })
+      .filter(Boolean);
+    data.home.introVideo = v("f-introVideo");
+    data.home.statement = $("f-statement").value.replace(/\s+$/, "");
+    data.home.statementBody = v("f-statementBody");
 
+    data.business = collectBiz();
     data.works = collectWorks();
 
     data.about = data.about || {};
@@ -470,5 +546,9 @@
       node.scrollIntoView({ behavior: "smooth", block: "center" });
     });
     $("save-all").addEventListener("click", saveAll);
+    $("clear-introVideo").addEventListener("click", function () {
+      setV("f-introVideo", "");
+      status("01번 영상을 비웠습니다. [저장하기]를 누르면 G 로고 화면으로 돌아갑니다.");
+    });
   });
 })();

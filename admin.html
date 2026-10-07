@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="robots" content="noindex" />
   <title>편집기 — GOLDSTREAM</title>
-  <link rel="stylesheet" href="css/style.css?v=498fa21951" />
+  <link rel="stylesheet" href="css/style.css?v=c821883e34" />
 </head>
 <body class="admin">
   <header class="hd">
@@ -60,7 +60,7 @@
       <section class="admin-section">
         <h2>색상 (테마)</h2>
         <p style="font-size:13px;color:var(--ink-muted);margin:-8px 0 14px">
-          저장 후 약 1분 뒤 전체 사이트에 반영됩니다. 기본값 — 포인트 #cdb27a · 글자 #f4f1ea · 배경 #0f0e0c
+          저장 후 약 1분 뒤 전체 사이트에 반영됩니다. 기본값 — 포인트 #cdb27a · 글자 #f4f1ea · 배경 #0b0a08 (밝은 골드는 포인트 색에서 자동 계산)
         </p>
         <div class="grid-2">
           <div class="field"><label>포인트 색 (골드)</label><input type="color" id="f-th-accent" /></div>
@@ -89,19 +89,45 @@
 
       <!-- HOME -->
       <section class="admin-section">
-        <h2>홈 (Home)</h2>
-        <div class="grid-2">
-          <div class="field"><label>상단 라벨</label><input type="text" id="f-heroEyebrow" /></div>
-          <div class="field"><label>큰 제목</label><input type="text" id="f-heroTitle" /></div>
-        </div>
-        <div class="grid-2">
-          <div class="field"><label>태그라인 (한글)</label><input type="text" id="f-heroTagline" /></div>
-          <div class="field"><label>태그라인 (영문)</label><input type="text" id="f-heroTaglineEn" /></div>
+        <h2>홈 — 첫 화면 슬라이드</h2>
+        <p class="admin-hint">01번은 회사 소개 화면(지금은 G 로고), 02번부터 아래 순서대로 작품이 나옵니다. 작품별 가로 이미지는 아래 [작품] 칸에서 올립니다.</p>
+        <div class="field">
+          <label>슬라이드 작품 순서 — 작품 ID, 쉼표로 구분 (작품 ID: code, steelrain, steelrain2, pine, mungmungi, demonkiller, suanara)</label>
+          <input type="text" id="f-home-slideIds" placeholder="steelrain, pine, code, steelrain2, mungmungi" />
         </div>
         <div class="field">
-          <label>홈 대표 작품 3개 — 작품 ID, 쉼표로 구분, 원하는 순서대로 (예: code, pine, steelrain)</label>
-          <input type="text" id="f-home-featuredIds" placeholder="code, pine, steelrain" />
+          <label>01번 모션그래픽 영상 (mp4 · 16:9 · 소리 없음 · 10MB 이하 권장) — 비워두면 G 로고 화면</label>
+          <div class="tokenbar">
+            <input type="text" id="f-introVideo" placeholder="assets/img/...mp4" style="flex:1;min-width:220px;font-family:inherit;font-size:13px;padding:10px 12px;border:1px solid var(--line-strong);border-radius:4px" />
+            <button type="button" class="btn btn--ghost btn--sm" id="clear-introVideo">비우기</button>
+          </div>
+          <input type="file" accept="video/mp4,video/webm" data-target="f-introVideo" />
         </div>
+        <div class="grid-2">
+          <div class="field"><label>01번 — 작은 라벨</label><input type="text" id="f-heroEyebrow" /></div>
+          <div class="field"><label>01번 — 큰 제목</label><input type="text" id="f-heroTitle" /></div>
+        </div>
+        <div class="grid-2">
+          <div class="field"><label>01번 — 태그라인 (한글)</label><input type="text" id="f-heroTagline" /></div>
+          <div class="field"><label>01번 — 태그라인 (영문)</label><input type="text" id="f-heroTaglineEn" /></div>
+        </div>
+      </section>
+
+      <section class="admin-section">
+        <h2>홈 — 아래쪽 내용</h2>
+        <div class="field"><label>회사 한 줄 소개 — 큰 문장 (줄바꿈 그대로 반영)</label><textarea id="f-statement" style="min-height:70px"></textarea></div>
+        <div class="field"><label>회사 한 줄 소개 — 설명</label><textarea id="f-statementBody"></textarea></div>
+        <div class="field">
+          <label>SELECTED WORK 포스터 — 작품 ID, 쉼표로 구분, 원하는 순서대로</label>
+          <input type="text" id="f-home-featuredIds" placeholder="steelrain, pine, code, steelrain2, mungmungi" />
+        </div>
+      </section>
+
+      <!-- BUSINESS -->
+      <section class="admin-section">
+        <h2>사업 영역 (BUSINESS)</h2>
+        <p class="admin-hint">상단 메뉴 PRODUCTION · LOCATION · CAMPAIGN · SPONSORSHIP 페이지와 홈 BUSINESS 카드에 함께 쓰입니다.</p>
+        <div id="biz-list"></div>
       </section>
 
       <!-- WORKS -->
@@ -183,6 +209,27 @@
     </form>
   </main>
 
+  <!-- template for one business-area editor -->
+  <template id="biz-tpl">
+    <div class="work-editor">
+      <div class="work-editor__bar"><strong class="be-name">사업</strong></div>
+      <input type="hidden" class="b-id" />
+      <div class="grid-2">
+        <div class="field"><label>메뉴 이름 (영문 대문자)</label><input type="text" class="b-label" /></div>
+        <div class="field"><label>한글 제목</label><input type="text" class="b-title" /></div>
+      </div>
+      <div class="field"><label>소개 문구</label><textarea class="b-lead" style="min-height:64px"></textarea></div>
+      <div class="field"><label>키워드 (쉼표로 구분)</label><input type="text" class="b-keywords" /></div>
+      <div class="field">
+        <label>페이지 상단 배경 이미지 (가로) — 비우면 골드 타이포 디자인</label>
+        <img class="thumb-preview thumb-preview--wide b-image-preview" alt="" />
+        <input type="hidden" class="b-image" />
+        <input type="file" accept="image/*" class="b-image-file" />
+        <button type="button" class="btn btn--ghost btn--sm b-image-clear" style="margin-top:6px">이미지 비우기</button>
+      </div>
+    </div>
+  </template>
+
   <!-- template for one work editor -->
   <template id="work-tpl">
     <div class="work-editor">
@@ -194,9 +241,21 @@
           <button type="button" class="btn btn--ghost btn--sm we-del">삭제</button>
         </div>
       </div>
-      <img class="thumb-preview f-image-preview" alt="" />
-      <input type="hidden" class="f-image" />
-      <div class="field"><label>대표 이미지 (가로 3:2 권장)</label><input type="file" accept="image/*" class="f-image-file" /></div>
+      <div class="grid-2">
+        <div class="field">
+          <label>포스터 (세로 2:3) — WORK 목록 · 휴대폰 첫 화면</label>
+          <img class="thumb-preview f-image-preview" alt="" />
+          <input type="hidden" class="f-image" />
+          <input type="file" accept="image/*" class="f-image-file" />
+        </div>
+        <div class="field">
+          <label>첫 화면 가로 이미지 (16:9) — 비우면 포스터로 자동 구성</label>
+          <img class="thumb-preview thumb-preview--wide f-heroImage-preview" alt="" />
+          <input type="hidden" class="f-heroImage" />
+          <input type="file" accept="image/*" class="f-heroImage-file" />
+          <button type="button" class="btn btn--ghost btn--sm f-heroImage-clear" style="margin-top:6px">가로 이미지 비우기</button>
+        </div>
+      </div>
       <div class="grid-2">
         <div class="field"><label>제목 (한글)</label><input type="text" class="f-title" /></div>
         <div class="field"><label>제목 (영문)</label><input type="text" class="f-titleEn" /></div>
@@ -237,6 +296,6 @@
     </div>
   </template>
 
-  <script src="js/admin.js?v=7eb255ba33"></script>
+  <script src="js/admin.js?v=d018dcf965"></script>
 </body>
 </html>

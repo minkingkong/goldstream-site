@@ -41,65 +41,91 @@
   }
   </script>
   <link rel="preload" as="font" type="font/woff2" href="assets/fonts/PretendardVariable.woff2" crossorigin />
-  <link rel="stylesheet" href="css/style.css?v=498fa21951" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=swap" />
+  <link rel="stylesheet" href="css/style.css?v=c821883e34" />
 </head>
-<body>
-  <header class="hd">
-    <div class="wrap hd__in">
-      <a class="hd__logo" href="index.html" data-field="site.brand" data-split>GOLDSTREAM<span class="hd__logo-rest"> ENT</span></a>
-      <nav class="hd__nav">
-        <a href="works.html">works</a>
-        <a href="about.html">about</a>
-        <a href="contact.html">contact</a>
-      </nav>
-    </div>
+<body class="home">
+  <header class="hd" id="hd">
+    <a class="hd__logo" href="index.html" aria-label="GOLDSTREAM ENTERTAINMENT 홈"><img src="assets/img/logo-goldstream.png" alt="GOLDSTREAM ENTERTAINMENT" width="774" height="170" /></a>
+    <nav class="hd__nav" aria-label="주 메뉴">
+      <a href="works.html">WORK</a>
+      <a href="production.html">PRODUCTION</a>
+      <a href="location.html">LOCATION</a>
+      <a href="campaign.html">CAMPAIGN</a>
+      <a href="sponsorship.html">SPONSORSHIP</a>
+      <a href="about.html">ABOUT</a>
+    </nav>
+    <a class="hd__cta" href="contact.html">CONTACT</a>
+    <button class="hd__burger" type="button" aria-label="메뉴 열기" aria-expanded="false"><span></span><span></span></button>
   </header>
 
   <main>
-    <section class="hero">
-      <svg class="hero__mark" viewBox="0 0 84 100" aria-hidden="true" focusable="false">
-        <defs>
-          <linearGradient id="gs-gold" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stop-color="#ecd9ab" />
-            <stop offset="0.55" stop-color="#cdb27a" />
-            <stop offset="1" stop-color="#8f7442" />
-          </linearGradient>
-          <mask id="gs-inline" maskUnits="userSpaceOnUse" x="-10" y="-10" width="104" height="120">
-            <rect x="-10" y="-10" width="104" height="120" fill="#fff" />
-            <text x="42" y="86" text-anchor="middle" font-size="100" fill="none" stroke="#000" stroke-width="0.7">G</text>
-          </mask>
-        </defs>
-        <text x="42" y="86" text-anchor="middle" font-size="100" fill="none" stroke="url(#gs-gold)" stroke-width="1.3" mask="url(#gs-inline)">G</text>
-      </svg>
-      <div class="wrap">
-        <p class="eyebrow" data-field="home.heroEyebrow">Film Production</p>
-        <h1 class="hero__title" data-field="home.heroTitle">GOLDSTREAM ENTERTAINMENT</h1>
-        <p class="hero__tagline" data-field="home.heroTagline">이야기를 현실로 만듭니다.</p>
-        <p class="hero__tagline-en" data-field="home.heroTaglineEn">Creating stories into reality</p>
-        <a class="hero__cta" href="works.html">작품 보기 &rarr;</a>
+    <section class="hs" id="hs" aria-roledescription="carousel" aria-label="대표 작품" tabindex="-1">
+      <div class="hs__track"></div>
+      <div class="hs__pager">
+        <button class="hs__arrow hs__arrow--prev" type="button" aria-label="이전">
+          <svg viewBox="0 0 40 12" aria-hidden="true"><path d="M40 6H2M7 1L2 6l5 5" fill="none" stroke="currentColor" stroke-width="1.2"/></svg>
+        </button>
+        <div class="hs__nums"></div>
+        <button class="hs__arrow hs__arrow--next" type="button" aria-label="다음">
+          <svg viewBox="0 0 40 12" aria-hidden="true"><path d="M0 6h38M33 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.2"/></svg>
+        </button>
       </div>
     </section>
 
     <section class="section wrap">
-      <div class="section__head reveal">
+      <div class="statement reveal">
+        <p class="statement__label">GOLDSTREAM ENTERTAINMENT</p>
         <div>
-          <h2>Selected Works</h2>
-          <p>최근 제작한 작품 일부입니다.</p>
+          <p class="statement__big" data-field="home.statement" data-multiline>좋은 이야기를 발견하고,<br>스크린 위의 현실로 만듭니다.</p>
+          <p class="statement__body" data-field="home.statementBody">골드스트림엔터테인먼트는 영화·드라마의 기획개발과 투자, 제작을 중심으로 로케이션 지원, 공공·브랜드 영상, 기업 협찬까지 아우릅니다. 이야기의 시작부터 현장까지, 한 팀이 끝까지 책임집니다.</p>
         </div>
-        <a class="section__link" href="works.html">전체 보기 &rarr;</a>
       </div>
-      <div class="works-grid reveal" id="works-grid" data-featured></div>
+    </section>
+
+    <section class="section wrap">
+      <div class="sec-head reveal">
+        <h2 class="sec-title"><small>WHAT WE DO</small>BUSINESS</h2>
+      </div>
+      <div class="biz-grid reveal" id="biz-grid"></div>
+    </section>
+
+    <section class="section wrap">
+      <div class="sec-head reveal">
+        <h2 class="sec-title"><small>FILMOGRAPHY</small>SELECTED WORK</h2>
+        <a class="sec-link" href="works.html">VIEW ALL <svg class="arrow" viewBox="0 0 26 10" aria-hidden="true"><path d="M0 5h24M20 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      </div>
+      <div class="works-grid works-grid--feature reveal" id="works-grid" data-featured></div>
     </section>
   </main>
 
   <footer class="ft">
-    <div class="wrap ft__in">
-      <span>© 2026 주식회사 골드스트림엔터테인먼트</span>
-      <a href="mailto:kim@goldstream.kr" data-field="contact.email" data-mailto>kim@goldstream.kr</a>
-      <span data-field="contact.address">광주 · 서울</span>
+    <div class="wrap">
+      <div class="ft__top">
+        <a class="ft__logo" href="index.html"><img src="assets/img/logo-goldstream.png" alt="GOLDSTREAM ENTERTAINMENT" width="774" height="170" loading="lazy" /></a>
+        <nav class="ft__nav" aria-label="하단 메뉴">
+          <a href="works.html">WORK</a>
+          <a href="production.html">PRODUCTION</a>
+          <a href="location.html">LOCATION</a>
+          <a href="campaign.html">CAMPAIGN</a>
+          <a href="sponsorship.html">SPONSORSHIP</a>
+          <a href="about.html">ABOUT</a>
+          <a href="contact.html">CONTACT</a>
+        </nav>
+      </div>
+      <div class="ft__info">
+        <div><h4>CONTACT</h4><a href="mailto:kim@goldstream.kr" data-field="contact.email" data-mailto>kim@goldstream.kr</a></div>
+        <div><h4>OFFICES</h4><div id="ft-offices"><p><b>광주</b>&nbsp;&nbsp;전남광주통합특별시 광산구 첨단중앙로152번길 5-8, 3층</p><p><b>서울</b>&nbsp;&nbsp;서울 강남구 삼성로 648, 4층</p></div></div>
+      </div>
+      <div class="ft__bottom">
+        <span>© 2026 주식회사 골드스트림엔터테인먼트</span>
+        <span>GOLDSTREAM ENTERTAINMENT. All rights reserved.</span>
+      </div>
     </div>
   </footer>
 
-  <script src="js/site.js?v=9d753a90c4"></script>
+  <script src="js/site.js?v=1b883cc801"></script>
 </body>
 </html>

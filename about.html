@@ -18,22 +18,27 @@
   <link rel="icon" type="image/png" sizes="192x192" href="assets/icons/icon-192.png" />
   <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png" />
   <link rel="preload" as="font" type="font/woff2" href="assets/fonts/PretendardVariable.woff2" crossorigin />
-  <link rel="stylesheet" href="css/style.css?v=498fa21951" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=swap" />
+  <link rel="stylesheet" href="css/style.css?v=c821883e34" />
 </head>
-<body>
-  <header class="hd">
-    <div class="wrap hd__in">
-      <a class="hd__logo" href="index.html" data-field="site.brand" data-split>GOLDSTREAM<span class="hd__logo-rest"> ENT</span></a>
-      <nav class="hd__nav">
-        <a href="works.html">works</a>
-        <a href="about.html" aria-current="page">about</a>
-        <a href="contact.html">contact</a>
-      </nav>
-    </div>
+<body>  <header class="hd" id="hd">
+    <a class="hd__logo" href="index.html" aria-label="GOLDSTREAM ENTERTAINMENT 홈"><img src="assets/img/logo-goldstream.png" alt="GOLDSTREAM ENTERTAINMENT" width="774" height="170" /></a>
+    <nav class="hd__nav" aria-label="주 메뉴">
+      <a href="works.html">WORK</a>
+      <a href="production.html">PRODUCTION</a>
+      <a href="location.html">LOCATION</a>
+      <a href="campaign.html">CAMPAIGN</a>
+      <a href="sponsorship.html">SPONSORSHIP</a>
+      <a href="about.html">ABOUT</a>
+    </nav>
+    <a class="hd__cta" href="contact.html">CONTACT</a>
+    <button class="hd__burger" type="button" aria-label="메뉴 열기" aria-expanded="false"><span></span><span></span></button>
   </header>
-
-  <main class="page wrap">
-    <h1 class="page__title" data-field="pages.about.title">About</h1>
+  <main class="phead wrap">
+    <p class="eyebrow">COMPANY</p>
+    <h1 class="page__title" data-field="pages.about.title">ABOUT</h1>
 
     <div class="about">
       <div class="about__portrait reveal">
@@ -49,7 +54,7 @@
     </div>
 
     <section class="about-section reveal">
-      <h2 class="about__block-title" data-field="about.profileTitle">Profile</h2>
+      <h2 class="about__block-title" data-field="about.profileTitle">PROFILE</h2>
       <div class="about__prose about__prose--wide" id="about-profile"></div>
     </section>
 
@@ -64,30 +69,46 @@
     </section>
 
     <section class="about-section reveal">
-      <h2 class="about__block-title" data-field="about.currentBusinessTitle">Current Business</h2>
+      <h2 class="about__block-title" data-field="about.currentBusinessTitle">CURRENT BUSINESS</h2>
       <ul class="about-list" id="about-business"></ul>
     </section>
 
     <div class="about-grid">
       <section class="reveal">
-        <h2 class="eyebrow" style="display:block;margin-bottom:14px">Company</h2>
+        <h2 class="about__block-title">COMPANY</h2>
         <dl class="facts" id="about-facts"></dl>
       </section>
       <section class="reveal">
-        <h2 class="eyebrow" style="display:block;margin-bottom:14px">Selected Filmography</h2>
+        <h2 class="about__block-title">SELECTED FILMOGRAPHY</h2>
         <dl class="facts" id="about-recognition"></dl>
       </section>
     </div>
   </main>
-
   <footer class="ft">
-    <div class="wrap ft__in">
-      <span>© 2026 주식회사 골드스트림엔터테인먼트</span>
-      <a href="mailto:kim@goldstream.kr" data-field="contact.email" data-mailto>kim@goldstream.kr</a>
-      <span data-field="contact.address">광주 · 서울</span>
+    <div class="wrap">
+      <div class="ft__top">
+        <a class="ft__logo" href="index.html"><img src="assets/img/logo-goldstream.png" alt="GOLDSTREAM ENTERTAINMENT" width="774" height="170" loading="lazy" /></a>
+        <nav class="ft__nav" aria-label="하단 메뉴">
+          <a href="works.html">WORK</a>
+          <a href="production.html">PRODUCTION</a>
+          <a href="location.html">LOCATION</a>
+          <a href="campaign.html">CAMPAIGN</a>
+          <a href="sponsorship.html">SPONSORSHIP</a>
+          <a href="about.html">ABOUT</a>
+          <a href="contact.html">CONTACT</a>
+        </nav>
+      </div>
+      <div class="ft__info">
+        <div><h4>CONTACT</h4><a href="mailto:kim@goldstream.kr" data-field="contact.email" data-mailto>kim@goldstream.kr</a></div>
+        <div><h4>OFFICES</h4><div id="ft-offices"><p><b>광주</b>&nbsp;&nbsp;전남광주통합특별시 광산구 첨단중앙로152번길 5-8, 3층</p><p><b>서울</b>&nbsp;&nbsp;서울 강남구 삼성로 648, 4층</p></div></div>
+      </div>
+      <div class="ft__bottom">
+        <span>© 2026 주식회사 골드스트림엔터테인먼트</span>
+        <span>GOLDSTREAM ENTERTAINMENT. All rights reserved.</span>
+      </div>
     </div>
   </footer>
 
-  <script src="js/site.js?v=9d753a90c4"></script>
+  <script src="js/site.js?v=1b883cc801"></script>
 </body>
 </html>
