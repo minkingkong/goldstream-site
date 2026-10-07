@@ -18,9 +18,9 @@
   <link rel="icon" type="image/png" sizes="192x192" href="assets/icons/icon-192.png" />
   <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png" />
   <link rel="preload" as="font" type="font/woff2" href="assets/fonts/PretendardVariable.woff2" crossorigin />
-  <link rel="stylesheet" href="css/style.css?v=0e095a00a5" />
+  <link rel="stylesheet" href="css/style.css?v=5b6b2b6b0a" />
 </head>
-<body>  <header class="hd" id="hd">
+<body id="top">  <header class="hd" id="hd">
     <a class="hd__logo" href="index.html" aria-label="GOLDSTREAM ENTERTAINMENT 홈"><img src="assets/img/logo-goldstream-dark.png" alt="GOLDSTREAM ENTERTAINMENT" width="774" height="170" /></a>
     <nav class="hd__nav" aria-label="주 메뉴">
       <a href="works.html">WORK</a>
@@ -49,29 +49,38 @@
     </section>
   </main>
   <footer class="ft">
-    <div class="wrap">
-      <div class="ft__top">
-        <a class="ft__logo" href="index.html"><img src="assets/img/logo-goldstream-dark.png" alt="GOLDSTREAM ENTERTAINMENT" width="774" height="170" loading="lazy" /></a>
-        <nav class="ft__nav" aria-label="하단 메뉴">
-          <a href="works.html">WORK</a>
-          <a href="location.html">LOCATION</a>
-          <a href="campaign.html">CAMPAIGN</a>
-          <a href="sponsorship.html">SPONSORSHIP</a>
-          <a href="about.html">ABOUT</a>
-          <a href="contact.html">CONTACT</a>
-        </nav>
+    <div class="wrap ft__top">
+      <div class="ft__lead">
+        <p>좋은 이야기를 발견하고,<br />스크린 위의 현실로.</p>
+        <a class="ft__cta" href="contact.html">CONTACT US <svg class="arrow" viewBox="0 0 26 10" aria-hidden="true"><path d="M0 5h24M20 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></a>
       </div>
-      <div class="ft__info">
-        <div><h4>CONTACT</h4><a href="mailto:kim@goldstream.kr" data-field="contact.email" data-mailto>kim@goldstream.kr</a></div>
-        <div><h4>OFFICES</h4><div id="ft-offices"><p><b>광주</b>&nbsp;&nbsp;전남광주통합특별시 광산구 첨단중앙로152번길 5-8, 3층</p><p><b>서울</b>&nbsp;&nbsp;서울 강남구 삼성로 648, 4층</p></div></div>
+      <nav class="ft__col" aria-label="하단 메뉴">
+        <h4>MENU</h4>
+        <ul>
+          <li><a href="works.html">WORK</a></li>
+          <li><a href="location.html">LOCATION</a></li>
+          <li><a href="campaign.html">CAMPAIGN</a></li>
+          <li><a href="sponsorship.html">SPONSORSHIP</a></li>
+          <li><a href="about.html">ABOUT</a></li>
+          <li><a href="contact.html">CONTACT</a></li>
+        </ul>
+      </nav>
+      <div class="ft__col">
+        <h4>OFFICES</h4>
+        <div id="ft-offices"><p><b>광주</b>전남광주통합특별시 광산구 첨단중앙로152번길 5-8, 3층</p><p><b>서울</b>서울 강남구 삼성로 648, 4층</p></div>
       </div>
-      <div class="ft__bottom">
-        <span>© 2026 주식회사 골드스트림엔터테인먼트</span>
-        <span>GOLDSTREAM ENTERTAINMENT. All rights reserved.</span>
+      <div class="ft__col">
+        <h4>CONTACT</h4>
+        <a href="mailto:kim@goldstream.kr" data-field="contact.email" data-mailto>kim@goldstream.kr</a>
       </div>
     </div>
+    <div class="wrap ft__bottom">
+      <span>© 2026 주식회사 골드스트림엔터테인먼트 · 대표 김정환</span>
+      <a class="ft__top-btn" href="#top">TOP ↑</a>
+    </div>
+    <div class="ft__word" aria-hidden="true">GOLDSTREAM</div>
   </footer>
 
-  <script src="js/site.js?v=756b350b87"></script>
+  <script src="js/site.js?v=a5469a83a9"></script>
 </body>
 </html>

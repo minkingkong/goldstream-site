@@ -807,7 +807,7 @@
       c.offices.forEach(function (o) {
         if (!o || (!o.label && !o.address)) return;
         var p = document.createElement("p");
-        p.innerHTML = "<b>" + esc(o.label) + "</b>&nbsp;&nbsp;" + esc(o.address);
+        p.innerHTML = "<b>" + esc(o.label) + "</b>" + (id === "ft-offices" ? "" : "&nbsp;&nbsp;") + esc(o.address);
         off.appendChild(p);
       });
     });
