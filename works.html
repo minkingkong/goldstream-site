@@ -18,7 +18,7 @@
   <link rel="icon" type="image/png" sizes="192x192" href="assets/icons/icon-192.png" />
   <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png" />
   <link rel="preload" as="font" type="font/woff2" href="assets/fonts/PretendardVariable.woff2" crossorigin />
-  <link rel="stylesheet" href="css/style.css?v=8ddafef151" />
+  <link rel="stylesheet" href="css/style.css?v=cde8d755a8" />
 </head>
 <body>  <header class="hd" id="hd">
     <a class="hd__logo" href="index.html" aria-label="GOLDSTREAM ENTERTAINMENT 홈"><img src="assets/img/logo-goldstream-dark.png" alt="GOLDSTREAM ENTERTAINMENT" width="774" height="170" /></a>
@@ -33,25 +33,21 @@
     <a class="hd__cta" href="contact.html">CONTACT</a>
     <button class="hd__burger" type="button" aria-label="메뉴 열기" aria-expanded="false"><span></span><span></span></button>
   </header>
-  <main class="phead wrap">
-    <p class="eyebrow">FILMOGRAPHY</p>
-    <h1 class="page__title" data-field="pages.works.title">WORK</h1>
-    <p class="page__lead" data-field="pages.works.lead">GOLDSTREAM ENTERTAINMENT가 기획·제작에 참여한 영화와 드라마 시리즈입니다.</p>
+  <main class="wk">
+    <h1 class="sr-only">WORK — 작품</h1>
+    <section class="wk-hero" id="wk-hero" aria-live="polite"></section>
 
-    <div class="works-controls">
-      <div class="filters" data-filters>
-        <button type="button" data-filter="all" aria-pressed="true">ALL</button>
-        <button type="button" data-filter="upcoming" aria-pressed="false">UPCOMING</button>
-        <button type="button" data-filter="released" aria-pressed="false">RELEASED</button>
+    <section class="wk-all wrap">
+      <div class="wk-all__head">
+        <p class="wk-all__count" id="wk-count">ALL WORKS</p>
+        <div class="wk-tabs" data-filters>
+          <button type="button" data-filter="all" aria-pressed="true">ALL</button>
+          <button type="button" data-filter="film" aria-pressed="false">FILM</button>
+          <button type="button" data-filter="series" aria-pressed="false">SERIES</button>
+        </div>
       </div>
-      <div class="viewtoggle" data-view>
-        <button type="button" data-viewmode="gallery" aria-pressed="true"><span class="dot"></span> GALLERY</button>
-        <button type="button" data-viewmode="list" aria-pressed="false">LIST</button>
-      </div>
-    </div>
-
-    <div class="works-grid" id="works-grid"></div>
-    <p class="works-empty" id="works-empty" hidden>해당하는 작품이 없습니다.</p>
+      <div class="wk-grid" id="wk-grid"></div>
+    </section>
   </main>
   <footer class="ft">
     <div class="wrap">
@@ -78,6 +74,6 @@
     </div>
   </footer>
 
-  <script src="js/site.js?v=0cb5187fe6"></script>
+  <script src="js/site.js?v=1f0e180748"></script>
 </body>
 </html>

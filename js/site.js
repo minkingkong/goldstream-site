@@ -513,71 +513,119 @@
     return a;
   }
 
+  /* ---------- WORK page: featured work on top, all works below ---------- */
+  function isFilm(w) {
+    return /영화|film/i.test(w.format || "");
+  }
+  function orderedWorks(data) {
+    // order = content.json order (admin ↑↓); "sortLast" works go to the end
+    return (data.works || []).map(function (w, i) { return { w: w, i: i }; })
+      .sort(function (a, b) { return (!!a.w.sortLast - !!b.w.sortLast) || a.i - b.i; })
+      .map(function (x) { return x.w; });
+  }
+
+  function renderWorkPage(data) {
+    var hero = document.getElementById("wk-hero");
+    var grid = document.getElementById("wk-grid");
+    if (!hero || !grid) return;
+    var works = orderedWorks(data);
+    if (!works.length) return;
+    var latest = works[0];
+    var current = null;
+    var count = document.getElementById("wk-count");
+    if (count) count.textContent = "ALL WORKS — " + pad2(works.length);
+
+    function feature(w, scroll) {
+      current = w;
+      var cr = w.credits || {};
+      var plat = String(cr["플랫폼"] || "").replace(/\(.*?\)/g, "").trim();
+      var dir = String(cr["감독"] || "").trim();
+      var cast = String(cr["출연"] || "").split(",").map(function (s) { return s.trim(); })
+        .filter(function (s) { return s && s !== "-"; }).slice(0, 4).join(", ");
+      var label = [w === latest ? "LATEST" : "", w.status === "upcoming" ? "COMING " + w.year : w.year,
+        w.format, plat !== "-" ? plat : ""].filter(Boolean).map(esc).join(" · ");
+      var emb = videoEmbed(w.video);
+      hero.classList.remove("is-in");
+      hero.innerHTML =
+        '<div class="wk-hero__bg" style="background-image:url(&quot;' + esc(w.image || "") + '&quot;)"></div>' +
+        '<div class="wk-hero__in wrap">' +
+        '<img class="wk-hero__poster" src="' + esc(w.image || "") + '" alt="' + esc(w.title) + ' 포스터">' +
+        '<div class="wk-hero__body">' +
+        '<p class="wk-hero__label">' + label + "</p>" +
+        '<h2 class="wk-hero__title">' + esc(w.title) + "</h2>" +
+        (w.titleEn ? '<p class="wk-hero__en">' + esc(w.titleEn) + "</p>" : "") +
+        (w.synopsis ? '<p class="wk-hero__syn">' + esc(w.synopsis) + "</p>" : "") +
+        '<dl class="wk-hero__cr">' +
+        (dir && dir !== "-" ? "<div><dt>DIRECTOR</dt><dd>" + esc(dir) + "</dd></div>" : "") +
+        (cast ? "<div><dt>CAST</dt><dd>" + esc(cast) + "</dd></div>" : "") +
+        "</dl>" +
+        '<div class="wk-hero__btns">' +
+        '<button type="button" class="wk-btn wk-btn--solid" data-act="info">작품 정보 ' + ARROW + "</button>" +
+        (emb ? '<button type="button" class="wk-btn" data-act="trailer">예고편</button>' : "") +
+        "</div></div></div>";
+      hero.querySelectorAll("[data-act]").forEach(function (b) {
+        b.addEventListener("click", function () { openModal(w); });
+      });
+      requestAnimationFrame(function () { hero.classList.add("is-in"); });
+      grid.querySelectorAll(".wk-card").forEach(function (c) {
+        var on = c.getAttribute("data-id") === w.id;
+        c.classList.toggle("is-on", on);
+        c.setAttribute("aria-current", on ? "true" : "false");
+      });
+      if (scroll) {
+        history.replaceState(null, "", "#" + w.id);
+        var top = hero.getBoundingClientRect().top + window.scrollY - (document.getElementById("hd") || { offsetHeight: 0 }).offsetHeight;
+        window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+      }
+    }
+
+    grid.innerHTML = "";
+    works.forEach(function (w) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "wk-card";
+      b.setAttribute("data-id", w.id);
+      b.setAttribute("data-kind", isFilm(w) ? "film" : "series");
+      b.innerHTML =
+        '<span class="wk-card__thumb"><img loading="lazy" src="' + esc(w.image || "") + '" alt=""></span>' +
+        '<span class="wk-card__title">' + esc(w.title) + "</span>" +
+        '<span class="wk-card__meta">' + esc(w.status === "upcoming" ? "COMING " + w.year : w.year) +
+        (w.format ? " · " + esc(w.format) : "") + "</span>";
+      b.addEventListener("click", function () { feature(w, true); });
+      grid.appendChild(b);
+    });
+
+    var bar = document.querySelector("[data-filters]");
+    if (bar) bar.addEventListener("click", function (e) {
+      var btn = e.target.closest("button[data-filter]");
+      if (!btn) return;
+      bar.querySelectorAll("button").forEach(function (x) {
+        x.setAttribute("aria-pressed", x === btn ? "true" : "false");
+      });
+      var f = btn.getAttribute("data-filter");
+      grid.querySelectorAll(".wk-card").forEach(function (c) {
+        c.hidden = f !== "all" && c.getAttribute("data-kind") !== f;
+      });
+    });
+
+    var fromHash = location.hash.length > 1 && byId(works, location.hash.slice(1));
+    feature(fromHash || latest, false);
+  }
+
+  // home "SELECTED WORK" poster grid
   function renderWorks(data) {
+    if (document.getElementById("wk-hero")) return renderWorkPage(data);
     var grid = document.getElementById("works-grid");
     if (!grid) return;
     var works = data.works || [];
-    var featured = grid.hasAttribute("data-featured");
-    if (featured) {
-      var ids = (data.home && data.home.featuredIds) || [];
-      if (ids.length) {
-        works = ids.map(function (id) { return byId(works, id); }).filter(Boolean);
-      } else {
-        works = works.slice(0, (data.home && data.home.featuredCount) || 5);
-      }
-    } else {
-      // order = the order in content.json (admin ↑↓ buttons); "sortLast" works still go to the end
-      works = works.map(function (w, i) { return { w: w, i: i }; })
-        .sort(function (a, b) { return (!!a.w.sortLast - !!b.w.sortLast) || a.i - b.i; })
-        .map(function (x) { return x.w; });
-    }
+    var ids = (data.home && data.home.featuredIds) || [];
+    works = ids.length
+      ? ids.map(function (id) { return byId(works, id); }).filter(Boolean)
+      : orderedWorks(data).slice(0, (data.home && data.home.featuredCount) || 5);
     grid.innerHTML = "";
     works.forEach(function (w) {
       grid.appendChild(workCard(w));
     });
-
-    // filters
-    var filterBar = document.querySelector("[data-filters]");
-    if (filterBar && !featured) {
-      filterBar.addEventListener("click", function (e) {
-        var btn = e.target.closest("button[data-filter]");
-        if (!btn) return;
-        filterBar.querySelectorAll("button").forEach(function (b) {
-          b.setAttribute("aria-pressed", b === btn ? "true" : "false");
-        });
-        var f = btn.getAttribute("data-filter");
-        var shown = 0;
-        grid.querySelectorAll(".work").forEach(function (card) {
-          var ok = f === "all" || card.getAttribute("data-status") === f;
-          card.classList.toggle("is-hidden", !ok);
-          if (ok) shown++;
-        });
-        var empty = document.getElementById("works-empty");
-        if (empty) empty.hidden = shown !== 0;
-      });
-    }
-
-    // view toggle (gallery / list)
-    var viewBar = document.querySelector("[data-view]");
-    if (viewBar) {
-      viewBar.addEventListener("click", function (e) {
-        var btn = e.target.closest("button[data-viewmode]");
-        if (!btn) return;
-        viewBar.querySelectorAll("button").forEach(function (b) {
-          b.setAttribute("aria-pressed", b === btn ? "true" : "false");
-        });
-        grid.classList.toggle(
-          "works-grid--list",
-          btn.getAttribute("data-viewmode") === "list"
-        );
-      });
-    }
-
-    // deep link (#steelrain)
-    if (!featured && location.hash.length > 1) {
-      var target = byId(data.works, location.hash.slice(1));
-      if (target) openModal(target);
-    }
   }
 
   /* ---------- modal ---------- */
