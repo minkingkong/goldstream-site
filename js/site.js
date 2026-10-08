@@ -21,13 +21,13 @@
       keywords: ["장소 섭외", "촬영 허가", "기관 협조", "현장 운영"]
     },
     {
-      id: "campaign", label: "ADVERTISING", title: "광고·기획",
-      lead: "영화·드라마를 만들어온 기획력과 제작 역량으로, 브랜드의 메시지를 사람들이 기억하는 콘텐츠로 완성합니다.",
+      id: "campaign", label: "CAMPAIGN", title: "캠페인·홍보물 제작",
+      lead: "포스터, 명함, 현수막부터 차량 래핑, SNS 영상까지. 캠페인에 필요한 모든 홍보물을 기획부터 설치까지 한 번에 제작합니다.",
       keywords: []
     },
     {
-      id: "sponsorship", label: "SPONSORSHIP", title: "기업 협찬·PPL",
-      lead: "브랜드가 작품 속에서 자연스럽게 빛나도록 연결합니다.",
+      id: "sponsorship", label: "BRAND & SPONSORSHIP", title: "브랜드·협찬",
+      lead: "협찬이 필요한 제작사와 콘텐츠로 브랜드를 알리고 싶은 기업을 연결합니다.",
       keywords: ["제작 협찬", "PPL 기획", "브랜드 매칭", "파트너십 운영"]
     }
   ];
@@ -561,15 +561,41 @@
     });
     show("types", types.length > 0);
 
-    var svc = b.services || [];
-    all("services").forEach(function (el) {
-      el.style.setProperty("--cols", svc.length % 3 === 0 ? 3 : svc.length === 4 ? 4 : 3);
-      el.innerHTML = svc.map(function (s, i) {
+    // two-sided intro (e.g. for producers / for brands)
+    var paths = b.paths || [];
+    text("pathsTitle", b.pathsTitle, true);
+    all("paths").forEach(function (el) {
+      el.innerHTML = paths.map(function (p) {
+        return '<article class="bx-path"><p class="bx-k">' + esc(p.en || "") + "</p><h3>" + esc(p.title) + "</h3>" +
+          "<p>" + esc(p.desc || "") + "</p>" +
+          ((p.points || []).length ? '<ul class="bx-checks">' + p.points.map(function (t) { return "<li>" + esc(t) + "</li>"; }).join("") + "</ul>" : "") +
+          "</article>";
+      }).join("");
+    });
+    show("paths", paths.length > 0);
+
+    var cards = function (list) {
+      return list.map(function (s, i) {
         return '<article class="bx-card">' + pic(s.image, "bx-card__img") + num(i) +
           "<h3>" + esc(s.title) + "</h3><p>" + esc(s.desc || "") + "</p></article>";
       }).join("");
+    };
+    var cols = function (n) { return n % 3 === 0 ? 3 : n % 4 === 0 ? 4 : 3; };
+    var svc = b.services || [];
+    all("services").forEach(function (el) {
+      el.style.setProperty("--cols", cols(svc.length));
+      el.innerHTML = cards(svc);
     });
     show("services", svc.length > 0);
+    text("note", b.note);
+
+    var extras = b.extras || [];
+    text("extrasTitle", b.extrasTitle, true);
+    all("extras").forEach(function (el) {
+      el.style.setProperty("--cols", cols(extras.length));
+      el.innerHTML = cards(extras);
+    });
+    show("extras", extras.length > 0);
 
     var steps = b.process || [];
     all("process").forEach(function (el) {
