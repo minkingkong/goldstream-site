@@ -31,6 +31,7 @@
     "introVideo": "",
     "slideIds": [
       "code",
+      "forbidden",
       "pine",
       "mungmungi",
       "steelrain2",
@@ -342,6 +343,26 @@
       "heroImage": "assets/img/hero/code.jpg"
     },
     {
+      "id": "forbidden",
+      "title": "금지된 여자",
+      "titleEn": "",
+      "status": "upcoming",
+      "dateLabel": "Upcoming, 2027 · KBS2",
+      "year": 2027,
+      "format": "드라마 시리즈",
+      "image": "assets/img/forbidden-poster.jpg",
+      "video": "",
+      "synopsis": "30년 전 버스 사고로 친구의 삶을 대신 살게 된 차유경. 가짜 신분으로 재벌가 며느리가 된 그녀가 제국의 정점에 오르려는 순간, 죽은 줄만 알았던 딸 은파가 나타난다. 가짜 신분으로 금지된 제국에 들어간 엄마와 진실을 쫓는 딸이 마주하며 시작되는 모녀의 복수와 구원, 그리고 속죄의 이야기.",
+      "credits": {
+        "극본": "오상희",
+        "출연": "오윤아, 하승리",
+        "제작": "PLAYGRAM · Urban works · 스튜디오그르르",
+        "플랫폼": "KBS2 (2026 촬영, 2027 방송 예정)"
+      },
+      "links": [],
+      "heroImage": "assets/img/hero/forbidden.jpg"
+    },
+    {
       "id": "pine",
       "title": "파인: 촌뜨기들",
       "titleEn": "Low Life",
@@ -438,8 +459,7 @@
           "url": "https://www.news1.kr/entertain/movie/3704559"
         }
       ],
-      "heroImage": "assets/img/hero/steelrain2.jpg",
-      "heroPos": "50% 0%"
+      "heroImage": "assets/img/hero/steelrain2.jpg"
     },
     {
       "id": "steelrain",
@@ -472,8 +492,7 @@
           "url": "https://www.xportsnews.com/article/928591"
         }
       ],
-      "heroImage": "assets/img/hero/steelrain.jpg",
-      "heroPos": "50% 0%"
+      "heroImage": "assets/img/hero/steelrain.jpg"
     },
     {
       "id": "suanara",
