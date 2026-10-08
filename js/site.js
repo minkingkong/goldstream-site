@@ -259,7 +259,9 @@
       (w.heroImage
         ? // wide photo on desktop; phones keep the vertical poster until a mobile cut exists
           '<picture class="hs__wide"><source media="(min-width: 861px)" srcset="' + esc(w.heroImage) + '">' +
-          '<img src="' + esc(poster || w.heroImage) + '" alt="" draggable="false"></picture>'
+          '<img src="' + esc(poster || w.heroImage) + '" alt="" draggable="false"' +
+          // heroPos keeps faces in frame when the wide crop trims top/bottom (e.g. "50% 0%")
+          (w.heroPos ? ' style="object-position:' + esc(w.heroPos) + '"' : "") + "></picture>"
         : '<div class="hs__bg" style="background-image:url(&quot;' + esc(poster) + '&quot;)"></div>' +
           '<img class="hs__poster" src="' + esc(poster) + '" alt="' + esc(w.title) + ' 포스터" draggable="false">') +
       '<div class="hs__shade"></div>' +
