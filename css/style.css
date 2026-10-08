@@ -1297,6 +1297,24 @@ ul {
 .modal__media img.is-wide {
   object-fit: cover;
 }
+/* short laptop screens: less chrome so media + synopsis still fit the first view */
+@media (min-width: 861px) and (max-height: 760px) {
+  .modal {
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
+  .modal__body {
+    padding: 22px 30px;
+  }
+  .modal__title {
+    font-size: 28px;
+  }
+  .modal__synopsis {
+    margin-top: 10px;
+    font-size: 14.5px;
+    line-height: 1.65;
+  }
+}
 .modal__body {
   padding: clamp(22px, 4vw, 44px);
 }
