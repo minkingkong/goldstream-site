@@ -841,6 +841,38 @@ ul {
 .biz-card:hover::before {
   transform: scaleX(1);
 }
+/* card photo sits flush on top; the text block keeps its own spacing */
+.biz-card.has-img {
+  min-height: 0;
+}
+.biz-card__img {
+  display: block;
+  margin: calc(-1 * clamp(26px, 2.6vw, 40px)) calc(-1 * clamp(26px, 2.6vw, 40px)) 26px;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--bg-soft);
+}
+.biz-card__img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.9s var(--ease);
+}
+.biz-card:hover .biz-card__img img {
+  transform: scale(1.05);
+}
+@media (max-width: 640px) {
+  .biz-card__img {
+    aspect-ratio: 16 / 9;
+  }
+}
+.biz-card.has-img .biz-card__label {
+  margin-top: 18px;
+}
+.biz-card.has-img .biz-card__go {
+  margin-top: auto;
+  padding-top: 22px;
+}
 .biz-card__num {
   font-variant-numeric: tabular-nums;
   font-size: 14px;
@@ -931,12 +963,7 @@ ul {
   gap: clamp(40px, 5vw, 64px) clamp(20px, 2.4vw, 36px);
 }
 .works-grid--feature {
-  grid-template-columns: repeat(5, 1fr);
-}
-@media (max-width: 1180px) {
-  .works-grid--feature {
-    grid-template-columns: repeat(3, 1fr);
-  }
+  grid-template-columns: repeat(4, 1fr);
 }
 @media (max-width: 640px) {
   .works-grid,

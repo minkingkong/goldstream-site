@@ -502,11 +502,12 @@
     var grid = document.getElementById("biz-grid");
     if (!grid) return;
     grid.innerHTML = businessList(data).map(function (b, i) {
-      return '<a class="biz-card" href="' + (b.id === "production" ? "works" : esc(b.id)) + '.html">' +
+      return '<a class="biz-card' + (b.image ? " has-img" : "") + '" href="' + (b.id === "production" ? "works" : esc(b.id)) + '.html">' +
+        (b.image ? '<span class="biz-card__img"><img loading="lazy" src="' + esc(b.image) + '" alt=""></span>' : "") +
         '<span class="biz-card__num">' + pad2(i + 1) + "</span>" +
         '<span class="biz-card__label">' + esc(b.label) + "</span>" +
         '<h3 class="biz-card__title">' + esc(b.title) + "</h3>" +
-        '<p class="biz-card__lead">' + esc(b.lead) + "</p>" +
+        '<p class="biz-card__lead">' + esc(b.cardLead || b.lead) + "</p>" +
         '<span class="biz-card__go">' + ARROW + "</span></a>";
     }).join("");
   }
