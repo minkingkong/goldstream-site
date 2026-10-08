@@ -21,9 +21,9 @@
       keywords: ["장소 섭외", "촬영 허가", "기관 협조", "현장 운영"]
     },
     {
-      id: "campaign", label: "CAMPAIGN", title: "공공·브랜드 영상",
-      lead: "정책과 브랜드의 메시지를, 사람들이 기억하는 영상으로 만듭니다.",
-      keywords: ["공공 캠페인", "홍보 영상", "브랜드 필름", "콘텐츠 기획"]
+      id: "campaign", label: "ADVERTISING", title: "광고·기획",
+      lead: "영화·드라마를 만들어온 기획력과 제작 역량으로, 브랜드의 메시지를 사람들이 기억하는 콘텐츠로 완성합니다.",
+      keywords: []
     },
     {
       id: "sponsorship", label: "SPONSORSHIP", title: "기업 협찬·PPL",
@@ -513,26 +513,71 @@
     list.forEach(function (b, i) { if (b.id === id) idx = i; });
     if (idx < 0) return;
     var b = list[idx];
-    var set = function (sel, val) {
-      var el = document.querySelector(sel);
-      if (el && val) el.textContent = val;
+    var all = function (key) { return document.querySelectorAll("[data-b='" + key + "']"); };
+    var text = function (key, val, multi) {
+      all(key).forEach(function (el) {
+        if (!val) return;
+        if (multi) el.innerHTML = esc(val).replace(/\n/g, "<br>");
+        else el.textContent = val;
+      });
     };
-    set("[data-b='title']", b.label);
-    set("[data-b='ko']", b.title);
-    set("[data-b='lead']", b.lead);
-    set("[data-b='word']", b.label);
-    var kw = document.querySelector("[data-b='keywords']");
-    if (kw && b.keywords && b.keywords.length) {
-      kw.innerHTML = b.keywords.map(function (k) { return "<li>" + esc(k) + "</li>"; }).join("");
+    var show = function (sec, on) {
+      var s = document.querySelector("[data-sec='" + sec + "']");
+      if (s) s.hidden = !on;
+    };
+    var num = function (i) { return '<span class="bx-num">' + pad2(i + 1) + "</span>"; };
+    var pic = function (src, cls) {
+      return src ? '<span class="' + cls + '"><img loading="lazy" src="' + esc(src) + '" alt=""></span>' : "";
+    };
+
+    text("label", b.label + " — " + b.title);
+    text("headline", b.headline || b.title, true);
+    text("lead", b.lead);
+    text("ctaButton", b.ctaButton || "문의하기");
+    text("typesTitle", b.typesTitle);
+    text("servicesTitle", b.servicesTitle);
+    text("whyTitle", b.whyTitle, true);
+    text("cta", b.cta, true);
+
+    var media = all("image")[0];
+    if (media && b.image) {
+      media.innerHTML = '<img src="' + esc(b.image) + '" alt="">';
+      media.hidden = false;
     }
-    var hero = document.querySelector(".bhero");
-    if (hero && b.image && !hero.querySelector(".bhero__img")) {
-      var img = document.createElement("img");
-      img.className = "bhero__img";
-      img.alt = "";
-      img.src = b.image;
-      hero.insertBefore(img, hero.firstChild);
-    }
+
+    var types = b.types || [];
+    all("types").forEach(function (el) {
+      el.innerHTML = types.map(function (t, i) {
+        return '<article class="bx-type' + (t.image ? " has-img" : "") + '">' + pic(t.image, "bx-type__img") +
+          '<div class="bx-type__body">' + num(i) +
+          "<h3>" + esc(t.title) + "</h3><p class=\"bx-en\">" + esc(t.en || "") + "</p><p>" + esc(t.desc || "") + "</p></div></article>";
+      }).join("");
+    });
+    show("types", types.length > 0);
+
+    var svc = b.services || [];
+    all("services").forEach(function (el) {
+      el.style.setProperty("--cols", svc.length % 3 === 0 ? 3 : svc.length === 4 ? 4 : 3);
+      el.innerHTML = svc.map(function (s, i) {
+        return '<article class="bx-card">' + pic(s.image, "bx-card__img") + num(i) +
+          "<h3>" + esc(s.title) + "</h3><p>" + esc(s.desc || "") + "</p></article>";
+      }).join("");
+    });
+    show("services", svc.length > 0);
+
+    var steps = b.process || [];
+    all("process").forEach(function (el) {
+      el.innerHTML = steps.map(function (s, i) {
+        return "<li>" + num(i) + "<span>" + esc(s) + "</span></li>";
+      }).join("");
+    });
+    show("process", steps.length > 0);
+
+    var why = b.why || [];
+    all("why").forEach(function (el) {
+      el.innerHTML = why.map(function (w) { return "<li>" + esc(w) + "</li>"; }).join("");
+    });
+    show("why", why.length > 0);
   }
 
   /* ---------- works ---------- */

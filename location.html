@@ -18,14 +18,14 @@
   <link rel="icon" type="image/png" sizes="192x192" href="assets/icons/icon-192.png" />
   <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png" />
   <link rel="preload" as="font" type="font/woff2" href="assets/fonts/PretendardVariable.woff2" crossorigin />
-  <link rel="stylesheet" href="css/style.css?v=f15fc0cfe4" />
+  <link rel="stylesheet" href="css/style.css?v=be23d95e44" />
 </head>
 <body data-business="location" id="top">  <header class="hd" id="hd">
     <a class="hd__logo" href="index.html" aria-label="GOLDSTREAM ENTERTAINMENT 홈"><img src="assets/img/logo-goldstream-dark.png" alt="GOLDSTREAM ENTERTAINMENT" width="774" height="170" /></a>
     <nav class="hd__nav" aria-label="주 메뉴">
       <a href="works.html">WORK</a>
       <a href="location.html">LOCATION</a>
-      <a href="campaign.html">CAMPAIGN</a>
+      <a href="campaign.html">ADVERTISING</a>
       <a href="sponsorship.html">SPONSORSHIP</a>
       <a href="about.html">ABOUT</a>
       <a href="shop.html">SHOP</a>
@@ -33,26 +33,47 @@
     <a class="hd__cta" href="contact.html">CONTACT</a>
     <button class="hd__burger" type="button" aria-label="메뉴 열기" aria-expanded="false"><span></span><span></span></button>
   </header>
-  <main>
-    <section class="bhero">
-      <span class="bhero__word" data-b="word" aria-hidden="true">LOCATION</span>
-      <div class="bhero__shade"></div>
-      <div class="bhero__in wrap">
-        <h1 class="bhero__title" data-b="title">LOCATION</h1>
-        <p class="bhero__ko" data-b="ko">로케이션 & 촬영 지원</p>
-        <p class="bhero__lead" data-b="lead">장소 섭외부터 촬영 허가, 현장 준비까지. 제작진은 촬영에만 집중하세요.</p>
+  <main class="bx">
+    <section class="bx-hero">
+      <div class="bx-hero__in wrap">
+        <div class="bx-hero__text">
+          <p class="bx-hero__label" data-b="label"></p>
+          <h1 class="bx-hero__title" data-b="headline"></h1>
+          <p class="bx-hero__lead" data-b="lead"></p>
+          <a class="bx-btn" href="contact.html" data-b="ctaButton">문의하기</a>
+        </div>
+        <figure class="bx-hero__media" data-b="image" hidden></figure>
       </div>
     </section>
 
-    <section class="wrap">
-      <div class="bbody reveal">
-        <p class="bbody__label">WHAT WE DO</p>
-        <div>
-          <ul class="keywords" data-b="keywords"><li>장소 섭외</li><li>촬영 허가</li><li>기관 협조</li><li>현장 운영</li></ul>
-          <div class="notice">
-            <p class="notice__msg"><span class="notice__dot" aria-hidden="true"></span><span>상세 내용은 곧 업데이트됩니다.<small>프로젝트 문의는 지금도 언제든 환영합니다.</small></span></p>
-            <a class="btn-gold" href="contact.html">문의하기 <svg class="arrow" viewBox="0 0 26 10" aria-hidden="true"><path d="M0 5h24M20 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></a>
-          </div>
+    <section class="bx-sec wrap" data-sec="types" hidden>
+      <div class="bx-head"><p class="bx-k">LOCATION TYPES</p><h2 class="bx-h" data-b="typesTitle"></h2></div>
+      <div class="bx-types" data-b="types"></div>
+    </section>
+
+    <section class="bx-sec wrap" data-sec="services" hidden>
+      <div class="bx-head"><p class="bx-k">OUR SERVICES</p><h2 class="bx-h" data-b="servicesTitle"></h2></div>
+      <div class="bx-svc" data-b="services"></div>
+    </section>
+
+    <section class="bx-sec wrap" data-sec="process" hidden>
+      <div class="bx-head"><p class="bx-k">PROCESS</p><h2 class="bx-h">진행 과정</h2></div>
+      <ol class="bx-steps" data-b="process"></ol>
+    </section>
+
+    <section class="bx-sec wrap" data-sec="why" hidden>
+      <div class="bx-why">
+        <div><p class="bx-k">WHY GOLDSTREAM</p><h2 class="bx-h" data-b="whyTitle"></h2></div>
+        <ul class="bx-checks" data-b="why"></ul>
+      </div>
+    </section>
+
+    <section class="bx-cta">
+      <div class="bx-cta__in wrap">
+        <p class="bx-cta__text" data-b="cta"></p>
+        <div class="bx-cta__side">
+          <a class="bx-btn bx-btn--light" href="contact.html" data-b="ctaButton">문의하기</a>
+          <p class="bx-cta__contact"><a href="tel:01046121588" data-field="contact.phone" data-tel>010-4612-1588</a><a href="mailto:kim@goldstream.kr" data-field="contact.email" data-mailto>kim@goldstream.kr</a></p>
         </div>
       </div>
     </section>
@@ -68,7 +89,7 @@
         <ul>
           <li><a href="works.html">WORK</a></li>
           <li><a href="location.html">LOCATION</a></li>
-          <li><a href="campaign.html">CAMPAIGN</a></li>
+          <li><a href="campaign.html">ADVERTISING</a></li>
           <li><a href="sponsorship.html">SPONSORSHIP</a></li>
           <li><a href="about.html">ABOUT</a></li>
           <li><a href="shop.html">SHOP</a></li>
@@ -91,6 +112,6 @@
     <div class="ft__word" aria-hidden="true">GOLDSTREAM</div>
   </footer>
 
-  <script src="js/site.js?v=74ff5c8507"></script>
+  <script src="js/site.js?v=5ed90df402"></script>
 </body>
 </html>

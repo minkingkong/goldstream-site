@@ -164,7 +164,6 @@
     q(".b-label").value = b.label || b.id.toUpperCase();
     q(".b-title").value = b.title || "";
     q(".b-lead").value = b.lead || "";
-    q(".b-keywords").value = (b.keywords || []).join(", ");
     q(".b-image").value = b.image || "";
     q(".be-name").textContent = (b.label || b.id.toUpperCase()) + " — " + b.id + ".html";
     bindUpload(q(".b-image-file"), q(".b-image"), q(".b-image-preview"), q(".b-image-clear"), b.image);
@@ -173,14 +172,16 @@
   function collectBiz() {
     return Array.prototype.map.call(document.querySelectorAll("#biz-list .work-editor"), function (el) {
       var g = function (sel) { return el.querySelector(sel).value.trim(); };
-      return {
-        id: g(".b-id"),
+      var id = g(".b-id");
+      // keep the page sections (headline, services, process, why, cta…) that this form doesn't edit
+      var prev = ((state.data && state.data.business) || []).filter(function (x) { return x.id === id; })[0] || {};
+      return Object.assign({}, prev, {
+        id: id,
         label: g(".b-label").toUpperCase(),
         title: g(".b-title"),
         lead: g(".b-lead"),
-        keywords: g(".b-keywords").split(",").map(function (s) { return s.trim(); }).filter(Boolean),
         image: g(".b-image")
-      };
+      });
     });
   }
 
