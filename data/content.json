@@ -466,7 +466,8 @@
           "url": "https://www.news1.kr/entertain/movie/3704559"
         }
       ],
-      "heroImage": "assets/img/hero/steelrain2.jpg"
+      "heroImage": "assets/img/hero/steelrain2.jpg",
+      "heroPos": "50% 0%"
     },
     {
       "id": "steelrain",
@@ -499,7 +500,8 @@
           "url": "https://www.xportsnews.com/article/928591"
         }
       ],
-      "heroImage": "assets/img/hero/steelrain.jpg"
+      "heroImage": "assets/img/hero/steelrain.jpg",
+      "heroPos": "50% 0%"
     },
     {
       "id": "suanara",

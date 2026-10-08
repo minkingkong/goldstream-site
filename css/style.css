@@ -399,6 +399,10 @@ ul {
   position: absolute;
   inset: 0;
 }
+/* the header sits over the slider; keep photos below it so heads are never hidden */
+.hs__slide--wide .hs__wide {
+  top: var(--header-h);
+}
 .hs__wide img {
   display: block;
   width: 100%;
