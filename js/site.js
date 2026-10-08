@@ -785,7 +785,10 @@
     } else if (emb && emb.type === "video") {
       media.innerHTML = '<video src="' + esc(emb.src) + '" controls playsinline></video>';
     } else {
-      media.innerHTML = '<img alt="' + esc(w.title) + '" src="' + esc(w.image || "") + '">';
+      // no trailer: the 16:9 hero image fills the frame; a bare poster is letterboxed
+      media.innerHTML = w.heroImage
+        ? '<img class="is-wide" alt="' + esc(w.title) + '" src="' + esc(w.heroImage) + '">'
+        : '<img alt="' + esc(w.title) + '" src="' + esc(w.image || "") + '">';
     }
     document.getElementById("modal-eyebrow").textContent =
       (w.format ? w.format + " · " : "") + (w.dateLabel || "");

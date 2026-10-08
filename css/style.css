@@ -1294,6 +1294,9 @@ ul {
 .modal__media img {
   object-fit: contain;
 }
+.modal__media img.is-wide {
+  object-fit: cover;
+}
 .modal__body {
   padding: clamp(22px, 4vw, 44px);
 }
