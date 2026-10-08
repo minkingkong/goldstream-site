@@ -774,6 +774,24 @@
     return modalEl;
   }
 
+  // desktop: shrink the card until media + title + synopsis fit the first screen;
+  // credits and links stay below for scrolling
+  function fitModal() {
+    if (!modalEl || !modalEl.classList.contains("is-open")) return;
+    var card = modalEl.querySelector(".modal__card");
+    card.style.maxWidth = "";
+    if (window.innerWidth < 861) return;
+    var body = modalEl.querySelector(".modal__body");
+    var syn = document.getElementById("modal-synopsis");
+    var pad = parseFloat(getComputedStyle(modalEl).paddingTop) || 0;
+    for (var i = 0; i < 2; i++) { // synopsis rewraps once the width changes
+      var textH = syn.getBoundingClientRect().bottom - body.getBoundingClientRect().top + 24;
+      var mediaH = window.innerHeight - pad * 2 - textH;
+      card.style.maxWidth = Math.round(Math.max(560, Math.min(940, mediaH * 16 / 9))) + "px";
+    }
+  }
+  window.addEventListener("resize", fitModal);
+
   function openModal(w) {
     ensureModal();
     var media = document.getElementById("modal-media");
@@ -820,6 +838,8 @@
     });
     modalEl.classList.add("is-open");
     document.body.style.overflow = "hidden";
+    modalEl.scrollTop = 0;
+    fitModal();
     if (!document.getElementById("hs")) history.replaceState(null, "", "#" + w.id);
   }
 
