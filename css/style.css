@@ -2207,8 +2207,20 @@ ul {
 }
 
 @media (max-width: 1100px) {
+  /* 6-track grid: three per row, and the last two of five share a row so no cell is left empty */
   .bx-types {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(6, 1fr);
+  }
+  .bx-type {
+    grid-column: span 2;
+  }
+  .bx-type:nth-child(4):nth-last-child(2),
+  .bx-type:nth-child(5):last-child {
+    grid-column: span 3;
+  }
+  .bx-type:nth-child(4):nth-last-child(2) .bx-type__img,
+  .bx-type:nth-child(5):last-child .bx-type__img {
+    aspect-ratio: 16 / 10;
   }
   .bx-svc {
     grid-template-columns: repeat(2, 1fr);
@@ -2249,6 +2261,17 @@ ul {
 @media (max-width: 600px) {
   .bx-types {
     grid-template-columns: 1fr 1fr;
+  }
+  .bx-type,
+  .bx-type:nth-child(4):nth-last-child(2) {
+    grid-column: auto;
+  }
+  .bx-type:nth-child(4):nth-last-child(2) .bx-type__img {
+    aspect-ratio: 4 / 5;
+  }
+  /* odd count: the last card takes the full row */
+  .bx-type:nth-child(odd):last-child {
+    grid-column: 1 / -1;
   }
   .bx-svc {
     grid-template-columns: 1fr;
