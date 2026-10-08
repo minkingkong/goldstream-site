@@ -623,6 +623,42 @@
     return { type: "iframe", src: url };
   }
 
+  // trailer only: dark full-screen player, separate from the info modal
+  var trailerEl = null;
+  function openTrailer(w) {
+    var emb = videoEmbed(w.video);
+    if (!emb) return openModal(w);
+    if (!trailerEl) {
+      trailerEl = document.createElement("div");
+      trailerEl.className = "trailer";
+      trailerEl.setAttribute("role", "dialog");
+      trailerEl.setAttribute("aria-modal", "true");
+      trailerEl.innerHTML =
+        '<button class="trailer__close" aria-label="닫기">&times;</button>' +
+        '<div class="trailer__box"><div class="trailer__frame"></div><p class="trailer__title"></p></div>';
+      document.body.appendChild(trailerEl);
+      var close = function () {
+        if (!trailerEl.classList.contains("is-open")) return;
+        trailerEl.classList.remove("is-open");
+        trailerEl.querySelector(".trailer__frame").innerHTML = "";
+        document.body.style.overflow = "";
+      };
+      trailerEl.querySelector(".trailer__close").addEventListener("click", close);
+      trailerEl.addEventListener("click", function (e) {
+        if (e.target === trailerEl || e.target.classList.contains("trailer__box")) close();
+      });
+      document.addEventListener("keydown", function (e) { if (e.key === "Escape") close(); });
+    }
+    var frame = trailerEl.querySelector(".trailer__frame");
+    frame.innerHTML = emb.type === "video"
+      ? '<video src="' + esc(emb.src) + '" controls autoplay playsinline></video>'
+      : '<iframe src="' + esc(emb.src) + (emb.src.indexOf("?") < 0 ? "?" : "&") + 'autoplay=1&rel=0&playsinline=1" ' +
+        'allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="' + esc(w.title) + ' 예고편"></iframe>';
+    trailerEl.querySelector(".trailer__title").textContent = w.title + " — 예고편";
+    trailerEl.classList.add("is-open");
+    document.body.style.overflow = "hidden";
+  }
+
   function workCard(w) {
     var a = document.createElement("a");
     a.className = "work";
@@ -703,7 +739,10 @@
         (emb ? '<button type="button" class="wk-btn" data-act="trailer">예고편</button>' : "") +
         "</div></div></div>";
       hero.querySelectorAll("[data-act]").forEach(function (b) {
-        b.addEventListener("click", function () { openModal(w); });
+        b.addEventListener("click", function () {
+          if (b.getAttribute("data-act") === "trailer") openTrailer(w);
+          else openModal(w);
+        });
       });
       requestAnimationFrame(function () { hero.classList.add("is-in"); });
       grid.querySelectorAll(".wk-card").forEach(function (c) {
