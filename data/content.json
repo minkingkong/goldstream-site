@@ -268,7 +268,8 @@
           "label": "남주혁, 속물 변호사役 발탁 (헤럴드뮤즈)",
           "url": "https://www.heraldmuse.com/article/10817347"
         }
-      ]
+      ],
+      "heroImage": "assets/img/hero/code.jpg"
     },
     {
       "id": "pine",
@@ -300,7 +301,8 @@
           "label": "디즈니+ 한국 오리지널 1위 달성 (한국일보)",
           "url": "https://www.hankookilbo.com/News/Read/A2025071913210005946"
         }
-      ]
+      ],
+      "heroImage": "assets/img/hero/pine.jpg"
     },
     {
       "id": "mungmungi",
@@ -332,7 +334,8 @@
           "label": "[커버] 유연석·차태현 인터뷰 (씨네21)",
           "url": "http://www.cine21.com/news/view/?mag_id=102101"
         }
-      ]
+      ],
+      "heroImage": "assets/img/hero/mungmungi.jpg"
     },
     {
       "id": "steelrain2",
@@ -364,7 +367,8 @@
           "label": "'정상회담'으로 제목 변경, 크랭크인 (뉴스1)",
           "url": "https://www.news1.kr/entertain/movie/3704559"
         }
-      ]
+      ],
+      "heroImage": "assets/img/hero/steelrain2.jpg"
     },
     {
       "id": "steelrain",
@@ -396,7 +400,8 @@
           "label": "개봉 18일째 400만 돌파, 손익분기점 넘겨 [공식] (Xports News)",
           "url": "https://www.xportsnews.com/article/928591"
         }
-      ]
+      ],
+      "heroImage": "assets/img/hero/steelrain.jpg"
     },
     {
       "id": "suanara",
@@ -425,7 +430,8 @@
           "url": "https://filmthreat.com/reviews/demon-dancer-sua-nara/"
         }
       ],
-      "sortLast": true
+      "sortLast": true,
+      "heroImage": "assets/img/hero/suanara.jpg"
     },
     {
       "id": "demonkiller",
@@ -458,7 +464,8 @@
           "url": "https://www.sportsworldi.com/newsView/20260425503113"
         }
       ],
-      "sortLast": true
+      "sortLast": true,
+      "heroImage": "assets/img/hero/demonkiller.jpg"
     }
   ],
   "about": {

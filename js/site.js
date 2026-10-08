@@ -253,11 +253,13 @@
 
   function workSlide(w) {
     var el = document.createElement("div");
-    el.className = "hs__slide";
+    el.className = "hs__slide" + (w.heroImage ? " hs__slide--wide" : "");
     var poster = w.image || "";
     el.innerHTML =
       (w.heroImage
-        ? '<img class="hs__wide" src="' + esc(w.heroImage) + '" alt="" draggable="false">'
+        ? // wide photo on desktop; phones keep the vertical poster until a mobile cut exists
+          '<picture class="hs__wide"><source media="(min-width: 861px)" srcset="' + esc(w.heroImage) + '">' +
+          '<img src="' + esc(poster || w.heroImage) + '" alt="" draggable="false"></picture>'
         : '<div class="hs__bg" style="background-image:url(&quot;' + esc(poster) + '&quot;)"></div>' +
           '<img class="hs__poster" src="' + esc(poster) + '" alt="' + esc(w.title) + ' 포스터" draggable="false">') +
       '<div class="hs__shade"></div>' +
@@ -393,6 +395,8 @@
         b.setAttribute("aria-current", i === current ? "true" : "false");
       });
       btns[current].after(gauge);
+      // full-bleed photo slides carry white type, so the pager flips to light too
+      root.classList.toggle("is-dark", slides[current].classList.contains("hs__slide--wide"));
       schedule();
     }
     // after landing on a clone, jump to its real twin without animation
