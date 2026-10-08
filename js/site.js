@@ -1001,7 +1001,41 @@
       fillLinkList("about-press", a.press);
       fillPartners(a.partners);
     }
+    // tilted wall of every work's poster behind the ABOUT / CONTACT heroes
+    var posters = (data.works || []).map(function (w) { return w.image; }).filter(Boolean);
+    document.querySelectorAll("[data-poster-wall]").forEach(function (wall) {
+      if (!posters.length) return;
+      var html = "";
+      for (var i = 0; i < 32; i++) {
+        html += '<img src="' + esc(posters[(i * 3 + Math.floor(i / 8)) % posters.length]) + '" alt="">';
+      }
+      wall.innerHTML = html;
+    });
+
     var c = data.contact || {};
+    var map = document.getElementById("contact-offices-map");
+    if (map) {
+      map.innerHTML = (c.offices || []).filter(function (o) { return o && o.address; }).map(function (o) {
+        return '<div class="ct__office"><p class="ct__office-name">' + esc(o.label) + "</p><p>" + esc(o.address) + "</p>" +
+          '<a href="https://map.naver.com/p/search/' + encodeURIComponent(o.address) + '" target="_blank" rel="noopener noreferrer">지도 보기 ↗</a></div>';
+      }).join("");
+    }
+    document.querySelectorAll("[data-copy]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var done = btn.querySelector(".ct__copied");
+        var text = (btn.querySelector("[data-field]") || btn).textContent.trim();
+        var ok = function () {
+          if (!done) return;
+          done.textContent = "복사됨";
+          btn.classList.add("is-copied");
+          clearTimeout(btn._t);
+          btn._t = setTimeout(function () { done.textContent = ""; btn.classList.remove("is-copied"); }, 1600);
+        };
+        if (navigator.clipboard) navigator.clipboard.writeText(text).then(ok, ok);
+        else ok();
+      });
+    });
+
     var inq = document.getElementById("contact-inquiries");
     if (inq) {
       inq.innerHTML = "";

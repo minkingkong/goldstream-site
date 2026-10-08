@@ -18,7 +18,7 @@
   <link rel="icon" type="image/png" sizes="192x192" href="assets/icons/icon-192.png" />
   <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png" />
   <link rel="preload" as="font" type="font/woff2" href="assets/fonts/PretendardVariable.woff2" crossorigin />
-  <link rel="stylesheet" href="css/style.css?v=f8122c6c20" />
+  <link rel="stylesheet" href="css/style.css?v=93f608f5e0" />
 </head>
 <body id="top">  <header class="hd" id="hd">
     <a class="hd__logo" href="index.html" aria-label="GOLDSTREAM ENTERTAINMENT 홈"><img src="assets/img/logo-goldstream-dark.png" alt="GOLDSTREAM ENTERTAINMENT" width="774" height="170" /></a>
@@ -33,26 +33,35 @@
     <a class="hd__cta" href="contact.html">CONTACT</a>
     <button class="hd__burger" type="button" aria-label="메뉴 열기" aria-expanded="false"><span></span><span></span></button>
   </header>
-  <main class="phead wrap">
-    <p class="eyebrow">GET IN TOUCH</p>
-    <h1 class="page__title" data-field="pages.contact.title">CONTACT</h1>
-    <p class="contact-big" data-field="pages.contact.big" data-multiline>좋은 이야기를 발견하고,<br />좋은 사람을 연결하고,<br />그것을 하나의 산업으로 만든다.</p>
-
-    <div class="contact-grid">
-      <div>
-        <h4>GENERAL</h4>
-        <a class="mail" href="mailto:kim@goldstream.kr" data-field="contact.email" data-mailto>kim@goldstream.kr</a>
+  <main class="ct">
+    <section class="pw-hero pw-hero--contact">
+      <div class="pw-wall" data-poster-wall aria-hidden="true"></div>
+      <div class="pw-hero__shade"></div>
+      <div class="ct__in wrap">
+        <div class="ct__main">
+          <p class="pw-k">GET IN TOUCH</p>
+          <h1 class="ct__title">함께 만들 이야기가 있다면,<br />언제든 연락주세요.</h1>
+          <p class="ct__label">EMAIL</p>
+          <button type="button" class="ct__mail" data-copy="kim@goldstream.kr"><span data-field="contact.email">kim@goldstream.kr</span><em class="ct__copied" aria-live="polite"></em></button>
+          <p class="ct__hint">클릭하면 주소가 복사됩니다</p>
+        </div>
+        <div class="ct__side">
+          <div class="ct__block">
+            <p class="ct__label">WHAT WE TALK ABOUT</p>
+            <ul class="ct__topics">
+              <li><a href="works.html">작품 제안 · 공동제작 · 투자<span>→</span></a></li>
+              <li><a href="location.html">로케이션 섭외 · 촬영 지원<span>→</span></a></li>
+              <li><a href="campaign.html">캠페인 · 홍보물 제작<span>→</span></a></li>
+              <li><a href="sponsorship.html">브랜드 협찬 · PPL<span>→</span></a></li>
+            </ul>
+          </div>
+          <div class="ct__block">
+            <p class="ct__label">OFFICES</p>
+            <div class="ct__offices" id="contact-offices-map"></div>
+          </div>
+        </div>
       </div>
-      <div>
-        <h4>INQUIRIES</h4>
-        <p class="office-intro" data-field="contact.inquiriesIntro">이런 이야기라면, 저를 찾아오세요.</p>
-        <div id="contact-inquiries"></div>
-      </div>
-      <div>
-        <h4>OFFICES</h4>
-        <div id="contact-offices"></div>
-      </div>
-    </div>
+    </section>
   </main>
   <footer class="ft">
     <div class="wrap ft__top">
@@ -88,6 +97,6 @@
     <div class="ft__word" aria-hidden="true">GOLDSTREAM</div>
   </footer>
 
-  <script src="js/site.js?v=4762c68cf4"></script>
+  <script src="js/site.js?v=46e56a85fb"></script>
 </body>
 </html>

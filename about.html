@@ -18,7 +18,7 @@
   <link rel="icon" type="image/png" sizes="192x192" href="assets/icons/icon-192.png" />
   <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png" />
   <link rel="preload" as="font" type="font/woff2" href="assets/fonts/PretendardVariable.woff2" crossorigin />
-  <link rel="stylesheet" href="css/style.css?v=f8122c6c20" />
+  <link rel="stylesheet" href="css/style.css?v=93f608f5e0" />
 </head>
 <body id="top">  <header class="hd" id="hd">
     <a class="hd__logo" href="index.html" aria-label="GOLDSTREAM ENTERTAINMENT 홈"><img src="assets/img/logo-goldstream-dark.png" alt="GOLDSTREAM ENTERTAINMENT" width="774" height="170" /></a>
@@ -34,61 +34,72 @@
     <button class="hd__burger" type="button" aria-label="메뉴 열기" aria-expanded="false"><span></span><span></span></button>
   </header>
   <main>
-    <section class="bhero">
-      <span class="bhero__word" aria-hidden="true">ABOUT</span>
-      <div class="bhero__shade"></div>
-      <div class="bhero__in wrap">
-        <h1 class="bhero__title" data-field="pages.about.title">ABOUT</h1>
-        <p class="bhero__ko">회사 소개</p>
-        <p class="bhero__lead">좋은 이야기를 발견하고, 좋은 사람을 연결해 경쟁력 있는 콘텐츠로 만듭니다.</p>
+    <section class="pw-hero">
+      <div class="pw-wall" data-poster-wall aria-hidden="true"></div>
+      <div class="pw-hero__shade"></div>
+      <div class="pw-hero__in">
+        <p class="pw-k">ABOUT GOLDSTREAM</p>
+        <h1 class="pw-hero__title" data-field="about.heroQuote" data-multiline>좋은 이야기를 발견하고,<br />좋은 사람을 연결하고,<br />그것을 하나의 산업으로.</h1>
+      </div>
+      <span class="pw-hero__cue" aria-hidden="true">SCROLL</span>
+    </section>
+
+    <section class="ab-intro wrap reveal">
+      <h2 class="sec-title"><small>WHO WE ARE</small>GOLDSTREAM</h2>
+      <div class="ab-intro__body">
+        <p class="ab-intro__lead" data-field="home.statementBody"></p>
+        <div class="about__prose" id="about-profile"></div>
       </div>
     </section>
 
-  <div class="wrap">
-    <div class="about">
-      <div class="about__portrait reveal">
-        <img data-field="about.portrait" src="assets/img/portrait.svg" alt="김정환 대표이사" />
+    <section class="ab-ceo wrap reveal">
+      <div class="ab-ceo__photo">
+        <img data-field="about.portrait" src="assets/img/ceo-portrait.jpg" alt="김정환 대표이사" />
       </div>
-      <div class="about__body reveal">
-        <p class="about__name" data-field="about.name">김정환</p>
-
-        <h2 class="about__block-title" data-field="about.greetingTitle">대표이사 인사말</h2>
+      <div class="ab-ceo__body">
+        <p class="pw-k">CEO MESSAGE</p>
+        <p class="ab-ceo__name"><span data-field="about.name">김정환</span> <small>대표이사</small></p>
         <div class="about__prose" id="about-greeting"></div>
         <p class="about__sign" data-field="about.greetingSign"></p>
       </div>
-    </div>
-
-    <section class="about-section reveal">
-      <h2 class="about__block-title" data-field="about.profileTitle">PROFILE</h2>
-      <div class="about__prose about__prose--wide" id="about-profile"></div>
     </section>
 
-    <section class="about-section reveal" id="about-partners-wrap">
-      <h2 class="about__block-title" data-field="about.partnersTitle">협력사</h2>
-      <ul class="partners" id="about-partners"></ul>
+    <section class="section wrap">
+      <div class="sec-head reveal">
+        <h2 class="sec-title"><small>WHAT WE DO</small>BUSINESS</h2>
+      </div>
+      <div class="biz-grid reveal" id="biz-grid"></div>
     </section>
 
-    <section class="about-section reveal" id="about-press-wrap">
-      <h2 class="about__block-title">관련 기사</h2>
-      <nav class="modal__links" id="about-press" aria-label="관련 보도"></nav>
+    <section class="section wrap">
+      <div class="sec-head reveal">
+        <h2 class="sec-title"><small>FILMOGRAPHY</small>WORKS</h2>
+        <a class="sec-link" href="works.html">VIEW ALL <svg class="arrow" viewBox="0 0 26 10" aria-hidden="true"><path d="M0 5h24M20 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      </div>
+      <div class="works-grid works-grid--feature reveal" id="works-grid" data-featured></div>
     </section>
 
-    <section class="about-section reveal">
-      <h2 class="about__block-title" data-field="about.currentBusinessTitle">CURRENT BUSINESS</h2>
-      <ul class="about-list" id="about-business"></ul>
-    </section>
-
-    <div class="about-grid">
-      <section class="reveal">
+    <section class="ab-meta wrap reveal">
+      <div id="about-partners-wrap">
+        <h2 class="about__block-title" data-field="about.partnersTitle">협력사</h2>
+        <ul class="partners" id="about-partners"></ul>
+      </div>
+      <div id="about-press-wrap">
+        <h2 class="about__block-title">관련 기사</h2>
+        <nav class="modal__links" id="about-press" aria-label="관련 보도"></nav>
+      </div>
+      <div>
         <h2 class="about__block-title">COMPANY</h2>
         <dl class="facts" id="about-facts"></dl>
-      </section>
-      <section class="reveal">
-        <h2 class="about__block-title">SELECTED FILMOGRAPHY</h2>
-        <dl class="facts" id="about-recognition"></dl>
-      </section>
-    </div>
-  </div>
+      </div>
+    </section>
+
+    <section class="ab-cta">
+      <div class="wrap ab-cta__in">
+        <p class="ab-cta__text">함께 만들 이야기가 있다면,<br />언제든 연락주세요.</p>
+        <a class="bx-btn bx-btn--light" href="contact.html">CONTACT</a>
+      </div>
+    </section>
   </main>
   <footer class="ft">
     <div class="wrap ft__top">
@@ -124,6 +135,6 @@
     <div class="ft__word" aria-hidden="true">GOLDSTREAM</div>
   </footer>
 
-  <script src="js/site.js?v=4762c68cf4"></script>
+  <script src="js/site.js?v=46e56a85fb"></script>
 </body>
 </html>

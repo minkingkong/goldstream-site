@@ -2674,6 +2674,332 @@ body::after {
 }
 
 /* =========================================================
+   ABOUT / CONTACT — poster-wall heroes
+   ========================================================= */
+.pw-hero {
+  position: relative;
+  height: calc(100vh - var(--header-h));
+  height: calc(100svh - var(--header-h));
+  min-height: 560px;
+  overflow: hidden;
+  background: #0b0b0b;
+  color: #fff;
+}
+.pw-wall {
+  position: absolute;
+  inset: -12% -8%;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 14px;
+  transform: rotate(-6deg) scale(1.12);
+  animation: pw-drift 60s linear infinite alternate;
+}
+.pw-wall img {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+}
+@keyframes pw-drift {
+  to {
+    transform: rotate(-6deg) scale(1.12) translate3d(-4%, -3%, 0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pw-wall {
+    animation: none;
+  }
+}
+.pw-hero__shade {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 10, 10, 0.72);
+}
+.pw-k {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  color: var(--gold);
+}
+.pw-hero__in {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 var(--pad);
+  text-align: center;
+}
+.pw-hero__title {
+  margin-top: 22px;
+  font-size: clamp(34px, 5.2vw, 76px);
+  font-weight: 800;
+  letter-spacing: -0.045em;
+  line-height: 1.2;
+  word-break: keep-all;
+  color: #fff;
+}
+.pw-hero__cue {
+  position: absolute;
+  left: 50%;
+  bottom: 28px;
+  transform: translateX(-50%);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  color: rgba(255, 255, 255, 0.55);
+}
+.pw-hero__cue::after {
+  content: "";
+  display: block;
+  width: 1px;
+  height: 34px;
+  margin: 10px auto 0;
+  background: linear-gradient(rgba(255, 255, 255, 0.6), transparent);
+}
+
+/* ABOUT body */
+.ab-intro {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: clamp(32px, 6vw, 96px);
+  padding-top: clamp(80px, 10vw, 140px);
+}
+.ab-intro__lead {
+  font-size: clamp(19px, 1.8vw, 24px);
+  font-weight: 600;
+  line-height: 1.7;
+  letter-spacing: -0.02em;
+  word-break: keep-all;
+  margin-bottom: 28px;
+}
+.ab-ceo {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: clamp(32px, 6vw, 96px);
+  align-items: start;
+  margin-top: clamp(80px, 10vw, 140px);
+  padding-top: clamp(48px, 6vw, 80px);
+  border-top: 1px solid var(--line);
+}
+.ab-ceo__photo {
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--bg-soft);
+}
+.ab-ceo__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 25% 50%;
+}
+.ab-ceo__name {
+  margin: 14px 0 26px;
+  font-size: clamp(30px, 3.6vw, 46px);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+}
+.ab-ceo__name small {
+  margin-left: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0;
+  color: var(--ink-faint);
+}
+.ab-meta {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(28px, 4vw, 56px);
+  margin-top: clamp(80px, 10vw, 140px);
+  padding-top: clamp(28px, 4vw, 44px);
+  border-top: 1px solid var(--line);
+}
+.ab-meta .about__block-title {
+  margin-top: 0;
+}
+.ab-meta .partners {
+  grid-template-columns: 1fr;
+}
+.ab-meta .partner {
+  min-height: 72px;
+  font-size: 16px;
+}
+.ab-meta .facts {
+  margin-top: 0;
+}
+.ab-meta .facts div {
+  grid-template-columns: 96px 1fr;
+}
+.ab-cta {
+  margin-top: clamp(80px, 10vw, 140px);
+  background: var(--ink);
+  color: #fff;
+}
+.ab-cta__in {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  flex-wrap: wrap;
+  padding-top: clamp(48px, 6vw, 80px);
+  padding-bottom: clamp(48px, 6vw, 80px);
+}
+.ab-cta__text {
+  font-size: clamp(24px, 2.8vw, 38px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.4;
+}
+.ab-cta + .ft,
+.ct + .ft {
+  margin-top: 0;
+}
+
+/* CONTACT — everything fits the first screen */
+.pw-hero--contact .pw-hero__shade {
+  background: linear-gradient(90deg, rgba(10, 10, 10, 0.86) 0%, rgba(10, 10, 10, 0.72) 55%, rgba(10, 10, 10, 0.8) 100%);
+}
+.ct__in {
+  position: relative;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: clamp(32px, 5vw, 88px);
+  align-items: center;
+}
+.ct__title {
+  margin-top: 20px;
+  font-size: clamp(32px, 4vw, 58px);
+  font-weight: 800;
+  letter-spacing: -0.045em;
+  line-height: 1.2;
+  word-break: keep-all;
+  color: #fff;
+}
+.ct__label {
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.26em;
+  color: rgba(255, 255, 255, 0.5);
+}
+.ct__main .ct__label {
+  margin-top: clamp(36px, 5vh, 60px);
+}
+.ct__mail {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-top: 10px;
+  padding: 0;
+  background: none;
+  border: 0;
+  color: #fff;
+  font: inherit;
+  font-size: clamp(32px, 4.6vw, 70px);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  cursor: copy;
+  text-align: left;
+  word-break: break-all;
+  transition: color 0.2s ease;
+}
+.ct__mail:hover,
+.ct__mail.is-copied {
+  color: var(--gold);
+}
+.ct__copied {
+  font-style: normal;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--gold);
+}
+.ct__hint {
+  margin-top: 10px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.45);
+}
+.ct__block + .ct__block {
+  margin-top: clamp(28px, 4vh, 48px);
+}
+.ct__topics {
+  margin-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.25);
+}
+.ct__topics a {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+  font-size: 16.5px;
+  font-weight: 600;
+  color: #fff;
+  transition: color 0.2s ease, padding 0.25s var(--ease);
+}
+.ct__topics a:hover {
+  color: var(--gold);
+  padding-left: 6px;
+}
+.ct__topics span {
+  color: var(--gold);
+}
+.ct__offices {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 14px;
+}
+.ct__office p {
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.78);
+  word-break: keep-all;
+}
+.ct__office .ct__office-name {
+  margin-bottom: 4px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+}
+.ct__office a {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gold);
+}
+
+@media (max-width: 960px) {
+  .ab-intro,
+  .ab-ceo,
+  .ab-meta {
+    grid-template-columns: 1fr;
+  }
+  .ab-ceo__photo {
+    max-width: 360px;
+  }
+  .pw-hero--contact {
+    height: auto;
+    min-height: calc(100svh - var(--header-h));
+  }
+  .ct__in {
+    grid-template-columns: 1fr;
+    gap: 44px;
+    padding-top: 56px;
+    padding-bottom: 64px;
+  }
+}
+@media (max-width: 640px) {
+  .pw-wall {
+    grid-template-columns: repeat(5, 1fr);
+    inset: -10% -30%;
+  }
+  .ct__offices {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================================================
    Admin (light editor; keeps the same gold family)
    ========================================================= */
 .admin {
