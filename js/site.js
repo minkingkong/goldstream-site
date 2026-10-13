@@ -212,8 +212,9 @@
           var y = band + Math.sin(X * .0026 + t * .4) * A + o * R * Math.cos(X * .0019 - t * .55);
           X === -60 ? x.moveTo(X, y) : x.lineTo(X, y);
         }
-        var v = Math.round(25 + 145 * Math.abs(o) * 2);
-        x.strokeStyle = "rgba(" + v + "," + v + "," + (v + 6) + "," + (.5 - Math.abs(o) * .55) * fade + ")";
+        // gold ribbon: deep gold at the core, pale champagne toward the edges
+        var k = Math.min(1, Math.abs(o) * 2);
+        x.strokeStyle = "rgba(" + Math.round(132 + 69 * k) + "," + Math.round(98 + 70 * k) + "," + Math.round(38 + 62 * k) + "," + (.78 - Math.abs(o) * .62) * fade + ")";
         x.lineWidth = .8; x.stroke();
       }
       var la = reduce ? 1 : ease((t - 3.6) / 1.4) * fade;
