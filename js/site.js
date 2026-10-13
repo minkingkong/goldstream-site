@@ -167,89 +167,48 @@
   function introSlide(home) {
     var video = home.introVideo || "";
     var el = document.createElement("div");
-    el.className = "hs__slide hs__slide--intro" + (video ? " has-video" : "");
+    el.className = "hs__slide hs__slide--intro" + (video ? " has-video" : " hs__slide--dark");
     el.innerHTML =
       (video
         ? '<video class="hs__video" src="' + esc(video) + '" muted playsinline preload="auto"' +
           (home.introPoster ? ' poster="' + esc(home.introPoster) + '"' : "") + "></video>"
-        : '<canvas class="hs__ribbon" aria-hidden="true"></canvas>') +
+        : viewfinderIntro(home.heroTagline || "이야기를 현실로 만듭니다")) +
       '<h1 class="sr-only">' + esc(home.heroTitle || "GOLDSTREAM ENTERTAINMENT") + "</h1>";
     if (!video) {
-      el.setAttribute("data-dur", String(RIBBON_MS));
-      ribbonIntro(el.querySelector("canvas"), el, home.heroTagline || "이야기를 현실로 만듭니다");
+      el.setAttribute("data-dur", String(INTRO_MS));
+      bindViewfinder(el);
     }
     return el;
   }
 
-  /* Intro motion: a ribbon of fine lines twists through the frame like film turning in light,
-     then the logo and tagline settle in. One pass = RIBBON_MS; restarts whenever the slide is shown. */
-  var RIBBON_MS = 11000;
-  function ribbonIntro(canvas, slide, tag) {
-    var x = canvas.getContext("2d"), W = 0, H = 0, t0 = performance.now(), raf = 0;
-    var logo = new Image();
-    logo.src = "assets/img/logo-goldstream-dark.png";
-    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    var clamp = function (v) { return v < 0 ? 0 : v > 1 ? 1 : v; };
-    var ease = function (v) { v = clamp(v); return v * v * (3 - 2 * v); };
-    function size() {
-      var d = Math.min(window.devicePixelRatio || 1, 2);
-      W = slide.clientWidth; H = slide.clientHeight;
-      canvas.width = W * d; canvas.height = H * d;
-      x.setTransform(d, 0, 0, d, 0, 0);
+  /* Intro: tilted wall of our posters behind a white logo, framed like a camera viewfinder.
+     The logo, gold rule and tagline replay and the timecode restarts each time the slide is shown. */
+  var INTRO_MS = 11000;
+  function viewfinderIntro(tag) {
+    return '<div class="hi" aria-hidden="true">' +
+      '<div class="pw-wall" data-poster-wall></div><div class="hi__shade"></div>' +
+      '<div class="hi__center"><img src="assets/img/logo-goldstream-dark.png" alt="">' +
+      '<span class="hi__rule"></span><p class="hi__tag">' + esc(tag) + "</p></div>" +
+      '<div class="hi__vf"><b></b><b></b><b></b><b></b>' +
+      '<span class="hi__rec">REC</span><span class="hi__scene">SCENE 01</span>' +
+      '<span class="hi__tc">00:00:00:00</span><span class="hi__ar">2.39 : 1</span></div></div>';
+  }
+  function bindViewfinder(slide) {
+    var timer = 0, t0 = 0;
+    var pad = function (n) { return (n < 10 ? "0" : "") + n; };
+    function tick() {
+      var tc = slide.querySelector(".hi__tc");
+      if (!slide.classList.contains("is-active")) { clearInterval(timer); timer = 0; return; }
+      var f = Math.floor((performance.now() - t0) / 1000 * 24);
+      if (tc) tc.textContent = "00:00:" + pad(Math.floor(f / 24) % 60) + ":" + pad(f % 24);
     }
-    function draw(t) {
-      var hd = document.getElementById("hd"), top = hd ? hd.offsetHeight : 0;
-      var cy = top + (H - top) * .5;
-      var lw = Math.min(W * .62, 540), lh = lw * 170 / 774;
-      var reveal = reduce ? 1 : ease(t / 3), fade = reduce ? 1 : 1 - ease((t - 9.6) / 1.4);
-      var front = -60 + (W + 120) * reveal, A = Math.min(H, W) * .12, R = Math.min(H, W) * .2;
-      var band = cy + lh * .2, N = 70;
-      x.fillStyle = "#fafaf8"; x.fillRect(0, 0, W, H);
-      for (var i = 0; i < N; i++) {
-        var o = i / (N - 1) - .5;
-        x.beginPath();
-        for (var X = -60; X <= front; X += 5) {
-          var y = band + Math.sin(X * .0026 + t * .4) * A + o * R * Math.cos(X * .0019 - t * .55);
-          X === -60 ? x.moveTo(X, y) : x.lineTo(X, y);
-        }
-        // gold ribbon: deep gold at the core, pale champagne toward the edges
-        var k = Math.min(1, Math.abs(o) * 2);
-        x.strokeStyle = "rgba(" + Math.round(132 + 69 * k) + "," + Math.round(98 + 70 * k) + "," + Math.round(38 + 62 * k) + "," + (.78 - Math.abs(o) * .62) * fade + ")";
-        x.lineWidth = .8; x.stroke();
-      }
-      var la = reduce ? 1 : ease((t - 3.6) / 1.4) * fade;
-      if (la > 0) {
-        var g = x.createRadialGradient(W / 2, cy, 0, W / 2, cy, lw * .75);
-        g.addColorStop(0, "rgba(250,250,248," + .92 * la + ")"); g.addColorStop(1, "rgba(250,250,248,0)");
-        x.fillStyle = g; x.fillRect(0, 0, W, H);
-        if (logo.complete && logo.naturalWidth) {
-          x.globalAlpha = la;
-          x.drawImage(logo, W / 2 - lw / 2, cy - lh * .6 + (1 - la) * 14, lw, lh);
-          x.globalAlpha = 1;
-        }
-      }
-      var ta = reduce ? 1 : ease((t - 4.6) / 1.2) * fade;
-      if (ta > 0 && tag) {
-        var fs = Math.max(12, lw * .028);
-        x.globalAlpha = ta; x.fillStyle = "#555"; x.textAlign = "center";
-        x.font = "500 " + fs + "px 'Pretendard Variable', sans-serif";
-        if ("letterSpacing" in x) x.letterSpacing = ".38em";
-        x.fillText(tag, W / 2 + fs * .19, cy + lh * .85);
-        x.globalAlpha = 1;
-      }
-    }
-    function loop(n) {
-      draw((n - t0) / 1000);
-      raf = slide.classList.contains("is-active") ? requestAnimationFrame(loop) : 0;
-    }
-    function restart() {
-      size();
+    slide._onActive = function () {
+      var hi = slide.querySelector(".hi");
+      if (hi) { hi.classList.remove("is-play"); void hi.offsetWidth; hi.classList.add("is-play"); }
       t0 = performance.now();
-      cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(loop);
-    }
-    slide._onActive = restart;
-    window.addEventListener("resize", function () { if (raf) size(); });
+      clearInterval(timer);
+      timer = setInterval(tick, 42);
+    };
   }
 
   function workSlide(w) {
@@ -399,7 +358,7 @@
       });
       btns[current].after(gauge);
       // full-bleed photo slides carry white type, so the pager flips to light too
-      root.classList.toggle("is-dark", slides[current].classList.contains("hs__slide--wide"));
+      root.classList.toggle("is-dark", /hs__slide--(wide|dark)/.test(slides[current].className));
       schedule();
     }
     // after landing on a clone, jump to its real twin without animation

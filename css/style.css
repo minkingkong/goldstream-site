@@ -540,13 +540,6 @@ ul {
 .hs__slide--intro {
   background: radial-gradient(120% 90% at 78% 50%, #1d1a13 0%, var(--hero-2) 60%), var(--hero-2);
 }
-.hs__ribbon {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  display: block;
-}
 .hs__video {
   position: absolute;
   inset: 0;
@@ -3221,6 +3214,135 @@ body::after {
   .bx-hero .bx-hero__title {
     margin-top: 12px;
     font-size: clamp(30px, min(3.6vw, 5.4vh), 56px);
+  }
+}
+
+/* home intro: poster wall + white logo in a camera viewfinder */
+.hs__slide--dark {
+  background: #0b0b0b;
+}
+.hi {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: var(--header-h);
+  bottom: 0;
+  overflow: hidden;
+  background: #0b0b0b;
+  color: #fff;
+}
+.hi__shade {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(38% 46% at 50% 50%, rgba(10, 10, 10, 0.5), rgba(10, 10, 10, 0.9));
+}
+.hi__center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 2;
+  width: min(560px, 74vw);
+  transform: translate(-50%, -54%);
+  text-align: center;
+}
+.hi__center img {
+  display: block;
+  width: 100%;
+  filter: brightness(0) invert(1);
+}
+.hi__rule {
+  display: block;
+  width: 86%;
+  height: 1px;
+  margin: clamp(18px, 2.4vw, 28px) auto clamp(12px, 1.4vw, 16px);
+  background: #c9a869;
+}
+.hi__tag {
+  font-size: clamp(11.5px, 1.05vw, 15px);
+  font-weight: 500;
+  letter-spacing: 0.42em;
+  color: rgba(255, 255, 255, 0.78);
+}
+.hi.is-play .hi__center img {
+  animation: hi-up 1.4s 0.3s ease both;
+}
+.hi.is-play .hi__rule {
+  animation: hi-grow 1.1s 1.5s cubic-bezier(0.6, 0, 0.2, 1) both;
+}
+.hi.is-play .hi__tag {
+  animation: hi-fade 1.2s 2.4s ease both;
+}
+@keyframes hi-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes hi-grow {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+@keyframes hi-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.hi__vf {
+  position: absolute;
+  inset: clamp(14px, 2.6vw, 40px) clamp(14px, 2.6vw, 40px) clamp(96px, 12vh, 130px);
+  z-index: 3;
+  pointer-events: none;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: rgba(255, 255, 255, 0.75);
+}
+.hi__vf b {
+  position: absolute;
+  width: 34px;
+  height: 34px;
+  border: 0 solid rgba(255, 255, 255, 0.8);
+}
+.hi__vf b:nth-child(1) { left: 0; top: 0; border-left-width: 1.5px; border-top-width: 1.5px; }
+.hi__vf b:nth-child(2) { right: 0; top: 0; border-right-width: 1.5px; border-top-width: 1.5px; }
+.hi__vf b:nth-child(3) { left: 0; bottom: 0; border-left-width: 1.5px; border-bottom-width: 1.5px; }
+.hi__vf b:nth-child(4) { right: 0; bottom: 0; border-right-width: 1.5px; border-bottom-width: 1.5px; }
+.hi__vf span {
+  position: absolute;
+}
+.hi__rec { left: 48px; top: 10px; }
+.hi__scene { right: 48px; top: 10px; }
+.hi__tc { left: 48px; bottom: 10px; font-variant-numeric: tabular-nums; }
+.hi__ar { right: 48px; bottom: 10px; }
+.hi__rec::before {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 8px;
+  border-radius: 50%;
+  background: #e23b2e;
+  vertical-align: 1px;
+  animation: hi-blink 1s steps(1) infinite;
+}
+@keyframes hi-blink {
+  50% { opacity: 0; }
+}
+@media (max-width: 640px) {
+  .hi__vf {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+  }
+  .hi__vf b {
+    width: 22px;
+    height: 22px;
+  }
+  .hi__rec, .hi__tc { left: 30px; }
+  .hi__scene, .hi__ar { right: 30px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hi.is-play .hi__center img,
+  .hi.is-play .hi__rule,
+  .hi.is-play .hi__tag,
+  .hi__rec::before {
+    animation: none;
   }
 }
 
