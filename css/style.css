@@ -3197,6 +3197,33 @@ body::after {
   }
 }
 
+/* business hero v2: photo + text band always fit the first screen on desktop */
+@media (min-width: 861px) {
+  .bx-hero {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - var(--header-h));
+    height: calc(100svh - var(--header-h));
+    min-height: 600px;
+  }
+  .bx-hero .bx-hero__media,
+  .sc .bx-hero__media {
+    flex: 1 1 auto;
+    height: auto;
+    min-height: 220px;
+  }
+  .bx-hero .bx-hero__in,
+  .bx-hero .bx-hero__in:has(.bx-hero__media:not([hidden])) {
+    flex: none;
+    padding-top: clamp(26px, 3.4vh, 44px);
+    padding-bottom: clamp(30px, 4.4vh, 56px);
+  }
+  .bx-hero .bx-hero__title {
+    margin-top: 12px;
+    font-size: clamp(30px, min(3.6vw, 5.4vh), 56px);
+  }
+}
+
 /* =========================================================
    Admin (light editor; keeps the same gold family)
    ========================================================= */
