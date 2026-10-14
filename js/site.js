@@ -785,13 +785,19 @@
       '<nav class="modal__links" id="modal-links" aria-label="관련 링크"></nav>' +
       "</div></div>";
     document.body.appendChild(modalEl);
-    function close() {
+    function shut() {
       if (!modalEl.classList.contains("is-open")) return;
       modalEl.classList.remove("is-open");
       document.getElementById("modal-media").innerHTML = "";
       document.body.style.overflow = "";
-      if (location.hash) history.replaceState(null, "", location.pathname);
+      if (location.hash) history.replaceState(history.state, "", location.pathname);
     }
+    // the popup owns one history entry, so the phone's back button/swipe closes it instead of leaving the site
+    function close() {
+      if (history.state && history.state.gsModal) history.back();
+      else shut();
+    }
+    window.addEventListener("popstate", shut);
     modalEl.querySelector(".modal__close").addEventListener("click", close);
     modalEl.addEventListener("click", function (e) {
       if (e.target === modalEl) close();
@@ -853,7 +859,7 @@
     dl.innerHTML = "";
     var cr = w.credits || {};
     Object.keys(cr).forEach(function (k) {
-      if (!cr[k]) return;
+      if (!cr[k] || String(cr[k]).trim() === "-") return;
       var d = document.createElement("div");
       d.innerHTML = "<dt>" + esc(k) + "</dt><dd>" + esc(cr[k]) + "</dd>";
       dl.appendChild(d);
@@ -875,7 +881,8 @@
     document.body.style.overflow = "hidden";
     modalEl.scrollTop = 0;
     fitModal();
-    if (!document.getElementById("hs")) history.replaceState(null, "", "#" + w.id);
+    if (!(history.state && history.state.gsModal)) history.pushState({ gsModal: 1 }, "");
+    if (!document.getElementById("hs")) history.replaceState(history.state, "", "#" + w.id);
   }
 
   /* ---------- about / contact / footer ---------- */

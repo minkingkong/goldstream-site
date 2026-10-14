@@ -3346,6 +3346,66 @@ body::after {
   }
 }
 
+/* work modal on phones: full-screen sheet, close button always on top, compact info */
+.modal__close {
+  z-index: 5;
+}
+@media (max-width: 860px) {
+  .modal {
+    padding: 0;
+    background: var(--bg);
+  }
+  .modal__card {
+    max-width: none !important;
+    min-height: 100%;
+    border: 0;
+    border-radius: 0;
+  }
+  .modal__close {
+    position: fixed;
+    top: max(12px, env(safe-area-inset-top));
+    right: 12px;
+    width: 42px;
+    height: 42px;
+    font-size: 24px;
+    background: rgba(17, 17, 17, 0.82);
+    color: #fff;
+    border-color: transparent;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  }
+  .modal__media {
+    aspect-ratio: 16 / 9;
+  }
+  .modal__body {
+    padding: 18px 20px 28px;
+  }
+  .modal__eyebrow {
+    font-size: 11px;
+  }
+  .modal__title {
+    margin-top: 6px;
+    font-size: 24px;
+  }
+  .modal__synopsis {
+    margin-top: 10px;
+    font-size: 14px;
+    line-height: 1.65;
+  }
+  .modal__credits {
+    margin-top: 16px;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 16px;
+  }
+  .modal__credits div {
+    padding: 9px 0;
+  }
+  .modal__credits dd {
+    margin-top: 2px;
+    font-size: 13.5px;
+    line-height: 1.5;
+  }
+}
+
 /* =========================================================
    Admin (light editor; keeps the same gold family)
    ========================================================= */
