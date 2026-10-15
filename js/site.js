@@ -173,7 +173,7 @@
         ? '<video class="hs__video" src="' + esc(video) + '" muted playsinline preload="auto"' +
           (home.introPoster ? ' poster="' + esc(home.introPoster) + '"' : "") + "></video>"
         : viewfinderIntro(home.heroTagline || "이야기를 현실로 만듭니다")) +
-      '<h1 class="sr-only">' + esc(home.heroTitle || "GOLDSTREAM ENTERTAINMENT") + "</h1>";
+      '<p class="sr-only">' + esc(home.heroTitle || "GOLDSTREAM ENTERTAINMENT") + "</p>";
     if (!video) {
       el.setAttribute("data-dur", String(INTRO_MS));
       bindViewfinder(el);
@@ -190,8 +190,8 @@
       '<div class="hi__center"><img src="assets/img/logo-goldstream-dark.png" alt="">' +
       '<span class="hi__rule"></span><p class="hi__tag">' + esc(tag) + "</p></div>" +
       '<div class="hi__vf"><b></b><b></b><b></b><b></b>' +
-      '<span class="hi__rec">REC</span><span class="hi__scene">SCENE 01</span>' +
-      '<span class="hi__tc">00:00:00:00</span><span class="hi__ar">2.39 : 1</span></div></div>';
+      '<span class="hi__rec" data-t="REC"></span><span class="hi__scene" data-t="SCENE 01"></span>' +
+      '<span class="hi__tc" data-t="00:00:00:00"></span><span class="hi__ar" data-t="2.39 : 1"></span></div></div>';
   }
   function bindViewfinder(slide) {
     var timer = 0, t0 = 0;
@@ -200,7 +200,7 @@
       var tc = slide.querySelector(".hi__tc");
       if (!slide.classList.contains("is-active")) { clearInterval(timer); timer = 0; return; }
       var f = Math.floor((performance.now() - t0) / 1000 * 24);
-      if (tc) tc.textContent = "00:00:" + pad(Math.floor(f / 24) % 60) + ":" + pad(f % 24);
+      if (tc) tc.dataset.t = "00:00:" + pad(Math.floor(f / 24) % 60) + ":" + pad(f % 24);
     }
     slide._onActive = function () {
       var hi = slide.querySelector(".hi");

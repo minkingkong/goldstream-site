@@ -3307,6 +3307,8 @@ body::after {
 .hi__vf span {
   position: absolute;
 }
+.hi__vf span::after { content: attr(data-t); }
+.pw-hero__cue::before { content: "SCROLL"; }
 .hi__rec { left: 48px; top: 10px; }
 .hi__scene { right: 48px; top: 10px; }
 .hi__tc { left: 48px; bottom: 10px; font-variant-numeric: tabular-nums; }
