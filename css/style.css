@@ -3802,6 +3802,60 @@ body::after {
   .so-care ul { grid-template-columns: 1fr 1fr; }
 }
 
+/* SHOP v5 — product detail (G/I) + ingredients (H) */
+.pd { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: clamp(32px, 5vw, 96px); align-items: start; padding-top: clamp(28px, 3.4vw, 56px); padding-bottom: clamp(56px, 7vw, 100px); }
+.pd__main { margin: 0; aspect-ratio: 4 / 5; max-height: calc(100svh - var(--header-h) - 150px); width: 100%; overflow: hidden; background: #efebe4; }
+.pd__main img { width: 100%; height: 100%; object-fit: cover; }
+.pd__thumbs { display: flex; gap: 10px; margin-top: 12px; }
+.pd__thumbs button { width: 72px; aspect-ratio: 1; padding: 0; border: 1px solid transparent; overflow: hidden; background: #efebe4; opacity: .6; transition: opacity .2s, border-color .2s; }
+.pd__thumbs button.is-on, .pd__thumbs button:hover { opacity: 1; border-color: var(--ink); }
+.pd__thumbs img { width: 100%; height: 100%; object-fit: cover; }
+.pd__info { position: sticky; top: calc(var(--header-h) + 32px); padding-top: clamp(8px, 2vw, 40px); }
+.pd__crumb { font-size: 11px; letter-spacing: .24em; color: var(--ink-faint); }
+.pd__brand { margin-top: 26px; font-size: 13px; font-weight: 600; letter-spacing: .32em; color: var(--gold); }
+.pd__name { margin-top: 10px; font-size: clamp(26px, 2.3vw, 34px); font-weight: 500; letter-spacing: -.03em; }
+.pd__copy { margin-top: 16px; font-size: 15px; line-height: 1.85; color: var(--ink-muted); }
+.pd__ing { list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 26px; }
+.pd__ing img { display: block; width: 100%; aspect-ratio: 1; object-fit: cover; }
+.pd__ing span { display: block; margin-top: 8px; font-size: 12.5px; color: var(--ink-muted); }
+.pd__row { display: grid; grid-template-columns: 76px 1fr; align-items: center; padding: 14px 0; border-bottom: 1px solid var(--line); font-size: 14px; }
+.pd__row:first-of-type { margin-top: 26px; border-top: 1px solid var(--line); }
+.pd__row dt { font-size: 13px; color: var(--ink-faint); }
+.pd__chip { display: inline-block; padding: 5px 12px; border: 1px solid var(--ink); border-radius: 999px; font-size: 12.5px; }
+.pd__price { display: flex; align-items: baseline; gap: 10px; }
+.pd__price b { font-size: 24px; font-weight: 700; letter-spacing: -.02em; }
+.pd__price del { font-size: 13px; color: var(--ink-faint); }
+.pd__price em { font-style: normal; font-size: 13px; font-weight: 700; color: #b5442f; }
+.pd__buy { display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 24px; padding: 17px 20px; border-radius: 999px; background: #1d1d1b; color: #fff; font-size: 15px; font-weight: 600; transition: background .2s; }
+.pd__buy:hover { background: #3b3a36; }
+.pd__buy i { font-style: normal; transition: transform .25s var(--ease); }
+.pd__buy:hover i { transform: translateX(4px); }
+.pd__n { display: inline-grid; place-items: center; width: 20px; height: 20px; border-radius: 4px; background: #03c75a; font-size: 12px; font-weight: 800; }
+.pd__help { margin-top: 12px; text-align: center; font-size: 12.5px; color: var(--ink-faint); }
+.pd__help a { color: var(--ink-muted); border-bottom: 1px solid var(--line-strong); }
+.pd__marks { list-style: none; display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 16px; margin-top: 22px; font-size: 12px; color: var(--ink-muted); }
+.pd__marks li::before { content: "✓ "; color: var(--gold); }
+.ig { background: #f4f1eb; padding: clamp(72px, 9vw, 130px) 0; }
+.ig__in { display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(28px, 4vw, 64px) clamp(32px, 5vw, 90px); align-items: center; }
+.ig__title { margin-top: 14px; font-size: clamp(26px, 2.8vw, 40px); font-weight: 500; letter-spacing: -.03em; line-height: 1.3; }
+.ig__lead { margin-top: 18px; font-size: 15px; line-height: 1.85; color: var(--ink-muted); }
+.ig__img { margin: 0; grid-row: span 2; aspect-ratio: 16 / 10; overflow: hidden; }
+.ig__img img { width: 100%; height: 100%; object-fit: cover; }
+.ig__list { list-style: none; border-top: 1px solid var(--ink); }
+.ig__list li { display: grid; grid-template-columns: 1fr auto; gap: 2px 12px; padding: 16px 0; border-bottom: 1px solid var(--line-strong); }
+.ig__list b { font-size: 15px; font-weight: 600; letter-spacing: .04em; }
+.ig__list span { font-size: 13px; color: var(--ink-faint); text-align: right; }
+.ig__list em { grid-column: 1 / -1; font-style: normal; font-size: 13.5px; color: var(--ink-muted); }
+.ig + .sp-rec { padding-top: clamp(72px, 9vw, 130px); }
+@media (max-width: 960px) {
+  .pd { grid-template-columns: 1fr; }
+  .pd__main { max-height: none; aspect-ratio: 1; }
+  .pd__info { position: static; padding-top: 0; }
+  .pd__thumbs button { width: 60px; }
+  .ig__in { grid-template-columns: 1fr; }
+  .ig__img { grid-row: auto; }
+}
+
 /* =========================================================
    Admin (light editor; keeps the same gold family)
    ========================================================= */
