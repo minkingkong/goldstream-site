@@ -3657,6 +3657,73 @@ body::after {
   .sp-ph span { font-size: 10px; padding: 6px 0; }
 }
 
+/* SHOP v2 — commerce hero */
+.sx {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(380px, 1fr);
+  min-height: calc(100svh - var(--header-h));
+  background: #f6f4f0;
+}
+.sx__media { position: relative; overflow: hidden; background: #e9e5de; }
+.sx__main { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: opacity .4s ease; }
+.sx__thumbs { position: absolute; left: clamp(16px, 2.4vw, 32px); bottom: clamp(16px, 2.4vw, 32px); display: flex; gap: 8px; }
+.sx__thumbs button { width: 58px; height: 58px; padding: 0; border: 1.5px solid transparent; border-radius: 10px; overflow: hidden; background: #fff; opacity: .78; transition: opacity .2s, border-color .2s; }
+.sx__thumbs button.is-on, .sx__thumbs button:hover { opacity: 1; border-color: #111; }
+.sx__thumbs img { width: 100%; height: 100%; object-fit: cover; }
+.sx__panel { display: flex; flex-direction: column; justify-content: center; padding: clamp(36px, 5vw, 88px) clamp(28px, 4.4vw, 80px); }
+.sx__eyebrow { display: flex; align-items: center; gap: 10px; font-size: 11.5px; font-weight: 700; letter-spacing: .22em; color: #6f6a62; }
+.sx__eyebrow span { padding: 4px 9px; border-radius: 999px; background: #111; color: #fff; letter-spacing: .14em; }
+.sx__name { margin-top: 22px; font-size: clamp(54px, 6.4vw, 104px); font-weight: 300; letter-spacing: .08em; line-height: .95; }
+.sx__ko { margin-top: 16px; font-size: 15px; color: #6f6a62; }
+.sx__copy { margin-top: 26px; font-size: clamp(16px, 1.3vw, 18px); line-height: 1.75; color: #2a2724; word-break: keep-all; }
+.sx__spec { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+.sx__spec li { padding: 7px 13px; border: 1px solid #d9d3c9; border-radius: 999px; font-size: 12.5px; color: #4a453f; background: rgba(255,255,255,.5); }
+.sx__price { display: flex; align-items: baseline; gap: 12px; margin-top: 34px; padding-top: 26px; border-top: 1px solid #ddd7cd; }
+.sx__off { font-size: 24px; font-weight: 800; color: #c0392b; }
+.sx__price b { font-size: clamp(30px, 2.6vw, 38px); font-weight: 800; letter-spacing: -.02em; }
+.sx__price del { font-size: 15px; color: #9b958c; }
+.sx__note { margin-top: 6px; font-size: 13px; color: #6f6a62; }
+.sx__buy { display: flex; align-items: center; gap: 12px; margin-top: 24px; padding: 20px 26px; border-radius: 999px; background: #111; color: #fff; transition: background .25s ease, transform .25s var(--ease); }
+.sx__buy span { font-size: 16px; font-weight: 700; }
+.sx__buy small { font-size: 12.5px; color: rgba(255,255,255,.6); }
+.sx__buy i { margin-left: auto; font-style: normal; font-size: 18px; transition: transform .25s var(--ease); }
+.sx__buy:hover { background: #2c2a27; }
+.sx__buy:hover i { transform: translateX(5px); }
+.sx__buy--light { background: #fff; color: #111; min-width: min(100%, 380px); }
+.sx__buy--light small { color: #8a857d; }
+.sx__buy--light:hover { background: #f1eee9; }
+.sx__call { margin-top: 14px; align-self: center; font-size: 13px; color: #6f6a62; border-bottom: 1px solid #cfc9bf; padding-bottom: 2px; }
+.sx-marquee { list-style: none; display: flex; overflow: hidden; white-space: nowrap; padding: 18px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); font-size: 15px; font-weight: 600; color: #8a857d; }
+.sx-marquee li { flex: none; padding-right: 28px; animation: sx-mq 38s linear infinite; }
+@keyframes sx-mq { to { transform: translateX(-100%); } }
+@media (prefers-reduced-motion: reduce) { .sx-marquee li { animation: none; } }
+.sx-bar { position: fixed; z-index: 60; left: 0; right: 0; bottom: 0; transform: translateY(110%); transition: transform .35s var(--ease); padding: 10px clamp(12px, 2vw, 24px) calc(10px + env(safe-area-inset-bottom)); }
+.sx-bar.is-on { transform: none; }
+.sx-bar__in { display: flex; align-items: center; gap: 14px; max-width: 920px; margin: 0 auto; padding: 10px 10px 10px 12px; border-radius: 999px; background: rgba(17,17,17,.92); backdrop-filter: blur(10px); color: #fff; box-shadow: 0 12px 40px rgba(0,0,0,.25); }
+.sx-bar__in img { width: 42px; height: 42px; border-radius: 50%; object-fit: cover; object-position: 50% 55%; }
+.sx-bar__in p { display: flex; flex-direction: column; font-size: 13.5px; line-height: 1.35; min-width: 0; }
+.sx-bar__in b { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sx-bar__in span { color: rgba(255,255,255,.65); font-size: 12.5px; }
+.sx-bar__in em { font-style: normal; font-weight: 700; color: #fff; }
+.sx-bar__in del { margin-left: 4px; }
+.sx-bar__in a { margin-left: auto; flex: none; padding: 12px 22px; border-radius: 999px; background: #fff; color: #111; font-size: 14px; font-weight: 700; }
+.sp .sp-end { background: #f6f4f0; color: #111; }
+.sp .sp-end__price { color: #6f6a62; }
+.sp .sp-end__price del { color: #9b958c; }
+.sp .sp-end__price b { color: #111; }
+.sp .sp-end .sx__buy--light { background: #111; color: #fff; }
+.sp .sp-end .sx__buy--light small { color: rgba(255,255,255,.6); }
+.sp .sp-end .sp-call, .sp .sp-end .sp-call a { color: #4a453f; }
+.sp .sp-banner { margin-top: 0; }
+@media (max-width: 960px) {
+  .sx { grid-template-columns: 1fr; min-height: 0; }
+  .sx__media { aspect-ratio: 4 / 5; max-height: 72svh; width: 100%; }
+  .sx__thumbs button { width: 48px; height: 48px; }
+  .sx__panel { padding: 32px 20px 40px; }
+  .sx__name { font-size: 56px; }
+  .sx-bar__in span { display: none; }
+}
+
 /* =========================================================
    Admin (light editor; keeps the same gold family)
    ========================================================= */
