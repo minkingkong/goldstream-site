@@ -814,9 +814,24 @@
     if (!modalEl || !modalEl.classList.contains("is-open")) return;
     var card = modalEl.querySelector(".modal__card");
     var credits = document.getElementById("modal-credits");
+    var media = document.getElementById("modal-media");
     card.style.maxWidth = "";
     credits.style.marginTop = "";
-    if (window.innerWidth < 861) return;
+    media.style.height = "";
+    media.style.aspectRatio = "";
+    if (window.innerWidth < 861) {
+      // phones: size the picture to whatever height this app leaves (KakaoTalk, Safari, Naver differ)
+      // so title, synopsis and every credit line end inside the first screen
+      var vh = (window.visualViewport && window.visualViewport.height) || window.innerHeight;
+      var natural = media.offsetWidth * 9 / 16;
+      var below = credits.getBoundingClientRect().bottom - media.getBoundingClientRect().bottom + 16;
+      var h = Math.max(120, Math.min(natural, vh - below));
+      if (h < natural - 1) {
+        media.style.aspectRatio = "auto";
+        media.style.height = Math.round(h) + "px";
+      }
+      return;
+    }
     var body = modalEl.querySelector(".modal__body");
     var syn = document.getElementById("modal-synopsis");
     var pad = parseFloat(getComputedStyle(modalEl).paddingTop) || 0;
@@ -832,6 +847,7 @@
     if (gap > 0) credits.style.marginTop = Math.max(26, gap + 32) + "px";
   }
   window.addEventListener("resize", fitModal);
+  if (window.visualViewport) window.visualViewport.addEventListener("resize", fitModal);
 
   function openModal(w) {
     ensureModal();
