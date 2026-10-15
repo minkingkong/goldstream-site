@@ -3859,6 +3859,33 @@ body::after {
   .ig__img { grid-row: auto; }
 }
 
+/* BRAND — one-screen pre-launch teaser */
+.tz__hero { position: relative; height: calc(100vh - var(--header-h)); height: calc(100svh - var(--header-h)); min-height: 560px; overflow: hidden; background: #050505; color: #f1ede6; }
+.tz__bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 70% 50%; animation: tz-in 2.4s ease both; }
+@keyframes tz-in { from { opacity: 0; transform: scale(1.04); } to { opacity: 1; transform: none; } }
+.tz__hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(5,5,5,.78) 0%, rgba(5,5,5,.35) 45%, rgba(5,5,5,0) 70%); }
+.tz__in { position: relative; z-index: 1; height: 100%; display: flex; flex-direction: column; justify-content: center; }
+.tz__in > * { animation: tz-up 1.2s ease both; }
+.tz__in > :nth-child(2) { animation-delay: .3s; } .tz__in > :nth-child(3) { animation-delay: .6s; } .tz__in > :nth-child(4) { animation-delay: .8s; } .tz__in > :nth-child(5) { animation-delay: 1.1s; }
+@keyframes tz-up { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+.tz__k { font-size: 11px; font-weight: 500; letter-spacing: .4em; color: rgba(241,237,230,.55); }
+.tz__name { margin-top: 22px; font-size: clamp(44px, 5.4vw, 84px); font-weight: 200; letter-spacing: .22em; line-height: 1; }
+.tz__line { margin-top: 26px; font-size: clamp(17px, 1.5vw, 21px); font-weight: 300; letter-spacing: .08em; }
+.tz__desc { margin-top: 14px; font-size: 14px; font-weight: 300; line-height: 1.9; color: rgba(241,237,230,.6); }
+.tz__soon { display: flex; align-items: center; gap: 14px; margin-top: 44px; font-size: 12px; font-weight: 400; letter-spacing: .36em; text-transform: uppercase; color: #d9c08d; }
+.tz__soon span { width: 48px; height: 1px; background: #d9c08d; }
+.tz__foot { position: absolute; z-index: 1; left: 0; right: 0; bottom: 28px; pointer-events: none; text-align: center; font-size: 10.5px; letter-spacing: .4em; color: rgba(241,237,230,.4); }
+.tz + .ft { margin-top: 0; }
+@media (min-width: 861px) { .tz__foot { left: var(--pad); right: auto; text-align: left; } }
+@media (max-width: 860px) {
+  .tz__bg { top: 0; bottom: auto; height: 58%; object-position: 64% 40%; }
+  .tz__hero::after { background: linear-gradient(0deg, #050505 0%, #050505 42%, rgba(5,5,5,0) 60%); }
+  .tz__in { justify-content: flex-end; padding-bottom: 76px; }
+  .tz__name { margin-top: 16px; }
+  .tz__soon { margin-top: 28px; }
+}
+@media (prefers-reduced-motion: reduce) { .tz__bg, .tz__in > * { animation: none; } }
+
 /* =========================================================
    Admin (light editor; keeps the same gold family)
    ========================================================= */
