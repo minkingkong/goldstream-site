@@ -3886,6 +3886,43 @@ body::after {
 }
 @media (prefers-reduced-motion: reduce) { .tz__bg, .tz__in > * { animation: none; } }
 
+/* BRAND teaser — offer + ingredients (dark) */
+.tz__offer { margin-top: 40px; max-width: 420px; animation: tz-up 1.2s 1.1s ease both; }
+.tz__offer dl { border-top: 1px solid rgba(241,237,230,.2); }
+.tz__offer dl div { display: grid; grid-template-columns: 96px 1fr; align-items: baseline; padding: 12px 0; border-bottom: 1px solid rgba(241,237,230,.12); }
+.tz__offer dt { font-size: 10.5px; letter-spacing: .32em; text-transform: uppercase; color: rgba(241,237,230,.45); }
+.tz__offer dd { font-size: 14px; font-weight: 300; letter-spacing: .02em; }
+.tz__offer dd b { font-size: 20px; font-weight: 400; color: #d9c08d; letter-spacing: .01em; }
+.tz__offer dd del { margin-left: 8px; font-size: 12.5px; color: rgba(241,237,230,.38); }
+.tz__call { margin-top: 14px; font-size: 12px; font-weight: 300; letter-spacing: .04em; color: rgba(241,237,230,.45); }
+.tz__call a { color: rgba(241,237,230,.8); border-bottom: 1px solid rgba(241,237,230,.25); }
+.tz-ing { background: #070707; color: #f1ede6; padding: clamp(80px, 10vw, 150px) 0; border-top: 1px solid rgba(241,237,230,.08); }
+.tz-ing__title { margin-top: 18px; font-size: clamp(24px, 2.6vw, 38px); font-weight: 200; letter-spacing: .02em; }
+.tz-ing__list { list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(20px, 3vw, 48px); margin-top: clamp(40px, 5vw, 72px); }
+.tz-ing__list li { padding-top: 22px; border-top: 1px solid rgba(241,237,230,.25); }
+.tz-ing__n { font-size: 11px; letter-spacing: .3em; color: #d9c08d; }
+.tz-ing__list b { display: block; margin-top: 18px; font-size: clamp(20px, 1.8vw, 26px); font-weight: 200; letter-spacing: .1em; text-transform: uppercase; }
+.tz-ing__list em { display: block; margin-top: 6px; font-style: normal; font-size: 13px; color: rgba(241,237,230,.5); }
+.tz-ing__list p { margin-top: 18px; font-size: 14px; font-weight: 300; line-height: 1.8; color: rgba(241,237,230,.7); }
+.tz-more { display: grid; grid-template-columns: 1.4fr 1fr; gap: 24px 48px; margin-top: clamp(48px, 6vw, 88px); padding: 28px 0; border-top: 1px solid rgba(241,237,230,.12); border-bottom: 1px solid rgba(241,237,230,.12); }
+.tz-more p { font-size: 13.5px; font-weight: 300; line-height: 1.9; color: rgba(241,237,230,.6); word-break: keep-all; }
+.tz-more b { display: block; margin-bottom: 6px; font-size: 13px; font-weight: 500; letter-spacing: .06em; color: #f1ede6; }
+.tz-care { list-style: none; display: flex; flex-wrap: wrap; gap: 10px; margin-top: 32px; }
+.tz-care li { padding: 9px 16px; border: 1px solid rgba(241,237,230,.22); border-radius: 999px; font-size: 12.5px; font-weight: 300; letter-spacing: .04em; color: rgba(241,237,230,.8); }
+.tz-rv { opacity: 0; transform: translateY(24px); transition: opacity 1.1s ease, transform 1.1s cubic-bezier(.2,.7,.2,1); }
+.tz-rv.is-in { opacity: 1; transform: none; }
+.tz-ing + .ft, .tz .tz-ing:last-child { margin-bottom: 0; }
+@media (max-width: 860px) {
+  .tz__hero { display: flex; flex-direction: column; height: auto; min-height: 0; }
+  .tz__hero .tz__bg { position: relative; inset: auto; height: 58vh; width: 100%; }
+  .tz__hero::after { inset: 0 0 auto 0; height: 58vh; background: linear-gradient(0deg, #050505 0%, rgba(5,5,5,0) 45%); }
+  .tz__hero .tz__in { height: auto; margin-top: -64px; padding-bottom: 72px; justify-content: flex-start; }
+  .tz__offer { margin-top: 26px; }
+  .tz__foot { position: relative; bottom: auto; padding: 0 0 28px; }
+  .tz-ing__list, .tz-more { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) { .tz-rv { opacity: 1; transform: none; transition: none; } .tz__offer { animation: none; } }
+
 /* =========================================================
    Admin (light editor; keeps the same gold family)
    ========================================================= */
