@@ -3217,7 +3217,7 @@ body::after {
   }
 }
 
-/* home intro: film still with letterbox bars and a wide-tracked title, like a movie's opening card */
+/* home intro: tilted poster wall behind a wide-tracked title, like a movie's opening card */
 .hs__slide--dark {
   background: #000;
 }
@@ -3231,27 +3231,11 @@ body::after {
   background: #000;
   color: #fff;
 }
-.hi__bg {
-  position: absolute;
-  inset: 0;
-  background: center / cover no-repeat;
-  filter: grayscale(0.6) contrast(1.1);
-}
 .hi__shade {
   position: absolute;
   inset: 0;
-  background: radial-gradient(60% 60% at 50% 50%, rgba(0, 0, 0, 0.72), rgba(0, 0, 0, 0.9));
+  background: radial-gradient(38% 46% at 50% 50%, rgba(10, 10, 10, 0.5), rgba(10, 10, 10, 0.9));
 }
-.hi__bar {
-  position: absolute;
-  left: 0;
-  right: 0;
-  z-index: 3;
-  height: 11%;
-  background: #000;
-}
-.hi__bar--t { top: 0; }
-.hi__bar--b { bottom: 0; }
 .hi__center {
   position: absolute;
   left: 50%;
@@ -3288,9 +3272,6 @@ body::after {
   letter-spacing: 0.42em;
   color: rgba(255, 255, 255, 0.7);
 }
-.hi.is-play .hi__bg {
-  animation: hi-push 11s linear both;
-}
 .hi.is-play .hi__shade {
   animation: hi-open 1.8s ease both;
 }
@@ -3303,8 +3284,6 @@ body::after {
 .hi.is-play .hi__tag {
   animation: hi-fade 1.4s 3s ease both;
 }
-@keyframes hi-push {
-  from { transform: scale(1.12); }
   to { transform: scale(1); }
 }
 @keyframes hi-open {
@@ -3322,10 +3301,8 @@ body::after {
 .pw-hero__cue::before { content: "SCROLL"; }
 @media (max-width: 640px) {
   .hi__title { font-size: 7.4vw; }
-  .hi__bar { height: 7%; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .hi.is-play .hi__bg,
   .hi.is-play .hi__shade,
   .hi.is-play .hi__title,
   .hi.is-play .hi__sub,

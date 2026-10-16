@@ -181,13 +181,13 @@
     return el;
   }
 
-  /* Intro: a film still between letterbox bars with a wide-tracked title, like a movie's opening card.
-     The push-in, title and tagline replay each time the slide is shown. */
+  /* Intro: the tilted poster wall behind a wide-tracked title, like a movie's opening card.
+     The title and tagline replay each time the slide is shown. */
   var INTRO_MS = 11000;
   function titleIntro(tag) {
     return '<div class="hi" aria-hidden="true">' +
-      '<div class="hi__bg" style="background-image:url(assets/img/hero/pine.jpg)"></div><div class="hi__shade"></div>' +
-      '<div class="hi__bar hi__bar--t"></div><div class="hi__bar hi__bar--b"></div>' +
+      '<div class="pw-wall" data-poster-wall></div><div class="hi__shade"></div>' +
+      '' +
       '<div class="hi__center"><p class="hi__title">GOLDSTREAM</p><p class="hi__sub">ENTERTAINMENT</p></div>' +
       '<p class="hi__tag">' + esc(tag) + "</p></div>";
   }
