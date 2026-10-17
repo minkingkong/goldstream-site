@@ -3391,9 +3391,7 @@ body::after {
 .sp-hero__img img {
   display: block;
   width: 100%;
-  max-height: calc(100vh - var(--header-h) - 80px);
-  object-fit: cover;
-  object-position: 50% 30%;
+  height: auto;
 }
 .sp-hero__title {
   margin-top: 16px;
@@ -3549,9 +3547,6 @@ body::after {
 @media (max-width: 860px) {
   .sp-hero__in {
     grid-template-columns: 1fr;
-  }
-  .sp-hero__img img {
-    max-height: 62vh;
   }
   .sp-feat__list {
     grid-template-columns: 1fr 1fr;
