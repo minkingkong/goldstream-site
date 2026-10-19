@@ -1,0 +1,93 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="robots" content="noindex,nofollow"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>입자 인트로 미리보기</title>
+<link rel="stylesheet" href="css/style.css?v=82de5e3af9">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400&display=block">
+<style>
+html,body{margin:0;height:100%;overflow:hidden;background:#000}
+.top{position:fixed;z-index:30;left:0;right:0;top:0;height:84px;background:#fff;display:flex;align-items:center;padding:0 clamp(20px,4vw,72px);gap:34px;font:700 14px "Pretendard Variable",sans-serif;letter-spacing:.12em;border-bottom:1px solid #eee}
+.top img{height:36px;margin-right:auto}.top i{font-style:normal;border:1px solid #111;padding:12px 22px}
+@media(max-width:1100px){.top span,.top i{display:none}.top{height:64px}.top img{height:26px}.hi{top:64px!important}}
+.hi{position:fixed;left:0;right:0;top:84px;bottom:0}
+#pc{position:absolute;inset:0;z-index:5;pointer-events:none}
+.veil{position:absolute;inset:0;z-index:4;background:#000;opacity:1;transition:opacity 1.6s ease}
+.hi.is-reveal .veil{opacity:0}
+.hi .hi__center,.hi .hi__tag{opacity:0;transition:opacity 1.2s ease}
+.hi.is-reveal .hi__center{opacity:1;transition-delay:.3s}
+.hi.is-reveal .hi__tag{opacity:1;transition-delay:1s}
+.hi.is-reveal .hi__title{animation:none}
+.btn{position:fixed;z-index:40;left:50%;top:100px;transform:translateX(-50%);background:#fff;border:0;padding:10px 18px;border-radius:99px;font:700 13px "Pretendard Variable";cursor:pointer}
+</style></head>
+<body>
+<div class="top"><img src="assets/img/logo-goldstream-dark.png" alt=""><span>WORK</span><span>LOCATION</span><span>CAMPAIGN</span><span>SPONSORSHIP</span><span>IMPACT</span><span>ABOUT</span><span>BRAND</span><i>CONTACT</i></div>
+<button class="btn" onclick="start()">다시 재생</button>
+<div class="hi" id="hi">
+  <div class="pw-wall" id="wall"></div><div class="hi__shade"></div>
+  <div class="veil"></div>
+  <canvas id="pc"></canvas>
+  <div class="hi__center"><p class="hi__title">GOLDSTREAM</p><p class="hi__sub">ENTERTAINMENT</p></div>
+  <p class="hi__tag">이야기를 현실로 만듭니다</p>
+</div>
+<script>
+var P=["assets/img/1789518254143--.png","assets/img/forbidden-poster.jpg","assets/img/1789518301734--.png","assets/img/1789518312319--.png","assets/img/1789518284030--2.png","assets/img/1789518267017--1.png","assets/img/suanara-poster.webp","assets/img/demon-killer-poster.jpg"];
+var h='';for(var i=0;i<32;i++)h+='<img src="'+P[(i*3+Math.floor(i/8))%P.length]+'">';document.getElementById('wall').innerHTML=h;
+
+/* ---- particle intro ---- */
+var hi=document.getElementById('hi'),cv=document.getElementById('pc'),x=cv.getContext('2d');
+var W,H,DPR,pts=[],t0=0,raf=0,targets=[];
+var T={drift:1.3,gather:2.2,hold:1.6,burst:1.5}; // seconds per phase
+function ease(t){return t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2}
+function size(){DPR=Math.min(2,devicePixelRatio||1);W=cv.clientWidth;H=cv.clientHeight;cv.width=W*DPR;cv.height=H*DPR;x.setTransform(DPR,0,0,DPR,0,0)}
+function sample(){
+  // draw the title once, offscreen, and keep every lit pixel as a target
+  var o=document.createElement('canvas'),g=o.getContext('2d');o.width=W;o.height=H;
+  var fs=Math.min(W*0.056*1.0,96);if(W<640)fs=W*0.074;
+  g.fillStyle='#fff';g.textAlign='center';g.textBaseline='middle';
+  g.font='400 '+fs+'px Jost, sans-serif';
+  var sp=fs*0.42;g.letterSpacing=sp+'px';
+  g.fillText('GOLDSTREAM',W/2+sp/2,H/2-fs*0.1);
+  var fs2=Math.max(11,Math.min(W*0.01,16));g.font='300 '+fs2+'px Jost, sans-serif';g.letterSpacing=fs2*0.8+'px';
+  g.fillText('ENTERTAINMENT',W/2+fs2*0.4,H/2+fs*0.62);
+  var d=g.getImageData(0,0,W,H).data,step=W<640?3:4,out=[];
+  for(var y=0;y<H;y+=step)for(var xx=0;xx<W;xx+=step){if(d[(y*W+xx)*4+3]>128)out.push([xx+(Math.random()-.5)*step,y+(Math.random()-.5)*step])}
+  return out;
+}
+function build(){
+  targets=sample();pts=[];
+  for(var i=0;i<targets.length;i++){
+    var a=Math.random()*6.283,r=Math.random();
+    pts.push({tx:targets[i][0],ty:targets[i][1],
+      sx:Math.random()*W,sy:Math.random()*H,          // start: scattered dust
+      vx:(Math.random()-.5)*14,vy:(Math.random()-.5)*14, // slow drift
+      bx:Math.cos(a)*(120+r*W*0.9),by:Math.sin(a)*(120+r*H*0.9), // burst direction
+      d:Math.random()*0.5,r:Math.random()*1.1+0.6,tw:Math.random()*6.28});
+  }
+}
+function frame(now){
+  var t=(now-t0)/1000;x.clearRect(0,0,W,H);
+  var ph,k;
+  if(t<T.drift){ph=0;k=t/T.drift}
+  else if(t<T.drift+T.gather){ph=1;k=(t-T.drift)/T.gather}
+  else if(t<T.drift+T.gather+T.hold){ph=2;k=(t-T.drift-T.gather)/T.hold}
+  else{ph=3;k=Math.min(1,(t-T.drift-T.gather-T.hold)/T.burst)}
+  if(ph===3&&!hi.classList.contains('is-reveal'))hi.classList.add('is-reveal');
+  for(var i=0;i<pts.length;i++){
+    var p=pts[i],px,py,al;
+    var dx=p.sx+p.vx*t,dy=p.sy+p.vy*t; // drifting dust position
+    if(ph===0){px=dx;py=dy;al=0.25+0.35*Math.abs(Math.sin(t*2+p.tw))}
+    else if(ph===1){var e=ease(Math.max(0,Math.min(1,(k-p.d*0.5)/(1-p.d*0.5))));px=dx+(p.tx-dx)*e;py=dy+(p.ty-dy)*e;al=0.3+0.7*e}
+    else if(ph===2){px=p.tx+Math.sin(t*3+p.tw)*0.4;py=p.ty+Math.cos(t*2.6+p.tw)*0.4;al=0.85+0.15*Math.sin(t*5+p.tw)}
+    else{var e2=ease(Math.min(1,k/(0.6+p.d*0.8)));px=p.tx+p.bx*e2;py=p.ty+p.by*e2;al=(1-e2)*0.9}
+    if(al<=0)continue;
+    x.globalAlpha=al;x.fillStyle=ph===2?'#fff':'#e8e8e8';
+    x.beginPath();x.arc(px,py,p.r,0,6.283);x.fill();
+  }
+  x.globalAlpha=1;
+  if(t<T.drift+T.gather+T.hold+T.burst+0.2)raf=requestAnimationFrame(frame);
+}
+function start(){cancelAnimationFrame(raf);hi.classList.remove('is-reveal');size();build();t0=performance.now();raf=requestAnimationFrame(frame)}
+document.fonts.load('400 40px Jost').then(start,start);
+addEventListener('resize',function(){size();if(!at)start()});
+// freeze at a given second for screenshots: ?at=2.5
+var at=location.search.match(/at=([\d.]+)/);if(at){var go=function(){cancelAnimationFrame(raf);hi.classList.remove('is-reveal');size();build();t0=performance.now()-at[1]*1000;var st=document.createElement('style');st.textContent='.hi *{transition:none!important}.pw-wall{animation:none!important}';document.head.appendChild(st);frame(performance.now());cancelAnimationFrame(raf);if(+at[1]>=T.drift+T.gather+T.hold)hi.classList.add('is-reveal');};document.fonts.load('400 40px Jost').then(go,go)}
+</script>
+</body></html>
