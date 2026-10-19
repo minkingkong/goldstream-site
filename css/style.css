@@ -3234,7 +3234,8 @@ body::after {
 .hi__shade {
   position: absolute;
   inset: 0;
-  background: radial-gradient(38% 46% at 50% 50%, rgba(10, 10, 10, 0.5), rgba(10, 10, 10, 0.9));
+  /* lighter than before so the poster wall reads clearly behind the logo */
+  background: radial-gradient(38% 46% at 50% 50%, rgba(10, 10, 10, 0.34), rgba(10, 10, 10, 0.76));
 }
 .hi__logo {
   position: absolute;
@@ -3309,7 +3310,7 @@ body::after {
   inset: 0;
   z-index: 4;
   pointer-events: none;
-  background: radial-gradient(70% 70% at 50% 50%, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.55));
+  background: radial-gradient(70% 70% at 50% 50%, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4));
 }
 @keyframes hi-grain {
   0% { transform: translate(0, 0); }
