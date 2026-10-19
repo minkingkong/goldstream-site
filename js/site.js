@@ -181,14 +181,14 @@
     return el;
   }
 
-  /* Intro: the tilted poster wall behind a wide-tracked title, like a movie's opening card.
-     The dust-to-title burst replays each time the slide is shown. */
-  var INTRO_MS = 11000;
+  /* Intro: white dust spirals in and packs itself into the wordmark over the tilted poster wall
+     (js/intro.js), then the finished logo holds for ~3s before the next slide. Replays each show. */
+  var INTRO_MS = 7600;
   function titleIntro(tag) {
     return '<div class="hi" aria-hidden="true">' +
       '<div class="pw-wall" data-poster-wall></div><div class="hi__shade"></div><div class="hi__veil"></div>' +
       '' +
-      '<div class="hi__center"><p class="hi__title">GOLDSTREAM</p><p class="hi__sub">ENTERTAINMENT</p></div>' +
+      '<img class="hi__logo" src="assets/img/logo-goldstream.png" alt="" width="774" height="170" decoding="async">' +
       '<p class="hi__tag">' + esc(tag) + '</p><canvas class="hi__fx" aria-hidden="true"></canvas><div class="hi__grain"></div></div>';
   }
   function bindIntro(slide) {

@@ -1,16 +1,23 @@
-/* Home intro: dust rushes in and packs into one glowing clump where the title will sit,
-   squeezes tighter, then bursts — the burst is what reveals the poster wall and title.
-   Canvas layers (bottom → top): drifting gradient mesh, particles, flash. CSS adds the
-   veil, grain and vignette on top. Timing is in seconds; every move is eased, never linear. */
+/* Home intro: white dust drifts in the dark, then spirals in and packs itself into the
+   GOLDSTREAM wordmark (each grain already owns a spot on a letter — no clump, no burst).
+   While the dust gathers the black veil lifts off the poster wall; once the grains settle
+   the real logo PNG surfaces underneath and the grains melt into it. Then the slide holds.
+   Layers (bottom → top): poster wall, shade, veil, logo, canvas dust, grain, vignette.
+   Timing is in seconds; every move is eased, never linear. */
 (function () {
   "use strict";
-  var T = { drift: 1.0, gather: 2.0, hold: 0.7, bang: 1.2 };
-  var END = { drift: T.drift, gather: T.drift + T.gather, hold: T.drift + T.gather + T.hold };
-  var TOTAL = END.hold + T.bang;
+  var T = { dust: 1.0, gather: 2.6, settle: 0.8 };
+  var END = { dust: T.dust, gather: T.dust + T.gather };
+  END.settle = END.gather + T.settle;
+  var TOTAL = END.settle;
+  var VEIL = { at: 1.6, dur: 2.8 };                 /* black lifts off the poster wall */
+  var LOGO = { at: END.gather - 0.25, dur: 0.9 };   /* real wordmark surfaces under the dust */
 
   var outExpo = function (t) { return t >= 1 ? 1 : 1 - Math.pow(2, -10 * t); };
-  var inExpo = function (t) { return t <= 0 ? 0 : Math.pow(2, 10 * t - 10); };
+  var inCubic = function (t) { return t * t * t; };
+  var outCubic = function (t) { return 1 - Math.pow(1 - t, 3); };
   var clamp = function (v) { return v < 0 ? 0 : v > 1 ? 1 : v; };
+  var smooth = function (t) { t = clamp(t); return t * t * (3 - 2 * t); };
 
   function sprite(c1, c2) {
     var s = document.createElement("canvas"); s.width = s.height = 64;
@@ -20,133 +27,115 @@
   }
 
   function mount(hi, opts) {
-    var cv = hi.querySelector(".hi__fx"), title = hi.querySelector(".hi__title");
-    if (!cv || !title) return null;
+    var cv = hi.querySelector(".hi__fx"), logo = hi.querySelector(".hi__logo"), veil = hi.querySelector(".hi__veil");
+    if (!cv || !logo) return null;
     var x = cv.getContext("2d");
-    var W = 0, H = 0, R = 0, pts = [], t0 = 0, raf = 0, safety = 0, spW, spG, core = { x: 0, y: 0 };
+    var W = 0, H = 0, pts = [], core = { x: 0, y: 0 }, t0 = 0, raf = 0, safety = 0, spW, spG;
 
     function size() {
       var d = Math.min(2, window.devicePixelRatio || 1);
       W = cv.clientWidth; H = cv.clientHeight; cv.width = W * d; cv.height = H * d; x.setTransform(d, 0, 0, d, 0, 0);
     }
-    function build() {
-      pts = [];
-      spW = sprite("rgba(255,255,255,1)", "rgba(255,255,255,.5)");
-      spG = sprite("rgba(255,246,222,1)", "rgba(236,204,140,.55)");
-      /* the clump forms where the title will appear, so the burst hands over to it */
-      core.x = W / 2; core.y = title.getBoundingClientRect().top - cv.getBoundingClientRect().top + title.offsetHeight / 2;
-      R = Math.min(W, H) * (W < 640 ? 0.13 : 0.095);
-      var n = W < 640 ? 1000 : W < 1200 ? 1900 : 3000;
-      for (var i = 0; i < n; i++) {
-        var a = Math.random() * 6.283, r = Math.random(), spark = Math.random() < 0.1;
-        /* targets: dense core, thinning toward the rim (sum of two randoms ≈ bell curve) */
-        var ta = Math.random() * 6.283, tr = Math.abs(Math.random() + Math.random() - 1) * R;
-        var edge = Math.random() < 0.55; /* over half the dust starts beyond the edges and rushes in */
-        pts.push({
-          ox: Math.cos(ta) * tr, oy: Math.sin(ta) * tr * 0.8,
-          sx: edge ? Math.random() * W * 1.5 - W * 0.25 : Math.random() * W,
-          sy: edge ? Math.random() * H * 1.5 - H * 0.25 : Math.random() * H,
-          vx: (Math.random() - 0.5) * 18, vy: (Math.random() - 0.5) * 18,
-          sw: (Math.random() < 0.5 ? -1 : 1) * (80 + Math.random() * 220),
-          bx: Math.cos(a) * (300 + r * W * 1.3), by: Math.sin(a) * (300 + r * H * 1.3),
-          j: Math.random(), tw: Math.random() * 6.283,
-          r: spark ? 2 + Math.random() * 1.6 : 0.7 + Math.random() * 1.0, spark: spark
-        });
+    /* sample the on-screen logo PNG so every grain has a target on a letter */
+    function sample(n) {
+      var r = logo.getBoundingClientRect(), c = cv.getBoundingClientRect(), S = 2;
+      var off = document.createElement("canvas"); off.width = Math.max(1, Math.ceil(r.width / S)); off.height = Math.max(1, Math.ceil(r.height / S));
+      var g = off.getContext("2d"), out = [], guard = 0;
+      try { g.drawImage(logo, 0, 0, off.width, off.height); } catch (e) { return out; }
+      var img = g.getImageData(0, 0, off.width, off.height).data;
+      while (out.length < n && guard++ < n * 60) {
+        var px = (Math.random() * off.width) | 0, py = (Math.random() * off.height) | 0;
+        if (img[(py * off.width + px) * 4 + 3] > 120) out.push({ x: r.left - c.left + px * S + Math.random() * S, y: r.top - c.top + py * S + Math.random() * S });
       }
+      return out;
     }
-    function glow(cx, cy, rad, al, warm) {
-      var g = x.createRadialGradient(cx, cy, 0, cx, cy, rad);
-      g.addColorStop(0, "rgba(255," + (warm ? "240,210" : "255,255") + "," + al + ")");
-      g.addColorStop(0.35, "rgba(255,240,215," + al * 0.4 + ")");
-      g.addColorStop(1, "rgba(255,255,255,0)");
-      x.fillStyle = g; x.fillRect(cx - rad, cy - rad, rad * 2, rad * 2);
+    function build() {
+      spW = sprite("rgba(255,255,255,1)", "rgba(255,255,255,.55)");
+      spG = sprite("rgba(255,250,236,1)", "rgba(236,222,190,.55)");
+      var r = logo.getBoundingClientRect(), c = cv.getBoundingClientRect();
+      core.x = r.left - c.left + r.width / 2; core.y = r.top - c.top + r.height / 2;
+      var n = W < 640 ? 1500 : W < 1200 ? 2800 : 4400;
+      pts = sample(n).map(function (p) {
+        var edge = Math.random() < 0.6, spark = Math.random() < 0.08;
+        return {
+          tx: p.x, ty: p.y,
+          sx: edge ? Math.random() * W * 1.6 - W * 0.3 : Math.random() * W,
+          sy: edge ? Math.random() * H * 1.6 - H * 0.3 : Math.random() * H,
+          vx: (Math.random() - 0.5) * 16, vy: (Math.random() - 0.5) * 16,
+          j: Math.random(), tw: Math.random() * 6.283,
+          sw: (Math.random() < 0.5 ? -1 : 1) * (0.9 + Math.random() * 1.3), /* spiral direction + turn */
+          r: spark ? 1.8 + Math.random() * 1.4 : 0.6 + Math.random() * 0.9, spark: spark
+        };
+      });
     }
-    function mesh(t) {
-      /* layer 1: two slow-drifting colour pools so the black is never flat */
-      x.globalCompositeOperation = "source-over";
-      var a = x.createRadialGradient(W * (0.3 + Math.sin(t * 0.25) * 0.08), H * 0.4, 0, W * 0.3, H * 0.4, W * 0.7);
-      a.addColorStop(0, "rgba(28,34,52,.9)"); a.addColorStop(1, "rgba(0,0,0,0)");
-      x.fillStyle = a; x.fillRect(0, 0, W, H);
-      var b = x.createRadialGradient(W * (0.72 + Math.cos(t * 0.2) * 0.06), H * 0.7, 0, W * 0.72, H * 0.7, W * 0.6);
-      b.addColorStop(0, "rgba(46,36,24,.75)"); b.addColorStop(1, "rgba(0,0,0,0)");
-      x.fillStyle = b; x.fillRect(0, 0, W, H);
+    function layers(t) {
+      if (veil) veil.style.opacity = 1 - smooth((t - VEIL.at) / VEIL.dur);
+      logo.style.opacity = smooth((t - LOGO.at) / LOGO.dur);
+      if (t >= LOGO.at && !hi.classList.contains("is-reveal")) hi.classList.add("is-reveal");
     }
-    function frame(now) {
-      if (cv.clientWidth !== W || cv.clientHeight !== H) { size(); build(); }
-      if (opts && opts.active && !opts.active()) { stop(); return; }
-      var t = (now - t0) / 1000;
+    function draw(t) {
       x.clearRect(0, 0, W, H);
-      var ph, k;
-      if (t < END.drift) { ph = 0; k = t / T.drift; }
-      else if (t < END.gather) { ph = 1; k = (t - END.drift) / T.gather; }
-      else if (t < END.hold) { ph = 2; k = (t - END.gather) / T.hold; }
-      else { ph = 3; k = clamp((t - END.hold) / T.bang); }
-      if (ph === 3 && !hi.classList.contains("is-reveal")) hi.classList.add("is-reveal");
-      if (ph < 3 || k < 0.5) mesh(t);
-
+      var ph = t < END.dust ? 0 : t < END.gather ? 1 : 2;
+      var k = ph === 0 ? t / T.dust : ph === 1 ? (t - END.dust) / T.gather : clamp((t - END.gather) / T.settle);
       x.globalCompositeOperation = "lighter";
-      /* the clump's core light: builds while gathering, squeezes brighter, then blows out (no ring) */
-      var big = Math.max(W, H);
-      if (ph === 1) glow(core.x, core.y, big * 0.28, 0.35 * inExpo(k), true);
-      if (ph === 2) { glow(core.x, core.y, big * (0.28 - k * 0.1), 0.35 + 0.45 * inExpo(k) + 0.05 * Math.sin(t * 22), true); glow(core.x, core.y, R * (1.2 - k * 0.5), 0.5 + 0.5 * k, false); }
-      if (ph === 3) { var f = 1 - outExpo(k); glow(core.x, core.y, big * 0.75, 0.95 * f, false); glow(core.x, core.y, big * 0.25, 0.6 * f, true); }
-      var squeeze = ph === 2 ? 1 - 0.5 * inExpo(k) : 1; /* clump radius shrinks as it charges */
-
+      /* a soft warm light grows where the mark forms, then eases away as the mark takes over */
+      var big = Math.max(W, H), lamp = ph === 1 ? 0.22 * inCubic(k) : ph === 2 ? 0.22 * (1 - smooth(k)) : 0;
+      if (lamp > 0.005) {
+        var g = x.createRadialGradient(core.x, core.y, 0, core.x, core.y, big * 0.32);
+        g.addColorStop(0, "rgba(255,244,222," + lamp + ")"); g.addColorStop(1, "rgba(255,244,222,0)");
+        x.fillStyle = g; x.fillRect(core.x - big * 0.32, core.y - big * 0.32, big * 0.64, big * 0.64);
+      }
+      var fade = ph === 2 ? 1 - smooth((k - 0.15) / 0.85) : 1;
       for (var i = 0; i < pts.length; i++) {
-        var p = pts[i], px, py, al, sc = 1;
-        var tx = core.x + p.ox * squeeze, ty = core.y + p.oy * squeeze;
+        var p = pts[i], px, py, al, sc = 1, kk = 1;
         var dx = p.sx + p.vx * t + Math.sin(t * 0.8 + p.tw) * 10, dy = p.sy + p.vy * t + Math.cos(t * 0.6 + p.tw) * 10;
-        if (ph === 0) { px = dx; py = dy; al = (0.15 + 0.45 * Math.abs(Math.sin(t * 2 + p.tw))) * outExpo(k); }
-        else if (ph === 1) {
-          /* slow start, then the whole cloud rushes in at once and spirals into the core */
-          var kk = clamp((k - p.j * 0.25) / 0.75);
-          var e = kk < 0.6 ? inExpo(kk / 0.6) * 0.5 : 0.5 + outExpo((kk - 0.6) / 0.4) * 0.5;
-          var ang = e * 4.2 + p.tw, rad = Math.sin(e * 3.1416) * p.sw * (1 - e * 0.6);
-          px = dx + (tx - dx) * e + Math.cos(ang) * rad; py = dy + (ty - dy) * e + Math.sin(ang) * rad * 0.6;
-          al = 0.3 + 0.7 * e; sc = 1 + (1 - e) * 0.8;
-          if (e > 0.15 && e < 0.97) { /* streak toward the core so the pull reads as force */
-            x.globalAlpha = al * (p.spark ? 0.45 : 0.2); x.strokeStyle = "#fff"; x.lineWidth = p.spark ? 1.2 : 0.7;
-            x.beginPath(); x.moveTo(px - (tx - dx) * 0.03, py - (ty - dy) * 0.03); x.lineTo(px, py); x.stroke();
-          }
-        }
-        else if (ph === 2) {
-          var sh = inExpo(k) * 3; /* the packed clump shakes harder as it charges */
-          px = tx + Math.sin(t * 16 + p.tw) * (0.4 + sh); py = ty + Math.cos(t * 13 + p.tw) * (0.4 + sh);
-          al = 0.9 + 0.1 * Math.sin(t * 9 + p.tw); sc = 1 + inExpo(k) * 0.6;
-        }
+        if (ph === 0) { px = dx; py = dy; al = (0.12 + 0.4 * Math.abs(Math.sin(t * 2 + p.tw))) * outCubic(k); }
         else {
-          var e2 = inExpo(clamp(k / (0.45 + p.j * 0.55)));
-          var eo = outExpo(clamp(k / (0.45 + p.j * 0.55)));
-          var m = e2 * 0.35 + eo * 0.65;
-          px = tx + p.bx * m; py = ty + p.by * m; al = (1 - eo) * 0.95; sc = 1 + eo * (p.spark ? 0.3 : 1.0);
-          if (k < 0.7) { x.globalAlpha = al * 0.55; x.strokeStyle = "#fff"; x.lineWidth = p.spark ? 1.5 : 0.8;
-            x.beginPath(); x.moveTo(px - p.bx * 0.06 * (1 - k), py - p.by * 0.06 * (1 - k)); x.lineTo(px, py); x.stroke(); }
+          kk = ph === 2 ? 1 : clamp((k - p.j * 0.3) / 0.7); /* staggered start, slow pull, fast arrival */
+          var e = kk < 0.55 ? inCubic(kk / 0.55) * 0.5 : 0.5 + outExpo((kk - 0.55) / 0.45) * 0.5;
+          /* spiral: the offset from the target shrinks while rotating, so each grain swirls in on its own arc */
+          var ox = dx - p.tx, oy = dy - p.ty, ang = (1 - e) * p.sw, cs = Math.cos(ang), sn = Math.sin(ang), m = 1 - e;
+          px = p.tx + (ox * cs - oy * sn) * m; py = p.ty + (ox * sn + oy * cs) * m;
+          if (ph === 2) { var jit = (1 - smooth(k)) * 1.2; px += Math.sin(t * 15 + p.tw) * jit; py += Math.cos(t * 12 + p.tw) * jit; }
+          al = (0.3 + 0.7 * e) * fade; sc = 1 + (1 - e) * 0.7;
+          if (ph === 1 && e > 0.1 && e < 0.96) { /* streak toward the target so the pull reads as force */
+            x.globalAlpha = al * (p.spark ? 0.5 : 0.22); x.strokeStyle = "#fff"; x.lineWidth = p.spark ? 1.2 : 0.7;
+            var vx2 = (px - p.tx) * 0.06 * (1 - e), vy2 = (py - p.ty) * 0.06 * (1 - e);
+            x.beginPath(); x.moveTo(px + vx2, py + vy2); x.lineTo(px, py); x.stroke();
+          }
         }
         if (al <= 0.01) continue;
         x.globalAlpha = al;
         if (p.spark) { var s = p.r * sc * 6; x.drawImage(p.j < 0.5 ? spG : spW, px - s / 2, py - s / 2, s, s); }
-        else { x.fillStyle = ph === 2 ? "#fff" : "#eeeeee"; x.beginPath(); x.arc(px, py, p.r * sc, 0, 6.283); x.fill(); }
+        else { x.fillStyle = ph === 2 || (ph === 1 && kk > 0.9) ? "#ffffff" : "#ece6d8"; x.beginPath(); x.arc(px, py, p.r * sc, 0, 6.283); x.fill(); }
       }
       x.globalAlpha = 1; x.globalCompositeOperation = "source-over";
-      if (t < TOTAL + 0.3) raf = requestAnimationFrame(frame); else { x.clearRect(0, 0, W, H); raf = 0; }
+    }
+    function finish() { x.clearRect(0, 0, W, H); if (veil) veil.style.opacity = 0; logo.style.opacity = 1; hi.classList.add("is-reveal"); raf = 0; }
+    function frame(now) {
+      if (cv.clientWidth !== W || cv.clientHeight !== H) { size(); build(); }
+      if (opts && opts.active && !opts.active()) { stop(); return; }
+      var t = (now - t0) / 1000;
+      layers(t);
+      if (t < TOTAL) { draw(t); raf = requestAnimationFrame(frame); } else finish();
+    }
+    function reset() { hi.classList.remove("is-reveal"); if (veil) veil.style.opacity = 1; logo.style.opacity = 0; void hi.offsetWidth; }
+    function start() {
+      size(); build(); t0 = performance.now(); raf = requestAnimationFrame(frame);
+      /* background tabs pause rAF; make sure the slide still lands on the finished state in time */
+      clearTimeout(safety);
+      safety = setTimeout(function () { if (raf) { cancelAnimationFrame(raf); finish(); } }, TOTAL * 1000 + 400);
     }
     function play() {
-      cancelAnimationFrame(raf);
-      hi.classList.remove("is-reveal"); void hi.offsetWidth;
-      size(); build(); t0 = performance.now(); raf = requestAnimationFrame(frame);
-      /* background tabs pause rAF; make sure the wall is revealed on time regardless */
-      clearTimeout(safety);
-      safety = setTimeout(function () {
-        hi.classList.add("is-reveal");
-        safety = setTimeout(function () { if (raf) { cancelAnimationFrame(raf); raf = 0; x.clearRect(0, 0, W, H); } }, T.bang * 1000 + 400);
-      }, END.hold * 1000 + 50);
+      cancelAnimationFrame(raf); reset();
+      if (logo.complete && logo.naturalWidth) start();
+      else { logo.onload = start; logo.onerror = skip; }
     }
     function stop() { cancelAnimationFrame(raf); raf = 0; clearTimeout(safety); x.clearRect(0, 0, W, H); }
-    function skip() { stop(); hi.classList.add("is-reveal"); }
+    function skip() { stop(); finish(); }
     function freeze(sec) {
-      stop(); hi.classList.remove("is-reveal"); size(); build(); t0 = performance.now() - sec * 1000;
-      frame(performance.now()); cancelAnimationFrame(raf);
-      if (sec >= END.hold) hi.classList.add("is-reveal");
+      stop(); reset(); size(); build(); t0 = performance.now() - sec * 1000;
+      layers(sec); if (sec < TOTAL) draw(sec); else finish();
       hi.setAttribute("data-shot", cv.toDataURL());
     }
     return { play: play, stop: stop, skip: skip, freeze: freeze, duration: TOTAL };

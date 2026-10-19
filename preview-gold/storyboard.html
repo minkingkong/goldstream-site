@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>GOLDSTREAM 메인 인트로 스토리보드</title>
+<style>
+@font-face { font-family: "Pretendard Variable"; src: url("../assets/fonts/PretendardVariable.woff2") format("woff2-variations"); font-weight: 45 920; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #111; color: #ddd; font-family: "Pretendard Variable", system-ui, sans-serif; padding: 40px 48px 80px; }
+h1 { font-size: 22px; font-weight: 700; letter-spacing: -.01em; color: #fff; }
+h1 small { display: block; margin-top: 6px; font-size: 13px; font-weight: 400; color: #888; }
+.idea { margin-top: 44px; }
+.idea h2 { font-size: 16px; font-weight: 700; color: #d3b36c; margin-bottom: 4px; }
+.idea p { font-size: 13px; color: #9a9a9a; margin-bottom: 14px; max-width: 900px; line-height: 1.6; }
+.row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.cut { background: #000; border: 1px solid #2a2a2a; }
+.cut canvas { width: 100%; height: auto; display: block; }
+.cut .cap { padding: 8px 10px; font-size: 11.5px; color: #aaa; border-top: 1px solid #222; line-height: 1.5; }
+.cut .cap b { color: #fff; font-weight: 600; margin-right: 6px; }
+@media (max-width: 900px) { .row { grid-template-columns: repeat(2, 1fr); } body { padding: 24px 16px 60px; } }
+</style>
+</head>
+<body>
+<h1>메인 첫 화면 인트로 스토리보드 <small>5가지 안 × 핵심 4컷. 뭉침 없음, 번쩍 없음. 모든 안은 금속 골드 로고(07-A)로 끝나고 3초 머문 뒤 2페이지로 넘어갑니다.</small></h1>
+<div id="root"></div>
+<script>
+(function () {
+  var W = 640, H = 360, LOGO_W = 0.6;
+  function rng(seed) { var s = seed; return function () { s = (s * 16807) % 2147483647; return (s - 1) / 2147483646; }; }
+  function logoGrad(x, top, h) {
+    var g = x.createLinearGradient(0, top, 0, top + h);
+    [["#F7E7B0", 0], ["#E2C56E", .22], ["#B78F2E", .48], ["#F0D98A", .62], ["#A77E22", .85], ["#E5C86F", 1]].forEach(function (s) { g.addColorStop(s[1], s[0]); });
+    return g;
+  }
+  /* draw the wordmark; alpha, blur and scale let each cut show a stage of the reveal */
+  function logo(x, al, blur, sc) {
+    x.save(); x.globalAlpha = al; if (blur) x.filter = "blur(" + blur + "px)";
+    x.translate(W / 2, H / 2); x.scale(sc || 1, sc || 1);
+    x.textAlign = "center"; x.textBaseline = "alphabetic";
+    x.font = "800 64px 'Pretendard Variable'"; x.letterSpacing = "-1px";
+    x.fillStyle = logoGrad(x, -56, 60); x.shadowColor = "rgba(0,0,0,.6)"; x.shadowBlur = 10; x.shadowOffsetY = 4;
+    x.fillText("GOLDSTREAM", 0, 6);
+    x.shadowBlur = 0; x.shadowOffsetY = 0;
+    x.font = "500 15px 'Pretendard Variable'"; x.letterSpacing = "9px";
+    x.fillStyle = "#C9A646"; x.fillText("ENTERTAINMENT", 5, 42);
+    x.restore();
+  }
+  /* sample the wordmark into points so particles can sit on the letters */
+  var mask = null;
+  function logoPoints(n, seed) {
+    if (!mask) {
+      var c = document.createElement("canvas"); c.width = W; c.height = H; var x = c.getContext("2d");
+      x.fillStyle = "#000"; x.fillRect(0, 0, W, H); logo(x, 1, 0, 1);
+      mask = x.getImageData(0, 0, W, H).data;
+    }
+    var r = rng(seed), out = [], guard = 0;
+    while (out.length < n && guard++ < n * 40) {
+      var px = (r() * W) | 0, py = (r() * H) | 0;
+      if (mask[(py * W + px) * 4] > 90) out.push({ x: px, y: py, r: r(), j: r() });
+    }
+    return out;
+  }
+  function base(x) { x.fillStyle = "#050505"; x.fillRect(0, 0, W, H);
+    var g = x.createRadialGradient(W * .4, H * .5, 0, W * .4, H * .5, W * .7); g.addColorStop(0, "rgba(34,28,16,.9)"); g.addColorStop(1, "rgba(0,0,0,0)"); x.fillStyle = g; x.fillRect(0, 0, W, H); }
+  function vignette(x) { var g = x.createRadialGradient(W / 2, H / 2, H * .3, W / 2, H / 2, W * .65); g.addColorStop(0, "rgba(0,0,0,0)"); g.addColorStop(1, "rgba(0,0,0,.6)"); x.fillStyle = g; x.fillRect(0, 0, W, H); }
+  function dot(x, px, py, r, al, hi) { x.globalAlpha = al; x.fillStyle = hi ? "#F7E7B0" : "#D3B36C"; x.beginPath(); x.arc(px, py, r, 0, 6.283); x.fill(); x.globalAlpha = 1; }
+  function glowDot(x, px, py, r, al) { var g = x.createRadialGradient(px, py, 0, px, py, r); g.addColorStop(0, "rgba(247,231,176," + al + ")"); g.addColorStop(1, "rgba(247,231,176,0)"); x.fillStyle = g; x.fillRect(px - r, py - r, r * 2, r * 2); }
+  function label(x, t) { x.fillStyle = "rgba(255,255,255,.35)"; x.font = "500 11px 'Pretendard Variable'"; x.letterSpacing = "2px"; x.textAlign = "left"; x.fillText(t, 16, H - 16); }
+
+  var ideas = [
+    { title: "1. 글자 자체가 입자로 이루어짐", desc: "금가루가 넓게 흩어져 떠다니다 4~5초에 걸쳐 느리게 제자리로 흘러들어갑니다. 어느 순간 글자로 읽히기 시작하고, 다 모이면 입자가 녹아들듯 사라지며 매끈한 금속 로고만 남습니다.",
+      caps: ["0.0s 금가루가 화면 전체에 흩어져 천천히 떠다님", "2.0s 눈치채지 못할 만큼 느리게 각자 자리로 흐름", "3.5s 글자가 읽히기 시작, 입자가 글자 위에 내려앉음", "5.0s 입자가 녹아들고 금속 로고만 남아 3초 유지"],
+      draw: function (x, i) {
+        var pts = logoPoints(1600, 11), r = rng(3);
+        base(x);
+        var e = [0, .35, .8, 1][i];
+        if (i === 3) logo(x, 1, 0, 1);
+        if (i === 2) logo(x, .55, 2, 1);
+        pts.forEach(function (p) {
+          var sx = p.j * W, sy = p.r * H, px = sx + (p.x - sx) * e, py = sy + (p.y - sy) * e;
+          if (i === 3) { if (p.j > .12) return; dot(x, px, py, .8, .5, true); return; }
+          dot(x, px, py, .7 + p.r * .9, .35 + e * .6, p.j < .15);
+        });
+        vignette(x); label(x, ["T 0.0", "T 2.0", "T 3.5", "T 5.0"][i]);
+      } },
+    { title: "2. 금빛 강물", desc: "금색 입자가 화면 아래쪽을 왼쪽에서 오른쪽으로 잔잔히 흐릅니다. 흐름이 지나간 자리에 글자가 한 글자씩 남고, 마지막 M을 지나면 흐름은 화면 밖으로 빠지고 로고만 남습니다. GOLD + STREAM을 모션으로 설명.",
+      caps: ["0.0s 화면 왼쪽에서 금빛 흐름이 들어옴", "1.5s 흐름이 지나간 자리에 G·O·L·D가 남음", "3.0s 흐름이 로고 끝까지 통과, STREAM까지 드러남", "4.5s 흐름이 화면 밖으로 빠지고 로고만 남아 유지"],
+      draw: function (x, i) {
+        var r = rng(21), head = [-.1, .38, .78, 1.3][i];
+        base(x);
+        if (i > 0) { x.save(); x.beginPath(); x.rect(0, 0, Math.min(W, W * head - 40), H); x.clip(); logo(x, 1, 0, 1); x.restore(); }
+        for (var k = 0; k < 900; k++) {
+          var t = r(), px = (head - t * .9) * W + (r() - .5) * 30, band = Math.sin(t * 3.14) * 60;
+          var py = H * .5 + (r() - .5) * (20 + band) + Math.sin(px * .02) * 14;
+          if (px < -10 || px > W + 10) continue;
+          dot(x, px, py, .6 + r() * 1.2, (1 - t) * .8, r() < .2);
+        }
+        if (i < 3) glowDot(x, head * W, H * .5, 120, .35);
+        vignette(x); label(x, ["T 0.0", "T 1.5", "T 3.0", "T 4.5"][i]);
+      } },
+    { title: "3. 먹이 번지듯 드러남", desc: "검정 화면에 금색 안개가 한 지점에서 천천히 번집니다. 안개는 로고 바깥에선 검정으로 녹고 로고 안쪽에선 금속면으로 굳습니다. 안개가 걷히면 로고 완성. 금박이 종이에 스며드는 감각.",
+      caps: ["0.5s 왼쪽 아래에서 금빛 안개가 피어오름", "2.0s 안개가 로고 영역을 덮으며 글자가 비치기 시작", "3.5s 안개가 걷히는 자리마다 금속면으로 굳음", "5.0s 안개 소멸, 로고만 남아 유지"],
+      draw: function (x, i) {
+        var r = rng(31), rad = [.18, .55, .95, 1.4][i];
+        base(x);
+        if (i >= 1) { x.save(); x.beginPath(); x.arc(W * .3, H * .7, rad * W * .75, 0, 6.283); x.clip(); logo(x, i === 1 ? .5 : 1, i === 1 ? 3 : 0, 1); x.restore(); }
+        if (i < 3) {
+          for (var k = 0; k < 14; k++) { var a = r() * 6.283, d = r() * rad * W * .8; var px = W * .3 + Math.cos(a) * d, py = H * .7 + Math.sin(a) * d * .6; glowDot(x, px, py, 50 + r() * 90, .12 + (1 - rad) * .12); }
+          var g = x.createRadialGradient(W * .3, H * .7, 0, W * .3, H * .7, rad * W * .9); g.addColorStop(.6, "rgba(211,179,108,0)"); g.addColorStop(.95, "rgba(211,179,108,.22)"); g.addColorStop(1, "rgba(211,179,108,0)"); x.fillStyle = g; x.fillRect(0, 0, W, H);
+        }
+        vignette(x); label(x, ["T 0.5", "T 2.0", "T 3.5", "T 5.0"][i]);
+      } },
+    { title: "4. 빛의 결로 쓰기", desc: "가는 금색 선 수십 개가 화면을 가로로 천천히 흐릅니다. 선은 로고 글자 영역을 지날 때만 밝게 빛나고 밖에선 어둡습니다. 선이 지나며 로고가 서서히 축적되고, 마지막엔 선이 잦아들며 조명이 켜지듯 로고가 고정됩니다.",
+      caps: ["0.0s 어두운 금색 선들이 가로로 흐르기 시작", "1.5s 글자 영역을 지나는 선만 밝아져 윤곽이 비침", "3.0s 선이 계속 지나며 로고가 축적됨", "4.5s 선이 잦아들고 금속 로고가 고정되어 유지"],
+      draw: function (x, i) {
+        var r = rng(41), k = [0, .35, .75, 1][i];
+        base(x);
+        if (i === 3) logo(x, 1, 0, 1); else if (i > 0) logo(x, k * .8, 0, 1);
+        var n = i === 3 ? 10 : 48;
+        for (var l = 0; l < n; l++) {
+          var y = r() * H, len = 80 + r() * 260, px = r() * (W + 200) - 100, al = i === 3 ? .12 : .15 + r() * .25;
+          var g = x.createLinearGradient(px, 0, px + len, 0); g.addColorStop(0, "rgba(211,179,108,0)"); g.addColorStop(1, "rgba(247,231,176," + al + ")");
+          x.strokeStyle = g; x.lineWidth = r() < .2 ? 1.4 : .6; x.beginPath(); x.moveTo(px, y); x.lineTo(px + len, y); x.stroke();
+          if (i > 0 && i < 3 && Math.abs(y - H / 2) < 40) { var gl = x.createLinearGradient(px, 0, px + len, 0); gl.addColorStop(0, "rgba(255,248,220,0)"); gl.addColorStop(1, "rgba(255,248,220," + (.5 * k) + ")"); x.strokeStyle = gl; x.lineWidth = 1.6; x.beginPath(); x.moveTo(px, y); x.lineTo(px + len, y); x.stroke(); }
+        }
+        if (i > 0 && i < 3) { x.save(); x.globalCompositeOperation = "lighter"; x.globalAlpha = .35 * k; logo(x, .5, 4, 1); x.restore(); }
+        vignette(x); label(x, ["T 0.0", "T 1.5", "T 3.0", "T 4.5"][i]);
+      } },
+    { title: "5. 포커스 인", desc: "로고가 처음부터 화면에 있지만 완전히 흐릿한 금빛 보케(빛방울) 상태입니다. 카메라 초점이 맞아가듯 5초 동안 보케가 줄어들며 글자로 수렴하고, 마지막 1초에 금속 질감이 선명해집니다. 렌즈를 돌리는 감각.",
+      caps: ["0.0s 흩어진 금빛 빛방울, 형태를 알 수 없음", "2.0s 보케가 줄며 덩어리진 글자 윤곽이 비침", "4.0s 초점이 거의 맞아 글자가 읽힘, 가장자리 번짐", "5.0s 초점 완성, 금속 질감 선명. 3초 유지"],
+      draw: function (x, i) {
+        var pts = logoPoints(220, 51), r = rng(5), blur = [0, 14, 5, 0][i];
+        base(x);
+        if (i === 0) { pts.forEach(function (p) { var rad = 14 + p.r * 26; var g = x.createRadialGradient(p.x, p.y, rad * .6, p.x, p.y, rad); g.addColorStop(0, "rgba(211,179,108,.08)"); g.addColorStop(.85, "rgba(211,179,108,.14)"); g.addColorStop(1, "rgba(211,179,108,0)"); x.fillStyle = g; x.fillRect(p.x - rad, p.y - rad, rad * 2, rad * 2); }); }
+        else if (i === 1) { logo(x, .75, blur, 1.04); pts.forEach(function (p, n) { if (n % 3) return; glowDot(x, p.x, p.y, 10 + p.r * 10, .18); }); }
+        else if (i === 2) { logo(x, .95, blur, 1.01); }
+        else logo(x, 1, 0, 1);
+        vignette(x); label(x, ["T 0.0", "T 2.0", "T 4.0", "T 5.0"][i]);
+      } }
+  ];
+
+  function render() {
+    var root = document.getElementById("root"); root.innerHTML = "";
+    ideas.forEach(function (idea) {
+      var sec = document.createElement("section"); sec.className = "idea";
+      sec.innerHTML = "<h2>" + idea.title + "</h2><p>" + idea.desc + "</p>";
+      var row = document.createElement("div"); row.className = "row";
+      for (var i = 0; i < 4; i++) {
+        var cut = document.createElement("div"); cut.className = "cut";
+        var cv = document.createElement("canvas"); cv.width = W; cv.height = H;
+        idea.draw(cv.getContext("2d"), i);
+        cut.appendChild(cv);
+        var cap = document.createElement("div"); cap.className = "cap"; cap.innerHTML = "<b>CUT " + (i + 1) + "</b>" + idea.caps[i];
+        cut.appendChild(cap); row.appendChild(cut);
+      }
+      sec.appendChild(row); root.appendChild(sec);
+    });
+  }
+  document.fonts.load("800 64px 'Pretendard Variable'").then(function () { return document.fonts.load("500 15px 'Pretendard Variable'"); }).then(render, render);
+})();
+</script>
+</body>
+</html>
