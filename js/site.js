@@ -182,19 +182,24 @@
   }
 
   /* Intro: the tilted poster wall behind a wide-tracked title, like a movie's opening card.
-     The title and tagline replay each time the slide is shown. */
+     The dust-to-title burst replays each time the slide is shown. */
   var INTRO_MS = 11000;
   function titleIntro(tag) {
     return '<div class="hi" aria-hidden="true">' +
-      '<div class="pw-wall" data-poster-wall></div><div class="hi__shade"></div>' +
+      '<div class="pw-wall" data-poster-wall></div><div class="hi__shade"></div><div class="hi__veil"></div>' +
       '' +
       '<div class="hi__center"><p class="hi__title">GOLDSTREAM</p><p class="hi__sub">ENTERTAINMENT</p></div>' +
-      '<p class="hi__tag">' + esc(tag) + "</p></div>";
+      '<p class="hi__tag">' + esc(tag) + '</p><canvas class="hi__fx" aria-hidden="true"></canvas><div class="hi__grain"></div></div>';
   }
   function bindIntro(slide) {
+    var fx = null, reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     slide._onActive = function () {
       var hi = slide.querySelector(".hi");
-      if (hi) { hi.classList.remove("is-play"); void hi.offsetWidth; hi.classList.add("is-play"); }
+      if (!hi) return;
+      if (!fx && window.GSIntro) fx = window.GSIntro.mount(hi, { active: function () { return slide.classList.contains("is-active"); } });
+      var at = /[?&]introAt=([\d.]+)/.exec(location.search);
+      if (fx && at) { fx.freeze(+at[1]); return; }
+      if (fx && !reduced) fx.play(); else { hi.classList.add("is-reveal"); }
     };
   }
 
