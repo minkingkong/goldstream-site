@@ -3413,13 +3413,17 @@ body::after {
 }
 .sp-hero__img {
   margin: 0;
+  justify-self: center;
   background: #0b0b0b;
   overflow: hidden;
 }
+/* the whole bottle must fit in the first screen: cap the portrait image by viewport height */
 .sp-hero__img img {
   display: block;
-  width: 100%;
+  width: auto;
+  max-width: 100%;
   height: auto;
+  max-height: calc(100vh - var(--header-h) - clamp(32px, 4vw, 64px) - 48px);
 }
 .sp-hero__title {
   margin-top: 16px;
@@ -3575,6 +3579,13 @@ body::after {
 @media (max-width: 860px) {
   .sp-hero__in {
     grid-template-columns: 1fr;
+  }
+  .sp-hero__img {
+    justify-self: stretch;
+  }
+  .sp-hero__img img {
+    width: 100%;
+    max-height: none;
   }
   .sp-feat__list {
     grid-template-columns: 1fr 1fr;
