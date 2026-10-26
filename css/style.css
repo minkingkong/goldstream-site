@@ -239,22 +239,18 @@ ul { list-style: none; }
     linear-gradient(to bottom, rgba(0, 0, 0, 0.32), rgba(0, 0, 0, 0) 28%);
   pointer-events: none;
 }
-/* title block sits bottom right (ICONOCLAST), the number row runs along the bottom left */
+/* title block bottom left, above the timeline */
 .hs__credit {
   position: absolute;
-  right: var(--pad);
   left: var(--pad);
-  bottom: clamp(120px, 17vh, 190px);
+  right: var(--pad);
+  bottom: clamp(92px, 12vh, 140px);
   z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  text-align: right;
+  max-width: min(78vw, 1200px);
 }
 .hs__meta {
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-end;
   gap: 0 14px;
   font-size: 12px;
   font-weight: 700;
@@ -264,19 +260,18 @@ ul { list-style: none; }
 }
 .hs__meta i { width: 3px; height: 3px; margin: auto 0; border-radius: 50%; background: rgba(255, 255, 255, 0.5); }
 .hs__title {
-  margin: 0.14em 0 0.04em;
-  font-size: clamp(44px, 6.4vw, 104px);
+  margin: 0.14em 0 0.06em;
+  font-size: clamp(50px, 8.6vw, 140px);
   font-weight: 800;
   letter-spacing: -0.04em;
   line-height: 0.98;
   text-shadow: 0 4px 30px rgba(0, 0, 0, 0.25);
 }
 .hs__title-en {
-  font-size: clamp(22px, 3.4vw, 56px);
+  font-size: clamp(16px, 1.7vw, 26px);
   font-weight: 300;
-  letter-spacing: -0.01em;
-  line-height: 1.05;
-  color: rgba(255, 255, 255, 0.9);
+  letter-spacing: 0.01em;
+  color: rgba(255, 255, 255, 0.62);
 }
 .hs__people {
   margin-top: 16px;
@@ -294,53 +289,57 @@ ul { list-style: none; }
 .hs__slide.is-active .hs__credit > :nth-child(4) { transition-delay: 0.22s; }
 .hs__slide.is-active .hs__credit > :nth-child(5) { transition-delay: 0.28s; }
 
-/* number row along the bottom (ICONOCLAST): big bold figures from the left edge,
-   current one bright; a progress line of the current slide runs across the very bottom */
-.hs__pager {
-  position: absolute;
-  left: var(--pad);
-  right: var(--pad);
-  bottom: clamp(22px, 4vh, 44px);
-  z-index: 3;
-}
-.hs__nums { display: flex; gap: clamp(36px, 5.6vw, 112px); }
+/* timeline: the whole bottom edge, split into one segment per slide; number sits above each segment.
+   past = full white, current = fills over its time, upcoming = faint line */
+.hs__pager { position: absolute; left: 0; right: 0; bottom: 0; z-index: 3; }
+.hs__nums { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 3px; }
 .hs__num {
-  font-size: clamp(22px, 2.4vw, 38px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  padding-top: 14px; /* bigger tap area above the number */
+  color: #fff;
+  text-align: left;
+}
+.hs__num span {
+  padding-left: 14px;
+  font-size: clamp(14px, 1.15vw, 18px);
   font-weight: 700;
   letter-spacing: 0.06em;
   line-height: 1;
-  color: #fff;
   opacity: 0.45;
-  padding: 8px 0;
   transition: opacity 0.4s;
 }
-.hs__num:hover { opacity: 0.8; }
-.hs__num.is-active { opacity: 1; }
-.hs__gauge {
-  position: absolute;
-  left: 0; right: 0; bottom: 0;
-  z-index: 3;
-  height: 2px;
-  background: rgba(255, 255, 255, 0.18);
+.hs__num:first-child span { padding-left: var(--pad); }
+.hs__num:hover span { opacity: 0.85; }
+.hs__num.is-active span { opacity: 1; }
+.hs__num i {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 3px;
   overflow: hidden;
+  background: rgba(255, 255, 255, 0.22);
 }
-.hs__gauge i {
+.hs__num b {
   position: absolute;
   inset: 0;
   background: #fff;
   transform-origin: left;
   transform: scaleX(0);
 }
+.hs__num.is-past b { transform: scaleX(1); }
 @media (max-width: 860px) {
   .hs { min-height: 520px; }
-  .hs__credit { bottom: 96px; }
-  .hs__title { font-size: clamp(36px, 10.5vw, 60px); }
-  .hs__title-en { font-size: clamp(18px, 5.6vw, 30px); }
+  .hs__credit { bottom: 76px; max-width: none; }
+  .hs__title { font-size: clamp(42px, 13vw, 72px); }
   .hs__people { display: none; }
-  .hs__more { margin-top: 16px; }
-  .hs__pager { bottom: 22px; }
-  .hs__nums { justify-content: space-between; gap: 0; }
-  .hs__num { font-size: 17px; letter-spacing: 0; }
+  .hs__more { margin-top: 18px; }
+  .hs__nums { gap: 2px; }
+  .hs__num { gap: 10px; padding-top: 18px; }
+  .hs__num { align-items: center; }
+  .hs__num span, .hs__num:first-child span { padding-left: 0; font-size: 13px; letter-spacing: 0; }
   .hs__poster { height: auto; width: min(72vw, 360px); }
 }
 

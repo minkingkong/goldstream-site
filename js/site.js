@@ -209,7 +209,6 @@
     var n = slides.length;
     var track = root.querySelector(".hs__track");
     var nums = root.querySelector(".hs__nums");
-    var bar = root.querySelector(".hs__gauge i");
     var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     track.innerHTML = "";
@@ -227,12 +226,14 @@
     });
     track.appendChild(first);
 
+    /* timeline along the very bottom: one segment per slide with its number above.
+       past segments full, the current one fills over its duration, upcoming ones dim */
     nums.innerHTML = "";
     var btns = slides.map(function (s, i) {
       var b = document.createElement("button");
       b.type = "button";
       b.className = "hs__num";
-      b.textContent = String(i + 1);
+      b.innerHTML = "<span>" + (i + 1) + "</span><i><b></b></i>";
       b.setAttribute("aria-label", (i + 1) + "번째 슬라이드");
       b.addEventListener("click", function () { go(i); });
       nums.appendChild(b);
@@ -243,8 +244,10 @@
     function setX(px, anim) { track.classList.toggle("is-anim", !!anim); track.style.transform = "translate3d(" + px + "px,0,0)"; }
     function place(anim) { setX(-pos * root.clientWidth, anim); }
     function realIndex(p) { return ((p - 1) % n + n) % n; }
+    function fill(i) { return btns[i].querySelector("b"); }
     function startGauge(ms) {
-      bar.style.transition = "none";
+      btns.forEach(function (b, i) { var f = fill(i); f.style.transition = "none"; f.style.transform = ""; });
+      var bar = fill(current);
       bar.style.transform = "scaleX(0)";
       void bar.offsetWidth;
       bar.style.transition = "transform " + ms + "ms linear";
@@ -261,7 +264,11 @@
     function markActive() {
       current = realIndex(pos);
       slides.forEach(function (s, i) { s.classList.toggle("is-active", i === current); s.inert = i !== current; });
-      btns.forEach(function (b, i) { b.classList.toggle("is-active", i === current); b.setAttribute("aria-current", i === current ? "true" : "false"); });
+      btns.forEach(function (b, i) {
+        b.classList.toggle("is-active", i === current);
+        b.classList.toggle("is-past", i < current);
+        b.setAttribute("aria-current", i === current ? "true" : "false");
+      });
       schedule();
     }
     function normalize() {
@@ -311,7 +318,7 @@
     root.addEventListener("scroll", function () { root.scrollLeft = 0; });
     window.addEventListener("resize", function () { place(false); });
     document.addEventListener("visibilitychange", function () {
-      if (document.hidden) { clearTimeout(timer); bar.style.transition = "none"; } else schedule();
+      if (document.hidden) { clearTimeout(timer); fill(current).style.transition = "none"; } else schedule();
     });
 
     place(false);
