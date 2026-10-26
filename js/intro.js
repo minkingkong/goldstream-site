@@ -1,144 +1,103 @@
-/* Home intro: white dust drifts in the dark, then spirals in and packs itself into the
-   GOLDSTREAM wordmark (each grain already owns a spot on a letter — no clump, no burst).
-   While the dust gathers the black veil lifts off the poster wall; once the grains settle
-   the real logo PNG surfaces underneath and the grains melt into it. Then the slide holds.
-   Layers (bottom → top): poster wall, shade, veil, logo, canvas dust, grain, vignette.
-   Timing is in seconds; every move is eased, never linear. */
+/* Home intro (slide 01) — LETTERBOX.
+   Black screen opens to a cinemascope band over the tilted poster wall, the GOLDSTREAM letters
+   rise one by one, then ENTERTAINMENT, then the bars open to full screen and the logo holds.
+   The letters are cut from the original logo PNG (its own pixels decide where each letter is),
+   so the mark is never redrawn. Timing lives in CSS (.hi.is-play ...); this file only builds
+   the letters and restarts the sequence. */
 (function () {
   "use strict";
-  var T = { dust: 1.0, gather: 2.6, settle: 0.8 };
-  var END = { dust: T.dust, gather: T.dust + T.gather };
-  END.settle = END.gather + T.settle;
-  var TOTAL = END.settle;
-  var VEIL = { at: 1.6, dur: 2.8 };                 /* black lifts off the poster wall */
-  var LOGO = { at: END.gather - 0.25, dur: 0.9 };   /* real wordmark surfaces under the dust */
+  var SRC = "assets/img/logo-goldstream.png";
+  var geo = null, waiting = [];
 
-  var outExpo = function (t) { return t >= 1 ? 1 : 1 - Math.pow(2, -10 * t); };
-  var inCubic = function (t) { return t * t * t; };
-  var outCubic = function (t) { return 1 - Math.pow(1 - t, 3); };
-  var clamp = function (v) { return v < 0 ? 0 : v > 1 ? 1 : v; };
-  var smooth = function (t) { t = clamp(t); return t * t * (3 - 2 * t); };
-
-  function sprite(c1, c2) {
-    var s = document.createElement("canvas"); s.width = s.height = 64;
-    var g = s.getContext("2d"), r = g.createRadialGradient(32, 32, 0, 32, 32, 32);
-    r.addColorStop(0, c1); r.addColorStop(0.3, c2); r.addColorStop(1, "rgba(0,0,0,0)");
-    g.fillStyle = r; g.fillRect(0, 0, 64, 64); return s;
+  /* find the two word bands and every letter inside them; letters that touch get split
+     at their thinnest column until the count matches */
+  function measure(img) {
+    var W = img.naturalWidth, H = img.naturalHeight;
+    var c = document.createElement("canvas"); c.width = W; c.height = H;
+    var g = c.getContext("2d"); g.drawImage(img, 0, 0);
+    var d = g.getImageData(0, 0, W, H).data;
+    var on = function (x, y) { return d[(y * W + x) * 4 + 3] > 40; };
+    var rows = [], x, y;
+    for (y = 0; y < H; y++) { var s = 0; for (x = 0; x < W; x++) if (on(x, y)) s++; rows.push(s); }
+    var bands = [], st = -1;
+    for (y = 0; y <= H; y++) { var f = y < H && rows[y] > 0; if (f && st < 0) st = y; if (!f && st >= 0) { bands.push([st, y]); st = -1; } }
+    bands.sort(function (a, b) { return (b[1] - b[0]) - (a[1] - a[0]); });
+    var two = bands.slice(0, 2).sort(function (a, b) { return a[0] - b[0]; });
+    if (two.length < 2) return null;
+    function letters(y0, y1, expect) {
+      var sum = [], out = [], s0 = -1;
+      for (x = 0; x < W; x++) { var n = 0; for (var yy = y0; yy < y1; yy++) if (on(x, yy)) n++; sum.push(n); }
+      for (x = 0; x <= W; x++) { var ff = x < W && sum[x] > 0; if (ff && s0 < 0) s0 = x; if (!ff && s0 >= 0) { out.push([s0, x]); s0 = -1; } }
+      for (var guard = 0; out.length < expect && guard < 40; guard++) {
+        var wi = 0; out.forEach(function (r, i) { if (r[1] - r[0] > out[wi][1] - out[wi][0]) wi = i; });
+        var r = out[wi], a = r[0] + Math.round((r[1] - r[0]) * 0.25), z = r[0] + Math.round((r[1] - r[0]) * 0.75), best = a;
+        for (x = a; x < z; x++) if (sum[x] < sum[best]) best = x;
+        out.splice(wi, 1, [r[0], best], [best, r[1]]);
+      }
+      return out.map(function (q) { return [q[0] / W, q[1] / W]; });
+    }
+    return {
+      px: [1.5 / W, 1.5 / H],
+      top: { y0: two[0][0] / H, y1: two[0][1] / H, letters: letters(two[0][0], two[0][1], 10) },
+      bot: { y0: two[1][0] / H, y1: two[1][1] / H, letters: letters(two[1][0], two[1][1], 13) }
+    };
   }
 
-  function mount(hi, opts) {
-    var cv = hi.querySelector(".hi__fx"), logo = hi.querySelector(".hi__logo"), veil = hi.querySelector(".hi__veil");
-    if (!cv || !logo) return null;
-    var x = cv.getContext("2d");
-    var W = 0, H = 0, pts = [], core = { x: 0, y: 0 }, t0 = 0, raf = 0, safety = 0, spW, spG;
+  /* one letter = a clipping box (positioned in % of the mark) holding the PNG cropped to that letter */
+  function letter(band, L, cls, i, px) {
+    var x0 = Math.max(0, L[0] - px[0]), x1 = Math.min(1, L[1] + px[0]);
+    var y0 = Math.max(0, band.y0 - px[1]), y1 = Math.min(1, band.y1 + px[1]);
+    var w = x1 - x0, h = y1 - y0;
+    var box = document.createElement("span");
+    box.className = "hi__l " + cls;
+    box.style.cssText = "left:" + (x0 * 100) + "%;top:" + (y0 * 100) + "%;width:" + (w * 100) + "%;height:" + (h * 100) + "%;--i:" + i;
+    var ink = document.createElement("i");
+    ink.style.backgroundImage = "url(" + SRC + ")";
+    ink.style.backgroundSize = (100 / w) + "% " + (100 / h) + "%";
+    ink.style.backgroundPosition = (x0 / (1 - w) * 100) + "% " + (y0 / (1 - h) * 100) + "%";
+    box.appendChild(ink);
+    return box;
+  }
 
-    function size() {
-      var d = Math.min(2, window.devicePixelRatio || 1);
-      W = cv.clientWidth; H = cv.clientHeight; cv.width = W * d; cv.height = H * d; x.setTransform(d, 0, 0, d, 0, 0);
+  function build(mark) {
+    if (!geo) { mark.classList.add("is-fallback"); return; }
+    var frag = document.createDocumentFragment();
+    geo.top.letters.forEach(function (L, i) { frag.appendChild(letter(geo.top, L, "is-top", i, geo.px)); });
+    geo.bot.letters.forEach(function (L, i) { frag.appendChild(letter(geo.bot, L, "is-bot", i, geo.px)); });
+    mark.appendChild(frag);
+  }
+
+  var img = new Image();
+  img.onload = function () {
+    try { geo = measure(img); } catch (e) { geo = null; }
+    var w = waiting; waiting = []; w.forEach(function (f) { f(); });
+  };
+  img.onerror = function () { var w = waiting; waiting = []; w.forEach(function (f) { f(); }); };
+  img.src = SRC;
+
+  function mount(hi) {
+    var mark = hi.querySelector(".hi__mark"), built = false;
+    function ensure(cb) {
+      if (built) return cb();
+      var go = function () { if (!built) { build(mark); built = true; } cb(); };
+      if (img.complete) go(); else waiting.push(go);
     }
-    /* sample the on-screen logo PNG so every grain has a target on a letter */
-    function sample(n) {
-      var r = logo.getBoundingClientRect(), c = cv.getBoundingClientRect(), S = 2;
-      var off = document.createElement("canvas"); off.width = Math.max(1, Math.ceil(r.width / S)); off.height = Math.max(1, Math.ceil(r.height / S));
-      var g = off.getContext("2d"), out = [], guard = 0;
-      try { g.drawImage(logo, 0, 0, off.width, off.height); } catch (e) { return out; }
-      var img = g.getImageData(0, 0, off.width, off.height).data;
-      while (out.length < n && guard++ < n * 60) {
-        var px = (Math.random() * off.width) | 0, py = (Math.random() * off.height) | 0;
-        if (img[(py * off.width + px) * 4 + 3] > 120) out.push({ x: r.left - c.left + px * S + Math.random() * S, y: r.top - c.top + py * S + Math.random() * S });
-      }
-      return out;
-    }
-    function build() {
-      spW = sprite("rgba(255,255,255,1)", "rgba(255,255,255,.55)");
-      spG = sprite("rgba(255,250,236,1)", "rgba(236,222,190,.55)");
-      var r = logo.getBoundingClientRect(), c = cv.getBoundingClientRect();
-      core.x = r.left - c.left + r.width / 2; core.y = r.top - c.top + r.height / 2;
-      var n = W < 640 ? 1500 : W < 1200 ? 2800 : 4400;
-      pts = sample(n).map(function (p) {
-        var edge = Math.random() < 0.6, spark = Math.random() < 0.08;
-        return {
-          tx: p.x, ty: p.y,
-          sx: edge ? Math.random() * W * 1.6 - W * 0.3 : Math.random() * W,
-          sy: edge ? Math.random() * H * 1.6 - H * 0.3 : Math.random() * H,
-          vx: (Math.random() - 0.5) * 16, vy: (Math.random() - 0.5) * 16,
-          j: Math.random(), tw: Math.random() * 6.283,
-          sw: (Math.random() < 0.5 ? -1 : 1) * (0.9 + Math.random() * 1.3), /* spiral direction + turn */
-          r: spark ? 1.8 + Math.random() * 1.4 : 0.6 + Math.random() * 0.9, spark: spark
-        };
-      });
-    }
-    function layers(t) {
-      if (veil) veil.style.opacity = 1 - smooth((t - VEIL.at) / VEIL.dur);
-      logo.style.opacity = smooth((t - LOGO.at) / LOGO.dur);
-      if (t >= LOGO.at && !hi.classList.contains("is-reveal")) hi.classList.add("is-reveal");
-    }
-    function draw(t) {
-      x.clearRect(0, 0, W, H);
-      var ph = t < END.dust ? 0 : t < END.gather ? 1 : 2;
-      var k = ph === 0 ? t / T.dust : ph === 1 ? (t - END.dust) / T.gather : clamp((t - END.gather) / T.settle);
-      x.globalCompositeOperation = "lighter";
-      /* a soft warm light grows where the mark forms, then eases away as the mark takes over */
-      var big = Math.max(W, H), lamp = ph === 1 ? 0.22 * inCubic(k) : ph === 2 ? 0.22 * (1 - smooth(k)) : 0;
-      if (lamp > 0.005) {
-        var g = x.createRadialGradient(core.x, core.y, 0, core.x, core.y, big * 0.32);
-        g.addColorStop(0, "rgba(255,244,222," + lamp + ")"); g.addColorStop(1, "rgba(255,244,222,0)");
-        x.fillStyle = g; x.fillRect(core.x - big * 0.32, core.y - big * 0.32, big * 0.64, big * 0.64);
-      }
-      var fade = ph === 2 ? 1 - smooth((k - 0.15) / 0.85) : 1;
-      for (var i = 0; i < pts.length; i++) {
-        var p = pts[i], px, py, al, sc = 1, kk = 1;
-        var dx = p.sx + p.vx * t + Math.sin(t * 0.8 + p.tw) * 10, dy = p.sy + p.vy * t + Math.cos(t * 0.6 + p.tw) * 10;
-        if (ph === 0) { px = dx; py = dy; al = (0.12 + 0.4 * Math.abs(Math.sin(t * 2 + p.tw))) * outCubic(k); }
-        else {
-          kk = ph === 2 ? 1 : clamp((k - p.j * 0.3) / 0.7); /* staggered start, slow pull, fast arrival */
-          var e = kk < 0.55 ? inCubic(kk / 0.55) * 0.5 : 0.5 + outExpo((kk - 0.55) / 0.45) * 0.5;
-          /* spiral: the offset from the target shrinks while rotating, so each grain swirls in on its own arc */
-          var ox = dx - p.tx, oy = dy - p.ty, ang = (1 - e) * p.sw, cs = Math.cos(ang), sn = Math.sin(ang), m = 1 - e;
-          px = p.tx + (ox * cs - oy * sn) * m; py = p.ty + (ox * sn + oy * cs) * m;
-          if (ph === 2) { var jit = (1 - smooth(k)) * 1.2; px += Math.sin(t * 15 + p.tw) * jit; py += Math.cos(t * 12 + p.tw) * jit; }
-          al = (0.3 + 0.7 * e) * fade; sc = 1 + (1 - e) * 0.7;
-          if (ph === 1 && e > 0.1 && e < 0.96) { /* streak toward the target so the pull reads as force */
-            x.globalAlpha = al * (p.spark ? 0.5 : 0.22); x.strokeStyle = "#fff"; x.lineWidth = p.spark ? 1.2 : 0.7;
-            var vx2 = (px - p.tx) * 0.06 * (1 - e), vy2 = (py - p.ty) * 0.06 * (1 - e);
-            x.beginPath(); x.moveTo(px + vx2, py + vy2); x.lineTo(px, py); x.stroke();
-          }
-        }
-        if (al <= 0.01) continue;
-        x.globalAlpha = al;
-        if (p.spark) { var s = p.r * sc * 6; x.drawImage(p.j < 0.5 ? spG : spW, px - s / 2, py - s / 2, s, s); }
-        else { x.fillStyle = ph === 2 || (ph === 1 && kk > 0.9) ? "#ffffff" : "#ece6d8"; x.beginPath(); x.arc(px, py, p.r * sc, 0, 6.283); x.fill(); }
-      }
-      x.globalAlpha = 1; x.globalCompositeOperation = "source-over";
-    }
-    function finish() { x.clearRect(0, 0, W, H); if (veil) veil.style.opacity = 0; logo.style.opacity = 1; hi.classList.add("is-reveal"); raf = 0; }
-    function frame(now) {
-      if (cv.clientWidth !== W || cv.clientHeight !== H) { size(); build(); }
-      if (opts && opts.active && !opts.active()) { stop(); return; }
-      var t = (now - t0) / 1000;
-      layers(t);
-      if (t < TOTAL) { draw(t); raf = requestAnimationFrame(frame); } else finish();
-    }
-    function reset() { hi.classList.remove("is-reveal"); if (veil) veil.style.opacity = 1; logo.style.opacity = 0; void hi.offsetWidth; }
-    function start() {
-      size(); build(); t0 = performance.now(); raf = requestAnimationFrame(frame);
-      /* background tabs pause rAF; make sure the slide still lands on the finished state in time */
-      clearTimeout(safety);
-      safety = setTimeout(function () { if (raf) { cancelAnimationFrame(raf); finish(); } }, TOTAL * 1000 + 400);
-    }
-    function play() {
-      cancelAnimationFrame(raf); reset();
-      if (logo.complete && logo.naturalWidth) start();
-      else { logo.onload = start; logo.onerror = skip; }
-    }
-    function stop() { cancelAnimationFrame(raf); raf = 0; clearTimeout(safety); x.clearRect(0, 0, W, H); }
-    function skip() { stop(); finish(); }
-    function freeze(sec) {
-      stop(); reset(); size(); build(); t0 = performance.now() - sec * 1000;
-      layers(sec); if (sec < TOTAL) draw(sec); else finish();
-      hi.setAttribute("data-shot", cv.toDataURL());
-    }
-    return { play: play, stop: stop, skip: skip, freeze: freeze, duration: TOTAL };
+    return {
+      /* restart the whole sequence from black */
+      play: function () {
+        ensure(function () {
+          /* snap back to the start without animating backwards, then run again */
+          hi.classList.add("is-reset");
+          hi.classList.remove("is-play", "is-done");
+          void hi.offsetWidth;
+          hi.classList.remove("is-reset");
+          void hi.offsetWidth;
+          hi.classList.add("is-play");
+        });
+      },
+      /* jump straight to the finished frame (reduced motion) */
+      finish: function () { ensure(function () { hi.classList.add("is-play", "is-done"); }); }
+    };
   }
   window.GSIntro = { mount: mount };
 })();
