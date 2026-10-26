@@ -14,7 +14,7 @@
   function ui(key, fallback) { return EN && EN.ui[key] ? EN.ui[key] : fallback; }
   function creditKey(k) { return EN && EN.creditKeys[k] ? EN.creditKeys[k] : k; }
   var SLIDE_MS = 6000;
-  var INTRO_MS = 7600; /* letterbox intro: bars fully open at 4.8s, logo holds ~2.8s */
+  var INTRO_MS = 6200; /* intro: logo complete at ~2.6s, holds ~3.5s */
   var ARROW =
     '<svg class="arrow" viewBox="0 0 26 10" aria-hidden="true"><path d="M0 5h24M20 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.2"/></svg>';
 
@@ -155,13 +155,13 @@
     var el = document.createElement("div");
     el.className = "hs__slide hs__slide--dark";
     el.innerHTML =
-      /* LETTERBOX intro (js/intro.js): poster wall behind, black bars open to cinemascope,
-         logo letters rise one by one, bars open fully */
+      /* intro (js/intro.js): black fades up into the poster wall,
+         logo letters rise one by one */
       '<div class="hi" aria-hidden="true">' +
       '<div class="hi__wall"><div class="pw-wall" data-poster-wall></div></div><div class="hi__shade"></div>' +
       '<div class="hi__mark"><img class="hi__logo" src="assets/img/logo-goldstream.png" alt="" width="774" height="170" decoding="async"></div>' +
       '<p class="hi__tag">' + esc(home.heroTagline || "이야기를 현실로 만듭니다") + "</p>" +
-      '<div class="hi__bar is-top"></div><div class="hi__bar is-bot"></div></div>' +
+      '<div class="hi__fade"></div></div>' +
       '<p class="sr-only">' + esc(home.heroTitle || "GOLDSTREAM ENTERTAINMENT") + "</p>";
     el.setAttribute("data-dur", String(INTRO_MS));
     var fx = null, reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;

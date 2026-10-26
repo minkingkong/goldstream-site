@@ -1,6 +1,6 @@
-/* Home intro (slide 01) — LETTERBOX.
-   Black screen opens to a cinemascope band over the tilted poster wall, the GOLDSTREAM letters
-   rise one by one, then ENTERTAINMENT, then the bars open to full screen and the logo holds.
+/* Home intro (slide 01).
+   Black fades up into the tilted poster wall while the GOLDSTREAM letters
+   rise one by one, then ENTERTAINMENT, and the logo holds.
    The letters are cut from the original logo PNG (its own pixels decide where each letter is),
    so the mark is never redrawn. Timing lives in CSS (.hi.is-play ...); this file only builds
    the letters and restarts the sequence. */
