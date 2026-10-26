@@ -4,13 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>회사 소개 | 골드스트림엔터테인먼트</title>
-  <meta name="description" content="골드스트림엔터테인먼트 회사 소개 — 대표이사 김정환 인사말, 사업 분야, 필모그래피, 협력사." />
+  <meta name="description" content="골드스트림엔터테인먼트 회사 소개. 대표이사 김정환 인사말, 사업 분야, 회사 정보." />
   <link rel="canonical" href="https://goldstream.kr/about.html" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="골드스트림엔터테인먼트" />
   <meta property="og:url" content="https://goldstream.kr/about.html" />
   <meta property="og:title" content="회사 소개 | GOLDSTREAM Entertainment" />
-  <meta property="og:description" content="대표이사 김정환 인사말, 회사 소개, 협력사와 사업 영역, 관련 기사." />
+  <meta property="og:description" content="대표이사 김정환 인사말, 회사 소개, 사업 분야." />
   <meta property="og:image" content="https://goldstream.kr/assets/img/og-goldstream.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" href="favicon.ico" sizes="any" />
@@ -18,125 +18,80 @@
   <link rel="icon" type="image/png" sizes="192x192" href="assets/icons/icon-192.png" />
   <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png" />
   <link rel="preload" as="font" type="font/woff2" href="assets/fonts/PretendardVariable.woff2" crossorigin />
-  <link rel="stylesheet" href="css/style.css?v=1d96e2ca1b" />
+  <link rel="stylesheet" href="css/style.css?v=4178463a3f" />
 </head>
-<body id="top">  <header class="hd" id="hd">
-    <a class="hd__logo" href="index.html" aria-label="GOLDSTREAM ENTERTAINMENT 홈"><img src="assets/img/logo-goldstream-dark.png" alt="GOLDSTREAM ENTERTAINMENT" width="774" height="170" /></a>
+<body id="top">
+  <header class="hd" id="hd">
+    <a class="hd__logo" href="index.html" aria-label="GOLDSTREAM ENTERTAINMENT 홈">
+      <img class="is-dark" src="assets/img/logo-goldstream-dark.png" alt="GOLDSTREAM ENTERTAINMENT" width="774" height="170" />
+      <img class="is-light" src="assets/img/logo-goldstream.png" alt="" width="774" height="170" aria-hidden="true" />
+    </a>
     <nav class="hd__nav" aria-label="주 메뉴">
-      <a href="works.html">WORK</a>
-      <a href="location.html">LOCATION</a>
-      <a href="campaign.html">CAMPAIGN</a>
-      <a href="sponsorship.html">SPONSORSHIP</a>
-      <a href="social.html">IMPACT</a>
-      <a href="about.html">ABOUT</a>
-      <a href="brand.html">BRAND</a>
+      <a href="about.html">About</a>
+      <a href="works.html">Work</a>
+      <a href="partners.html">Partners</a>
+      <a href="contact.html">Contact</a>
     </nav>
-    <a class="hd__cta" href="contact.html">CONTACT</a>
     <button class="hd__burger" type="button" aria-label="메뉴 열기" aria-expanded="false"><span></span><span></span></button>
   </header>
-  <main>
-    <section class="pw-hero">
-      <div class="pw-wall" data-poster-wall aria-hidden="true"></div>
-      <div class="pw-hero__shade"></div>
-      <div class="pw-hero__in">
-        <p class="pw-k">ABOUT GOLDSTREAM</p>
-        <h1 class="pw-hero__title" data-field="about.heroQuote" data-multiline>좋은 이야기를 발견하고,<br />좋은 사람을 연결하고,<br />그것을 하나의 산업으로.</h1>
-      </div>
-      <span class="pw-hero__cue" aria-hidden="true"></span>
+
+  <main class="pg wrap">
+    <section class="pg-head">
+      <h1 class="pg-title" data-field="pages.about.title">ABOUT</h1>
     </section>
 
-    <section class="ab-intro wrap reveal">
-      <h2 class="sec-title"><small>WHO WE ARE</small>GOLDSTREAM</h2>
-      <div class="ab-intro__body">
-        <p class="ab-intro__lead" data-field="home.statementBody"></p>
-        <div class="about__prose" id="about-profile"></div>
-      </div>
+    <p class="pg-quote reveal" data-field="about.heroQuote" data-multiline>좋은 이야기를 발견하고,<br />좋은 사람을 연결하고,<br />그것을 하나의 산업으로.</p>
+
+    <section class="ab-grid reveal">
+      <p class="k">Who we are</p>
+      <div class="prose prose--lg" id="about-profile"></div>
     </section>
 
-    <section class="ab-ceo wrap reveal">
-      <div class="ab-ceo__photo">
-        <img data-field="about.portrait" src="assets/img/ceo-portrait.jpg" alt="김정환 대표이사" />
-      </div>
-      <div class="ab-ceo__body">
-        <p class="pw-k">CEO MESSAGE</p>
-        <p class="ab-ceo__name"><span data-field="about.name">김정환</span> <small>대표이사</small></p>
-        <div class="about__prose" id="about-greeting"></div>
-        <p class="about__sign" data-field="about.greetingSign"></p>
+    <section class="ab-grid reveal">
+      <p class="k">CEO message</p>
+      <div class="ceo">
+        <div class="ceo__photo"><img data-field="about.portrait" src="assets/img/ceo-portrait.jpg" alt="김정환 대표이사" /></div>
+        <div>
+          <p class="ceo__name"><span data-field="about.name">김정환</span><small data-field="about.role">대표이사</small></p>
+          <div class="prose" id="about-greeting"></div>
+          <p class="sign" data-field="about.greetingSign"></p>
+        </div>
       </div>
     </section>
 
-    <section class="section wrap">
-      <div class="sec-head reveal">
-        <h2 class="sec-title"><small>WHAT WE DO</small>BUSINESS</h2>
-      </div>
-      <div class="biz-grid reveal" id="biz-grid"></div>
+    <section class="ab-grid reveal">
+      <p class="k" data-field="about.currentBusinessTitle">What we do</p>
+      <ul class="biglist" id="about-business"></ul>
     </section>
 
-    <section class="section wrap">
-      <div class="sec-head reveal">
-        <h2 class="sec-title"><small>FILMOGRAPHY</small>WORKS</h2>
-        <a class="sec-link" href="works.html">VIEW ALL <svg class="arrow" viewBox="0 0 26 10" aria-hidden="true"><path d="M0 5h24M20 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></a>
-      </div>
-      <div class="works-grid works-grid--feature reveal" id="works-grid" data-featured></div>
-    </section>
-
-    <section class="ab-meta wrap reveal">
-      <div id="about-partners-wrap">
-        <h2 class="about__block-title" data-field="about.partnersTitle">협력사</h2>
-        <ul class="partners" id="about-partners"></ul>
-      </div>
-      <div id="about-press-wrap">
-        <h2 class="about__block-title">관련 기사</h2>
-        <nav class="modal__links" id="about-press" aria-label="관련 보도"></nav>
-      </div>
+    <section class="ab-grid reveal">
+      <p class="k">Company</p>
       <div>
-        <h2 class="about__block-title">COMPANY</h2>
         <dl class="facts" id="about-facts"></dl>
-      </div>
-    </section>
-
-    <section class="ab-cta">
-      <div class="wrap ab-cta__in">
-        <p class="ab-cta__text">함께 만들 이야기가 있다면,<br />언제든 연락주세요.</p>
-        <a class="bx-btn bx-btn--light" href="contact.html">CONTACT</a>
+        <div data-optional style="margin-top:40px">
+          <p class="k" style="margin-bottom:12px">Press</p>
+          <nav class="linklist" id="about-press" aria-label="관련 보도"></nav>
+        </div>
       </div>
     </section>
   </main>
+
   <footer class="ft">
     <div class="wrap ft__top">
-      <div class="ft__lead">
-        <p>좋은 이야기를 발견하고,<br />스크린 위의 현실로.</p>
-        <a class="ft__cta" href="contact.html">CONTACT US <svg class="arrow" viewBox="0 0 26 10" aria-hidden="true"><path d="M0 5h24M20 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></a>
-      </div>
-      <nav class="ft__col" aria-label="하단 메뉴">
-        <h4>MENU</h4>
-        <ul>
-          <li><a href="works.html">WORK</a></li>
-          <li><a href="location.html">LOCATION</a></li>
-          <li><a href="campaign.html">CAMPAIGN</a></li>
-          <li><a href="sponsorship.html">SPONSORSHIP</a></li>
-          <li><a href="social.html">IMPACT</a></li>
-          <li><a href="about.html">ABOUT</a></li>
-          <li><a href="brand.html">BRAND</a></li>
-          <li><a href="contact.html">CONTACT</a></li>
-        </ul>
+      <a class="ft__logo" href="index.html" aria-label="GOLDSTREAM ENTERTAINMENT"><img src="assets/img/logo-goldstream-dark.png" alt="GOLDSTREAM ENTERTAINMENT" width="774" height="170" /></a>
+      <nav class="ft__nav" aria-label="하단 메뉴">
+        <a href="about.html">About</a>
+        <a href="works.html">Work</a>
+        <a href="partners.html">Partners</a>
+        <a href="contact.html">Contact</a>
       </nav>
-      <div class="ft__col">
-        <h4>OFFICES</h4>
-        <div id="ft-offices"><p><b>광주</b>전남광주통합특별시 광산구 첨단중앙로152번길 5-8, 3층</p><p><b>서울</b>서울 강남구 삼성로 648, 4층</p></div>
-      </div>
-      <div class="ft__col">
-        <h4>CONTACT</h4>
-        <a href="mailto:kim@goldstream.kr" data-field="contact.email" data-mailto>kim@goldstream.kr</a>
-      </div>
     </div>
     <div class="wrap ft__bottom">
-      <span>© 2026 주식회사 골드스트림엔터테인먼트 · 대표 김정환</span>
-      <a class="ft__top-btn" href="#top">TOP ↑</a>
+      <span>© 2026 주식회사 골드스트림엔터테인먼트</span>
+      <a href="mailto:kim@goldstream.kr" data-field="contact.email" data-mailto>kim@goldstream.kr</a>
     </div>
-    <div class="ft__word" aria-hidden="true">GOLDSTREAM</div>
   </footer>
 
-  <script src="js/site.js?v=581a507c13"></script>
+  <script src="js/site.js?v=62e61b4ae2"></script>
 </body>
 </html>
