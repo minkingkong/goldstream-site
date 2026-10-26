@@ -8,7 +8,7 @@ window.GS_EN = {
     "works.lead": "Films and drama series that GOLDSTREAM ENTERTAINMENT has developed and produced.",
     "works.titles": "TITLES",
     "modal.close": "Close",
-    "about.press": "Press", "about.who": "Who we are", "about.ceo": "CEO message", "about.what": "What we do", "about.company": "Company",
+    "about.press": "Press", "about.kicker": "Film & Drama Production", "about.focusK": "Focus", "about.focusV": "Film & drama development · financing · production", "about.baseK": "Base", "about.who": "Who we are", "about.ceo": "CEO message", "about.what": "What we do", "about.company": "Company",
     "partners.lead": "Good work is never made alone. These are the companies we plan and produce with.",
     "contact.email": "Email", "contact.offices": "Offices", "contact.company": "Company", "contact.map": "Open map ↗",
     "contact.companyLine": "GOLDSTREAM ENTERTAINMENT Co., Ltd.", "contact.ceo": "CEO",
@@ -70,7 +70,8 @@ window.GS_EN = {
   },
   about: {
     name: "Kim Jung-hwan",
-    role: "CEO · GOLDSTREAM ENTERTAINMENT",
+    role: "CEO",
+    ceoQuote: "We would rather be a company that makes work people remember for a long time than one that simply makes a lot of it.",
     heroQuote: "Find good stories,\nconnect good people,\nand turn it into an industry.",
     greeting: [
       "I believe content always begins with a good story and good people.",

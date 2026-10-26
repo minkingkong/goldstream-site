@@ -58,6 +58,7 @@
     d.pages = merge(d.pages || {}, EN.pages);
     d.about = merge(d.about || {}, EN.about);
     d.contact = merge(d.contact || {}, EN.contact);
+    d.contact.officesKo = (data.contact || {}).offices;
     (d.works || []).forEach(function (w) {
       var t = EN.works[w.id] || {};
       if (t.titleEn) w.titleEn = t.titleEn;
@@ -539,13 +540,30 @@
     var c = data.contact || {};
     var off = document.getElementById("contact-offices");
     if (off) {
-      off.innerHTML = (c.offices || []).filter(function (o) { return o && o.address; }).map(function (o) {
-        return "<p><b>" + esc(o.label) + "</b>" + esc(o.address) +
-          '<br><a class="map" href="https://map.naver.com/p/search/' + encodeURIComponent(o.address) + '" target="_blank" rel="noopener noreferrer">' + esc(ui("contact.map", "지도 보기 ↗")) + "</a></p>";
+      /* map search always uses the Korean address (English mode shows a translated one) */
+      var ko = c.officesKo || c.offices || [];
+      var q = function (i, o) { return String((ko[i] && ko[i].address) || o.address).replace("전남광주통합특별시", "광주광역시"); };
+      var offices = (c.offices || []).filter(function (o) { return o && o.address; });
+      off.innerHTML = offices.map(function (o, i) {
+        return '<div class="ct1__office' + (i ? "" : " is-on") + '" data-i="' + i + '"><b>' + esc(o.label) + "</b><p>" + esc(o.address) + "</p>" +
+          '<a class="map" href="https://map.naver.com/p/search/' + encodeURIComponent(q(i, o)) + '" target="_blank" rel="noopener noreferrer">' + esc(ui("contact.map", "지도 보기 ↗")) + "</a></div>";
       }).join("");
+      var frame = document.getElementById("contact-map");
+      var show = function (i) {
+        if (!frame || !offices[i]) return;
+        frame.src = "https://maps.google.com/maps?q=" + encodeURIComponent(q(i, offices[i])) + "&z=16&output=embed&hl=" + (EN ? "en" : "ko");
+        off.querySelectorAll(".ct1__office").forEach(function (e) { e.classList.toggle("is-on", +e.getAttribute("data-i") === i); });
+      };
+      /* on PC the map sits beside the addresses: pointing at an office switches the map */
+      off.querySelectorAll(".ct1__office").forEach(function (e) {
+        var i = +e.getAttribute("data-i");
+        e.addEventListener("mouseenter", function () { show(i); });
+        e.addEventListener("focusin", function () { show(i); });
+      });
+      if (frame && getComputedStyle(frame.parentNode).display !== "none") show(0);
     }
     var inq = document.getElementById("contact-inquiries");
-    if (inq) inq.innerHTML = (c.inquiries || []).map(function (t) { return "<p>" + esc(t) + "</p>"; }).join("");
+    if (inq) inq.innerHTML = (c.inquiries || []).map(function (t) { return "<em>" + esc(t) + "</em>"; }).join("");
   }
 
   /* ---------- reveal ---------- */

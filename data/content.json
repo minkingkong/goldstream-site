@@ -40,7 +40,7 @@
       "demonkiller"
     ],
     "statement": "좋은 이야기를 발견하고,\n스크린 위의 현실로 만듭니다.",
-    "statementBody": "골드스트림엔터테인먼트는 영화·드라마의 기획개발과 투자, 제작을 중심으로 로케이션 지원, 캠페인·홍보물 제작, 브랜드 협찬까지 아우릅니다. 이야기의 시작부터 현장까지, 한 팀이 끝까지 책임집니다.",
+    "statementBody": "골드스트림엔터테인먼트는 영화와 드라마를 기획·개발하고, 투자를 이끌어 제작하는 콘텐츠 제작사입니다. 〈강철비〉 〈강철비2: 정상회담〉 〈멍뭉이〉 〈파인: 촌뜨기들〉에 참여했고, 〈코드〉와 〈금지된 여자〉를 준비하고 있습니다.",
     "featuredIds": [
       "code",
       "forbidden",
@@ -570,7 +570,7 @@
   ],
   "about": {
     "name": "김정환",
-    "role": "대표이사 · GOLDSTREAM ENTERTAINMENT",
+    "role": "대표이사",
     "portrait": "assets/img/ceo-portrait.jpg",
     "greetingTitle": "대표이사 인사말",
     "greeting": [
@@ -663,7 +663,8 @@
         "logo": ""
       }
     ],
-    "heroQuote": "좋은 이야기를 발견하고,\n좋은 사람을 연결하고,\n그것을 하나의 산업으로."
+    "heroQuote": "좋은 이야기를 발견하고,\n좋은 사람을 연결하고,\n그것을 하나의 산업으로.",
+    "ceoQuote": "우리는 단순히 많은 작품을 만드는 회사보다 오랫동안 기억되는 작품을 만드는 회사를 지향합니다."
   },
   "contact": {
     "email": "kim@goldstream.kr",
