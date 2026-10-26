@@ -28,7 +28,7 @@
   }
   </script>
   <link rel="preload" as="font" type="font/woff2" href="assets/fonts/PretendardVariable.woff2" crossorigin />
-  <link rel="stylesheet" href="css/style.css?v=4178463a3f" />
+  <link rel="stylesheet" href="css/style.css?v=da10d4f950" />
 </head>
 <body class="home" id="top">
   <header class="hd" id="hd">
@@ -36,12 +36,15 @@
       <img class="is-dark" src="assets/img/logo-goldstream-dark.png" alt="GOLDSTREAM ENTERTAINMENT" width="774" height="170" />
       <img class="is-light" src="assets/img/logo-goldstream.png" alt="" width="774" height="170" aria-hidden="true" />
     </a>
+    <div class="hd__right">
     <nav class="hd__nav" aria-label="주 메뉴">
       <a href="about.html">About</a>
       <a href="works.html">Work</a>
       <a href="partners.html">Partners</a>
       <a href="contact.html">Contact</a>
     </nav>
+    <div class="hd__lang" aria-label="언어"><button type="button" data-lang="ko">KR</button><i>/</i><button type="button" data-lang="en">EN</button></div>
+    </div>
     <button class="hd__burger" type="button" aria-label="메뉴 열기" aria-expanded="false"><span></span><span></span></button>
   </header>
 
@@ -49,10 +52,8 @@
     <h1 class="sr-only">골드스트림엔터테인먼트 GOLDSTREAM ENTERTAINMENT</h1>
     <section class="hs" id="hs" aria-roledescription="carousel" aria-label="대표 작품" tabindex="-1">
       <div class="hs__track"></div>
-      <div class="hs__pager">
-        <div class="hs__nums"></div>
-        <span class="hs__gauge" aria-hidden="true"><i></i></span>
-      </div>
+      <div class="hs__pager"><div class="hs__nums"></div></div>
+      <span class="hs__gauge" aria-hidden="true"><i></i></span>
     </section>
 
     <section class="section wrap">
@@ -60,7 +61,7 @@
         <p class="k">GOLDSTREAM ENTERTAINMENT</p>
         <div>
           <p class="statement__big" data-field="home.statement" data-multiline>좋은 이야기를 발견하고,<br>스크린 위의 현실로 만듭니다.</p>
-          <p class="statement__body">골드스트림엔터테인먼트는 영화·드라마의 기획개발과 투자, 제작을 하는 콘텐츠 제작사입니다. 이야기의 시작부터 현장까지, 한 팀이 끝까지 책임집니다.</p>
+          <p class="statement__body" data-i18n="home.statementBody">골드스트림엔터테인먼트는 영화·드라마의 기획개발과 투자, 제작을 하는 콘텐츠 제작사입니다. 이야기의 시작부터 현장까지, 한 팀이 끝까지 책임집니다.</p>
         </div>
       </div>
     </section>
@@ -68,7 +69,7 @@
     <section class="section wrap">
       <div class="sec-head reveal">
         <h2 class="sec-title"><small>FILMOGRAPHY</small>SELECTED WORK</h2>
-        <a class="lnk" href="works.html">모든 작품 보기 <svg class="arrow" viewBox="0 0 26 10" aria-hidden="true"><path d="M0 5h24M20 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></a>
+        <a class="lnk" href="works.html"><span data-i18n="home.viewAll">모든 작품 보기</span> <svg class="arrow" viewBox="0 0 26 10" aria-hidden="true"><path d="M0 5h24M20 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></a>
       </div>
       <div class="works-grid reveal" id="works-grid" data-featured></div>
     </section>
@@ -85,12 +86,13 @@
       </nav>
     </div>
     <div class="wrap ft__bottom">
-      <span>© 2026 주식회사 골드스트림엔터테인먼트</span>
+      <span data-i18n="footer.copy">© 2026 주식회사 골드스트림엔터테인먼트</span>
       <a href="mailto:kim@goldstream.kr" data-field="contact.email" data-mailto>kim@goldstream.kr</a>
     </div>
   </footer>
 
   <script src="js/intro.js?v=a1e3617994"></script>
-  <script src="js/site.js?v=62e61b4ae2"></script>
+  <script src="js/en.js?v=2d875ecd38"></script>
+  <script src="js/site.js?v=929bef62b2"></script>
 </body>
 </html>

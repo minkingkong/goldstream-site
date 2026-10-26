@@ -6,6 +6,13 @@
   "use strict";
 
   var CONTENT_URL = "data/content.json?t=" + Date.now();
+  /* KR / EN: Korean is content.json, English is js/en.js. The choice is remembered per browser. */
+  var LANG = "ko";
+  try { LANG = localStorage.getItem("gs_lang") === "en" ? "en" : "ko"; } catch (e) {}
+  var EN = LANG === "en" && window.GS_EN ? window.GS_EN : null;
+  document.documentElement.lang = LANG;
+  function ui(key, fallback) { return EN && EN.ui[key] ? EN.ui[key] : fallback; }
+  function creditKey(k) { return EN && EN.creditKeys[k] ? EN.creditKeys[k] : k; }
   var SLIDE_MS = 6000;
   var INTRO_MS = 7600; /* dust gathers (~4.4s) + logo holds ~3s */
   var ARROW =
@@ -34,6 +41,37 @@
     if (t.ink) s.setProperty("--ink", t.ink);
     if (t.inkMuted) s.setProperty("--ink-muted", t.inkMuted);
     if (t.bg) s.setProperty("--bg", t.bg);
+  }
+
+  /* ---------- English: overlay js/en.js onto the Korean content ---------- */
+  function localize(data) {
+    if (!EN) return data;
+    var d = JSON.parse(JSON.stringify(data));
+    var merge = function (dst, src) {
+      Object.keys(src || {}).forEach(function (k) {
+        if (src[k] && typeof src[k] === "object" && !Array.isArray(src[k]) && dst[k] && typeof dst[k] === "object") merge(dst[k], src[k]);
+        else dst[k] = src[k];
+      });
+      return dst;
+    };
+    d.home = merge(d.home || {}, EN.home);
+    d.pages = merge(d.pages || {}, EN.pages);
+    d.about = merge(d.about || {}, EN.about);
+    d.contact = merge(d.contact || {}, EN.contact);
+    (d.works || []).forEach(function (w) {
+      var t = EN.works[w.id] || {};
+      if (t.titleEn) w.titleEn = t.titleEn;
+      if (w.titleEn) { w.title = w.titleEn; w.titleEn = ""; }
+      if (t.synopsis) w.synopsis = t.synopsis;
+      if (t.dateLabel) w.dateLabel = t.dateLabel;
+      if (t.credits) w.credits = merge(w.credits || {}, t.credits);
+      if (w.format && EN.format[w.format]) w.format = EN.format[w.format];
+    });
+    document.querySelectorAll("[data-i18n]").forEach(function (el) {
+      var v = EN.ui[el.getAttribute("data-i18n")];
+      if (v) el.textContent = v;
+    });
+    return d;
   }
 
   /* ---------- plain text / image fields ---------- */
@@ -69,8 +107,18 @@
     menu.innerHTML = Array.prototype.map.call(hd.querySelectorAll(".hd__nav a"), function (a) {
       var cur = a.getAttribute("aria-current") ? ' aria-current="page"' : "";
       return '<a href="' + esc(a.getAttribute("href")) + '"' + cur + ">" + esc(a.textContent.trim()) + "</a>";
-    }).join("") + '<p class="mnav__mail" data-field="contact.email"></p>';
+    }).join("") + '<p class="mnav__mail" data-field="contact.email"></p>' +
+      '<div class="mnav__lang"><button type="button" data-lang="ko">KR</button><button type="button" data-lang="en">EN</button></div>';
     document.body.appendChild(menu);
+    document.querySelectorAll("[data-lang]").forEach(function (b) {
+      b.classList.toggle("is-on", b.getAttribute("data-lang") === LANG);
+      b.addEventListener("click", function () {
+        var l = b.getAttribute("data-lang");
+        if (l === LANG) return;
+        try { localStorage.setItem("gs_lang", l); } catch (e) {}
+        location.reload();
+      });
+    });
     burger.setAttribute("aria-controls", "mnav");
     function setOpen(open) {
       hd.classList.toggle("is-open", open);
@@ -96,10 +144,10 @@
   function slidePeople(w) {
     var cr = w.credits || {}, out = [];
     var dir = clean(cr["감독"]);
-    if (dir) out.push("<span>감독</span>" + esc(dir));
+    if (dir) out.push("<span>" + esc(creditKey("감독")) + "</span>" + esc(dir));
     var cast = String(cr["출연"] || "").split(",").map(function (s) { return s.trim(); })
       .filter(function (s) { return s && s !== "-"; }).slice(0, 3);
-    if (cast.length) out.push("<span>출연</span>" + esc(cast.join(", ")));
+    if (cast.length) out.push("<span>" + esc(creditKey("출연")) + "</span>" + esc(cast.join(", ")));
     return out.join("<em>/</em>");
   }
 
@@ -141,7 +189,7 @@
       '<h2 class="hs__title">' + esc(w.title) + "</h2>" +
       (w.titleEn ? '<p class="hs__title-en">' + esc(w.titleEn) + "</p>" : "") +
       (slidePeople(w) ? '<p class="hs__people">' + slidePeople(w) + "</p>" : "") +
-      '<a class="lnk hs__more" href="works.html#' + esc(w.id) + '">작품 정보 보기 ' + ARROW + "</a>" +
+      '<a class="lnk hs__more" href="works.html#' + esc(w.id) + '">' + esc(ui("home.more", "작품 정보 보기")) + " " + ARROW + "</a>" +
       "</div>";
     el.querySelector(".hs__more").addEventListener("click", function (e) { e.preventDefault(); openModal(w); });
     return el;
@@ -313,7 +361,7 @@
     works.forEach(function (w) { grid.appendChild(workCard(w)); });
 
     var count = document.getElementById("works-count");
-    if (count) count.textContent = works.length + " TITLES";
+    if (count) count.textContent = works.length + " " + ui("works.titles", "TITLES");
     var bar = document.querySelector("[data-filters]");
     if (bar) bar.addEventListener("click", function (e) {
       var btn = e.target.closest("button[data-filter]");
@@ -382,7 +430,7 @@
     Object.keys(cr).forEach(function (k) {
       if (!cr[k] || String(cr[k]).trim() === "-") return;
       var d = document.createElement("div");
-      d.innerHTML = "<dt>" + esc(k) + "</dt><dd>" + esc(cr[k]) + "</dd>";
+      d.innerHTML = "<dt>" + esc(creditKey(k)) + "</dt><dd>" + esc(cr[k]) + "</dd>";
       dl.appendChild(d);
     });
     var lw = document.getElementById("modal-links");
@@ -473,7 +521,7 @@
     if (off) {
       off.innerHTML = (c.offices || []).filter(function (o) { return o && o.address; }).map(function (o) {
         return "<p><b>" + esc(o.label) + "</b>" + esc(o.address) +
-          '<br><a class="map" href="https://map.naver.com/p/search/' + encodeURIComponent(o.address) + '" target="_blank" rel="noopener noreferrer">지도 보기 ↗</a></p>';
+          '<br><a class="map" href="https://map.naver.com/p/search/' + encodeURIComponent(o.address) + '" target="_blank" rel="noopener noreferrer">' + esc(ui("contact.map", "지도 보기 ↗")) + "</a></p>";
       }).join("");
     }
     var inq = document.getElementById("contact-inquiries");
@@ -499,6 +547,7 @@
     fetch(CONTENT_URL, { cache: "no-store" })
       .then(function (r) { if (!r.ok) throw new Error("content " + r.status); return r.json(); })
       .then(function (data) {
+        data = localize(data);
         window.__content = data;
         applyTheme(data.theme);
         applyFields(data);

@@ -18,7 +18,7 @@
   <link rel="icon" type="image/png" sizes="192x192" href="assets/icons/icon-192.png" />
   <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png" />
   <link rel="preload" as="font" type="font/woff2" href="assets/fonts/PretendardVariable.woff2" crossorigin />
-  <link rel="stylesheet" href="css/style.css?v=4178463a3f" />
+  <link rel="stylesheet" href="css/style.css?v=da10d4f950" />
 </head>
 <body id="top">
   <header class="hd" id="hd">
@@ -26,12 +26,15 @@
       <img class="is-dark" src="assets/img/logo-goldstream-dark.png" alt="GOLDSTREAM ENTERTAINMENT" width="774" height="170" />
       <img class="is-light" src="assets/img/logo-goldstream.png" alt="" width="774" height="170" aria-hidden="true" />
     </a>
+    <div class="hd__right">
     <nav class="hd__nav" aria-label="주 메뉴">
       <a href="about.html">About</a>
       <a href="works.html">Work</a>
       <a href="partners.html">Partners</a>
       <a href="contact.html">Contact</a>
     </nav>
+    <div class="hd__lang" aria-label="언어"><button type="button" data-lang="ko">KR</button><i>/</i><button type="button" data-lang="en">EN</button></div>
+    </div>
     <button class="hd__burger" type="button" aria-label="메뉴 열기" aria-expanded="false"><span></span><span></span></button>
   </header>
 
@@ -67,11 +70,12 @@
       </nav>
     </div>
     <div class="wrap ft__bottom">
-      <span>© 2026 주식회사 골드스트림엔터테인먼트</span>
+      <span data-i18n="footer.copy">© 2026 주식회사 골드스트림엔터테인먼트</span>
       <a href="mailto:kim@goldstream.kr" data-field="contact.email" data-mailto>kim@goldstream.kr</a>
     </div>
   </footer>
 
-  <script src="js/site.js?v=62e61b4ae2"></script>
+  <script src="js/en.js?v=2d875ecd38"></script>
+  <script src="js/site.js?v=929bef62b2"></script>
 </body>
 </html>

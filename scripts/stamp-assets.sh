@@ -27,6 +27,7 @@ stamp() {
 stamp "css/style.css"
 stamp "css/admin.css"
 stamp "js/intro.js"
+stamp "js/en.js"
 stamp "js/site.js"
 stamp "js/admin.js"
 
