@@ -301,6 +301,7 @@ ul { list-style: none; }
 }
 .hs__nums {
   display: flex;
+  justify-content: space-between; /* 1 at the left edge, 9 at the right edge, even gaps */
   padding: 0 var(--pad);
   overflow-x: auto;
   scrollbar-width: none;
@@ -310,18 +311,19 @@ ul { list-style: none; }
 .hs__nums::-webkit-scrollbar { display: none; }
 .hs__num {
   flex: 0 0 auto;
-  width: calc(52px + 4.1vw);
+  min-width: 1.4em;
   padding: 6px 0;
   text-align: left;
   font-size: calc(16px + 1.2vw);
   font-weight: 700;
-  letter-spacing: 0.5em;
+  letter-spacing: 0;
   line-height: 0.8;
   color: #fff;
   opacity: 0.5;
   transition: opacity 0.4s;
   white-space: nowrap;
 }
+.hs__num:last-child { text-align: right; }
 .hs__num:hover { opacity: 0.8; }
 .hs__num.is-active { opacity: 1; }
 .hs__gauge {
