@@ -4143,3 +4143,8 @@ body::after {
 .statusline.err {
   color: #c0392b;
 }
+
+/* PARTNERS page (built from the old ABOUT partners block): bigger tiles on its own page */
+.pg-partners .partners { margin-top: 8px; }
+.pg-partners .partner { min-height: clamp(160px, 18vw, 260px); font-size: clamp(20px, 2vw, 30px); font-weight: 700; letter-spacing: -0.02em; }
+.pg-partners .partner img { max-height: 64px; }

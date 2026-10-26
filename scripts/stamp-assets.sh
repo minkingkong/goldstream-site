@@ -25,7 +25,8 @@ stamp() {
 }
 
 stamp "css/style.css"
-stamp "css/admin.css"
+stamp "css/legacy.css"
+stamp "js/legacy.js"
 stamp "js/intro.js"
 stamp "js/en.js"
 stamp "js/site.js"

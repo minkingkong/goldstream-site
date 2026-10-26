@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>연락처 | 골드스트림엔터테인먼트</title>
-  <meta name="description" content="골드스트림엔터테인먼트 연락처. 제작 제안, 투자·배급, 공동제작, 원작·IP 제안 문의." />
+  <title>문의 | GOLDSTREAM Entertainment</title>
+  <meta name="description" content="제작·투자·공동제작 문의 및 광주·서울 사무소 안내." />
   <link rel="canonical" href="https://goldstream.kr/contact.html" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="골드스트림엔터테인먼트" />
   <meta property="og:url" content="https://goldstream.kr/contact.html" />
-  <meta property="og:title" content="연락처 | GOLDSTREAM Entertainment" />
-  <meta property="og:description" content="제작 제안, 투자·배급, 공동제작, 원작·IP 제안 문의." />
+  <meta property="og:title" content="문의 | GOLDSTREAM Entertainment" />
+  <meta property="og:description" content="제작·투자·공동제작 문의 및 광주·서울 사무소 안내." />
   <meta property="og:image" content="https://goldstream.kr/assets/img/og-goldstream.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" href="favicon.ico" sizes="any" />
@@ -18,48 +18,78 @@
   <link rel="icon" type="image/png" sizes="192x192" href="assets/icons/icon-192.png" />
   <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png" />
   <link rel="preload" as="font" type="font/woff2" href="assets/fonts/PretendardVariable.woff2" crossorigin />
-  <link rel="stylesheet" href="css/style.css?v=0434638bfb" />
+  <link rel="stylesheet" href="css/legacy.css?v=b041c66848" />
 </head>
-<body class="one" id="top">
-  <header class="hd" id="hd">
-    <a class="hd__logo" href="index.html" aria-label="GOLDSTREAM ENTERTAINMENT 홈">
-      <img class="is-dark" src="assets/img/logo-goldstream-dark.png" alt="GOLDSTREAM ENTERTAINMENT" width="774" height="170" />
-      <img class="is-light" src="assets/img/logo-goldstream.png" alt="" width="774" height="170" aria-hidden="true" />
-    </a>
-    <div class="hd__right">
+<body id="top">  <header class="hd" id="hd">
+    <a class="hd__logo" href="index.html" aria-label="GOLDSTREAM ENTERTAINMENT 홈"><img src="assets/img/logo-goldstream-dark.png" alt="GOLDSTREAM ENTERTAINMENT" width="774" height="170" /></a>
     <nav class="hd__nav" aria-label="주 메뉴">
-      <a href="about.html">About</a>
-      <a href="works.html">Work</a>
-      <a href="partners.html">Partners</a>
-      <a href="contact.html">Contact</a>
+      <a href="about.html">ABOUT</a>
+      <a href="works.html">WORK</a>
+      <a href="partners.html">PARTNERS</a>
     </nav>
-    <div class="hd__lang" aria-label="언어"><button type="button" data-lang="ko">KR</button><i>/</i><button type="button" data-lang="en">EN</button></div>
-    </div>
+    <a class="hd__cta" href="contact.html">CONTACT</a>
     <button class="hd__burger" type="button" aria-label="메뉴 열기" aria-expanded="false"><span></span><span></span></button>
   </header>
-
-  <!-- one screen, no scroll: how to reach us (left) + map (right, PC only) -->
-  <main class="one__main ct1">
-    <section class="ct1__text">
-      <h1 class="one__title">Contact</h1>
-      <p class="k" data-i18n="contact.email">Email</p>
-      <a class="ct1__mail" href="mailto:kim@goldstream.kr" data-field="contact.email" data-mailto>kim@goldstream.kr</a>
-      <div class="ct1__offices" id="contact-offices"></div>
-      <p class="ct1__inq"><span class="k" data-field="contact.inquiriesIntro">이런 이야기라면, 저를 찾아오세요.</span><span id="contact-inquiries"></span></p>
-    </section>
-    <section class="ct1__map" aria-label="지도">
-      <iframe id="contact-map" title="사무실 위치" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  <main class="ct">
+    <section class="pw-hero pw-hero--contact">
+      <div class="pw-wall" data-poster-wall aria-hidden="true"></div>
+      <div class="pw-hero__shade"></div>
+      <div class="ct__in wrap">
+        <div class="ct__main">
+          <p class="pw-k">GET IN TOUCH</p>
+          <h1 class="ct__title">함께 만들 이야기가 있다면,<br />언제든 연락주세요.</h1>
+          <p class="ct__label">EMAIL</p>
+          <button type="button" class="ct__mail" data-copy="kim@goldstream.kr"><span data-field="contact.email">kim@goldstream.kr</span><em class="ct__copied" aria-live="polite"></em></button>
+          <p class="ct__hint">클릭하면 주소가 복사됩니다</p>
+        </div>
+        <div class="ct__side">
+          <div class="ct__block">
+            <p class="ct__label">WHAT WE TALK ABOUT</p>
+            <ul class="ct__topics">
+              <li><a href="works.html">작품 제안 · 공동제작 · 투자<span>→</span></a></li>
+              <li><a href="mailto:kim@goldstream.kr?subject=%EC%9B%90%EC%9E%91%C2%B7IP%20%EC%A0%9C%EC%95%88">원작 · IP 제안<span>→</span></a></li>
+              <li><a href="mailto:kim@goldstream.kr?subject=%EC%BA%90%EC%8A%A4%ED%8C%85%C2%B7%ED%8C%A8%ED%82%A4%EC%A7%95">캐스팅 · 패키징<span>→</span></a></li>
+            </ul>
+          </div>
+          <div class="ct__block">
+            <p class="ct__label">OFFICES</p>
+            <div class="ct__offices" id="contact-offices-map"></div>
+          </div>
+        </div>
+      </div>
     </section>
   </main>
-
-  <footer class="ft ft--slim">
-    <div class="wrap ft__bottom">
-      <span data-i18n="footer.copy">© 2026 주식회사 골드스트림엔터테인먼트</span>
-      <a href="mailto:kim@goldstream.kr" data-field="contact.email" data-mailto>kim@goldstream.kr</a>
+  <footer class="ft">
+    <div class="wrap ft__top">
+      <div class="ft__lead">
+        <p>좋은 이야기를 발견하고,<br />스크린 위의 현실로.</p>
+        <a class="ft__cta" href="contact.html">CONTACT US <svg class="arrow" viewBox="0 0 26 10" aria-hidden="true"><path d="M0 5h24M20 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      </div>
+      <nav class="ft__col" aria-label="하단 메뉴">
+        <h4>MENU</h4>
+        <ul>
+          <li><a href="about.html">ABOUT</a></li>
+          <li><a href="works.html">WORK</a></li>
+          <li><a href="partners.html">PARTNERS</a></li>
+          <li><a href="contact.html">CONTACT</a></li>
+        </ul>
+      </nav>
+      <div class="ft__col">
+        <h4>OFFICES</h4>
+        <div id="ft-offices"><p><b>광주</b>전남광주통합특별시 광산구 첨단중앙로152번길 5-8, 3층</p><p><b>서울</b>서울 강남구 삼성로 648, 4층</p></div>
+      </div>
+      <div class="ft__col">
+        <h4>CONTACT</h4>
+        <a href="mailto:kim@goldstream.kr" data-field="contact.email" data-mailto>kim@goldstream.kr</a>
+      </div>
     </div>
+    <div class="wrap ft__bottom">
+      <span>© 2026 주식회사 골드스트림엔터테인먼트 · 대표 김정환</span>
+      <a class="ft__top-btn" href="#top">TOP ↑</a>
+    </div>
+    <div class="ft__word" aria-hidden="true">GOLDSTREAM</div>
   </footer>
 
-  <script src="js/en.js?v=5f6d3a6607"></script>
-  <script src="js/site.js?v=ac30ca31d2"></script>
+  <script src="js/legacy.js?v=581a507c13"></script>
 </body>
 </html>
