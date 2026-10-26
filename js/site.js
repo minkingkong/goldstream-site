@@ -226,14 +226,22 @@
     });
     track.appendChild(first);
 
-    /* timeline along the very bottom: one segment per slide with its number above.
-       past segments full, the current one fills over its duration, upcoming ones dim */
+    /* numbers along the bottom + one continuous line on the very bottom edge (ICONOCLAST) */
+    var gauge = root.querySelector(".hs__gauge");
+    if (!gauge) {
+      gauge = document.createElement("span");
+      gauge.className = "hs__gauge";
+      gauge.setAttribute("aria-hidden", "true");
+      gauge.innerHTML = "<i></i>";
+      root.appendChild(gauge);
+    }
+    var bar = gauge.firstChild;
     nums.innerHTML = "";
     var btns = slides.map(function (s, i) {
       var b = document.createElement("button");
       b.type = "button";
       b.className = "hs__num";
-      b.innerHTML = "<span>" + (i + 1) + "</span><i><b></b></i>";
+      b.textContent = String(i + 1);
       b.setAttribute("aria-label", (i + 1) + "번째 슬라이드");
       b.addEventListener("click", function () { go(i); });
       nums.appendChild(b);
@@ -244,10 +252,8 @@
     function setX(px, anim) { track.classList.toggle("is-anim", !!anim); track.style.transform = "translate3d(" + px + "px,0,0)"; }
     function place(anim) { setX(-pos * root.clientWidth, anim); }
     function realIndex(p) { return ((p - 1) % n + n) % n; }
-    function fill(i) { return btns[i].querySelector("b"); }
     function startGauge(ms) {
-      btns.forEach(function (b, i) { var f = fill(i); f.style.transition = "none"; f.style.transform = ""; });
-      var bar = fill(current);
+      bar.style.transition = "none";
       bar.style.transform = "scaleX(0)";
       void bar.offsetWidth;
       bar.style.transition = "transform " + ms + "ms linear";
@@ -266,9 +272,13 @@
       slides.forEach(function (s, i) { s.classList.toggle("is-active", i === current); s.inert = i !== current; });
       btns.forEach(function (b, i) {
         b.classList.toggle("is-active", i === current);
-        b.classList.toggle("is-past", i < current);
         b.setAttribute("aria-current", i === current ? "true" : "false");
       });
+      /* phones: the number row scrolls sideways (only ~5 fit), keep the current one in view */
+      if (nums.scrollWidth > nums.clientWidth + 2) {
+        var target = Math.max(0, btns[current].offsetLeft - btns[0].offsetLeft - btns[0].offsetWidth);
+        nums.scrollTo({ left: target, behavior: reduce ? "auto" : "smooth" });
+      }
       schedule();
     }
     function normalize() {
@@ -318,7 +328,7 @@
     root.addEventListener("scroll", function () { root.scrollLeft = 0; });
     window.addEventListener("resize", function () { place(false); });
     document.addEventListener("visibilitychange", function () {
-      if (document.hidden) { clearTimeout(timer); fill(current).style.transition = "none"; } else schedule();
+      if (document.hidden) { clearTimeout(timer); bar.style.transition = "none"; } else schedule();
     });
 
     place(false);

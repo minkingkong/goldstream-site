@@ -289,57 +289,65 @@ ul { list-style: none; }
 .hs__slide.is-active .hs__credit > :nth-child(4) { transition-delay: 0.22s; }
 .hs__slide.is-active .hs__credit > :nth-child(5) { transition-delay: 0.28s; }
 
-/* timeline: the whole bottom edge, split into one segment per slide; number sits above each segment.
-   past = full white, current = fills over its time, upcoming = faint line */
-.hs__pager { position: absolute; left: 0; right: 0; bottom: 0; z-index: 3; }
-.hs__nums { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 3px; }
-.hs__num {
+/* timeline (ICONOCLAST, measured): bold numbers ~28px @1024 / 35px @1600, wide tracking,
+   evenly stepped from the left, current one bright; one solid line along the very bottom edge
+   that fills with the current slide's time */
+.hs__pager {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 22px;
+  z-index: 3;
+}
+.hs__nums {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 12px;
-  padding-top: 14px; /* bigger tap area above the number */
-  color: #fff;
+  padding: 0 var(--pad);
+  overflow-x: auto;
+  scrollbar-width: none;
+  touch-action: pan-x;
+  -webkit-overflow-scrolling: touch;
+}
+.hs__nums::-webkit-scrollbar { display: none; }
+.hs__num {
+  flex: 0 0 auto;
+  width: calc(52px + 4.1vw);
+  padding: 6px 0;
   text-align: left;
-}
-.hs__num span {
-  padding-left: 14px;
-  font-size: clamp(14px, 1.15vw, 18px);
+  font-size: calc(16px + 1.2vw);
   font-weight: 700;
-  letter-spacing: 0.06em;
-  line-height: 1;
-  opacity: 0.45;
+  letter-spacing: 0.5em;
+  line-height: 0.8;
+  color: #fff;
+  opacity: 0.5;
   transition: opacity 0.4s;
+  white-space: nowrap;
 }
-.hs__num:first-child span { padding-left: var(--pad); }
-.hs__num:hover span { opacity: 0.85; }
-.hs__num.is-active span { opacity: 1; }
-.hs__num i {
-  position: relative;
-  display: block;
-  width: 100%;
+.hs__num:hover { opacity: 0.8; }
+.hs__num.is-active { opacity: 1; }
+.hs__gauge {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 3;
   height: 3px;
   overflow: hidden;
-  background: rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.35);
 }
-.hs__num b {
+.hs__gauge i {
   position: absolute;
   inset: 0;
   background: #fff;
   transform-origin: left;
   transform: scaleX(0);
 }
-.hs__num.is-past b { transform: scaleX(1); }
 @media (max-width: 860px) {
   .hs { min-height: 520px; }
-  .hs__credit { bottom: 76px; max-width: none; }
+  .hs__credit { bottom: 92px; max-width: none; }
   .hs__title { font-size: clamp(42px, 13vw, 72px); }
   .hs__people { display: none; }
   .hs__more { margin-top: 18px; }
-  .hs__nums { gap: 2px; }
-  .hs__num { gap: 10px; padding-top: 18px; }
-  .hs__num { align-items: center; }
-  .hs__num span, .hs__num:first-child span { padding-left: 0; font-size: 13px; letter-spacing: 0; }
+  .hs__pager { bottom: 16px; }
   .hs__poster { height: auto; width: min(72vw, 360px); }
 }
 
