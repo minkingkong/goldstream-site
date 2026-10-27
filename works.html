@@ -4,13 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>작품 | GOLDSTREAM Entertainment</title>
-  <meta name="description" content="코드, 파인: 촌뜨기들, 강철비, 강철비2: 정상회담, 멍뭉이 등 기획·제작에 참여한 영화와 드라마 시리즈." />
+  <meta name="description" content="코드, 금지된 여자, 파인: 촌뜨기들, 멍뭉이, 강철비2: 정상회담, 강철비 등 골드스트림엔터테인먼트가 기획·제작에 참여한 영화와 드라마 시리즈." />
   <link rel="canonical" href="https://goldstream.kr/works.html" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="골드스트림엔터테인먼트" />
   <meta property="og:url" content="https://goldstream.kr/works.html" />
   <meta property="og:title" content="작품 | GOLDSTREAM Entertainment" />
-  <meta property="og:description" content="코드, 파인: 촌뜨기들, 강철비, 강철비2: 정상회담, 멍뭉이 등 기획·제작에 참여한 영화와 드라마 시리즈." />
+  <meta property="og:description" content="코드, 금지된 여자, 파인: 촌뜨기들, 멍뭉이, 강철비2: 정상회담, 강철비 등 골드스트림엔터테인먼트가 기획·제작에 참여한 영화와 드라마 시리즈." />
   <meta property="og:image" content="https://goldstream.kr/assets/img/og-goldstream.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" href="favicon.ico" sizes="any" />
@@ -18,11 +18,11 @@
   <link rel="icon" type="image/png" sizes="192x192" href="assets/icons/icon-192.png" />
   <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png" />
   <link rel="preload" as="font" type="font/woff2" href="assets/fonts/PretendardVariable.woff2" crossorigin />
-  <link rel="stylesheet" href="css/legacy.css?v=f5395a8697" />
   <link rel="stylesheet" href="css/header.css?v=f69fa177fb" />
+  <link rel="stylesheet" href="css/pages.css?v=82ba6b0393" />
 </head>
-<body id="top" class="nh-page">
-    <header class="nh" id="nh">
+<body id="top" class="pg nh-page">
+  <header class="nh" id="nh">
     <a class="nh__logo" href="index.html" aria-label="GOLDSTREAM ENTERTAINMENT 홈">
       <img class="is-dark" src="assets/img/logo-goldstream-dark.png" alt="GOLDSTREAM ENTERTAINMENT" width="774" height="170" />
       <img class="is-light" src="assets/img/logo-goldstream.png" alt="" width="774" height="170" aria-hidden="true" />
@@ -40,56 +40,37 @@
     </div>
     <button class="nh__burger" type="button" aria-label="메뉴 열기" aria-expanded="false"><span></span><span></span></button>
   </header>
-  <main class="wk">
-    <h1 class="sr-only">WORK — 작품</h1>
-    <section class="wk-hero" id="wk-hero" aria-live="polite"></section>
 
-    <section class="wk-all wrap">
-      <div class="wk-all__head">
-        <p class="wk-all__count" id="wk-count">ALL WORKS</p>
-        <div class="wk-tabs" data-filters>
-          <button type="button" data-filter="all" aria-pressed="true">ALL</button>
-          <button type="button" data-filter="film" aria-pressed="false">FILM</button>
-          <button type="button" data-filter="series" aria-pressed="false">SERIES</button>
-        </div>
+  <main class="pg-main">
+    <h1 class="pg-title" data-split>Work</h1>
+    <div class="wk2__bar up" style="--d:0">
+      <div class="wk2__tabs" role="group" aria-label="공개 상태">
+        <button type="button" data-f="all" aria-pressed="true">전체</button>
+        <button type="button" data-f="upcoming" aria-pressed="false">공개예정</button>
+        <button type="button" data-f="released" aria-pressed="false">공개완료</button>
       </div>
-      <div class="wk-grid" id="wk-grid"></div>
-    </section>
+      <div class="wk2__view" role="group" aria-label="보기 방식">
+        <button type="button" data-v="gallery" aria-pressed="true">갤러리</button>
+        <button type="button" data-v="list" aria-pressed="false">정보</button>
+      </div>
+    </div>
+    <div class="wk2__grid" id="works"></div>
   </main>
-  <footer class="ft">
-    <div class="wrap ft__top">
-      <div class="ft__lead">
-        <p>좋은 이야기를 발견하고,<br />스크린 위의 현실로.</p>
-        <a class="ft__cta" href="contact.html">CONTACT US <svg class="arrow" viewBox="0 0 26 10" aria-hidden="true"><path d="M0 5h24M20 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></a>
-      </div>
-      <nav class="ft__col" aria-label="하단 메뉴">
-        <h4>MENU</h4>
-        <ul>
-          <li><a href="about.html">ABOUT</a></li>
-          <li><a href="works.html">WORK</a></li>
-          <li><a href="location.html">LOCATION</a></li>
-          <li><a href="partners.html">PARTNERS</a></li>
-          <li><a href="social.html">IMPACT</a></li>
-          <li><a href="contact.html">CONTACT</a></li>
-        </ul>
-      </nav>
-      <div class="ft__col">
-        <h4>OFFICES</h4>
-        <div id="ft-offices"><p><b>서울</b>서울 강남구 삼성로 648, 4층</p><p><b>광주</b>전남광주통합특별시 광산구 첨단중앙로152번길 5-8, 3층</p></div>
-      </div>
-      <div class="ft__col">
-        <h4>CONTACT</h4>
-        <a href="mailto:kim@goldstream.kr" data-field="contact.email" data-mailto>kim@goldstream.kr</a>
-      </div>
+
+  <div class="wm" id="wm" role="dialog" aria-modal="true" aria-label="작품 정보">
+    <button type="button" class="wm__close" aria-label="닫기">&times;</button>
+    <div class="wm__in"><div class="wm__media"></div><p class="wm__k"></p><h2 class="wm__t"></h2><p class="wm__syn"></p><dl class="wm__cr"></dl><nav class="wm__links" aria-label="관련 링크"></nav></div>
+  </div>
+
+  <footer class="pg-ft">
+    <div class="pg-ft__line"></div>
+    <div class="pg-ft__in">
+      <div><p>© 2026</p><p><a href="mailto:kim@goldstream.kr" data-field="contact.email" data-mailto>kim@goldstream.kr</a></p></div>
+      <div><p>GOLDSTREAM ENTERTAINMENT.<br>ALL RIGHTS RESERVED.</p><div id="ft-offices"><p><b>서울</b> <span class="mute">서울 강남구 삼성로 648, 4층</span></p><p><b>광주</b> <span class="mute">전남광주통합특별시 광산구 첨단중앙로152번길 5-8, 3층</span></p></div></div>
     </div>
-    <div class="wrap ft__bottom">
-      <span>© 2026 주식회사 골드스트림엔터테인먼트 · 대표 김정환</span>
-      <a class="ft__top-btn" href="#top">TOP ↑</a>
-    </div>
-    <div class="ft__word" aria-hidden="true">GOLDSTREAM</div>
   </footer>
 
   <script src="js/header.js?v=ff53069054"></script>
-  <script src="js/legacy.js?v=0bad13955e"></script>
+  <script src="js/pages.js?v=b04309bec2"></script>
 </body>
 </html>
