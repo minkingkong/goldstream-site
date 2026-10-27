@@ -133,3 +133,35 @@ body.menu-open { overflow: hidden; }
 
 /* keep the scrollbar space reserved so the top bar never shifts between pages */
 html { scrollbar-gutter: stable; }
+
+/* ---------- white everywhere on the old-style pages (matches the home page) ---------- */
+/* footer: the old one was black; same content, white like home */
+.nh-page .ft { background: #fff; color: #111; border-top: 1px solid #e8e8e8; }
+.nh-page .ft__cta { color: #111; border-color: #111; }
+.nh-page .ft__cta:hover { color: #6b6b6b; }
+.nh-page .ft__col h4 { color: #8c8c8c; }
+.nh-page .ft__col a, .nh-page .ft__col p, .nh-page .ft__col b, .nh-page .ft__col > a { color: #111; }
+.nh-page .ft__col a:hover { color: #6b6b6b; }
+.nh-page .ft__bottom { border-color: #e8e8e8; color: #8c8c8c; }
+.nh-page .ft__top-btn:hover { color: #111; }
+.nh-page .ft__word { -webkit-text-stroke-color: rgba(0, 0, 0, 0.12); }
+
+/* ABOUT / PARTNERS first screen: no poster wall, plain white with the big line in black */
+.pg-white .pw-hero {
+  height: auto;
+  min-height: 0;
+  padding: clamp(80px, 16vh, 180px) 0 clamp(64px, 11vh, 130px);
+  background: #fff;
+  color: #111;
+  border-bottom: 1px solid #e8e8e8;
+}
+.pg-white .pw-wall, .pg-white .pw-hero__shade, .pg-white .pw-hero__cue { display: none; }
+.pg-white .pw-hero__in { height: auto; }
+.pg-white .pw-k { color: #8c8c8c; }
+.pg-white .pw-hero__title { color: #111; }
+/* the black "contact us" band becomes white too */
+.pg-white .ab-cta { background: #fff; color: #111; border-top: 1px solid #e8e8e8; }
+.pg-white .bx-btn--light { background: #111; color: #fff; border-color: #111; }
+.pg-white .bx-btn--light:hover { background: #fff; color: #111; }
+.nh-page #ft-offices p, .nh-page #ft-offices b { color: #111; }
+.nh-page #ft-offices p { color: #555; }

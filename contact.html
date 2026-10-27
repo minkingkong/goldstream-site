@@ -18,10 +18,10 @@
   <link rel="icon" type="image/png" sizes="192x192" href="assets/icons/icon-192.png" />
   <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png" />
   <link rel="preload" as="font" type="font/woff2" href="assets/fonts/PretendardVariable.woff2" crossorigin />
-  <link rel="stylesheet" href="css/legacy.css?v=ef7ebb554f" />
-  <link rel="stylesheet" href="css/header.css?v=fc6626370e" />
+  <link rel="stylesheet" href="css/legacy.css?v=f5395a8697" />
+  <link rel="stylesheet" href="css/header.css?v=dfc31bccda" />
 </head>
-<body id="top" class="pg-contact2 nh-page">
+<body id="top" class="pg-contact3 nh-page">
     <header class="nh" id="nh">
     <a class="nh__logo" href="index.html" aria-label="GOLDSTREAM ENTERTAINMENT 홈">
       <img class="is-dark" src="assets/img/logo-goldstream-dark.png" alt="GOLDSTREAM ENTERTAINMENT" width="774" height="170" />
@@ -38,29 +38,48 @@
     </div>
     <button class="nh__burger" type="button" aria-label="메뉴 열기" aria-expanded="false"><span></span><span></span></button>
   </header>
-  <!-- one screen, no background: the email is the centrepiece, three short columns under it -->
-  <main class="ct2">
-    <div class="ct2__in">
-      <p class="ct2__k">GET IN TOUCH</p>
-      <h1 class="ct2__title">함께 만들 이야기가 있다면,<br />언제든 연락주세요.</h1>
-      <button type="button" class="ct2__mail" data-copy="kim@goldstream.kr"><span data-field="contact.email">kim@goldstream.kr</span><em class="ct__copied" aria-live="polite"></em></button>
-      <p class="ct2__hint">주소를 누르면 복사됩니다 · <a href="mailto:kim@goldstream.kr">메일 쓰기</a></p>
-
-      <div class="ct2__cols">
-        <div class="ct2__col ct2__offices" id="contact-offices-map"></div>
-        <div class="ct2__col">
-          <p class="ct__office-name">문의</p>
-          <ul class="ct2__topics">
-            <li><a href="mailto:kim@goldstream.kr?subject=%EC%9E%91%ED%92%88%20%EC%A0%9C%EC%95%88">작품 제안 · 공동제작</a></li>
-            <li><a href="mailto:kim@goldstream.kr?subject=%ED%88%AC%EC%9E%90%C2%B7%EB%B0%B0%EA%B8%89">투자 · 배급</a></li>
-            <li><a href="mailto:kim@goldstream.kr?subject=%EC%9B%90%EC%9E%91%C2%B7IP%20%EC%A0%9C%EC%95%88">원작 · IP 제안</a></li>
-            <li><a href="mailto:kim@goldstream.kr?subject=%EC%BA%90%EC%8A%A4%ED%8C%85%C2%B7%ED%8C%A8%ED%82%A4%EC%A7%95">캐스팅 · 패키징</a></li>
-          </ul>
+  <!-- one screen: Contact title + list (left), LOCATION map with office tabs (right) -->
+  <main class="ct3">
+    <section class="ct3__info">
+      <h1 class="ct3__title">Contact</h1>
+      <ul class="ct3__list">
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="1.5"/><path d="M3.5 6l8.5 7 8.5-7"/></svg><a href="mailto:kim@goldstream.kr" data-field="contact.email" data-mailto>kim@goldstream.kr</a></li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6.5-6.1-6.5-11.2A6.5 6.5 0 0 1 18.5 9.8C18.5 14.9 12 21 12 21z"/><circle cx="12" cy="9.8" r="2.3"/></svg><span><b data-field="contact.offices.0.label">광주</b><span data-field="contact.offices.0.address">전남광주통합특별시 광산구 첨단중앙로152번길 5-8, 3층</span></span></li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6.5-6.1-6.5-11.2A6.5 6.5 0 0 1 18.5 9.8C18.5 14.9 12 21 12 21z"/><circle cx="12" cy="9.8" r="2.3"/></svg><span><b data-field="contact.offices.1.label">서울</b><span data-field="contact.offices.1.address">서울 강남구 삼성로 648, 4층</span></span></li>
+      </ul>
+      <p class="ct3__foot">© 2026 주식회사 골드스트림엔터테인먼트 · 대표 김정환</p>
+    </section>
+    <section class="ct3__loc" aria-label="Location">
+      <div class="ct3__loc-head">
+        <p class="ct3__k">LOCATION</p>
+        <div class="ct3__tabs" role="tablist">
+          <button type="button" role="tab" data-office="0" aria-selected="true">광주</button>
+          <button type="button" role="tab" data-office="1" aria-selected="false">서울</button>
         </div>
       </div>
-    </div>
-    <p class="ct2__foot">© 2026 주식회사 골드스트림엔터테인먼트 · 대표 김정환</p>
+      <div class="ct3__map"><iframe id="ct3-map" title="사무실 위치 지도" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div>
+      <a class="ct3__open" id="ct3-open" target="_blank" rel="noopener noreferrer">네이버 지도에서 열기 ↗</a>
+    </section>
   </main>
+  <script>
+  /* LOCATION: the tabs switch the map between the offices listed on the left */
+  (function () {
+    var frame = document.getElementById("ct3-map"), open = document.getElementById("ct3-open");
+    var tabs = [].slice.call(document.querySelectorAll(".ct3__tabs button"));
+    function addr(i) {
+      var el = document.querySelector('[data-field="contact.offices.' + i + '.address"]');
+      return (el ? el.textContent : "").replace("전남광주통합특별시", "광주광역시").trim();
+    }
+    function show(i) {
+      var q = addr(i);
+      frame.src = "https://maps.google.com/maps?q=" + encodeURIComponent(q) + "&z=16&output=embed&hl=ko";
+      open.href = "https://map.naver.com/p/search/" + encodeURIComponent(q);
+      tabs.forEach(function (t) { t.setAttribute("aria-selected", +t.getAttribute("data-office") === i ? "true" : "false"); });
+    }
+    tabs.forEach(function (t) { t.addEventListener("click", function () { show(+t.getAttribute("data-office")); }); });
+    show(0);
+  })();
+  </script>
 
   <script src="js/header.js?v=ff53069054"></script>
   <script src="js/legacy.js?v=0bad13955e"></script>

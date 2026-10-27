@@ -4254,3 +4254,53 @@ body::after {
   .ct2__title { margin-bottom: 14px; }
   .ct2__cols { margin-top: 20px; }
 }
+
+/* =========================================================
+   CONTACT v3: Contact title + list (left), LOCATION map with office tabs (right); one screen on PC
+   ========================================================= */
+.pg-contact3 { background: #fff; }
+.ct3 {
+  height: calc(100vh - var(--nh-h, 84px));
+  height: calc(100svh - var(--nh-h, 84px));
+  min-height: 520px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  gap: clamp(32px, 5vw, 96px);
+  padding: clamp(28px, 7vh, 96px) var(--pad) clamp(20px, 4vh, 44px);
+  max-width: 1760px;
+  margin: 0 auto;
+  color: #111;
+}
+.ct3__info { display: flex; flex-direction: column; min-height: 0; }
+.ct3__title { font-size: clamp(60px, min(7vw, 13vh), 132px); font-weight: 800; letter-spacing: -0.045em; line-height: 0.9; margin-left: -0.03em; }
+.ct3__list { margin-top: clamp(28px, 6.5vh, 72px); }
+.ct3__list li { display: flex; align-items: flex-start; gap: 16px; font-size: clamp(17px, 1.35vw, 22px); font-weight: 600; letter-spacing: -0.02em; line-height: 1.45; }
+.ct3__list li + li { margin-top: clamp(14px, 2.4vh, 24px); }
+.ct3__list svg { flex: 0 0 auto; width: 1.15em; height: 1.15em; margin-top: 0.15em; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linejoin: round; color: #6b6b6b; }
+.ct3__list a { color: #111; border-bottom: 1px solid transparent; transition: border-color 0.25s; }
+.ct3__list a:hover { border-color: #111; }
+.ct3__list b { margin-right: 10px; font-weight: 800; }
+.ct3__foot { margin-top: auto; padding-top: 20px; font-size: 12px; color: #8c8c8c; }
+.ct3__loc { display: flex; flex-direction: column; min-height: 0; }
+.ct3__loc-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding-bottom: 14px; border-bottom: 1px solid #111; }
+.ct3__k { font-size: 11px; font-weight: 700; letter-spacing: 0.3em; color: #111; }
+.ct3__tabs { display: flex; gap: 22px; }
+.ct3__tabs button { font: inherit; font-size: 13px; font-weight: 700; letter-spacing: 0.06em; color: #8c8c8c; background: none; border: 0; padding: 2px 0; cursor: pointer; border-bottom: 1px solid transparent; transition: color 0.25s, border-color 0.25s; }
+.ct3__tabs button:hover { color: #111; }
+.ct3__tabs button[aria-selected="true"] { color: #111; border-color: #111; }
+.ct3__map { flex: 1; min-height: 0; margin-top: 16px; background: #f5f5f4; }
+.ct3__map iframe { display: block; width: 100%; height: 100%; border: 0; }
+.ct3__open { align-self: flex-end; margin-top: 10px; font-size: 12px; color: #6b6b6b; border-bottom: 1px solid #cfcfcf; }
+.ct3__open:hover { color: #111; border-color: #111; }
+
+@media (max-width: 860px) {
+  .ct3 { display: flex; flex-direction: column; gap: 22px; height: auto; min-height: calc(100svh - var(--nh-h, 64px)); padding-top: 22px; padding-bottom: 16px; }
+  .ct3__title { font-size: clamp(48px, 15vw, 72px); }
+  .ct3__list { margin-top: 22px; }
+  .ct3__list li { font-size: 15px; gap: 12px; }
+  .ct3__list li + li { margin-top: 12px; }
+  .ct3__list b { display: block; margin: 0 0 2px; font-size: 13px; }
+  .ct3__foot { display: none; }
+  .ct3__loc { flex: 1; }
+  .ct3__map { flex: 1; min-height: 200px; }
+}
