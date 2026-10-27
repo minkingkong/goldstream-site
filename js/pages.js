@@ -15,7 +15,7 @@
     t.setAttribute("aria-label", word);
     t.innerHTML = '<span aria-hidden="true">' + word.split("").map(function (c, i) {
       return '<span class="ch"><i style="--i:' + i + '">' + esc(c) + "</i></span>";
-    }).join("") + '</span><span class="dot" aria-hidden="true"></span>';
+    }).join("") + "</span>";
   });
 
   function fields(d) {
@@ -106,8 +106,59 @@
     if (fromHash) open(fromHash);
   }
 
+
+  /* reveal on scroll for .rv2 blocks and the curtain photo */
+  function reveal() {
+    var els = document.querySelectorAll(".rv2, .wide, .types .card2");
+    if (!("IntersectionObserver" in window)) { els.forEach(function (e) { e.classList.add("in"); }); return; }
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+    }, { rootMargin: "0px 0px -8% 0px" });
+    els.forEach(function (e) { io.observe(e); });
+  }
+
+  /* ---------- LOCATION (content.json business[id=location]) ---------- */
+  function location_(d) {
+    var root = document.getElementById("loc");
+    if (!root) return;
+    var b = (d.business || []).filter(function (x) { return x.id === "location"; })[0];
+    if (!b) return;
+    var set = function (id, html) { var el = document.getElementById(id); if (el && html) el.innerHTML = html; };
+    var nl = function (s) { return esc(s || "").split(String.fromCharCode(10)).join("<br>"); };
+    set("loc-tag", nl(b.headline));
+    set("loc-lead", esc(b.lead));
+    var img = document.getElementById("loc-img"); if (img && b.image) img.src = b.image;
+    set("loc-types-t", nl(b.typesTitle));
+    set("loc-types", (b.types || []).map(function (t, i) {
+      return '<div class="card2 type" style="--i:' + i + '"><span class="card2__img"><img src="' + esc(t.image) + '" alt=""></span>' +
+        '<span class="card2__row"><span class="card2__t">' + esc(t.title) + '</span><span class="type__en">' + esc(t.en) + "</span></span>" +
+        '<p class="type__d">' + esc(t.desc) + "</p></div>";
+    }).join(""));
+    set("loc-svc-t", nl(b.servicesTitle));
+    set("loc-svc", (b.services || []).map(function (s, i) {
+      return '<div class="step rv2" style="transition-delay:' + (i * 0.08) + 's"><b>' + String(i + 1).padStart(2, "0") + "</b><h3>" + esc(s.title) + "</h3><p>" + esc(s.desc) + "</p></div>";
+    }).join(""));
+    set("loc-why-t", nl(b.whyTitle));
+    set("loc-why", (b.why || []).map(function (s, i) {
+      return '<div class="step rv2" style="transition-delay:' + (i * 0.08) + 's"><b>' + String(i + 1).padStart(2, "0") + "</b><h3>" + esc(s) + "</h3></div>";
+    }).join(""));
+    set("loc-end", nl(b.cta));
+    set("loc-end-a", esc(b.ctaButton || "로케이션 문의") + " →");
+  }
+
+  /* ---------- PARTNERS (content.json about.partners) ---------- */
+  function partners(d) {
+    var root = document.getElementById("prt");
+    if (!root) return;
+    var list = ((d.about || {}).partners || []).filter(function (p) { return p && p.name; });
+    root.innerHTML = list.map(function (p, i) {
+      return '<div class="prt__row rv2" style="transition-delay:' + (0.5 + i * 0.12) + 's"><span class="prt__no">' + String(i + 1).padStart(2, "0") + "</span>" +
+        '<span class="prt__name">' + (p.logo ? '<img src="' + esc(p.logo) + '" alt="' + esc(p.name) + '">' : esc(p.name)) + '</span><span class="prt__tag">PARTNER</span></div>';
+    }).join("");
+  }
+
   fetch("data/content.json?t=" + Date.now(), { cache: "no-store" })
     .then(function (r) { return r.json(); })
-    .then(function (d) { fields(d); works(d); })
+    .then(function (d) { fields(d); works(d); location_(d); partners(d); reveal(); })
     .catch(function (e) { console.error("[GOLDSTREAM] content load failed:", e); });
 })();

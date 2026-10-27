@@ -173,3 +173,87 @@ body.pg {
 
 /* footer office lines in black too (an older rule in header.css greys them on the old pages) */
 body.pg.nh-page #ft-offices p, body.pg.nh-page #ft-offices b { color: var(--ink); }
+
+/* label / value pairs (FOCUS, CEO …): hairline on top, small gold label above a large value */
+.kv { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0 clamp(24px, 3vw, 48px); margin-top: clamp(30px, 5vh, 56px); }
+.kv > div { position: relative; padding-top: 18px; }
+.kv > div::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 1px; background: var(--ink); transform: scaleX(0); transform-origin: left; animation: line-in 1.2s var(--ease) forwards; animation-delay: calc(0.9s + 0.15s * var(--k, 0)); }
+.kv > div + div { --k: 1; }
+.kv dt { font-size: 12px; font-weight: 800; letter-spacing: 0.22em; color: var(--gold); }
+.kv dd { margin-top: 10px; font-size: clamp(18px, 1.5vw, 24px); font-weight: 700; letter-spacing: -0.025em; line-height: 1.35; }
+.kv dd small { margin-left: 6px; font-size: 0.68em; font-weight: 600; color: var(--mute); letter-spacing: 0; }
+@media (max-width: 640px) { .kv { gap: 16px; margin-top: 18px; } .kv > div { padding-top: 12px; } .kv dd { margin-top: 6px; font-size: 16px; } }
+@media (prefers-reduced-motion: reduce) { .kv > div::before { animation: none; transform: none; } }
+
+/* ---------- sections below the first screen (LOCATION, PARTNERS) ---------- */
+.sec2 { margin-top: clamp(90px, 12vw, 170px); }
+.sec2__k { font-size: 12px; font-weight: 800; letter-spacing: 0.24em; color: var(--gold); }
+.sec2__t { margin-top: 14px; font-size: clamp(30px, 3.6vw, 60px); font-weight: 800; letter-spacing: -0.04em; line-height: 1.18; }
+.rv2 { opacity: 0; transform: translateY(28px); transition: opacity 1s var(--ease), transform 1.2s var(--ease); }
+.rv2.in { opacity: 1; transform: none; }
+
+/* wide photo that opens like a curtain from the left */
+.wide { margin-top: clamp(50px, 8vh, 90px); aspect-ratio: 21 / 9; overflow: hidden; background: #eee; clip-path: inset(0 100% 0 0); transition: clip-path 1.6s var(--ease); }
+.wide.in { clip-path: inset(0 0 0 0); }
+.wide img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.12); transition: transform 2.4s var(--ease); }
+.wide.in img { transform: none; }
+
+/* LOCATION place types */
+.types { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 44px 24px; margin-top: clamp(36px, 5vw, 64px); }
+.type .card2__img { aspect-ratio: 4 / 3; }
+.type .card2__row { margin-top: 18px; }
+.type__en { font-size: 12px; font-weight: 800; letter-spacing: 0.2em; color: var(--gold); }
+.type__d { margin-top: 6px; font-size: 15px; line-height: 1.6; color: var(--mute); }
+
+/* LOCATION track record (kinds of places) */
+.rec { margin-top: clamp(36px, 5vw, 64px); border-top: 1px solid var(--ink); }
+.rec__g { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 20px; padding: clamp(18px, 2.4vw, 30px) 0; border-bottom: 1px solid var(--line); }
+.rec__gl { padding-top: 0.6em; font-size: 12px; font-weight: 800; letter-spacing: 0.18em; color: var(--gold); }
+.rec__g ul { list-style: none; display: flex; flex-wrap: wrap; gap: 6px 0; }
+.rec__g li { font-size: clamp(24px, 2.8vw, 46px); font-weight: 800; letter-spacing: -0.04em; line-height: 1.25; transition: color 0.3s; }
+.rec__g li + li::before { content: "/"; margin: 0 0.45em; font-weight: 300; color: #cfcfcf; }
+.rec__g li:hover { color: var(--gold); }
+.rec__more { margin-top: 16px; text-align: right; font-size: 15px; font-weight: 600; color: var(--mute); }
+
+/* numbered steps / reasons */
+.steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0 24px; margin-top: clamp(36px, 5vw, 64px); }
+.step { padding-top: 20px; border-top: 1px solid var(--ink); }
+.step b { display: block; font-size: 13px; font-weight: 800; letter-spacing: 0.16em; color: var(--gold); }
+.step h3 { margin-top: 14px; font-size: clamp(19px, 1.5vw, 24px); font-weight: 800; letter-spacing: -0.025em; }
+.step p { margin-top: 10px; font-size: 15px; line-height: 1.7; color: var(--mute); }
+
+/* closing line + link to contact */
+.end { display: flex; justify-content: space-between; align-items: flex-end; gap: 30px; flex-wrap: wrap; margin: clamp(100px, 13vw, 180px) 0 clamp(70px, 9vw, 120px); }
+.end p { font-size: clamp(30px, 4vw, 66px); font-weight: 800; letter-spacing: -0.045em; line-height: 1.15; }
+.end a { display: inline-flex; align-items: center; gap: 12px; padding-bottom: 6px; border-bottom: 2px solid var(--gold); font-size: 17px; font-weight: 700; transition: gap 0.4s var(--ease), color 0.3s; }
+.end a:hover { gap: 20px; color: var(--gold); }
+
+/* PARTNERS: big rows */
+.prt { margin: clamp(40px, 7vh, 80px) 0 clamp(80px, 11vw, 150px); border-top: 1px solid var(--ink); }
+.prt__row { position: relative; display: grid; grid-template-columns: 80px minmax(0, 1fr) auto; align-items: center; gap: 20px; padding: clamp(22px, 3vw, 40px) 0; border-bottom: 1px solid var(--line); overflow: hidden; }
+.prt__row::before { content: ""; position: absolute; inset: 0; background: var(--gold-soft); transform: scaleY(0); transform-origin: bottom; transition: transform 0.5s var(--ease); z-index: -1; }
+.prt__row:hover::before { transform: none; }
+.prt__no { font-size: 13px; font-weight: 800; letter-spacing: 0.16em; color: var(--gold); }
+.prt__name { font-size: clamp(30px, 4.6vw, 80px); font-weight: 800; letter-spacing: -0.045em; line-height: 1.05; transition: transform 0.6s var(--ease); }
+.prt__row:hover .prt__name { transform: translateX(14px); }
+.prt__name img { max-height: clamp(40px, 5vw, 80px); width: auto; }
+.prt__tag { font-size: 12px; font-weight: 700; letter-spacing: 0.18em; color: var(--faint); }
+
+@media (max-width: 1000px) { .types { grid-template-columns: repeat(2, minmax(0, 1fr)); } .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 20px; } }
+@media (max-width: 640px) {
+  .types { grid-template-columns: 1fr; }
+  .steps { grid-template-columns: 1fr; }
+  .rec__g { grid-template-columns: 1fr; gap: 8px; } .rec__gl { padding-top: 0; } .rec__g li { font-size: 22px; }
+  .wide { aspect-ratio: 4 / 3; }
+  .prt__row { grid-template-columns: 44px minmax(0, 1fr); } .prt__tag { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { .rv2, .wide, .wide img { opacity: 1; transform: none; clip-path: none; transition: none; } }
+
+/* short laptop screens: keep ABOUT on one screen with the FOCUS/CEO grid */
+@media (min-width: 861px) and (max-height: 800px) {
+  .pg-main { padding-top: clamp(36px, 6vh, 64px); }
+  .ab2 { margin-top: clamp(28px, 5vh, 48px); }
+  .kv { margin-top: 22px; }
+  .pg-ft__in { padding-top: 18px; }
+}
+@media (max-width: 640px) { .ab2 { margin-top: 16px; gap: 14px; } .kv { margin-top: 14px; } .kv dd { font-size: 15px; } }
