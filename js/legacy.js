@@ -705,7 +705,7 @@
       });
       if (scroll) {
         history.replaceState(null, "", "#" + w.id);
-        var top = hero.getBoundingClientRect().top + window.scrollY - (document.getElementById("hd") || { offsetHeight: 0 }).offsetHeight;
+        var top = hero.getBoundingClientRect().top + window.scrollY - (document.getElementById("hd") || document.getElementById("nh") || { offsetHeight: 0 }).offsetHeight;
         window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
       }
     }

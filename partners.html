@@ -18,17 +18,25 @@
   <link rel="icon" type="image/png" sizes="192x192" href="assets/icons/icon-192.png" />
   <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png" />
   <link rel="preload" as="font" type="font/woff2" href="assets/fonts/PretendardVariable.woff2" crossorigin />
-  <link rel="stylesheet" href="css/legacy.css?v=de3507372f" />
+  <link rel="stylesheet" href="css/legacy.css?v=ef7ebb554f" />
+  <link rel="stylesheet" href="css/header.css?v=fc6626370e" />
 </head>
-<body id="top" class="pg-partners">  <header class="hd" id="hd">
-    <a class="hd__logo" href="index.html" aria-label="GOLDSTREAM ENTERTAINMENT 홈"><img src="assets/img/logo-goldstream-dark.png" alt="GOLDSTREAM ENTERTAINMENT" width="774" height="170" /></a>
-    <nav class="hd__nav" aria-label="주 메뉴">
-      <a href="about.html">ABOUT</a>
-      <a href="works.html">WORK</a>
-      <a href="partners.html">PARTNERS</a>
+<body id="top" class="pg-partners nh-page nh-over">
+    <header class="nh" id="nh">
+    <a class="nh__logo" href="index.html" aria-label="GOLDSTREAM ENTERTAINMENT 홈">
+      <img class="is-dark" src="assets/img/logo-goldstream-dark.png" alt="GOLDSTREAM ENTERTAINMENT" width="774" height="170" />
+      <img class="is-light" src="assets/img/logo-goldstream.png" alt="" width="774" height="170" aria-hidden="true" />
+    </a>
+    <div class="nh__right">
+    <nav class="nh__nav" aria-label="주 메뉴">
+      <a href="about.html">About</a>
+      <a href="works.html">Work</a>
+      <a href="partners.html">Partners</a>
+      <a href="contact.html">Contact</a>
     </nav>
-    <a class="hd__cta" href="contact.html">CONTACT</a>
-    <button class="hd__burger" type="button" aria-label="메뉴 열기" aria-expanded="false"><span></span><span></span></button>
+    <div class="nh__lang" aria-label="언어"><button type="button" data-lang="ko">KR</button><i>/</i><button type="button" data-lang="en">EN</button></div>
+    </div>
+    <button class="nh__burger" type="button" aria-label="메뉴 열기" aria-expanded="false"><span></span><span></span></button>
   </header>
   <main>
     <section class="pw-hero">
@@ -88,6 +96,7 @@
     <div class="ft__word" aria-hidden="true">GOLDSTREAM</div>
   </footer>
 
-  <script src="js/legacy.js?v=581a507c13"></script>
+  <script src="js/header.js?v=ff53069054"></script>
+  <script src="js/legacy.js?v=0bad13955e"></script>
 </body>
 </html>

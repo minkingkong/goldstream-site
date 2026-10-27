@@ -4247,7 +4247,7 @@ body::after {
   .ct2__topics li { font-size: 14px; }
 }
 /* body already reserves the header height in the old styles; the contact screen fills only the rest */
-.pg-contact2 .ct2 { min-height: calc(100vh - var(--header-h)); min-height: calc(100svh - var(--header-h)); padding-top: clamp(20px, 5vh, 64px); }
+.pg-contact2 .ct2 { min-height: calc(100vh - var(--nh-h, 84px)); min-height: calc(100svh - var(--nh-h, 84px)); padding-top: clamp(20px, 5vh, 64px); }
 @media (max-width: 860px) { .pg-contact2 .ct2 { padding-top: 22px; } }
 @media (max-width: 860px) and (max-height: 700px) {
   .ct2__hint { display: none; }

@@ -748,3 +748,6 @@ body.one { display: flex; flex-direction: column; min-height: 100vh; min-height:
   .ct1__inq { margin-top: 22px; font-size: 13px; gap: 6px 12px; }
   .ct1__map { display: none; }
 }
+
+/* keep the scrollbar space reserved so the top bar never shifts between pages */
+html { scrollbar-gutter: stable; }
