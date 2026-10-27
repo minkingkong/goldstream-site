@@ -4148,3 +4148,109 @@ body::after {
 .pg-partners .partners { margin-top: 8px; }
 .pg-partners .partner { min-height: clamp(160px, 18vw, 260px); font-size: clamp(20px, 2vw, 30px); font-weight: 700; letter-spacing: -0.02em; }
 .pg-partners .partner img { max-height: 64px; }
+
+/* =========================================================
+   CONTACT (one screen, no background): the email is the centrepiece,
+   광주 · 서울 · 문의 as three short columns underneath
+   ========================================================= */
+.pg-contact2 { background: #fff; }
+.ct2 {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  padding: calc(var(--header-h) + clamp(20px, 5vh, 64px)) var(--pad) 18px;
+  background: #fff;
+  color: var(--ink);
+}
+.ct2__in {
+  flex: 1;
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.ct2__k { font-size: 11px; font-weight: 700; letter-spacing: 0.32em; color: var(--ink-muted); }
+.ct2__title {
+  margin: 14px 0 clamp(18px, 4vh, 44px);
+  font-size: clamp(22px, min(2.5vw, 4.2vh), 40px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.3;
+}
+.ct2__mail {
+  position: relative;
+  font: inherit;
+  font-size: clamp(34px, min(6.4vw, 11vh), 116px);
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  line-height: 1.02;
+  color: var(--ink);
+  background: none;
+  border: 0;
+  border-bottom: 3px solid transparent;
+  padding: 0 0 4px;
+  cursor: pointer;
+  transition: border-color 0.3s;
+  overflow-wrap: anywhere;
+}
+.ct2__mail:hover, .ct2__mail.is-copied { border-color: var(--ink); }
+.ct2__mail .ct__copied {
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  margin-left: 14px;
+  transform: translateY(-50%);
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  color: var(--ink-muted);
+  white-space: nowrap;
+}
+.ct2__hint { margin-top: 14px; font-size: 13px; color: var(--ink-muted); }
+.ct2__hint a { color: var(--ink); border-bottom: 1px solid var(--line-strong); }
+.ct2__hint a:hover { border-color: var(--ink); }
+.ct2__cols {
+  width: 100%;
+  margin-top: clamp(28px, 7vh, 84px);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px clamp(20px, 3.4vw, 56px);
+  text-align: left;
+}
+.ct2__offices { display: contents; }
+.ct2 .ct__office, .ct2__col:not(.ct2__offices) { padding-top: 16px; border-top: 1px solid var(--ink); color: var(--ink); }
+.ct2 .ct__office-name { margin-bottom: 8px; font-size: 12px; font-weight: 700; letter-spacing: 0.18em; color: var(--ink); }
+.ct2 .ct__office p { font-size: 15px; line-height: 1.6; color: var(--ink); }
+.ct2 .ct__office a { display: inline-block; margin-top: 8px; font-size: 13px; color: var(--ink-muted); border-bottom: 1px solid var(--line-strong); }
+.ct2 .ct__office a:hover { color: var(--ink); border-color: var(--ink); }
+.ct2__topics li { font-size: 15px; line-height: 1.85; }
+.ct2__topics a { color: var(--ink); transition: color 0.25s; }
+.ct2__topics a:hover { color: var(--ink-muted); }
+.ct2__foot { margin-top: 18px; text-align: center; font-size: 12px; color: var(--ink-faint); }
+
+@media (max-width: 860px) {
+  .ct2 { padding-top: calc(var(--header-h) + 22px); }
+  .ct2__in { justify-content: flex-start; }
+  .ct2__title { font-size: 21px; margin-bottom: 18px; }
+  .ct2__mail { font-size: clamp(28px, 8.4vw, 44px); }
+  .ct2__mail .ct__copied { left: 50%; top: 100%; margin: 6px 0 0; transform: translateX(-50%); }
+  .ct2__cols { grid-template-columns: 1fr; gap: 16px; margin-top: 24px; }
+  .ct2__foot { margin-top: 10px; }
+  .pg-contact2 .ct2 { padding-bottom: 12px; }
+  .ct2 .ct__office, .ct2__col:not(.ct2__offices) { padding-top: 12px; }
+  .ct2 .ct__office p { font-size: 14px; }
+  .ct2__topics { display: flex; flex-wrap: wrap; gap: 2px 16px; }
+  .ct2__topics li { font-size: 14px; }
+}
+/* body already reserves the header height in the old styles; the contact screen fills only the rest */
+.pg-contact2 .ct2 { min-height: calc(100vh - var(--header-h)); min-height: calc(100svh - var(--header-h)); padding-top: clamp(20px, 5vh, 64px); }
+@media (max-width: 860px) { .pg-contact2 .ct2 { padding-top: 22px; } }
+@media (max-width: 860px) and (max-height: 700px) {
+  .ct2__hint { display: none; }
+  .ct2__title { margin-bottom: 14px; }
+  .ct2__cols { margin-top: 20px; }
+}
