@@ -168,3 +168,7 @@ html { scrollbar-gutter: stable; }
 
 /* PARTNERS opens straight on the partner list (no intro banner) */
 .pg-partners .pt-first { padding-top: clamp(48px, 7vw, 110px); }
+
+/* ABOUT opens straight on the company intro, then the CEO (no opening banner) */
+.pg-white .ab-first { padding-top: clamp(48px, 7vw, 110px); }
+.pg-white .ab-first + .ab-ceo { margin-top: clamp(56px, 7vw, 110px); }
