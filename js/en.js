@@ -114,8 +114,8 @@ window.GS_EN = {
   contact: {
     address: "Gwangju · Seoul",
     offices: [
-      { label: "Gwangju", address: "3F, 5-8 Cheomdanjungang-ro 152beon-gil, Gwangsan-gu, Gwangju" },
-      { label: "Seoul", address: "4F, 648 Samseong-ro, Gangnam-gu, Seoul" }
+      { label: "Seoul", address: "4F, 648 Samseong-ro, Gangnam-gu, Seoul" },
+      { label: "Gwangju", address: "3F, 5-8 Cheomdanjungang-ro 152beon-gil, Gwangsan-gu, Gwangju" }
     ],
     inquiriesIntro: "Talk to us about",
     inquiries: ["Production proposals", "Investment & distribution", "Co-production", "Original stories & IP", "Casting & packaging"]
