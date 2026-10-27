@@ -165,3 +165,6 @@ html { scrollbar-gutter: stable; }
 .pg-white .bx-btn--light:hover { background: #fff; color: #111; }
 .nh-page #ft-offices p, .nh-page #ft-offices b { color: #111; }
 .nh-page #ft-offices p { color: #555; }
+
+/* PARTNERS opens straight on the partner list (no intro banner) */
+.pg-partners .pt-first { padding-top: clamp(48px, 7vw, 110px); }
