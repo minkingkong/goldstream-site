@@ -165,29 +165,40 @@
   }
 
   /* ---------- PARTNERS (content.json about.partners) ----------
-     List on the left, and a map with GOLDSTREAM in the middle and the partners around it.
+     List on the left; on the right GOLDSTREAM and each partner, same size, linked one to one.
      "field" / "desc" show only when they are filled in. */
   function partners(d) {
     var root = document.getElementById("prt");
     if (!root) return;
     var list = ((d.about || {}).partners || []).filter(function (p) { return p && p.name; });
-    root.innerHTML = list.map(function (p, i) {
-      return "<li><span class=\"pt2__no\">" + String(i + 1).padStart(2, "0") + "</span><div><b>" + (p.logo ? '<img src="' + esc(p.logo) + '" alt="' + esc(p.name) + '">' : esc(p.name)) + "</b>" +
+    root.innerHTML = list.map(function (p) {
+      return "<li><div><b>" + (p.logo ? '<img src="' + esc(p.logo) + '" alt="' + esc(p.name) + '">' : esc(p.name)) + "</b>" +
         (p.field ? "<small>" + esc(p.field) + "</small>" : "") + (p.desc ? "<p>" + esc(p.desc) + "</p>" : "") + "</div></li>";
     }).join("");
     var map = document.getElementById("prt-map");
     if (!map || !list.length) return;
-    /* partners spread evenly on a circle, first one at the upper left */
-    var pts = list.map(function (p, i) {
-      var a = (-150 + i * 360 / list.length) * Math.PI / 180;
-      return { p: p, x: 50 + 38 * Math.cos(a), y: 50 + 38 * Math.sin(a) };
-    });
-    map.innerHTML = '<svg viewBox="0 0 100 100" preserveAspectRatio="none">' +
-      pts.map(function (q) { return '<line x1="50" y1="50" x2="' + q.x.toFixed(1) + '" y2="' + q.y.toFixed(1) + '"/>'; }).join("") + "</svg>" +
-      '<div class="pt2__core"><b>GOLDSTREAM</b><span>ENTERTAINMENT</span></div>' +
-      pts.map(function (q) {
-        return '<div class="pt2__node" style="left:' + q.x.toFixed(1) + "%;top:" + q.y.toFixed(1) + '%"><i></i><b>' + esc(q.p.name) + "</b>" + (q.p.field ? "<small>" + esc(q.p.field) + "</small>" : "") + "</div>";
-      }).join("");
+    /* GOLDSTREAM and each partner at the same size, one line to each: independent companies working
+       with us, not a group around a parent. Side by side on wide screens, top-to-bottom on phones. */
+    var name = function (t) { return esc(t).replace(/(.)(엔터테인먼트)$/, "$1<wbr>$2"); };
+    var mq = window.matchMedia("(max-width: 860px)");
+    function draw() {
+      var n = list.length, tall = mq.matches;
+      var gap = n > 1 ? Math.min(tall ? 33 : 30, (tall ? 66 : 64) / (n - 1)) : 0;
+      var at = list.map(function (p, i) { return 50 + (i - (n - 1) / 2) * gap; });
+      var paths = at.map(function (t) {
+        t = t.toFixed(1);
+        return tall ? '<path d="M50 33 C 50 50, ' + t + " 46, " + t + ' 62"/>' : '<path d="M36 50 C 52 50, 50 ' + t + ", 66 " + t + '"/>';
+      });
+      map.classList.toggle("is-tall", tall);
+      map.innerHTML = '<svg viewBox="0 0 100 100" preserveAspectRatio="none">' + paths.join("") + "</svg>" +
+        '<div class="pt2__c is-gs" style="' + (tall ? "left:50%;top:18%" : "left:22%;top:50%") + '"><b>GOLDSTREAM</b></div>' +
+        list.map(function (p, i) {
+          var pos = tall ? "left:" + at[i].toFixed(1) + "%;top:78%" : "left:80%;top:" + at[i].toFixed(1) + "%";
+          return '<div class="pt2__c" style="' + pos + '"><b>' + name(p.name) + "</b>" + (p.field ? "<small>" + esc(p.field) + "</small>" : "") + "</div>";
+        }).join("");
+    }
+    draw();
+    if (mq.addEventListener) mq.addEventListener("change", draw);
   }
 
   fetch("data/content.json?t=" + Date.now(), { cache: "no-store" })
