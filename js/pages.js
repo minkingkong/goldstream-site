@@ -164,15 +164,30 @@
     onScroll();
   }
 
-  /* ---------- PARTNERS (content.json about.partners) ---------- */
+  /* ---------- PARTNERS (content.json about.partners) ----------
+     List on the left, and a map with GOLDSTREAM in the middle and the partners around it.
+     "field" / "desc" show only when they are filled in. */
   function partners(d) {
     var root = document.getElementById("prt");
     if (!root) return;
     var list = ((d.about || {}).partners || []).filter(function (p) { return p && p.name; });
     root.innerHTML = list.map(function (p, i) {
-      return '<div class="prt__row rv2" style="transition-delay:' + (0.5 + i * 0.12) + 's"><span class="prt__no">' + String(i + 1).padStart(2, "0") + "</span>" +
-        '<span class="prt__name">' + (p.logo ? '<img src="' + esc(p.logo) + '" alt="' + esc(p.name) + '">' : esc(p.name)) + '</span><span class="prt__tag">PARTNER</span></div>';
+      return "<li><span class=\"pt2__no\">" + String(i + 1).padStart(2, "0") + "</span><div><b>" + (p.logo ? '<img src="' + esc(p.logo) + '" alt="' + esc(p.name) + '">' : esc(p.name)) + "</b>" +
+        (p.field ? "<small>" + esc(p.field) + "</small>" : "") + (p.desc ? "<p>" + esc(p.desc) + "</p>" : "") + "</div></li>";
     }).join("");
+    var map = document.getElementById("prt-map");
+    if (!map || !list.length) return;
+    /* partners spread evenly on a circle, first one at the upper left */
+    var pts = list.map(function (p, i) {
+      var a = (-150 + i * 360 / list.length) * Math.PI / 180;
+      return { p: p, x: 50 + 38 * Math.cos(a), y: 50 + 38 * Math.sin(a) };
+    });
+    map.innerHTML = '<svg viewBox="0 0 100 100" preserveAspectRatio="none">' +
+      pts.map(function (q) { return '<line x1="50" y1="50" x2="' + q.x.toFixed(1) + '" y2="' + q.y.toFixed(1) + '"/>'; }).join("") + "</svg>" +
+      '<div class="pt2__core"><b>GOLDSTREAM</b><span>ENTERTAINMENT</span></div>' +
+      pts.map(function (q) {
+        return '<div class="pt2__node" style="left:' + q.x.toFixed(1) + "%;top:" + q.y.toFixed(1) + '%"><i></i><b>' + esc(q.p.name) + "</b>" + (q.p.field ? "<small>" + esc(q.p.field) + "</small>" : "") + "</div>";
+      }).join("");
   }
 
   fetch("data/content.json?t=" + Date.now(), { cache: "no-store" })
