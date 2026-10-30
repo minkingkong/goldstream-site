@@ -190,3 +190,22 @@ html { scrollbar-gutter: stable; }
   .loc-rec__gl { padding-top: 0; }
   .loc-rec__g li { font-size: 24px; }
 }
+
+/* ---------- shared page footer (ABOUT, WORK, LOCATION, PARTNERS, IMPACT) ---------- */
+.pg-ft { width: 100%; max-width: 1760px; margin: 0 auto; padding: 0 clamp(20px, 4vw, 64px) 28px; }
+.pg-ft__line { height: 1px; background: #111; transform: scaleX(0); transform-origin: left; animation: line-in 1.4s cubic-bezier(0.19, 1, 0.22, 1) 0.7s forwards; }
+@keyframes line-in { to { transform: none; } }
+.pg-ft__in { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 20px clamp(32px, 6vw, 120px); padding-top: 26px; font-size: 14px; font-weight: 600; line-height: 1.7; }
+.pg-ft__in p + p { margin-top: 14px; }
+.pg-ft__in a:hover { color: #b08d57; }
+.pg-ft__in .mute { font-weight: 500; color: #111; }
+@media (max-width: 860px) { .pg-ft__in { grid-template-columns: 1fr; font-size: 13px; } }
+/* the old-style pages (IMPACT) carry legacy footer rules for #ft-offices; keep this footer identical */
+.pg-ft #ft-offices p { font-size: inherit; line-height: inherit; color: #111; }
+.pg-ft #ft-offices b { display: inline; color: #111; }
+body:not(.pg) .pg-ft { margin-top: clamp(70px, 9vw, 130px); font-family: "Pretendard Variable", -apple-system, BlinkMacSystemFont, system-ui, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif; letter-spacing: 0; }
+@media (max-width: 640px) {
+  body:not(.pg) .pg-ft { padding-bottom: 18px; }
+  body:not(.pg) .pg-ft__in { gap: 10px; padding-top: 16px; font-size: 12px; line-height: 1.6; }
+  body:not(.pg) .pg-ft__in p + p { margin-top: 6px; }
+}

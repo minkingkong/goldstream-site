@@ -126,14 +126,6 @@ body.pg {
 @media (max-width: 860px) { .wm__in { padding: 72px 20px 40px; } .pg .wm__close { top: 10px; right: 10px; } }
 
 /* ---------- footer (same on both pages) ---------- */
-.pg-ft { width: 100%; max-width: 1760px; margin: 0 auto; padding: 0 var(--pad) 28px; }
-.pg-ft__line { height: 1px; background: var(--ink); transform: scaleX(0); transform-origin: left; animation: line-in 1.4s var(--ease) 0.7s forwards; }
-@keyframes line-in { to { transform: none; } }
-.pg-ft__in { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 20px clamp(32px, 6vw, 120px); padding-top: 26px; font-size: 14px; font-weight: 600; line-height: 1.7; }
-.pg-ft__in p + p { margin-top: 14px; }
-.pg-ft__in a:hover { color: var(--gold); }
-.pg-ft__in .mute { font-weight: 500; color: var(--ink); }
-@media (max-width: 860px) { .pg-ft__in { grid-template-columns: 1fr; font-size: 13px; } }
 
 @media (prefers-reduced-motion: reduce) {
   .pg-title .ch i, .pg-title .dot, .up, .pg-ft__line { animation: none; transform: none; opacity: 1; }
@@ -162,14 +154,11 @@ body.pg.nh-page #ft-offices p, body.pg.nh-page #ft-offices b { color: var(--ink)
 
 /* label / value pairs (FOCUS, CEO …): hairline on top, small gold label above a large value */
 .kv { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0 clamp(24px, 3vw, 48px); margin-top: clamp(30px, 5vh, 56px); }
-.kv > div { position: relative; padding-top: 18px; }
-.kv > div::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 1px; background: var(--ink); transform: scaleX(0); transform-origin: left; animation: line-in 1.2s var(--ease) forwards; animation-delay: calc(0.9s + 0.15s * var(--k, 0)); }
-.kv > div + div { --k: 1; }
+.kv > div { position: relative; }
 .kv dt { font-size: 12px; font-weight: 800; letter-spacing: 0.22em; color: var(--gold); }
 .kv dd { margin-top: 10px; font-size: clamp(18px, 1.5vw, 24px); font-weight: 700; letter-spacing: -0.025em; line-height: 1.35; }
 .kv dd small { margin-left: 6px; font-size: 0.68em; font-weight: 600; color: var(--mute); letter-spacing: 0; }
-@media (max-width: 640px) { .kv { gap: 16px; margin-top: 18px; } .kv > div { padding-top: 12px; } .kv dd { margin-top: 6px; font-size: 16px; } }
-@media (prefers-reduced-motion: reduce) { .kv > div::before { animation: none; transform: none; } }
+@media (max-width: 640px) { .kv { gap: 16px; margin-top: 18px; } .kv dd { margin-top: 6px; font-size: 16px; } }
 
 /* ---------- sections below the first screen ---------- */
 .rv2 { opacity: 0; transform: translateY(28px); transition: opacity 1s var(--ease), transform 1.2s var(--ease); }
