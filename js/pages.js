@@ -86,7 +86,7 @@
       wm.querySelector(".wm__links").innerHTML = (w.links || []).filter(function (l) { return l && l.url; }).map(function (l) {
         return '<a href="' + esc(l.url) + '" target="_blank" rel="noopener noreferrer"><span>' + esc(l.label || l.url) + "</span><span>↗</span></a>";
       }).join("");
-      wm.classList.add("on"); wm.scrollTop = 0; document.body.style.overflow = "hidden";
+      wm.classList.add("on"); wm.querySelector(".wm__in").scrollTop = 0; document.body.style.overflow = "hidden";
       history.replaceState(null, "", "#" + w.id);
     }
     grid.addEventListener("click", function (e) {
