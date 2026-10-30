@@ -1,7 +1,7 @@
 /* ABOUT / WORK (2026-10 rebuild). Reads data/content.json so the admin editor keeps working.
    - [data-field="a.b.0.c"] gets its text from the data (numbers index into lists)
    - .pg-title[data-split] letters rise in one by one
-   - #works renders the cards, filters (전체 / 공개예정 / 공개완료), view switch (갤러리 / 정보) and the detail window
+   - #works renders the cards, filters (전체 / 공개예정 / 공개완료) and the detail window
    - LOCATION: the opening slideshow (#lh-sl) and the service / reasons / closing blocks */
 (function () {
   "use strict";
@@ -69,13 +69,6 @@
       tabs.querySelectorAll("button").forEach(function (x) { x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
       var f = b.getAttribute("data-f");
       cards.forEach(function (c) { c.hidden = f !== "all" && c.getAttribute("data-status") !== f; });
-      watch();
-    });
-    var view = document.querySelector(".wk2__view");
-    if (view) view.addEventListener("click", function (e) {
-      var b = e.target.closest("button[data-v]"); if (!b) return;
-      view.querySelectorAll("button").forEach(function (x) { x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
-      grid.classList.toggle("is-list", b.getAttribute("data-v") === "list");
       watch();
     });
     /* detail window */
