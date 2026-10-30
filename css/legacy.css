@@ -3135,12 +3135,12 @@ body::after {
   color: var(--ink-muted);
   word-break: keep-all;
 }
+/* closing band: the photo fades in from the section above and dissolves into the footer below */
 .sc-close {
   position: relative;
-  margin-top: clamp(90px, 11vw, 160px);
-  height: min(62vh, 620px);
+  height: min(78vh, 760px);
   overflow: hidden;
-  color: #fff;
+  color: #111;
 }
 .sc-close img {
   position: absolute;
@@ -3153,7 +3153,7 @@ body::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(0deg, rgba(0, 0, 0, 0.62), rgba(0, 0, 0, 0.15) 70%);
+  background: linear-gradient(180deg, #fff 0%, rgba(255, 255, 255, 0) 22%, rgba(255, 255, 255, 0) 45%, rgba(255, 255, 255, 0.75) 72%, #fff 94%);
 }
 .sc-close__in {
   position: relative;
@@ -3162,7 +3162,7 @@ body::after {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding-bottom: clamp(48px, 6vw, 88px);
+  padding-bottom: clamp(30px, 4vw, 56px);
 }
 .sc-close__text {
   margin-top: 14px;
@@ -3171,6 +3171,11 @@ body::after {
   letter-spacing: -0.035em;
   line-height: 1.35;
   word-break: keep-all;
+}
+@media (max-width: 860px) {
+  .sc-close {
+    height: 70svh;
+  }
 }
 .sc-close + .ft {
   margin-top: 0;
