@@ -12,6 +12,7 @@
   <meta property="og:title" content="로케이션 | GOLDSTREAM Entertainment" />
   <meta property="og:description" content="작품에 맞는 장소를 찾고, 촬영이 가능하도록 섭외·허가·현장을 지원합니다. 골드스트림엔터테인먼트 로케이션." />
   <meta property="og:image" content="https://goldstream.kr/assets/img/og-goldstream.jpg" />
+  <link rel="preload" as="image" href="assets/img/loc/p01-police.jpg" imagesrcset="assets/img/loc/p01-police-m.jpg 1100w, assets/img/loc/p01-police.jpg 2200w" imagesizes="100vw" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" href="favicon.ico" sizes="any" />
   <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png" />
@@ -19,9 +20,9 @@
   <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png" />
   <link rel="preload" as="font" type="font/woff2" href="assets/fonts/PretendardVariable.woff2" crossorigin />
   <link rel="stylesheet" href="css/header.css?v=015518fb98" />
-  <link rel="stylesheet" href="css/pages.css?v=a848952b54" />
+  <link rel="stylesheet" href="css/pages.css?v=52ead5e4c2" />
 </head>
-<body id="top" class="pg nh-page">
+<body id="top" class="pg nh-page nh-over loc">
   <header class="nh" id="nh">
     <a class="nh__logo" href="index.html" aria-label="GOLDSTREAM ENTERTAINMENT 홈">
       <img class="is-dark" src="assets/img/logo-goldstream-dark.png" alt="GOLDSTREAM ENTERTAINMENT" width="774" height="170" />
@@ -41,51 +42,58 @@
     <button class="nh__burger" type="button" aria-label="메뉴 열기" aria-expanded="false"><span></span><span></span></button>
   </header>
 
-  <main class="pg-main" id="loc">
-    <h1 class="pg-title" data-split>Location</h1>
-    <section class="ab2">
-      <p class="ab2__tag up" style="--d:0" id="loc-tag">작품에 맞는 장소를 찾고,<br>그곳에서 찍을 수 있게.</p>
-      <div class="ab2__txt">
-        <p class="up" style="--d:1" id="loc-lead"></p>
-        <dl class="kv up" style="--d:2">
-          <div><dt>SCOUTING</dt><dd>발굴 · 섭외</dd></div>
-          <div><dt>PERMITS</dt><dd>기관 협의 · 촬영 허가</dd></div>
-          <div><dt>ON SET</dt><dd>현장 지원</dd></div>
-        </dl>
+  <section class="lh" id="lh" aria-label="로케이션">
+    <div class="lh__sl" id="lh-sl">
+      <img class="on" src="assets/img/loc/p01-police.jpg" srcset="assets/img/loc/p01-police-m.jpg 1100w, assets/img/loc/p01-police.jpg 2200w" sizes="100vw" alt="" data-n="서울경찰청" data-e="PUBLIC &amp; JUSTICE" />
+      <img data-src="assets/img/loc/p02-station" alt="" data-n="서울시 경찰서" data-e="PUBLIC &amp; JUSTICE" />
+      <img data-src="assets/img/loc/p03-corridor" alt="" data-n="수원지방검찰청" data-e="PUBLIC &amp; JUSTICE" />
+      <img data-src="assets/img/loc/p04-court" alt="" data-n="청주지방법원" data-e="PUBLIC &amp; JUSTICE" />
+      <img data-src="assets/img/loc/p05-detention" alt="" data-n="서울동부구치소" data-e="PUBLIC &amp; JUSTICE" />
+      <img data-src="assets/img/loc/p06-cctv" alt="" data-n="구청 관제센터" data-e="PUBLIC &amp; JUSTICE" />
+      <img data-src="assets/img/loc/p07-airport" alt="" data-n="김포공항" data-e="TRANSPORT" />
+      <img data-src="assets/img/loc/p08-palace" alt="" data-n="경복궁" data-e="HERITAGE" />
+      <img data-src="assets/img/loc/p09-lobby" alt="" data-n="삼성 사옥" data-e="CORPORATE &amp; LANDMARK" />
+      <img data-src="assets/img/loc/p10-towers" alt="" data-n="그랑서울" data-e="CORPORATE &amp; LANDMARK" />
+    </div>
+    <div class="lh__in">
+      <div>
+        <p class="lh__k up">LOCATION · 로케이션 섭외 · 촬영 지원</p>
+        <h1 class="lh__t"><span class="ln"><span style="--d:0">영화·드라마 제작 현장에서 쌓아온 경험과 </span></span><span class="ln"><span style="--d:1">네트워크로, <em>작품에 꼭 맞는 장소</em>를 찾고 </span></span><span class="ln"><span style="--d:2">촬영이 가능하도록 만듭니다.</span></span></h1>
+        <div class="lh__steps up" style="--d:4"><p><span>SCOUTING</span>발굴 · 섭외</p><p><span>PERMITS</span>기관 협의 · 촬영 허가</p><p><span>ON SET</span>현장 지원</p></div>
       </div>
-    </section>
-    <figure class="wide"><img id="loc-img" alt="" /></figure>
+      <div class="lh__now up" style="--d:3" aria-hidden="true"><p class="lh__c"><b id="lh-i">01</b> / 10</p><p class="lh__n" id="lh-n">서울경찰청</p><p class="lh__e" id="lh-e">PUBLIC &amp; JUSTICE</p></div>
+    </div>
+  </section>
 
-    <section class="sec2">
-      <p class="sec2__k rv2">TRACK RECORD</p>
-      <h2 class="sec2__t rv2">섭외가 까다로운 장소에서도<br>촬영을 성사시켜 왔습니다.</h2>
-      <div class="rec rv2">
-        <div class="rec__g"><p class="rec__gl">공공 · 사법 기관</p><ul><li>경찰청</li><li>경찰서</li><li>검찰청</li><li>법원</li><li>구치소</li><li>구청 관제센터</li></ul></div>
-        <div class="rec__g"><p class="rec__gl">교통 · 문화유산</p><ul><li>국내 공항</li><li>고궁</li></ul></div>
-        <div class="rec__g"><p class="rec__gl">기업 · 도심</p><ul><li>대기업 사옥</li><li>도심 대형 오피스 빌딩</li></ul></div>
-      </div>
-      <p class="rec__more rv2">외 다수</p>
-    </section>
-
-    <section class="sec2">
-      <p class="sec2__k rv2">PLACES</p>
-      <h2 class="sec2__t rv2" id="loc-types-t"></h2>
-      <div class="types" id="loc-types"></div>
-    </section>
-
-    <section class="sec2">
-      <p class="sec2__k rv2">SERVICE</p>
-      <h2 class="sec2__t rv2" id="loc-svc-t"></h2>
-      <div class="steps" id="loc-svc"></div>
+  <main class="lw" id="loc">
+    <section class="lw__blk">
+      <div class="lw__l rv2"><p class="lw__k">TRACK RECORD</p><h2>섭외가 까다로운 장소에서도<br>촬영을 성사시켜 왔습니다.</h2><p class="lw__cnt"><b>10+</b><span>공공기관 · 공항 · 문화재 · 랜드마크</span></p></div>
+      <ul class="lw__rec">
+        <li class="rv2"><b>서울경찰청</b><span>01</span></li>
+        <li class="rv2"><b>서울시 경찰서</b><span>02</span></li>
+        <li class="rv2"><b>수원지방검찰청</b><span>03</span></li>
+        <li class="rv2"><b>청주지방법원</b><span>04</span></li>
+        <li class="rv2"><b>서울동부구치소</b><span>05</span></li>
+        <li class="rv2"><b>구청 관제센터</b><span>06</span></li>
+        <li class="rv2"><b>김포공항</b><span>07</span></li>
+        <li class="rv2"><b>경복궁</b><span>08</span></li>
+        <li class="rv2"><b>삼성 사옥</b><span>09</span></li>
+        <li class="rv2"><b>그랑서울</b><span>10</span></li>
+        <li class="rv2 is-more"><b>외 다수</b><span>+</span></li>
+      </ul>
     </section>
 
-    <section class="sec2">
-      <p class="sec2__k rv2">WHY GOLDSTREAM</p>
-      <h2 class="sec2__t rv2" id="loc-why-t"></h2>
-      <div class="steps" id="loc-why"></div>
+    <section class="lw__blk">
+      <div class="lw__l rv2"><p class="lw__k">SERVICE</p><h2 id="loc-svc-t">촬영이 가능한<br>로케이션을 만듭니다</h2></div>
+      <div class="lw__tl" id="loc-svc"><span class="lw__rail"><i></i></span></div>
     </section>
 
-    <section class="end rv2"><p id="loc-end"></p><a href="contact.html" id="loc-end-a">로케이션 문의 →</a></section>
+    <section class="lw__blk">
+      <div class="lw__l rv2"><p class="lw__k">WHY GOLDSTREAM</p><h2 id="loc-why-t">어려운 장소일수록,<br>더 치밀하게 준비합니다.</h2></div>
+      <div class="lw__why" id="loc-why"></div>
+    </section>
+
+    <section class="lw__ct"><h2 class="rv2" id="loc-end">장소를 찾는 것을 넘어,<br>촬영이 가능하도록 만드는 일.</h2><a class="rv2" href="contact.html"><span id="loc-end-a">로케이션 문의</span> <i>→</i></a></section>
   </main>
 
   <footer class="pg-ft">
@@ -97,6 +105,6 @@
   </footer>
 
   <script src="js/header.js?v=ff53069054"></script>
-  <script src="js/pages.js?v=06c9a0d56a"></script>
+  <script src="js/pages.js?v=09d23f351a"></script>
 </body>
 </html>

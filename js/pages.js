@@ -1,7 +1,8 @@
 /* ABOUT / WORK (2026-10 rebuild). Reads data/content.json so the admin editor keeps working.
    - [data-field="a.b.0.c"] gets its text from the data (numbers index into lists)
-   - .pg-title[data-split] letters rise in one by one, with a gold dot after the word
-   - #works renders the cards, filters (전체 / 공개예정 / 공개완료), view switch (갤러리 / 정보) and the detail window */
+   - .pg-title[data-split] letters rise in one by one
+   - #works renders the cards, filters (전체 / 공개예정 / 공개완료), view switch (갤러리 / 정보) and the detail window
+   - LOCATION: the opening slideshow (#lh-sl) and the service / reasons / closing blocks */
 (function () {
   "use strict";
   var ARROW = '<svg class="card2__arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>';
@@ -107,9 +108,9 @@
   }
 
 
-  /* reveal on scroll for .rv2 blocks and the curtain photo */
+  /* reveal on scroll for .rv2 blocks */
   function reveal() {
-    var els = document.querySelectorAll(".rv2, .wide, .types .card2");
+    var els = document.querySelectorAll(".rv2");
     if (!("IntersectionObserver" in window)) { els.forEach(function (e) { e.classList.add("in"); }); return; }
     var io = new IntersectionObserver(function (es) {
       es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
@@ -117,33 +118,57 @@
     els.forEach(function (e) { io.observe(e); });
   }
 
-  /* ---------- LOCATION (content.json business[id=location]) ---------- */
+  /* ---------- LOCATION ----------
+     Opening slideshow: the first still is in the markup, the rest load one step ahead ([data-src] is the
+     path without "-m.jpg"/".jpg"). Service / reasons / closing line come from content.json business[id=location]. */
+  (function slides() {
+    var sl = document.getElementById("lh-sl");
+    if (!sl) return;
+    var imgs = [].slice.call(sl.querySelectorAll("img")), k = 0;
+    var ni = document.getElementById("lh-i"), nn = document.getElementById("lh-n"), ne = document.getElementById("lh-e");
+    function load(im) {
+      var b = im && im.getAttribute("data-src");
+      if (!b) return;
+      im.removeAttribute("data-src");
+      im.sizes = "100vw";
+      im.srcset = b + "-m.jpg 1100w, " + b + ".jpg 2200w";
+      im.src = b + ".jpg";
+    }
+    load(imgs[1]);
+    setInterval(function () {
+      k = (k + 1) % imgs.length;
+      load(imgs[(k + 1) % imgs.length]);
+      imgs.forEach(function (im, j) { im.classList.toggle("on", j === k); });
+      ni.textContent = String(k + 1).padStart(2, "0");
+      nn.textContent = imgs[k].getAttribute("data-n");
+      ne.textContent = imgs[k].getAttribute("data-e");
+    }, 4600);
+  })();
+
   function location_(d) {
-    var root = document.getElementById("loc");
-    if (!root) return;
+    var svc = document.getElementById("loc-svc");
+    if (!svc) return;
     var b = (d.business || []).filter(function (x) { return x.id === "location"; })[0];
     if (!b) return;
-    var set = function (id, html) { var el = document.getElementById(id); if (el && html) el.innerHTML = html; };
+    var p2 = function (n) { return String(n).padStart(2, "0"); };
     var nl = function (s) { return esc(s || "").split(String.fromCharCode(10)).join("<br>"); };
-    set("loc-tag", nl(b.headline));
-    set("loc-lead", esc(b.lead));
-    var img = document.getElementById("loc-img"); if (img && b.image) img.src = b.image;
-    set("loc-types-t", nl(b.typesTitle));
-    set("loc-types", (b.types || []).map(function (t, i) {
-      return '<div class="card2 type" style="--i:' + i + '"><span class="card2__img"><img src="' + esc(t.image) + '" alt=""></span>' +
-        '<span class="card2__row"><span class="card2__t">' + esc(t.title) + '</span><span class="type__en">' + esc(t.en) + "</span></span>" +
-        '<p class="type__d">' + esc(t.desc) + "</p></div>";
+    svc.insertAdjacentHTML("beforeend", (b.services || []).map(function (s, i) {
+      return '<div class="lw__st"><span class="lw__dot">' + p2(i + 1) + "</span><h3>" + esc(s.title) + "</h3><p>" + esc(s.desc) + "</p></div>";
     }).join(""));
-    set("loc-svc-t", nl(b.servicesTitle));
-    set("loc-svc", (b.services || []).map(function (s, i) {
-      return '<div class="step rv2" style="transition-delay:' + (i * 0.08) + 's"><b>' + String(i + 1).padStart(2, "0") + "</b><h3>" + esc(s.title) + "</h3><p>" + esc(s.desc) + "</p></div>";
-    }).join(""));
-    set("loc-why-t", nl(b.whyTitle));
-    set("loc-why", (b.why || []).map(function (s, i) {
-      return '<div class="step rv2" style="transition-delay:' + (i * 0.08) + 's"><b>' + String(i + 1).padStart(2, "0") + "</b><h3>" + esc(s) + "</h3></div>";
-    }).join(""));
-    set("loc-end", nl(b.cta));
-    set("loc-end-a", esc(b.ctaButton || "로케이션 문의") + " →");
+    document.getElementById("loc-why").innerHTML = (b.why || []).map(function (w, i) {
+      return '<p class="rv2"><span>' + p2(i + 1) + "</span>" + esc(w) + "</p>";
+    }).join("");
+    if (b.cta) document.getElementById("loc-end").innerHTML = nl(b.cta);
+    if (b.ctaButton) document.getElementById("loc-end-a").textContent = b.ctaButton;
+    /* the service rail fills in gold as you read down */
+    var rail = svc.querySelector(".lw__rail i"), sts = svc.querySelectorAll(".lw__st");
+    function onScroll() {
+      var r = svc.getBoundingClientRect(), mid = window.innerHeight * 0.6;
+      rail.style.height = Math.min(1, Math.max(0, (mid - r.top) / r.height)) * 100 + "%";
+      [].forEach.call(sts, function (s) { s.classList.toggle("is-lit", s.getBoundingClientRect().top < mid); });
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
   }
 
   /* ---------- PARTNERS (content.json about.partners) ---------- */
