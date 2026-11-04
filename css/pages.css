@@ -192,16 +192,19 @@ body.pg.nh-page #ft-offices p, body.pg.nh-page #ft-offices b { color: var(--ink)
 @media (prefers-reduced-motion: reduce) { .pt2__map path { animation: none; stroke-dashoffset: 0; } }
 
 @media (max-width: 860px) {
-  .pt2 { grid-template-columns: 1fr; grid-template-rows: repeat(5, auto) 1fr; height: calc(100svh - var(--nh-h)); gap: 0; padding-bottom: 14px; }
+  /* the map takes whatever height is left (never less than 200px); on very short screens the page scrolls a little instead of squeezing */
+  .pg-main.pt2 { padding-top: 28px; }
+  .pt2 { grid-template-columns: minmax(0, 1fr); grid-template-rows: repeat(4, auto) minmax(200px, 1fr) auto; height: auto; min-height: calc(100svh - var(--nh-h)); gap: 0; padding-bottom: 14px; }
   .pt2__tag { margin-top: 16px; font-size: 19px; }
   .pt2__txt { margin-top: 10px; font-size: 14px; line-height: 1.65; }
   .pt2__list { margin-top: 18px; }
   .pt2__list li { padding: 9px 0; }
   .pt2__list b { font-size: 18px; }
-  .pt2__map { order: 2; width: 100%; aspect-ratio: auto; height: clamp(150px, calc(100svh - 600px), 300px); margin-top: 14px; }
-  .pt2__map.is-tall .pt2__c { width: auto; height: 36%; }
-  .pt2__c b { font-size: 12px; }
-  .pt2__c.is-gs b { font-size: 10px; }
+  .pt2__map { order: 2; align-self: stretch; width: 100%; aspect-ratio: auto; height: auto; max-height: 340px; margin-top: 14px; container-type: size; }
+  /* true circles: size from the map height, capped by the width so three fit in a row; names scale with the circle */
+  .pt2__map.is-tall .pt2__c { --d: min(40cqh, 28cqw); width: var(--d); height: var(--d); padding: 0 4px; }
+  .pt2__c b { font-size: max(8px, calc(var(--d) * 0.145)); }
+  .pt2__c.is-gs b { font-size: max(7px, calc(var(--d) * 0.115)); }
   .pt2__l { display: contents; }
   .pt2__foot { order: 3; margin-top: auto; padding-top: 10px; align-self: end; }
 }
