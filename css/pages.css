@@ -368,3 +368,9 @@ body.loc .nh.is-scrolled, body.loc .nh.is-open { background: rgba(250, 248, 245,
   .cp { gap: 12px; } .cp h3 { margin-top: 14px; font-size: 18px; } .cp .e { font-size: 9px; letter-spacing: .2em; } .cp .l { font-size: 12px; }
   .cy { grid-template-columns: repeat(3, 72%); overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; margin-right: calc(-1 * var(--pad)); } .cy > div { scroll-snap-align: start; }
 }
+/* VISION: a show logo (not a poster) sits whole on a warm card; a linked card lifts its title on hover */
+.ph--logo { background: #fff; box-shadow: inset 0 0 0 1px #ece5d9; }
+.ph--logo img { object-fit: contain; padding: 8%; }
+.cy__a { display: block; }
+.cy__a:hover h3 { color: var(--gold); }
+.cy h3 { transition: color .3s; }
