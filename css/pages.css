@@ -374,3 +374,7 @@ body.loc .nh.is-scrolled, body.loc .nh.is-open { background: rgba(250, 248, 245,
 .cy__a { display: block; }
 .cy__a:hover h3 { color: var(--gold); }
 .cy h3 { transition: color .3s; }
+.cy-cta { margin-top: 44px; font-size: 16px; line-height: 1.7; color: #555; }
+.cy-cta a { margin-left: 8px; font-weight: 700; color: var(--gold); border-bottom: 1px solid currentColor; white-space: nowrap; }
+.cy-cta a:hover { color: var(--ink); }
+@media (max-width: 860px) { .cy-cta { margin-top: 30px; font-size: 15px; } .cy-cta a { display: inline-block; margin: 8px 0 0; } }
