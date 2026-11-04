@@ -751,3 +751,9 @@ body.one { display: flex; flex-direction: column; min-height: 100vh; min-height:
 
 /* keep the scrollbar space reserved so the top bar never shifts between pages */
 html { scrollbar-gutter: stable; }
+
+/* phone menu: centred while it fits, scrolls from the top when the screen is short (e.g. a phone held sideways) */
+.mnav { justify-content: flex-start; overflow-y: auto; overscroll-behavior: contain; }
+.mnav > :first-child { margin-top: auto; }
+.mnav > :last-child { margin-bottom: auto; }
+.mnav a { font-size: clamp(28px, min(11vw, 7vh), 64px); }

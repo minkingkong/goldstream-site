@@ -209,3 +209,9 @@ body:not(.pg) .pg-ft { font-family: "Pretendard Variable", -apple-system, BlinkM
   body:not(.pg) .pg-ft__in { gap: 10px; padding-top: 16px; font-size: 12px; line-height: 1.6; }
   body:not(.pg) .pg-ft__in p + p { margin-top: 6px; }
 }
+
+/* phone menu: centred while it fits, scrolls from the top when the screen is short (e.g. a phone held sideways) */
+.nmnav { justify-content: flex-start; overflow-y: auto; overscroll-behavior: contain; }
+.nmnav > :first-child { margin-top: auto; }
+.nmnav > :last-child { margin-bottom: auto; }
+.nmnav a { font-size: clamp(28px, min(11vw, 7vh), 64px); }
