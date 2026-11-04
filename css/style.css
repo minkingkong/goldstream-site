@@ -757,3 +757,7 @@ html { scrollbar-gutter: stable; }
 .mnav > :first-child { margin-top: auto; }
 .mnav > :last-child { margin-bottom: auto; }
 .mnav a { font-size: clamp(28px, min(11vw, 7vh), 64px); }
+
+/* bigger touch area for the footer menu links (looks the same) */
+.ft__nav a { position: relative; }
+.ft__nav a::after { content: ""; position: absolute; inset: -8px -8px; }

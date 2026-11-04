@@ -1027,9 +1027,12 @@
       c.offices.forEach(function (o) {
         if (!o || (!o.label && !o.address)) return;
         var p = document.createElement("p");
+        /* "서울" + "서울 강남구 …" would read 서울 서울: drop the city when the address starts with the label */
+        var a = String(o.address || ""), l = String(o.label || "");
+        if (l && a.indexOf(l + " ") === 0) a = a.slice(l.length + 1);
         p.innerHTML = id === "ft-offices"
-          ? "<b>" + esc(o.label) + "</b> <span class=\"mute\">" + esc(o.address) + "</span>"
-          : "<b>" + esc(o.label) + "</b>&nbsp;&nbsp;" + esc(o.address);
+          ? "<b>" + esc(o.label) + "</b> <span class=\"mute\">" + esc(a) + "</span>"
+          : "<b>" + esc(o.label) + "</b>&nbsp;&nbsp;" + esc(a);
         off.appendChild(p);
       });
     });

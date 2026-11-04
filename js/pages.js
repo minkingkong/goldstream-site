@@ -19,6 +19,7 @@
     }).join("") + "</span>";
   });
 
+  function short(o) { var a = String(o.address || ""), l = String(o.label || ""); return l && a.indexOf(l + " ") === 0 ? a.slice(l.length + 1) : a; }
   function fields(d) {
     document.querySelectorAll("[data-field]").forEach(function (el) {
       var v = get(d, el.getAttribute("data-field"));
@@ -29,7 +30,8 @@
     });
     var off = document.getElementById("ft-offices");
     if (off && d.contact && d.contact.offices) {
-      off.innerHTML = d.contact.offices.map(function (o) { return "<p><b>" + esc(o.label) + '</b> <span class="mute">' + esc(o.address) + "</span></p>"; }).join("");
+      /* "서울" + "서울 강남구 …" would read 서울 서울: drop the city when the address starts with the label */
+      off.innerHTML = d.contact.offices.map(function (o) { return "<p><b>" + esc(o.label) + '</b> <span class="mute">' + esc(short(o)) + "</span></p>"; }).join("");
     }
   }
 

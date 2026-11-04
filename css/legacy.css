@@ -4309,3 +4309,7 @@ body::after {
   .ct3__loc { flex: 1; }
   .ct3__map { flex: 1; min-height: 200px; }
 }
+
+/* CONTACT: bigger touch area for the map tabs and the "open map" link (looks the same) */
+.ct3__tabs button, .ct3__open { position: relative; }
+.ct3__tabs button::after, .ct3__open::after { content: ""; position: absolute; inset: -12px -8px; }
