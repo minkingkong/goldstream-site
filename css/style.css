@@ -314,8 +314,8 @@ ul { list-style: none; }
   min-width: 1.4em;
   padding: 6px 0;
   text-align: left;
-  font-size: calc(16px + 1.2vw);
-  font-weight: 700;
+  font-size: calc(12px + 0.6vw);
+  font-weight: 600;
   letter-spacing: 0;
   line-height: 0.8;
   color: #fff;
@@ -421,7 +421,7 @@ ul { list-style: none; }
 @media (prefers-reduced-motion: reduce) { .pw-wall { animation: none; } }
 
 /* ---------- white sections ---------- */
-.section { padding: clamp(80px, 11vw, 170px) 0; }
+.section { padding-top: clamp(80px, 11vw, 170px); padding-bottom: clamp(80px, 11vw, 170px); }
 .section + .section { padding-top: 0; }
 .statement { display: grid; grid-template-columns: 1fr 2fr; gap: 32px clamp(32px, 6vw, 120px); align-items: start; }
 .statement__big {
@@ -761,3 +761,6 @@ html { scrollbar-gutter: stable; }
 /* bigger touch area for the footer menu links (looks the same) */
 .ft__nav a { position: relative; }
 .ft__nav a::after { content: ""; position: absolute; inset: -8px -8px; }
+
+/* Korean section label: no wide tracking (it is spaced for English capitals) */
+.statement .k { letter-spacing: 0.02em; font-size: 13px; }

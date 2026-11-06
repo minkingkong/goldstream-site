@@ -219,3 +219,6 @@ body:not(.pg) .pg-ft { font-family: "Pretendard Variable", -apple-system, BlinkM
 /* bigger touch area for the small footer links (looks the same) */
 .pg-ft__in a { position: relative; }
 .pg-ft__in a::after { content: ""; position: absolute; inset: -12px -6px; }
+
+/* KR / EN switch only on the home page until the other pages have English copy */
+.nh__lang, .nmnav__lang { display: none !important; }

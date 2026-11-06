@@ -137,7 +137,7 @@
   /* ---------- home: full-screen slides ---------- */
   function slideMeta(w) {
     var plat = clean((w.credits || {})["플랫폼"]);
-    var parts = [w.status === "upcoming" ? "COMING " + esc(w.year || "") : esc(w.year || "")];
+    var parts = [w.status === "upcoming" ? (EN ? "COMING " : "공개예정 ") + esc(w.year || "") : esc(w.year || "")];
     if (w.format) parts.push(esc(w.format));
     if (plat) parts.push(esc(plat));
     return parts.map(function (p) { return "<span>" + p + "</span>"; }).join("<i></i>");
@@ -366,7 +366,7 @@
     a.innerHTML =
       '<div class="work__thumb"><img loading="lazy" alt="' + esc(w.title) + '" src="' + esc(w.image || "") + '"></div>' +
       '<div class="work__row"><h3>' + esc(w.title) + '</h3><span class="work__arrow" aria-hidden="true">&rarr;</span></div>' +
-      '<p class="work__date">' + esc(w.status === "upcoming" ? "COMING " + w.year : w.year) + (w.format ? " · " + esc(w.format) : "") + "</p>";
+      '<p class="work__date">' + esc(w.status === "upcoming" ? (EN ? "COMING " : "공개예정 ") + w.year : w.year) + (w.format ? " · " + esc(w.format) : "") + "</p>";
     a.addEventListener("click", function (e) { e.preventDefault(); openModal(w); });
     return a;
   }

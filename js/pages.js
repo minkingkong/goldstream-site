@@ -51,9 +51,9 @@
     grid.innerHTML = list.map(function (w, i) {
       var up = w.status === "upcoming", plat = clean((w.credits || {})["플랫폼"]);
       return '<button type="button" class="card2" data-id="' + esc(w.id) + '" data-status="' + (up ? "upcoming" : "released") + '" style="--i:' + i + '">' +
-        '<span class="card2__img"><img src="' + esc(w.heroImage || w.image) + '" alt="" style="object-position:' + esc(w.heroPos || "50% 40%") + '"></span>' +
+        '<span class="card2__img"><img src="' + esc(w.image || w.heroImage) + '" alt="" loading="lazy"></span>' +
         '<span class="card2__row"><span class="card2__t">' + esc(w.title) + "</span>" + ARROW + "</span>" +
-        '<span class="card2__s"><b>' + (up ? "공개예정" : "공개완료") + "</b> , " + esc(w.year) + (w.format ? " · " + esc(w.format) : "") + (plat ? " · " + esc(plat) : "") + "</span></button>";
+        '<span class="card2__s"><b>' + (up ? "공개예정" : "공개완료") + "</b> · " + esc(w.year) + (w.format ? " · " + esc(w.format) : "") + (plat ? " · " + esc(plat) : "") + "</span></button>";
     }).join("");
     var cards = [].slice.call(grid.querySelectorAll(".card2"));
     /* cards rise in as they come into view */

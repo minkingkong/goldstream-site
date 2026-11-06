@@ -73,6 +73,9 @@
     document.querySelectorAll("[data-field]").forEach(function (el) {
       var v = get(data, el.getAttribute("data-field"));
       if (v == null || typeof v === "object" || v === "") return;
+      /* an address shown right after its office label drops the repeated city ("서울 서울 강남구") */
+      var lab = el.hasAttribute("data-short") && get(data, el.getAttribute("data-field").replace(/address$/, "label"));
+      if (lab && String(v).indexOf(lab + " ") === 0) v = String(v).slice(lab.length + 1);
       if (el.hasAttribute("data-mailto")) {
         el.textContent = v;
         el.setAttribute("href", "mailto:" + v);
