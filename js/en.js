@@ -42,21 +42,6 @@ window.GS_EN = {
       credits: { "감독": "Kang Yoon-sung", "각본": "Kang Yoon-sung", "출연": "Ryu Seung-ryong, Yang Se-jong, Im Soo-jung, Kim Eui-sung, Lee Dong-hwi, Jung Yun-ho", "플랫폼": "Disney+ Original" },
       dateLabel: "Released, 2025 · Disney+"
     },
-    mungmungi: {
-      synopsis: "When Min-su can no longer live with his dog Rooney, he and his cousin Jin-guk set out from Seoul to Jeju to find Rooney the perfect new family. A road movie that ends its laughs face to face with the reality of abandoned dogs.",
-      credits: { "감독": "Kim Joo-hwan", "각본": "Kim Joo-hwan", "출연": "Yoo Yeon-seok, Cha Tae-hyun", "플랫폼": "Theatrical release" },
-      dateLabel: "Released, March 2023"
-    },
-    steelrain2: {
-      synopsis: "During a summit between the leaders of South Korea, North Korea and the United States in Wonsan, a coup by the North's guard command erupts in protest at denuclearisation. The three leaders are taken hostage aboard a North Korean nuclear submarine, where the fate of the peninsula plays out in a cramped hull. The second story in the 'Steel Rain' universe.",
-      credits: { "감독": "Yang Woo-suk", "각본": "Yang Woo-suk", "출연": "Jung Woo-sung, Yoo Yeon-seok, Kwak Do-won, Angus Macfadyen, Shin Jung-geun", "플랫폼": "Theatrical release" },
-      dateLabel: "Released, 2020"
-    },
-    steelrain: {
-      synopsis: "A coup breaks out in North Korea and its mortally wounded leader is carried across the border into the South. A spy action film about one day in which two agents, one from each side, move together to stop a war. Based on the webtoon 'Steel Rain' by director Yang Woo-suk.",
-      credits: { "감독": "Yang Woo-suk", "각본": "Yang Woo-suk", "출연": "Jung Woo-sung, Kwak Do-won, Kim Kap-su, Kim Eui-sung, Jo Woo-jin", "플랫폼": "Theatrical release" },
-      dateLabel: "Released, December 2017"
-    },
     suanara: {
       synopsis: "Ballerina by day, demon hunter by night. An action fantasy in which Sua, a ballerina pushed to the edge of death, becomes one with the demon Nara and fights. Shot entirely in Gwangju, Gokseong, Geoje and Paju; its anime-flavoured stylised action and practical stunts drew attention from overseas press.",
       credits: { "감독": "Attila Korosi", "각본": "Attila Korosi", "출연": "Han Ji-yeon, Anita Korosi, Joseph Kim", "플랫폼": "-" },

@@ -240,7 +240,7 @@
     var home = data.home || {};
     var ids = home.slideIds && home.slideIds.length
       ? home.slideIds
-      : ["code", "pine", "mungmungi", "steelrain2", "steelrain", "suanara", "demonkiller"];
+      : ["code", "forbidden", "pine", "suanara", "demonkiller"];
     var slides = [introSlide(home)];
     ids.forEach(function (id) {
       var w = byId(data.works, id);

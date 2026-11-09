@@ -33,9 +33,6 @@
       "code",
       "forbidden",
       "pine",
-      "mungmungi",
-      "steelrain2",
-      "steelrain",
       "suanara",
       "demonkiller"
     ],
@@ -45,13 +42,10 @@
       "code",
       "forbidden",
       "pine",
-      "mungmungi",
-      "steelrain2",
-      "steelrain",
       "suanara",
       "demonkiller"
     ],
-    "featuredCount": 8
+    "featuredCount": 5
   },
   "business": [
     {
@@ -403,107 +397,6 @@
       "heroImage": "assets/img/hero/pine.jpg"
     },
     {
-      "id": "mungmungi",
-      "title": "멍뭉이",
-      "titleEn": "My Heart Puppy",
-      "status": "released",
-      "dateLabel": "Released, March 2023",
-      "year": 2023,
-      "format": "장편영화",
-      "image": "assets/img/1789518312319--.png",
-      "video": "https://www.youtube.com/watch?v=kHzgRPver_o",
-      "synopsis": "반려견 루니와 더는 함께 살 수 없게 된 민수가, 사촌 형 진국과 함께 루니의 완벽한 새 가족을 찾아 서울에서 제주까지 길을 나선다. 웃음 끝에 유기견의 현실을 마주하게 되는 로드무비.",
-      "credits": {
-        "감독": "김주환",
-        "각본": "김주환",
-        "출연": "유연석, 차태현",
-        "플랫폼": "극장 개봉"
-      },
-      "links": [
-        {
-          "label": "1차 예고편 (키다리스튜디오 공식)",
-          "url": "https://www.youtube.com/watch?v=kHzgRPver_o"
-        },
-        {
-          "label": "유연석 X 차태현, 댕댕이들과 펼친 역대급 '호흡' (맥스무비)",
-          "url": "https://www.maxmovie.com/news/433165"
-        },
-        {
-          "label": "[커버] 유연석·차태현 인터뷰 (씨네21)",
-          "url": "http://www.cine21.com/news/view/?mag_id=102101"
-        }
-      ],
-      "heroImage": "assets/img/hero/mungmungi.jpg"
-    },
-    {
-      "id": "steelrain2",
-      "title": "강철비2: 정상회담",
-      "titleEn": "Steel Rain 2: Summit",
-      "status": "released",
-      "dateLabel": "Released, 2020",
-      "year": 2020,
-      "format": "장편영화",
-      "image": "assets/img/1789518284030--2.png",
-      "video": "https://www.youtube.com/watch?v=KKPUEANoHAo",
-      "synopsis": "남·북·미 정상이 북한 원산에서 정상회담을 갖던 중, 핵 포기에 반대하는 북한 호위총국의 쿠데타가 일어난다. 납치된 세 정상은 북한 핵잠수함에 갇히고, 좁은 함 안에서 한반도의 운명을 건 시간이 흐른다. '강철비' 세계관의 두 번째 이야기.",
-      "credits": {
-        "감독": "양우석",
-        "각본": "양우석",
-        "출연": "정우성, 유연석, 곽도원, 앵거스 맥페이든, 신정근",
-        "플랫폼": "극장 개봉"
-      },
-      "links": [
-        {
-          "label": "메인 예고편 (롯데엔터테인먼트 공식)",
-          "url": "https://www.youtube.com/watch?v=KKPUEANoHAo"
-        },
-        {
-          "label": "티저 예고편 (롯데엔터테인먼트 공식)",
-          "url": "https://www.youtube.com/watch?v=fkSyE0qidyI"
-        },
-        {
-          "label": "'정상회담'으로 제목 변경, 크랭크인 (뉴스1)",
-          "url": "https://www.news1.kr/entertain/movie/3704559"
-        }
-      ],
-      "heroImage": "assets/img/hero/steelrain2.jpg",
-      "heroPos": "50% 0%"
-    },
-    {
-      "id": "steelrain",
-      "title": "강철비",
-      "titleEn": "Steel Rain",
-      "status": "released",
-      "dateLabel": "Released, December 2017",
-      "year": 2017,
-      "format": "장편영화",
-      "image": "assets/img/1789518267017--1.png",
-      "video": "https://www.youtube.com/watch?v=nCsO8lSZzZk",
-      "synopsis": "북한 내 쿠데타가 일어나고, 권력 1호가 치명상을 입은 채 남한으로 내려온다. 남과 북의 두 요원이 전쟁을 막기 위해 함께 움직이는 하루를 그린 첩보 액션. 양우석 감독의 웹툰 '스틸레인'이 원작.",
-      "credits": {
-        "감독": "양우석",
-        "각본": "양우석",
-        "출연": "정우성, 곽도원, 김갑수, 김의성, 조우진",
-        "플랫폼": "극장 개봉"
-      },
-      "links": [
-        {
-          "label": "메인 예고편 (YouTube)",
-          "url": "https://www.youtube.com/watch?v=nCsO8lSZzZk"
-        },
-        {
-          "label": "'강철비' 5분 순삭 미리보기 (잇츠뉴 It's NEW 공식)",
-          "url": "https://www.youtube.com/watch?v=6v3f9qUDE-w"
-        },
-        {
-          "label": "개봉 18일째 400만 돌파, 손익분기점 넘겨 [공식] (Xports News)",
-          "url": "https://www.xportsnews.com/article/928591"
-        }
-      ],
-      "heroImage": "assets/img/hero/steelrain.jpg",
-      "heroPos": "50% 0%"
-    },
-    {
       "id": "suanara",
       "title": "수아나라",
       "titleEn": "Sua/Nara",
@@ -628,18 +521,6 @@
       {
         "year": "2025",
         "text": "파인: 촌뜨기들 — Disney+ 시리즈"
-      },
-      {
-        "year": "2023",
-        "text": "멍뭉이 — 영화"
-      },
-      {
-        "year": "2020",
-        "text": "강철비2: 정상회담 — 영화"
-      },
-      {
-        "year": "2017",
-        "text": "강철비 — 영화"
       }
     ],
     "press": [

@@ -447,7 +447,7 @@ ul { list-style: none; }
 /* poster grid (home selected work + WORK page) */
 .works-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: clamp(28px, 3vw, 48px) clamp(18px, 2vw, 32px);
 }
 .work { display: block; outline: none; }
