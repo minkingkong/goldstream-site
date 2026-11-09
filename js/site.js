@@ -532,8 +532,23 @@
     var posters = (data.works || []).map(function (w) { return w.image; }).filter(Boolean);
     document.querySelectorAll("[data-poster-wall]").forEach(function (wall) {
       if (!posters.length) return;
-      var html = "";
-      for (var i = 0; i < 32; i++) html += '<img src="' + esc(posters[(i * 3 + Math.floor(i / 8)) % posters.length]) + '" alt="">';
+      /* shuffled on every load; a poster never touches itself — not beside, above or diagonally,
+         in the grid as it is laid out on this screen */
+      var pick = [], html = "";
+      var C = window.matchMedia("(max-width: 860px)").matches ? 4 : 8; // the wall's columns: 8 on desktop, 4 on phones
+      var near = [1, C, C - 1, C + 1]; // left, above, both upper diagonals: with 5+ posters one always fits
+      for (var i = 0; i < 32; i++) {
+        var choice = null;
+        for (var n = near.length; n >= 3 && choice === null; n--) {
+          var ok = posters.map(function (_, k) { return k; }).filter(function (k) {
+            return near.slice(0, n).every(function (d) { return i - d < 0 || pick[i - d] !== k; });
+          });
+          if (ok.length) choice = ok[Math.floor(Math.random() * ok.length)];
+        }
+        if (choice === null) choice = Math.floor(Math.random() * posters.length);
+        pick.push(choice);
+        html += '<img src="' + esc(posters[choice]) + '" alt="">';
+      }
       wall.innerHTML = html;
     });
 
