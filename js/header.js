@@ -6,7 +6,8 @@
   var hd = document.getElementById("nh");
   if (!hd) return;
   var LANG = "ko";
-  try { LANG = localStorage.getItem("gs_lang") === "en" ? "en" : "ko"; } catch (e) {}
+  // KR/EN switch removed (2026-11-09): the site is Korean only; forget an old EN choice
+  try { localStorage.removeItem("gs_lang"); } catch (e) {}
 
   var page = (location.pathname.split("/").pop() || "index.html").toLowerCase();
   hd.querySelectorAll(".nh__nav a").forEach(function (a) {
@@ -24,8 +25,7 @@
   menu.innerHTML = Array.prototype.map.call(hd.querySelectorAll(".nh__nav a"), function (a) {
     var cur = a.getAttribute("aria-current") ? ' aria-current="page"' : "";
     return '<a href="' + a.getAttribute("href") + '"' + cur + ">" + a.textContent.trim() + "</a>";
-  }).join("") + '<p class="nmnav__mail">kim@goldstream.kr</p>' +
-    '<div class="nmnav__lang"><button type="button" data-lang="ko">KR</button><button type="button" data-lang="en">EN</button></div>';
+  }).join("") + '<p class="nmnav__mail">kim@goldstream.kr</p>';
   document.body.appendChild(menu);
   if (burger) burger.setAttribute("aria-controls", "nmnav");
   function setOpen(open) {

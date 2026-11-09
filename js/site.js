@@ -8,7 +8,8 @@
   var CONTENT_URL = "data/content.json?t=" + Date.now();
   /* KR / EN: Korean is content.json, English is js/en.js. The choice is remembered per browser. */
   var LANG = "ko";
-  try { LANG = localStorage.getItem("gs_lang") === "en" ? "en" : "ko"; } catch (e) {}
+  // KR/EN switch removed (2026-11-09): Korean only; forget an old EN choice
+  try { localStorage.removeItem("gs_lang"); } catch (e) {}
   var EN = LANG === "en" && window.GS_EN ? window.GS_EN : null;
   document.documentElement.lang = LANG;
   function ui(key, fallback) { return EN && EN.ui[key] ? EN.ui[key] : fallback; }
@@ -108,8 +109,7 @@
     menu.innerHTML = Array.prototype.map.call(hd.querySelectorAll(".hd__nav a"), function (a) {
       var cur = a.getAttribute("aria-current") ? ' aria-current="page"' : "";
       return '<a href="' + esc(a.getAttribute("href")) + '"' + cur + ">" + esc(a.textContent.trim()) + "</a>";
-    }).join("") + '<p class="mnav__mail" data-field="contact.email"></p>' +
-      '<div class="mnav__lang"><button type="button" data-lang="ko">KR</button><button type="button" data-lang="en">EN</button></div>';
+    }).join("") + '<p class="mnav__mail" data-field="contact.email"></p>';
     document.body.appendChild(menu);
     document.querySelectorAll("[data-lang]").forEach(function (b) {
       b.classList.toggle("is-on", b.getAttribute("data-lang") === LANG);
