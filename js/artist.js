@@ -106,7 +106,10 @@
     if (lastFocus) lastFocus.focus({ preventScroll: true });
   }
   function close() {
-    if (location.hash) history.pushState("", document.title, location.pathname + location.search);
+    if (location.hash) {
+      try { history.pushState("", document.title, location.pathname + location.search); }
+      catch (e) { location.hash = ""; return; } // hashchange closes it
+    }
     hide();
   }
   function route() {
