@@ -41,23 +41,8 @@
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
   function byId(id) { for (var i = 0; i < ARTISTS.length; i++) if (ARTISTS[i].id === id) return ARTISTS[i]; return null; }
 
-  /* cards */
-  var grid = document.getElementById("ar-grid");
-  grid.innerHTML = ARTISTS.map(function (a, i) {
-    return '<a class="ar-card" href="#' + a.id + '" style="--i:' + i + '">' +
-      '<span class="ar-card__img"><img src="' + esc(a.cover) + '" alt="' + esc(a.ko) + '" loading="lazy"></span>' +
-      '<span class="ar-card__row"><b>' + esc(a.ko) + '</b><i aria-hidden="true">→</i></span>' +
-      '<span class="ar-card__en">' + esc(a.en) + "</span></a>";
-  }).join("");
-  var io = "IntersectionObserver" in window ? new IntersectionObserver(function (es) {
-    es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
-  }, { threshold: 0.12 }) : null;
-  grid.querySelectorAll(".ar-card").forEach(function (c) { io ? io.observe(c) : c.classList.add("in"); });
-
-  /* profile */
-  var dt = document.getElementById("ar-dt");
-  var lastFocus = null;
-  function render(a) {
+  /* every profile is shown in full on the page; the name row at the top jumps to each one */
+  function profile(a) {
     var rows = a.info.map(function (r) { return "<div><dt>" + esc(r[0]) + "</dt><dd>" + esc(r[1]) + "</dd></div>"; }).join("");
     var blocks = a.blocks.map(function (b) {
       return '<section class="ar-dt__blk"><h3>' + esc(b[0]) + "</h3><ul>" + b[1].map(function (it) {
@@ -67,57 +52,29 @@
     var sns = a.sns.map(function (s) {
       return '<a href="' + esc(s[2]) + '" target="_blank" rel="noopener"><small>' + esc(s[0]) + "</small>" + esc(s[1]) + " ↗</a>";
     }).join("");
-    dt.innerHTML =
-      '<div class="ar-dt__bar"><span>ARTIST</span><button type="button" class="ar-dt__x" aria-label="닫기">닫기 <i>×</i></button></div>' +
-      '<div class="ar-dt__in">' +
-        '<div class="ar-dt__top">' +
-          '<div class="ar-dt__cover"><img src="' + esc(a.cover) + '" alt="' + esc(a.ko) + '"></div>' +
-          '<div class="ar-dt__txt">' +
-            '<p class="ar-dt__k">ACTOR</p>' +
-            '<h2 id="ar-dt-name">' + esc(a.ko) + "</h2>" +
-            '<p class="ar-dt__en">' + esc(a.en) + "</p>" +
-            '<dl class="ar-dt__info">' + rows + "</dl>" +
-            blocks +
-            (sns ? '<div class="ar-dt__sns">' + sns + "</div>" : "") +
-            '<a class="ar-dt__cta" href="contact.html">캐스팅 · 출연 문의 <i>→</i></a>' +
-          "</div>" +
+    return '<article class="ar-pf" id="' + a.id + '">' +
+      '<div class="ar-dt__top">' +
+        '<div class="ar-dt__cover"><img src="' + esc(a.cover) + '" alt="' + esc(a.ko) + '"></div>' +
+        '<div class="ar-dt__txt">' +
+          '<p class="ar-dt__k">ACTOR</p>' +
+          "<h2>" + esc(a.ko) + "</h2>" +
+          '<p class="ar-dt__en">' + esc(a.en) + "</p>" +
+          '<dl class="ar-dt__info">' + rows + "</dl>" +
+          blocks +
+          (sns ? '<div class="ar-dt__sns">' + sns + "</div>" : "") +
+          '<a class="ar-dt__cta" href="contact.html">캐스팅 · 출연 문의 <i>→</i></a>' +
         "</div>" +
-        '<div class="ar-dt__gal">' + a.gallery.map(function (g) {
-          return '<figure><img src="' + esc(g) + '" alt="' + esc(a.ko) + ' 프로필 사진" loading="lazy"></figure>';
-        }).join("") + "</div>" +
-      "</div>";
-    dt.querySelector(".ar-dt__x").addEventListener("click", close);
+      "</div>" +
+      '<div class="ar-dt__gal">' + a.gallery.map(function (g) {
+        return '<figure><img src="' + esc(g) + '" alt="' + esc(a.ko) + ' 프로필 사진" loading="lazy"></figure>';
+      }).join("") + "</div>" +
+    "</article>";
   }
-  function open(a) {
-    lastFocus = document.activeElement;
-    render(a);
-    dt.hidden = false;
-    dt.scrollTop = 0;
-    document.documentElement.classList.add("ar-lock");
-    requestAnimationFrame(function () { dt.classList.add("is-open"); });
-    dt.querySelector(".ar-dt__x").focus({ preventScroll: true });
-    document.title = a.ko + " | 골드스트림엔터테인먼트";
-  }
-  function hide() {
-    dt.classList.remove("is-open");
-    document.documentElement.classList.remove("ar-lock");
-    setTimeout(function () { if (!dt.classList.contains("is-open")) dt.hidden = true; }, 400);
-    document.title = "아티스트 | 골드스트림엔터테인먼트";
-    if (lastFocus) lastFocus.focus({ preventScroll: true });
-  }
-  function close() {
-    if (location.hash) {
-      try { history.pushState("", document.title, location.pathname + location.search); }
-      catch (e) { location.hash = ""; return; } // hashchange closes it
-    }
-    hide();
-  }
-  function route() {
-    var a = byId(decodeURIComponent(location.hash.slice(1)));
-    a ? open(a) : (dt.classList.contains("is-open") && hide());
-  }
-  window.addEventListener("hashchange", route);
-  window.addEventListener("popstate", route);
-  document.addEventListener("keydown", function (e) { if (e.key === "Escape" && dt.classList.contains("is-open")) close(); });
-  route();
+  var list = document.getElementById("ar-grid");
+  list.className = "ar-pfs";
+  list.innerHTML =
+    '<nav class="ar-idx" aria-label="배우 바로가기">' + ARTISTS.map(function (a) {
+      return '<a href="#' + a.id + '"><b>' + esc(a.ko) + "</b><span>" + esc(a.en) + "</span></a>";
+    }).join("") + "</nav>" +
+    ARTISTS.map(profile).join("");
 })();

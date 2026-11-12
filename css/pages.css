@@ -481,3 +481,14 @@ html.ar-lock, html.ar-lock body { overflow: hidden; }
   .ar-hero__bg, .ar-hero__k, .ar-hero__t { animation: none; opacity: 1; transform: none; }
   .ar-card { opacity: 1; transform: none; }
 }
+
+/* ARTIST: profiles shown in full, with a name row on top */
+.ar-idx { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: clamp(48px, 7vw, 96px); }
+.pg .ar-idx a { display: inline-flex; align-items: baseline; gap: 10px; padding: 12px 22px; border: 1px solid #ddd; border-radius: 4px; color: var(--ink); transition: border-color 0.3s, background 0.3s; }
+.pg .ar-idx a:hover { border-color: var(--gold); background: var(--gold-soft); }
+.ar-idx b { font-size: 16px; font-weight: 700; }
+.ar-idx span { font-size: 11px; font-weight: 600; letter-spacing: 0.16em; color: var(--faint); }
+.ar-pf { scroll-margin-top: 96px; }
+.ar-pf + .ar-pf { margin-top: clamp(72px, 10vw, 150px); padding-top: clamp(72px, 10vw, 150px); border-top: 1px solid #e8e8e8; }
+.ar-pf .ar-dt__gal { margin-top: clamp(40px, 6vw, 80px); }
+@media (max-width: 640px) { .pg .ar-idx a { padding: 10px 16px; } .ar-pf { scroll-margin-top: 72px; } }
