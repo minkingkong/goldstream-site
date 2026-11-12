@@ -35,6 +35,7 @@ stamp "js/intro.js"
 stamp "js/en.js"
 stamp "js/site.js"
 stamp "js/admin.js"
+stamp "js/artist.js"
 
 # When invoked as a pre-commit hook, re-stage the HTML we just rewrote.
 git add -- ./*.html 2>/dev/null || true
