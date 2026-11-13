@@ -17,8 +17,8 @@
       id: "seo-suyeon",
       ko: "서수연",
       en: "SEO SU YEOUN",
-      cover: IMG + "seo/cover.webp",
-      gallery: ["g02", "g04", "g01", "g05", "g06", "g07"].map(function (g) { return IMG + "seo/" + g + ".webp"; }),
+      cover: IMG + "seo/portrait.webp",
+      gallery: ["g02", "g04", "g05", "g06", "g07"].map(function (g) { return IMG + "seo/" + g + ".webp"; }),
       info: [["출생", "1974"], ["신체", "164cm · 52kg"], ["학력", "경희대학교 간호학과 · 단국대학교 의과대학"], ["특기", "피아노 · 기타 · 가야금 · 골프 · 승마 · 당구"]],
       blocks: [
         ["주요 활동", [
