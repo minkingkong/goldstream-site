@@ -8,7 +8,6 @@
       ko: "김지혁",
       en: "KIM JI HYEOK",
       cover: IMG + "kim/cover.webp",
-      gallery: ["g02", "g03", "g04", "g05", "g06", "g07", "g08", "g01"].map(function (g) { return IMG + "kim/" + g + ".webp"; }),
       info: [["출생", "2006"], ["신체", "183cm · 73kg"], ["학력", "성균관대학교 연기예술학과 재학"], ["특기", "현대무용 · 영어회화 · 농구"]],
       blocks: [],
       sns: [["Instagram", "@ji_hyeok1", "https://www.instagram.com/ji_hyeok1/"]]
@@ -18,7 +17,6 @@
       ko: "서수연",
       en: "SEO SU YEOUN",
       cover: IMG + "seo/portrait.webp",
-      gallery: ["g02", "g04", "g05", "g06", "g07"].map(function (g) { return IMG + "seo/" + g + ".webp"; }),
       info: [["출생", "1974"], ["신체", "164cm · 52kg"], ["학력", "경희대학교 간호학과 · 단국대학교 의과대학"], ["특기", "피아노 · 기타 · 가야금 · 골프 · 승마 · 당구"]],
       blocks: [
         ["주요 활동", [
@@ -65,9 +63,6 @@
           '<a class="ar-dt__cta" href="contact.html">캐스팅 · 출연 문의 <i>→</i></a>' +
         "</div>" +
       "</div>" +
-      '<div class="ar-dt__gal">' + a.gallery.map(function (g) {
-        return '<figure><img src="' + esc(g) + '" alt="' + esc(a.ko) + ' 프로필 사진" loading="lazy"></figure>';
-      }).join("") + "</div>" +
     "</article>";
   }
   var list = document.getElementById("ar-grid");
