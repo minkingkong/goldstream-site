@@ -539,3 +539,10 @@ html.ar-lock, html.ar-lock body { overflow: hidden; }
 .ar-works figcaption { margin-top: 10px; font-size: 13px; color: #666; }
 .ar-credit { margin-top: 16px; font-size: 12px; color: var(--faint); }
 @media (max-width: 640px) { .ar-works { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; } }
+
+/* ARTIST: groups (배우 / 작가); the photo scrolls with the page */
+.ar-pf .ar-dt__cover { position: static; }
+.ar-group + .ar-group { margin-top: clamp(80px, 10vw, 150px); }
+.ar-group__t { display: flex; align-items: baseline; gap: 12px; padding-bottom: 16px; margin-bottom: clamp(40px, 5vw, 64px); border-bottom: 2px solid var(--ink); font-size: clamp(22px, 2.2vw, 30px); font-weight: 700; letter-spacing: -0.02em; }
+.ar-group__t small { font-size: 12px; font-weight: 700; letter-spacing: 0.3em; color: var(--gold); }
+.ar-group .ar-pf + .ar-pf { border-top: 1px solid #e8e8e8; }
