@@ -520,3 +520,22 @@ html.ar-lock, html.ar-lock body { overflow: hidden; }
   .ar-pf .ar-dt__gal { columns: 2; column-gap: 8px; }
   .ar-pf .ar-dt__gal figure { margin-bottom: 8px; }
 }
+
+/* ARTIST: artists (works, intro, long career lists behind 더보기) */
+.ar-dt__txt h2 small { margin-left: 10px; font-size: 0.42em; font-weight: 600; letter-spacing: 0; color: var(--faint); vertical-align: middle; }
+.ar-dt__intro { margin-top: 22px; font-size: 15px; line-height: 1.75; color: #444; max-width: 640px; }
+.ar-dt__blk h3 small { margin-left: 6px; font-size: 13px; font-weight: 600; color: var(--faint); }
+.ar-dt__blk ul.is-folded .ar-more { display: none; }
+.ar-dt__more { display: block; width: 100%; margin-top: 0; padding: 14px 0; border: 0; border-bottom: 1px solid #e8e8e8; background: none; font: inherit; font-size: 14px; font-weight: 700; color: var(--gold); text-align: center; cursor: pointer; transition: background 0.3s; }
+.ar-dt__more:hover { background: var(--gold-soft); }
+.ar-dt__more:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.ar-wk { margin-top: clamp(40px, 5vw, 72px); }
+.ar-wk h3 { font-size: 16px; font-weight: 700; padding-bottom: 10px; border-bottom: 2px solid var(--ink); }
+.ar-works { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin-top: 20px; }
+.ar-works figure { margin: 0; }
+.ar-works__img { aspect-ratio: 3 / 4; overflow: hidden; background: #f2f2f2; }
+.ar-works__img img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease); }
+.ar-works figure:hover img { transform: scale(1.03); }
+.ar-works figcaption { margin-top: 10px; font-size: 13px; color: #666; }
+.ar-credit { margin-top: 16px; font-size: 12px; color: var(--faint); }
+@media (max-width: 640px) { .ar-works { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; } }
